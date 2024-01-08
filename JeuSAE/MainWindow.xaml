@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:JeuSAE"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FocusManager.FocusedElement="{Binding ElementName=monCanvas}"
     Title="MainWindow"
     Width="1920"
     Height="1080"
@@ -18,7 +19,7 @@
     <Canvas
         x:Name="monCanvas"
         KeyDown="CanvasKeyIsDown"
-        KeyUp="CanvasKeyIsUp">
+        KeyUp="CanvasKeyIsUp" Focusable="True">
 
         <Rectangle
             x:Name="rectJoueur"

@@ -32,12 +32,15 @@ namespace JeuSAE
             // rafraissement toutes les 16 milliseconds
             dispatcherTimer.Interval = TimeSpan.FromMilliseconds(16);
             // lancement du timer
-            dispatcherTimer.Start();
-        }
+            dispatcherTimer.Start();        }
 
         private void GameEngine(object sender, EventArgs e)
         {
-            Rect player = new Rect(Canvas.GetLeft(rectJoueur), Canvas.GetTop(rectJoueur), rectJoueur.Width, rectJoueur.Height);
+            //Rect player = new Rect(Canvas.GetLeft(rectJoueur), Canvas.GetTop(rectJoueur), rectJoueur.Width, rectJoueur.Height);
+#if DEBUG
+            Console.WriteLine("test");
+#endif
+
             if (gauche)
             {
                 Canvas.SetLeft(rectCarte, Canvas.GetLeft(rectCarte) + 100);
@@ -59,25 +62,41 @@ namespace JeuSAE
         private void CanvasKeyIsDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Left)
+            {
                 gauche = true;
+            }
             if (e.Key == Key.Right)
+            {
                 droite = true;
+            }
             if (e.Key == Key.Up)
+            {
                 haut = true;
+            }
             if (e.Key == Key.Down)
+            {
                 bas = true;
+            }
         }
 
         private void CanvasKeyIsUp(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Left)
+            {
                 gauche = false;
+            }
             if (e.Key == Key.Right)
+            {
                 droite = false;
+            }
             if (e.Key == Key.Up)
+            {
                 haut = false;
+            }
             if (e.Key == Key.Down)
+            {
                 bas = false;
+            }
         }
     }
 }
