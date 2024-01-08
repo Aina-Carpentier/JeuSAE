@@ -23,10 +23,7 @@ namespace JeuSAE
         public MainWindow()
         {
             InitializeComponent();
-            for (int i = 0; i < 101000; i++) 
-            {
-                testWindow.;
-            }
+
         }
     }
 }
