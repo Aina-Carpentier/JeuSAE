@@ -15,26 +15,36 @@
     WindowStyle="None"
     mc:Ignorable="d">
 
-    <Canvas>
-        <Rectangle x:Name="rectJoueur"
+    <Canvas
+        x:Name="monCanvas"
+        KeyDown="CanvasKeyIsDown"
+        KeyUp="CanvasKeyIsUp">
+
+        <Rectangle
+            x:Name="rectJoueur"
             Width="100"
             Height="100"
             Margin="910,490,0,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Stroke="Black" Fill="#FFF51818" Panel.ZIndex="1000" />
+            Panel.ZIndex="1000"
+            Fill="#FFF51818"
+            Stroke="Black" />
 
 
-        <Rectangle x:Name="rectMap"
+        <Rectangle
+            x:Name="rectCarte"
+            Canvas.Left="-8640"
+            Canvas.Top="-4860"
             Width="19200"
             Height="10800"
             Margin="0,0,0,0"
             HorizontalAlignment="Left"
-            VerticalAlignment="Top" Canvas.Left="-8640" Canvas.Top="-4860" >
+            VerticalAlignment="Top">
             <Rectangle.Fill>
                 <RadialGradientBrush>
-                    <GradientStop Color="#FF20A016"/>
-                    <GradientStop Color="#FF051EA7" Offset="1"/>
+                    <GradientStop Color="#FF20A016" />
+                    <GradientStop Offset="1" Color="#FF051EA7" />
                 </RadialGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
