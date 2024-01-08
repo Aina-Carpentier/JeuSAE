@@ -16,14 +16,14 @@
     mc:Ignorable="d">
 
     <Canvas>
-        <Rectangle
+        <Rectangle x:Name="rectJoueur"
             Width="100"
             Height="100"
             Margin="910,490,0,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Stroke="Black" Fill="#FFF51818" Panel.ZIndex="1000" />
-        <Rectangle
+        <Rectangle x:Name="rectMap"
             Width="19200"
             Height="10800"
             Margin="0,0,0,0"
