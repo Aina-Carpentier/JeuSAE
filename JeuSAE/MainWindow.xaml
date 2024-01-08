@@ -23,6 +23,8 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Stroke="Black" Fill="#FFF51818" Panel.ZIndex="1000" />
+
+
         <Rectangle x:Name="rectMap"
             Width="19200"
             Height="10800"
@@ -36,5 +38,7 @@
                 </RadialGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
+
     </Canvas>
+
 </Window>
