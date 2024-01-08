@@ -32,32 +32,12 @@ namespace JeuSAE
             // rafraissement toutes les 16 milliseconds
             dispatcherTimer.Interval = TimeSpan.FromMilliseconds(16);
             // lancement du timer
-            dispatcherTimer.Start();
+            dispatcherTimer.Start();    
         }
 
-        private void GameEngine(object sender, EventArgs e)
-        {
-            Rect player = new Rect(Canvas.GetLeft(rectJoueur), Canvas.GetTop(rectJoueur), rectJoueur.Width, rectJoueur.Height);
-            if (gauche)
-            {
-                Canvas.SetLeft(rectCarte, Canvas.GetLeft(rectCarte) + 100);
-            }
-            if (droite)
-            {
-                Canvas.SetLeft(rectCarte, Canvas.GetLeft(rectCarte) - 100);
-            }
-            if (haut)
-            {
-                Canvas.SetTop(rectCarte, Canvas.GetLeft(rectCarte) + 100);
-            }
-            if (bas)
-            {
-                Canvas.SetTop(rectCarte, Canvas.GetLeft(rectCarte) - 100);
-            }
-
-        }
         private void CanvasKeyIsDown(object sender, KeyEventArgs e)
         {
+            Console.WriteLine("ytes");
             if (e.Key == Key.Left)
                 gauche = true;
             if (e.Key == Key.Right)
@@ -79,5 +59,30 @@ namespace JeuSAE
             if (e.Key == Key.Down)
                 bas = false;
         }
+
+
+        private void GameEngine(object sender, EventArgs e)
+        {
+
+            Rect player = new Rect(Canvas.GetLeft(rectJoueur), Canvas.GetTop(rectJoueur), rectJoueur.Width, rectJoueur.Height);
+            if (gauche)
+            {
+                Canvas.SetLeft(rectCarte, Canvas.GetLeft(rectCarte) + 100);
+            }
+            if (droite)
+            {
+                Canvas.SetLeft(rectCarte, Canvas.GetLeft(rectCarte) - 100);
+            }
+            if (haut)
+            {
+                Canvas.SetTop(rectCarte, Canvas.GetTop(rectCarte) + 100);
+            }
+            if (bas)
+            {
+                Canvas.SetTop(rectCarte, Canvas.GetTop(rectCarte) - 100);
+            }
+
+        }
+
     }
 }

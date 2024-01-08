@@ -16,7 +16,9 @@
     mc:Ignorable="d">
 
     <Canvas
-        x:Name="monCanvas"
+        Name="monCanvas"
+        Background="Black"
+        Focusable="True"
         KeyDown="CanvasKeyIsDown"
         KeyUp="CanvasKeyIsUp">
 
