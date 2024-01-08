@@ -19,16 +19,22 @@
         <Rectangle
             Width="100"
             Height="100"
-            Margin="500,500,0,0"
+            Margin="910,490,0,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Stroke="Black" />
+            Stroke="Black" Fill="#FFF51818" Panel.ZIndex="1000" />
         <Rectangle
-            Width="1920"
-            Height="1080"
+            Width="19200"
+            Height="10800"
             Margin="0,0,0,0"
             HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Stroke="Black" />
+            VerticalAlignment="Top" Canvas.Left="-8640" Canvas.Top="-4860" >
+            <Rectangle.Fill>
+                <RadialGradientBrush>
+                    <GradientStop Color="#FF20A016"/>
+                    <GradientStop Color="#FF051EA7" Offset="1"/>
+                </RadialGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
     </Canvas>
 </Window>
