@@ -25,7 +25,7 @@ namespace JeuSAE
             InitializeComponent();
             for (int i = 0; i < 101000; i++) 
             {
-                testWindow.;
+                //testWindow.;
             }
         }
     }
