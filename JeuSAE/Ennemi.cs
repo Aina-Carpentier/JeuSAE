@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace JeuSAE
 {
@@ -13,9 +15,11 @@ namespace JeuSAE
         private double cadenceTir;
         private int type;
         private String nom;
-        private double posX;
-        private double posY;
+        private int posX;
+        private int posY;
         private Guid id = Guid.NewGuid();
+        private Rect rect;
+        private Rectangle graphique;
 
 
         public double Vie
@@ -49,28 +53,28 @@ namespace JeuSAE
             get { return nom; }
         }
 
-        public double PosX
+        public int PosX
         {
             get { return posX; }
             set { posX = value; }
         }
 
-        public double PosY
+        public int PosY
         {
             get { return posY; }
             set { posY = value; }
         }
-
-
-
 
         public Guid Id
         {
             get { return id; }
         }
 
+        public Rect Rect { get => rect; set => rect = value; }
 
-        public Ennemi(int type, double posX, double posY)
+        public Rectangle Graphique { get => graphique; set => graphique = value; }
+
+        public Ennemi(int type, int posX, int posY)
         {
             Type = type;
 
@@ -81,6 +85,7 @@ namespace JeuSAE
             }
             PosX = posX;
             PosY = posY;
+            Graphique = new Rectangle(PosX, PosY, 75, 75); // TODO: Editer en fonction du type d'ennemi la taille
         }
 
         public override bool Equals(object? obj)
@@ -98,10 +103,5 @@ namespace JeuSAE
         {
             return this.Nom;
         }
-
-
-
-
-
     }
 }

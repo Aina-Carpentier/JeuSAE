@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace JeuSAE
 {
@@ -14,9 +16,11 @@ namespace JeuSAE
         private int type;
         private String tireur;
         private double acceleration;
-        private double posX;
-        private double posY;
+        private int posX;
+        private int posY;
         private Vector2 vecteur;
+        private Rect rect;
+        private Rectangle graphique;
 
         public double Vitesse
         {
@@ -51,13 +55,13 @@ namespace JeuSAE
             set { acceleration = value; }
         }
 
-        public double PosX
+        public int PosX
         {
             get { return posX; }
             set { posX = value; }
         }
 
-        public double PosY
+        public int PosY
         {
             get { return posY; }
             set { posY = value; }
@@ -69,7 +73,11 @@ namespace JeuSAE
             set { vecteur = value; }
         }
 
-        public Balle(double vitesse, double taille, int type, string tireur, double acceleration, double posX, double posY, Vector2 vecteur)
+        public Rect Rect { get => rect; set => rect = value; }
+
+        public Rectangle Graphique { get => graphique; set => graphique = value; }
+
+        public Balle(double vitesse, double taille, int type, string tireur, double acceleration, int posX, int posY, Vector2 vecteur)
         {
             Vitesse = vitesse;
             Taille = taille;
@@ -79,6 +87,8 @@ namespace JeuSAE
             PosX = posX;
             PosY = posY;
             Vecteur = vecteur;
+            Rect = new Rect((double)PosX, (Double)posY, 25, 15);
+            Graphique = new Rectangle(PosX, PosY, 25, 15); // TODO: Modifier 25 et 15
         }
 
         public override bool Equals(object? obj)
