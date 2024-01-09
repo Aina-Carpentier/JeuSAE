@@ -87,8 +87,8 @@ namespace JeuSAE
             PosX = posX;
             PosY = posY;
             Vecteur = vecteur;
-            Rect = new Rect((double)PosX, (Double)posY, 25, 15);
-            Graphique = new Rectangle(PosX, PosY, 25, 15); // TODO: Modifier 25 et 15
+            Rect = new Rect((double)PosX, (Double)posY, Constantes.BALLE_WIDHT, Constantes.BALLE_HEIGHT);
+            Graphique = new Rectangle(PosX, PosY, Constantes.BALLE_WIDHT, Constantes.BALLE_HEIGHT);
         }
 
         public override bool Equals(object? obj)

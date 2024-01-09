@@ -85,7 +85,8 @@ namespace JeuSAE
             }
             PosX = posX;
             PosY = posY;
-            Graphique = new Rectangle(PosX, PosY, 75, 75); // TODO: Editer en fonction du type d'ennemi la taille
+            Rect = new Rect(PosX, PosY, Constantes.ENNEMI_RECT_LARGEUR, Constantes.ENNEMI_RECT_HAUTEUR);
+            Graphique = new Rectangle(PosX, PosY, Constantes.ENNEMI_RECT_LARGEUR, Constantes.ENNEMI_RECT_HAUTEUR);
         }
 
         public override bool Equals(object? obj)
