@@ -5,10 +5,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:JeuSAE"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    FocusManager.FocusedElement="{Binding ElementName=monCanvas}"
     Title="MainWindow"
     Width="1920"
     Height="1080"
+    FocusManager.FocusedElement="{Binding ElementName=monCanvas}"
     FontFamily="Cascadia Mono SemiBold"
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
@@ -17,9 +17,11 @@
     mc:Ignorable="d">
 
     <Canvas
-        x:Name="monCanvas"
+        Name="monCanvas"
+        Background="Black"
+        Focusable="True"
         KeyDown="CanvasKeyIsDown"
-        KeyUp="CanvasKeyIsUp" Focusable="True">
+        KeyUp="CanvasKeyIsUp">
 
         <Rectangle
             x:Name="rectJoueur"
