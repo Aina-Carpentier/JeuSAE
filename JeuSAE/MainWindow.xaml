@@ -21,7 +21,8 @@
         Background="Black"
         Focusable="True"
         KeyDown="CanvasKeyIsDown"
-        KeyUp="CanvasKeyIsUp">
+        KeyUp="CanvasKeyIsUp"
+        MouseLeftButtonDown="monCanvas_MouseLeftButtonDown">
 
         <Rectangle
             x:Name="rectJoueur"

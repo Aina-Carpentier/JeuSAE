@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Numerics;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,8 +24,8 @@ namespace JeuSAE
     {
 
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
-        private int countTick = 0, vitesseJoueur = 634;
-        private bool gauche = false, droite = false, haut = false, bas = false;
+        private int countTick = 0, vitesseJoueur = 634, tempsRechargeArme = 60, tempsRechargeActuel = 0;
+        private bool gauche = false, droite = false, haut = false, bas = false, tirer = false;
         private Rect player = new Rect(910, 490, 50, 50);
         public MainWindow()
         {
@@ -34,6 +35,11 @@ namespace JeuSAE
             dispatcherTimer.Interval = TimeSpan.FromMilliseconds(16);
             // lancement du timer
             dispatcherTimer.Start();    
+        }
+
+        private void monCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            tirer = true;
         }
 
         private void CanvasKeyIsDown(object sender, KeyEventArgs e)
@@ -67,7 +73,7 @@ namespace JeuSAE
             Console.WriteLine(Canvas.GetLeft(rectCarte));
             Console.WriteLine(Canvas.GetTop(rectCarte));
 #endif
-            
+
             MouvementJoueur();
         }
 
@@ -113,6 +119,23 @@ namespace JeuSAE
                 {
                     Canvas.SetTop(rectCarte, -10260);
                 }
+        }
+
+        private void TirJoueur()
+        {
+            if (tempsRechargeActuel > 0)
+                tempsRechargeArme--;
+
+            /*
+            if (tirer && tempsRechargeActuel <= 0)
+            {
+                var point = Mouse.GetPosition(Application.Current.MainWindow);
+                Vector2 vecteurX = new Vector2(940, float(point.X);
+                Vector2 vecteurBalle = new Vector2(910,490,point.X, point.Y);
+                tempsRechargeActuel = tempsRechargeArme;
+                Balle ballejoueur = new Balle(10, 3, 0, "joueur", 0, 910, 490, vecteurBalle);
+            }
+            */
         }
     }
 }
