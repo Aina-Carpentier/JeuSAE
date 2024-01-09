@@ -25,7 +25,7 @@ namespace JeuSAE
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
         private int countTick = 0, vitesseJoueur = 634;
         private bool gauche = false, droite = false, haut = false, bas = false;
-
+        private Rect player = new Rect(910, 490, 50, 50);
         public MainWindow()
         {
             InitializeComponent();
@@ -67,21 +67,23 @@ namespace JeuSAE
             Console.WriteLine(Canvas.GetLeft(rectCarte));
             Console.WriteLine(Canvas.GetTop(rectCarte));
 #endif
-            Rect player = new Rect(Canvas.GetLeft(rectJoueur), Canvas.GetTop(rectJoueur), rectJoueur.Width, rectJoueur.Height);
-            MovementJoueur();
+            
+            MouvementJoueur();
         }
 
-        private void MovementJoueur()
+        private void MouvementJoueur()
         {
             if (gauche)
                 if (Canvas.GetLeft(rectCarte) + vitesseJoueur < 910)
                 {
                     Canvas.SetLeft(rectCarte, Canvas.GetLeft(rectCarte) + vitesseJoueur);
                 }
+
                 else
                 {
                     Canvas.SetLeft(rectCarte, 910);
                 }
+
             if (droite)
                 if (Canvas.GetLeft(rectCarte) - vitesseJoueur > -18240)
                 {
