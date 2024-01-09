@@ -34,7 +34,9 @@ namespace JeuSAE
             // rafraissement toutes les 16 milliseconds
             dispatcherTimer.Interval = TimeSpan.FromMilliseconds(16);
             // lancement du timer
-            dispatcherTimer.Start();    
+            dispatcherTimer.Start();
+
+            MapGenerator.load();
         }
 
         private void monCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
