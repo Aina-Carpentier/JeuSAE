@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace JeuSAE
@@ -11,8 +7,8 @@ namespace JeuSAE
     internal class Ennemi
     {
         private double vie;
-        private double vitesse;
-        private double cadenceTir;
+        private double vitesse; // En pixel/tick
+        private double cadenceTir; // En seconde/tir donc si = 3 alors l'ennemi tir une fois toutes les 3 secondes, donc pour 3 fois par seconde c'est approx 0.33
         private int type;
         private String nom;
         private int posX;
@@ -51,6 +47,7 @@ namespace JeuSAE
         public String Nom
         {
             get { return nom; }
+            set { nom = value; }
         }
 
         public int PosX
@@ -80,8 +77,60 @@ namespace JeuSAE
 
             switch (type)
             {
-                case 0://TODO faire les différents types d'ennemis
+                case 0:
+                    this.Vie = 3;
+                    this.Vitesse = 1;
+                    this.CadenceTir = 3;
+                    this.Nom = "Carré";
                     break;
+                case 1:
+                    this.Vie = 5;
+                    this.Vitesse = 1;
+                    this.CadenceTir = 2;
+                    this.Nom = "Rectangle";
+                    break;
+                case 2:
+                    this.Vie = 3;
+                    this.Vitesse = 3;
+                    this.CadenceTir = 3;
+                    this.Nom = "Triangle équilatéral";
+                    break;
+                case 3:
+                    this.Vie = 10;
+                    this.Vitesse = 3;
+                    this.CadenceTir = 1.5;
+                    this.Nom = "Pentagone";
+                    break;
+                case 4:
+                    this.Vie = 12;
+                    this.Vitesse = 3;
+                    this.CadenceTir = 1;
+                    this.Nom = "Hexagone";
+                    break;
+                case 5:
+                    this.Vie = 14;
+                    this.Vitesse = 2;
+                    this.CadenceTir = 0.5;
+                    this.Nom = "Heptagone";
+                    break;
+                case 6:
+                    this.Vie = 20;
+                    this.Vitesse = 8;
+                    this.CadenceTir = 0.4;
+                    this.Nom = "Octogone";
+                    break;
+                case 7:
+                    this.Vie = Math.PI;
+                    this.Vitesse = Math.PI;
+                    this.CadenceTir = Math.PI;
+                    this.Nom = "Cercle";
+                    break;
+                case 8:
+                    this.Vie = 10;
+                    this.Vitesse = 3;
+                    this.CadenceTir = 4;
+                    this.Nom = "Triangle rectangle";
+                    break; //TODO ajouter plus d'ennemis si on a des idées
             }
             PosX = posX;
             PosY = posY;
