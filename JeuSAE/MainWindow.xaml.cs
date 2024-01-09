@@ -21,8 +21,9 @@ namespace JeuSAE
     /// </summary>
     public partial class MainWindow : Window
     {
+
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
-        private int countTick = 0;
+        private int countTick = 0, vitesseJoueur = 634;
         private bool gauche = false, droite = false, haut = false, bas = false;
 
         public MainWindow()
@@ -37,7 +38,6 @@ namespace JeuSAE
 
         private void CanvasKeyIsDown(object sender, KeyEventArgs e)
         {
-            Console.WriteLine("ytes");
             if (e.Key == Key.Left)
                 gauche = true;
             if (e.Key == Key.Right)
@@ -68,24 +68,49 @@ namespace JeuSAE
             Console.WriteLine(Canvas.GetTop(rectCarte));
 #endif
             Rect player = new Rect(Canvas.GetLeft(rectJoueur), Canvas.GetTop(rectJoueur), rectJoueur.Width, rectJoueur.Height);
-            if (gauche)
-            {
-                Canvas.SetLeft(rectCarte, Canvas.GetLeft(rectCarte) + 10);
-            }
-            if (droite)
-            {
-                Canvas.SetLeft(rectCarte, Canvas.GetLeft(rectCarte) - 10);
-            }
-            if (haut)
-            {
-                Canvas.SetTop(rectCarte, Canvas.GetTop(rectCarte) + 10);
-            }
-            if (bas)
-            {
-                Canvas.SetTop(rectCarte, Canvas.GetTop(rectCarte) - 10);
-            }
-
+            MovementJoueur();
         }
 
+        private void MovementJoueur()
+        {
+            if (gauche)
+                if (Canvas.GetLeft(rectCarte) + vitesseJoueur < 910)
+                {
+                    Canvas.SetLeft(rectCarte, Canvas.GetLeft(rectCarte) + vitesseJoueur);
+                }
+                else
+                {
+                    Canvas.SetLeft(rectCarte, 910);
+                }
+            if (droite)
+                if (Canvas.GetLeft(rectCarte) - vitesseJoueur > -18240)
+                {
+                    Canvas.SetLeft(rectCarte, Canvas.GetLeft(rectCarte) - vitesseJoueur);
+                }
+                else
+                {
+                    Canvas.SetLeft(rectCarte, -18240);
+                }
+            if (haut)
+            {
+                if (Canvas.GetTop(rectCarte) + vitesseJoueur < 490)
+                {
+                    Canvas.SetTop(rectCarte, Canvas.GetTop(rectCarte) + vitesseJoueur);
+                }
+                else
+                {
+                    Canvas.SetTop(rectCarte, 490);
+                }
+            }
+            if (bas)
+                if (Canvas.GetTop(rectCarte) - vitesseJoueur > -10360)
+                {
+                    Canvas.SetTop(rectCarte, Canvas.GetTop(rectCarte) - vitesseJoueur);
+                }
+                else
+                {
+                    Canvas.SetTop(rectCarte, -10260);
+                }
+        }
     }
 }
