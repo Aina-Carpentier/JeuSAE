@@ -37,6 +37,7 @@ namespace JeuSAE
 
         private void CanvasKeyIsDown(object sender, KeyEventArgs e)
         {
+            Console.WriteLine("ytes");
             if (e.Key == Key.Left)
                 gauche = true;
             if (e.Key == Key.Right)
