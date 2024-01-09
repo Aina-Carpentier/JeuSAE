@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace JeuSAE
 {
@@ -16,6 +18,8 @@ namespace JeuSAE
         private Guid id = Guid.NewGuid();
         private Rect rect;
         private Rectangle graphique;
+        private ImageBrush ennemiImage = new ImageBrush();
+        private Uri dossierImage = new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/");
 
 
         public double Vie
@@ -79,53 +83,56 @@ namespace JeuSAE
             {
                 case 0:
                     this.Vie = 3;
-                    this.Vitesse = 1;
+                    this.Vitesse = 3;
                     this.CadenceTir = 3;
-                    this.Nom = "Carré";
-                    break;
+                    this.Nom = "Triangle équilatéral";
+                    ennemiImage.ImageSource = new BitmapImage(new Uri(dossierImage + "triangle.png"));// dossierImage c'est un Uri donc ça vas peut-être bugger
+                    break; //TODO finir de mettre les images sur les ennemis
+                    /*
                 case 1:
                     this.Vie = 5;
                     this.Vitesse = 1;
                     this.CadenceTir = 2;
                     this.Nom = "Rectangle";
                     break;
-                case 2:
+                    */
+                case 1:
                     this.Vie = 3;
-                    this.Vitesse = 3;
+                    this.Vitesse = 1;
                     this.CadenceTir = 3;
-                    this.Nom = "Triangle équilatéral";
+                    this.Nom = "Carré";
                     break;
-                case 3:
+                case 2:
                     this.Vie = 10;
                     this.Vitesse = 3;
                     this.CadenceTir = 1.5;
                     this.Nom = "Pentagone";
                     break;
-                case 4:
+                case 3:
                     this.Vie = 12;
                     this.Vitesse = 3;
                     this.CadenceTir = 1;
                     this.Nom = "Hexagone";
                     break;
-                case 5:
+                case 4:
                     this.Vie = 14;
                     this.Vitesse = 2;
                     this.CadenceTir = 0.5;
                     this.Nom = "Heptagone";
                     break;
-                case 6:
+                case 5:
                     this.Vie = 20;
                     this.Vitesse = 8;
                     this.CadenceTir = 0.4;
                     this.Nom = "Octogone";
                     break;
-                case 7:
+                case 6:
                     this.Vie = Math.PI;
                     this.Vitesse = Math.PI;
                     this.CadenceTir = Math.PI;
                     this.Nom = "Cercle";
                     break;
-                case 8:
+                case 7:
                     this.Vie = 10;
                     this.Vitesse = 3;
                     this.CadenceTir = 4;
