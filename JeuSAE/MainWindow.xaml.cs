@@ -87,12 +87,12 @@ namespace JeuSAE
 
         private void GameEngine(object sender, EventArgs e)
         {
-            /*
+            
 #if DEBUG
             Console.WriteLine(Canvas.GetLeft(carte));
             Console.WriteLine(Canvas.GetTop(carte));
 #endif
-            */
+            
 
             MouvementJoueur();
             TirJoueur();
