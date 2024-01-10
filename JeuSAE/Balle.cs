@@ -1,11 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
+//using System.Drawing;
 using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.Windows.Threading;
+
 
 namespace JeuSAE
 {
@@ -75,7 +85,11 @@ namespace JeuSAE
 
         public Rect Rect { get => rect; set => rect = value; }
 
-        public Rectangle Graphique { get => graphique; set => graphique = value; }
+        public Rectangle Graphique 
+        {
+            get { return graphique; }
+            set { graphique = value;}
+        }
 
         public Balle(double vitesse, double taille, int type, string tireur, double acceleration, int posX, int posY, Vector2 vecteur)
         {
@@ -88,7 +102,13 @@ namespace JeuSAE
             PosY = posY;
             Vecteur = vecteur;
             Rect = new Rect((double)PosX, (Double)posY, Constantes.BALLE_WIDHT, Constantes.BALLE_HEIGHT);
-            Graphique = new Rectangle(PosX, PosY, Constantes.BALLE_WIDHT, Constantes.BALLE_HEIGHT);
+            Graphique = new Rectangle{
+                Tag = "bulletPlayer",
+                Height = 20,
+                Width = 5,
+                Fill = Brushes.White,
+                Stroke = Brushes.Red
+            };
         }
 
         public override bool Equals(object? obj)

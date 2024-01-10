@@ -27,12 +27,12 @@ namespace JeuSAE
         private int countTick = 0, vitesseJoueur = 150, tempsRechargeArme = 60, tempsRechargeActuel = 0, vitesseBalle = 10;
         private bool gauche = false, droite = false, haut = false, bas = false, tirer = false;
 
-        private void monCanvas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            tirer = false;
-        }
+        
 
         private Rect player = new Rect(910, 490, 50, 50);
+
+
+
         public MainWindow()
         {
             InitializeComponent();
@@ -46,6 +46,11 @@ namespace JeuSAE
         private void monCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             tirer = true;
+        }
+
+        private void monCanvas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            tirer = false;
         }
 
         private void CanvasKeyIsDown(object sender, KeyEventArgs e)
@@ -138,14 +143,18 @@ namespace JeuSAE
             
             if (tirer && tempsRechargeActuel <= 0)
             {
-                var point = Mouse.GetPosition(rectCarte);
+                var posEcran = Mouse.GetPosition(Application.Current.MainWindow);
+                var posCarte = Mouse.GetPosition(rectCarte);
 #if DEBUG
-                Console.WriteLine(point.X.ToString() + "  " + point.Y.ToString());
+                Console.WriteLine(posCarte.X.ToString() + "  " + posCarte.Y.ToString());
 #endif
                 tempsRechargeActuel = tempsRechargeArme;
-                Vector2 vecteurTir = new Vector2((float)point.X - 910, (float)point.Y - 490);
-                Balle ballejoueur = new Balle(vitesseBalle, 5, 0, "joueur", 0, 910, 490, vecteurTir);
-                
+                Vector2 vecteurTir = new Vector2((float)posEcran.X - 910, (float)posEcran.Y - 490);
+                Balle balleJoueur = new Balle(vitesseBalle, 5, 0, "joueur", 0, (int)posCarte.X, (int)posCarte.Y, vecteurTir);
+
+                Canvas.SetTop(balleJoueur.Graphique, posEcran.Y);
+                Canvas.SetLeft(balleJoueur.Graphique, posEcran.X);
+                monCanvas.Children.Add(balleJoueur.Graphique);
             }
             
         }
