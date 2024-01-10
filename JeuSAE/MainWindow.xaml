@@ -36,23 +36,12 @@
             Fill="#FFF51818"
             Stroke="Black" />
 
-
-        <Rectangle
-            x:Name="rectCarte"
+        <Grid
+            x:Name="carte"
             Canvas.Left="-8640"
             Canvas.Top="-4860"
             Width="19200"
-            Height="10800"
-            Margin="0,0,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top">
-            <Rectangle.Fill>
-                <RadialGradientBrush>
-                    <GradientStop Color="#FF20A016" />
-                    <GradientStop Offset="1" Color="#FF051EA7" />
-                </RadialGradientBrush>
-            </Rectangle.Fill>
-        </Rectangle>
+            Height="10800" />
 
     </Canvas>
 

@@ -40,7 +40,9 @@ namespace JeuSAE
             // rafraissement toutes les 16 milliseconds
             dispatcherTimer.Interval = TimeSpan.FromMilliseconds(16);
             // lancement du timer
-            dispatcherTimer.Start();    
+            dispatcherTimer.Start();
+
+            MapGenerator.load(carte);
         }
 
         private void monCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -82,8 +84,8 @@ namespace JeuSAE
         {
             /*
 #if DEBUG
-            Console.WriteLine(Canvas.GetLeft(rectCarte));
-            Console.WriteLine(Canvas.GetTop(rectCarte));
+            Console.WriteLine(Canvas.GetLeft(carte));
+            Console.WriteLine(Canvas.GetTop(carte));
 #endif
             */
 
@@ -94,44 +96,44 @@ namespace JeuSAE
         private void MouvementJoueur()
         {
             if (gauche)
-                if (Canvas.GetLeft(rectCarte) + vitesseJoueur < 910)
+                if (Canvas.GetLeft(carte) + vitesseJoueur < 910)
                 {
-                    Canvas.SetLeft(rectCarte, Canvas.GetLeft(rectCarte) + vitesseJoueur);
+                    Canvas.SetLeft(carte, Canvas.GetLeft(carte) + vitesseJoueur);
                 }
 
                 else
                 {
-                    Canvas.SetLeft(rectCarte, 910);
+                    Canvas.SetLeft(carte, 910);
                 }
 
             if (droite)
-                if (Canvas.GetLeft(rectCarte) - vitesseJoueur > -18240)
+                if (Canvas.GetLeft(carte) - vitesseJoueur > -18240)
                 {
-                    Canvas.SetLeft(rectCarte, Canvas.GetLeft(rectCarte) - vitesseJoueur);
+                    Canvas.SetLeft(carte, Canvas.GetLeft(carte) - vitesseJoueur);
                 }
                 else
                 {
-                    Canvas.SetLeft(rectCarte, -18240);
+                    Canvas.SetLeft(carte, -18240);
                 }
             if (haut)
             {
-                if (Canvas.GetTop(rectCarte) + vitesseJoueur < 490)
+                if (Canvas.GetTop(carte) + vitesseJoueur < 490)
                 {
-                    Canvas.SetTop(rectCarte, Canvas.GetTop(rectCarte) + vitesseJoueur);
+                    Canvas.SetTop(carte, Canvas.GetTop(carte) + vitesseJoueur);
                 }
                 else
                 {
-                    Canvas.SetTop(rectCarte, 490);
+                    Canvas.SetTop(carte, 490);
                 }
             }
             if (bas)
-                if (Canvas.GetTop(rectCarte) - vitesseJoueur > -10360)
+                if (Canvas.GetTop(carte) - vitesseJoueur > -10360)
                 {
-                    Canvas.SetTop(rectCarte, Canvas.GetTop(rectCarte) - vitesseJoueur);
+                    Canvas.SetTop(carte, Canvas.GetTop(carte) - vitesseJoueur);
                 }
                 else
                 {
-                    Canvas.SetTop(rectCarte, -10260);
+                    Canvas.SetTop(carte, -10260);
                 }
         }
 
