@@ -35,7 +35,7 @@ namespace JeuSAE
             background2.Width = coteImage;
             background2.Height = coteImage;
 
-            Canvas.SetLeft(background1, 0);
+            Canvas.SetLeft(background1, 0);//TODO fix the scaling and do the scroll logic
             Canvas.SetLeft(background2, background1.Width);
             //background2.Visibility = Visibility.Hidden;
 
