@@ -96,7 +96,7 @@ namespace JeuSAE
 
         private static void ChargerImages()
         {
-            string[] tableau = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory + "images\\");
+            string[] tableau = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory + "images\\environnement\\");
 
             foreach (string file in tableau)
             {

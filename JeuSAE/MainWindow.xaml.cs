@@ -146,7 +146,7 @@ namespace JeuSAE
             if (tirer && tempsRechargeActuel <= 0)
             {
                 var posEcran = Mouse.GetPosition(Application.Current.MainWindow);
-                var posCarte = Mouse.GetPosition(rectCarte);
+                var posCarte = Mouse.GetPosition(carte);
 #if DEBUG
                 Console.WriteLine(posCarte.X.ToString() + "  " + posCarte.Y.ToString());
 #endif
