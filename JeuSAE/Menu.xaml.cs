@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace JeuSAE
 {
@@ -19,9 +20,44 @@ namespace JeuSAE
     /// </summary>
     public partial class Menu : Window
     {
+
+        private DispatcherTimer dispatcherTimer = new DispatcherTimer();
         public Menu()
         {
             InitializeComponent();
+            canvasMenu.Height = windowMenu.Height;
+            canvasMenu.Width = windowMenu.Width;
+
+            double coteImage = (canvasMenu.Width) + 50;
+
+            background1.Width = coteImage;
+            background1.Height = coteImage;
+            background2.Width = coteImage;
+            background2.Height = coteImage;
+
+            Canvas.SetLeft(background1, 0);
+            Canvas.SetLeft(background2, background1.Width);
+            //background2.Visibility = Visibility.Hidden;
+
+
+
+            dispatcherTimer.Tick += GameEngine;
+            // rafraissement toutes les 16 milliseconds
+            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(16);
+            // lancement du timer
+            dispatcherTimer.Start();
+
+
         }
-    }
+
+
+        private void GameEngine(object sender, EventArgs e)
+        {
+
+        }
+
+
+
+
+        }
 }

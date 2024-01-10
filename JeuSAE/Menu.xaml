@@ -1,12 +1,24 @@
-﻿<Window x:Class="JeuSAE.Menu"
+﻿<Window x:Name="windowMenu" x:Class="JeuSAE.Menu"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JeuSAE"
         mc:Ignorable="d"
-        Title="Menu" Height="450" Width="800">
+        Title="Menu" 
+        FocusManager.FocusedElement="{Binding ElementName=canvasMenu}"
+        Height="{x:Static SystemParameters.PrimaryScreenHeight}" 
+        Width="{x:Static SystemParameters.PrimaryScreenWidth}"
+        WindowStyle="None" WindowState="Maximized">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="173*"/>
+            <ColumnDefinition Width="27*"/>
+        </Grid.ColumnDefinitions>
+        <Canvas x:Name="canvasMenu" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Red">
+            <Image x:Name="background1" Source="/images/menu_background.png" Stretch="Fill" HorizontalAlignment="Left" Height="450" VerticalAlignment="Top" Width="450"/>
+            <Image x:Name="background2" Source="/images/menu_background.png" Stretch="Fill" HorizontalAlignment="Left" Height="450" Canvas.Left="450" VerticalAlignment="Top" Width="450"/>
+        </Canvas>
+
     </Grid>
 </Window>

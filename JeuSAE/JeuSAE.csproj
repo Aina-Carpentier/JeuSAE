@@ -8,6 +8,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="images\menu_background.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="images\menu_background.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="images\environnement\grass_1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

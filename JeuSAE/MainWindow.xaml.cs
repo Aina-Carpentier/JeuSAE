@@ -43,6 +43,11 @@ namespace JeuSAE
             dispatcherTimer.Start();
 
             MapGenerator.load(carte);
+
+            Menu menu = new Menu();
+            menu.ShowDialog();
+
+
         }
 
         private void monCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
