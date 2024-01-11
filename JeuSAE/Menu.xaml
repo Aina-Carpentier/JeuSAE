@@ -42,6 +42,42 @@
                 Source="/images/menu_background.png"
                 Stretch="Fill" />
         </Canvas>
+        <Label
+            x:Name="labJouer"
+            Width="208"
+            Height="96"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Jouer"
+            FontFamily="Rubik"
+            FontSize="72" MouseLeftButtonDown="labJouer_MouseLeftButtonDown" />
+        <Label
+            x:Name="labMagasin"
+            Width="287"
+            Height="96"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Magasin"
+            FontFamily="Rubik"
+            FontSize="72" MouseLeftButtonDown="labMagasin_MouseLeftButtonDown" />
+        <Label
+            x:Name="labParametre"
+            Width="363"
+            Height="96"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Parametre"
+            FontFamily="Rubik"
+            FontSize="72" MouseLeftButtonDown="labParametre_MouseLeftButtonDown" />
+        <Label
+            x:Name="labQuitter"
+            Width="244"
+            Height="96"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Quitter"
+            FontFamily="Rubik"
+            FontSize="72" MouseLeftButtonDown="labQuitter_MouseLeftButtonDown" />
 
     </Grid>
 </Window>
