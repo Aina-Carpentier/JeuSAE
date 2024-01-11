@@ -24,8 +24,9 @@ namespace JeuSAE
     {
 
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
-        private int countTick = 0, vitesseJoueur = 150, tempsRechargeArme = 60, tempsRechargeActuel = 0, vitesseBalle = 10;
+        private int countTick = 0, vitesseJoueur = 150, tempsRechargeArme = 60, tempsRechargeActuel = 0, vitesseBalle = 3;
         private bool gauche = false, droite = false, haut = false, bas = false, tirer = false;
+        private List<Balle> balleList = new List<Balle>();
 
         
 
@@ -92,7 +93,9 @@ namespace JeuSAE
             Console.WriteLine(Canvas.GetLeft(carte));
             Console.WriteLine(Canvas.GetTop(carte));
 #endif
-            
+
+
+
 
             MouvementJoueur();
             TirJoueur();
@@ -156,15 +159,52 @@ namespace JeuSAE
                 Console.WriteLine(posCarte.X.ToString() + "  " + posCarte.Y.ToString());
 #endif
                 tempsRechargeActuel = tempsRechargeArme;
+                /*
                 Vector2 vecteurTir = new Vector2((float)posEcran.X - 910, (float)posEcran.Y - 490);
                 Vector2 vecteurNormalise = Vector2.Normalize(vecteurTir);
                 Balle balleJoueur = new Balle(vitesseBalle, 20, 0, "joueur", 0, 810, 390, vecteurNormalise);
 
                 Canvas.SetTop(balleJoueur.Graphique, 390);
                 Canvas.SetLeft(balleJoueur.Graphique, 810);
+                */
+                Vector2 vecteurTir = new Vector2((float)posEcran.X - 910, (float)posEcran.Y - 490);
+
+                Balle balleJoueur = new Balle(vitesseBalle, 20, 0, "joueur", 0, 910, 490, vecteurTir);
+                Canvas.SetLeft(balleJoueur.Graphique, balleJoueur.PosX);
+                Canvas.SetTop(balleJoueur.Graphique, balleJoueur.PosY);
+
+
                 monCanvas.Children.Add(balleJoueur.Graphique);
+                balleList.Add(balleJoueur);
+                
             }
+
+
+
+            if (balleList != null)
+            {
+
+                foreach (Balle balle in balleList)
+                {
+                    balle.Deplacement();
+#if DEBUG
+                    Console.WriteLine("Balle PosX : " + balle.PosX);
+                    Console.WriteLine("Balle PosY : " + balle.PosY);
+
+#endif
+                    Canvas.SetLeft(balle.Graphique, balle.PosX);
+                    Canvas.SetTop(balle.Graphique, balle.PosY);
+                }
+
+            }
+
+
+            
             
         }
+
+        
+
+
     }
 }
