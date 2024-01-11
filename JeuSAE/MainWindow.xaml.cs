@@ -25,9 +25,10 @@ namespace JeuSAE
     {
 
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
-        private int countTick = 0, vitesseJoueur = 150, tempsRechargeArme = 60, tempsRechargeActuel = 0, vitesseBalle = 3;
-        private bool gauche = false, droite = false, haut = false, bas = false, tirer = false;
-        private List<Balle> balleList = new List<Balle>();
+        private int countTick = 0, vitesseJoueur = 20, tempsRechargeArme = 15, tempsRechargeActuel = 0, vitesseBalle = 30;
+        private bool gauche = false, droite = false, haut = false, bas = false, tirer = false, numPadUn = false, numPadQuatre = false;
+        private List<Balle> listeBalle = new List<Balle>();
+        private List<Balle> listeBalleAEnlever = new List<Balle>();
         private Rect player = new Rect(910, 490, 50, 50);
 
         double posJoueurX = 0, posJoueurY = 0;
@@ -84,6 +85,20 @@ namespace JeuSAE
                 haut = true;
             if (e.Key == Key.Down)
                 bas = true;
+
+
+
+
+
+            //-------------------------------------------CODES DE TRICHE-------------------------------------------
+
+            //Super vitesse
+            if (e.Key == Key.NumPad1)
+                numPadUn = true;
+            if (e.Key == Key.NumPad4)
+                numPadQuatre = true;
+            if (numPadUn && numPadQuatre) { vitesseJoueur = 200; } else { vitesseJoueur = 20; }
+
         }
 
         private void CanvasKeyIsUp(object sender, KeyEventArgs e)
@@ -96,6 +111,20 @@ namespace JeuSAE
                 haut = false;
             if (e.Key == Key.Down)
                 bas = false;
+
+
+
+
+
+            //-------------------------------------------CODES DE TRICHE-------------------------------------------
+
+            //Super vitesse
+            if (e.Key == Key.NumPad1)
+                numPadUn = false;
+            if (e.Key == Key.NumPad4)
+                numPadQuatre = false;
+
+
         }
 
 
@@ -120,7 +149,7 @@ namespace JeuSAE
                 if (Canvas.GetLeft(carte) + vitesseJoueur < posJoueurX - rectJoueur.Width / 2)
                 {
                     Canvas.SetLeft(carte, Canvas.GetLeft(carte) + vitesseJoueur);
-                    foreach (Balle balle in balleList) { 
+                    foreach (Balle balle in listeBalle) { 
                         Canvas.SetLeft(balle.Graphique, Canvas.GetLeft(balle.Graphique) + vitesseJoueur);
                         balle.PosX = Canvas.GetLeft(balle.Graphique);
                         balle.PosY = Canvas.GetTop(balle.Graphique);
@@ -140,7 +169,7 @@ namespace JeuSAE
                 if (Canvas.GetLeft(carte) - vitesseJoueur > -carte.Width + rectJoueur.Width/2 + posJoueurX)
                 {
                     Canvas.SetLeft(carte, Canvas.GetLeft(carte) - vitesseJoueur);
-                    foreach (Balle balle in balleList) { Canvas.SetLeft(balle.Graphique, Canvas.GetLeft(balle.Graphique) - vitesseJoueur); 
+                    foreach (Balle balle in listeBalle) { Canvas.SetLeft(balle.Graphique, Canvas.GetLeft(balle.Graphique) - vitesseJoueur); 
                         balle.PosX = Canvas.GetLeft(balle.Graphique);
                         balle.PosY = Canvas.GetTop(balle.Graphique);
                     }
@@ -158,7 +187,7 @@ namespace JeuSAE
                 if (Canvas.GetTop(carte) + vitesseJoueur < posJoueurY - rectJoueur.Height / 2)
                 {
                     Canvas.SetTop(carte, Canvas.GetTop(carte) + vitesseJoueur);
-                    foreach (Balle balle in balleList) { Canvas.SetTop(balle.Graphique, Canvas.GetTop(balle.Graphique) + vitesseJoueur); 
+                    foreach (Balle balle in listeBalle) { Canvas.SetTop(balle.Graphique, Canvas.GetTop(balle.Graphique) + vitesseJoueur); 
                                             balle.PosX = Canvas.GetLeft(balle.Graphique);
                         balle.PosY = Canvas.GetTop(balle.Graphique);
                     }
@@ -176,7 +205,7 @@ namespace JeuSAE
                 if (Canvas.GetTop(carte) - vitesseJoueur > -carte.Height + rectJoueur.Height / 2 + posJoueurY)
                 {
                     Canvas.SetTop(carte, Canvas.GetTop(carte) - vitesseJoueur);
-                    foreach (Balle balle in balleList) { Canvas.SetTop(balle.Graphique, Canvas.GetTop(balle.Graphique) - vitesseJoueur); 
+                    foreach (Balle balle in listeBalle) { Canvas.SetTop(balle.Graphique, Canvas.GetTop(balle.Graphique) - vitesseJoueur); 
                                             balle.PosX = Canvas.GetLeft(balle.Graphique);
                         balle.PosY = Canvas.GetTop(balle.Graphique);
                     }
@@ -221,16 +250,16 @@ namespace JeuSAE
 
 
                 monCanvas.Children.Add(balleJoueur.Graphique);
-                balleList.Add(balleJoueur);
+                listeBalle.Add(balleJoueur);
                 
             }
 
 
 
-            if (balleList != null)
+            if (listeBalle != null)
             {
 
-                foreach (Balle balle in balleList)
+                foreach (Balle balle in listeBalle)
                 {
                     balle.Deplacement();
 #if DEBUG
@@ -238,9 +267,22 @@ namespace JeuSAE
                     Console.WriteLine("Balle PosY : " + balle.PosY);
 
 #endif
+                    
+                    if (Canvas.GetLeft(balle.Graphique) <= Canvas.GetLeft(carte) - 100 || 
+                        Canvas.GetTop(balle.Graphique) <= Canvas.GetTop(carte) - 100 ||
+                        Canvas.GetRight(balle.Graphique) >= Canvas.GetLeft(carte) + carte.Width + 100 ||//TODO FIX CETTE LIGNE
+                        Canvas.GetBottom(balle.Graphique) >= Canvas.GetTop(carte) + carte.Height + 100) { listeBalleAEnlever.Add(balle); } //TODO FIX CETTE LIGNE
+
                     Canvas.SetLeft(balle.Graphique, balle.PosX);
                     Canvas.SetTop(balle.Graphique, balle.PosY);
                 }
+
+                foreach (Balle balle in listeBalleAEnlever)
+                {
+                    listeBalle.Remove(balle);
+                    monCanvas.Children.Remove(balle.Graphique);
+                }
+                listeBalleAEnlever.Clear();
 
             }
 
