@@ -40,6 +40,7 @@ namespace JeuSAE
             posJoueurY = fenetrePrincipale.Height / 2;
 
 
+
             MapGenerator.load(carte);
 
             Menu menu = new Menu();
@@ -98,6 +99,10 @@ namespace JeuSAE
             if (e.Key == Key.NumPad4)
                 numPadQuatre = true;
             if (numPadUn && numPadQuatre) { vitesseJoueur = 200; } else { vitesseJoueur = 20; }
+
+//#if DEBUG
+//            vitesseJoueur = 300;
+//#endif
 
         }
 
@@ -270,8 +275,8 @@ namespace JeuSAE
                     
                     if (Canvas.GetLeft(balle.Graphique) <= Canvas.GetLeft(carte) - 100 || 
                         Canvas.GetTop(balle.Graphique) <= Canvas.GetTop(carte) - 100 ||
-                        Canvas.GetRight(balle.Graphique) >= Canvas.GetLeft(carte) + carte.Width + 100 ||//TODO FIX CETTE LIGNE
-                        Canvas.GetBottom(balle.Graphique) >= Canvas.GetTop(carte) + carte.Height + 100) { listeBalleAEnlever.Add(balle); } //TODO FIX CETTE LIGNE
+                        Canvas.GetLeft(balle.Graphique) >= Canvas.GetLeft(carte) + carte.Width + 100 ||
+                        Canvas.GetTop(balle.Graphique) >= Canvas.GetTop(carte) + carte.Height + 100) { listeBalleAEnlever.Add(balle); }
 
                     Canvas.SetLeft(balle.Graphique, balle.PosX);
                     Canvas.SetTop(balle.Graphique, balle.PosY);
