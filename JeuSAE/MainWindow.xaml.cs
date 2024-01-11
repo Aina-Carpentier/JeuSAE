@@ -36,11 +36,7 @@ namespace JeuSAE
         public MainWindow()
         {
             InitializeComponent();
-            dispatcherTimer.Tick += GameEngine;
-            // rafraissement toutes les 16 milliseconds
-            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(16);
-            // lancement du timer
-            dispatcherTimer.Start();
+            
 
             MapGenerator.load(carte);
 
@@ -48,7 +44,11 @@ namespace JeuSAE
             menu.ShowDialog();
             
             rectJoueur.Margin = new Thickness(fenetrePrincipale.Width/2 - rectJoueur.Width/2, fenetrePrincipale.Height/2 - rectJoueur.Height/2, 0, 0);
-
+            dispatcherTimer.Tick += GameEngine;
+            // rafraissement toutes les 16 milliseconds
+            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(16);
+            // lancement du timer
+            dispatcherTimer.Start();
         }
 
         private void monCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

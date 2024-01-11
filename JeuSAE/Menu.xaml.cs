@@ -35,6 +35,11 @@ namespace JeuSAE
             background2.Width = coteImage;
             background2.Height = coteImage;
 
+            labJouer.Margin = new Thickness(windowMenu.Width/2 - labJouer.Width/2, windowMenu.Height * 0.2 - labJouer.Height/2, 0 ,0);
+            labMagasin.Margin = new Thickness(windowMenu.Width/2 - labMagasin.Width/2, windowMenu.Height * 0.4 - labMagasin.Height/2, 0 ,0);
+            labParametre.Margin = new Thickness(windowMenu.Width/2 - labParametre.Width/2, windowMenu.Height * 0.6 - labParametre.Height/2, 0 ,0);
+            labQuitter.Margin = new Thickness(windowMenu.Width / 2 - labQuitter.Width / 2, windowMenu.Height * 0.8 - labQuitter.Height/2, 0 ,0);
+
             Canvas.SetLeft(background1, 0);//TODO fix the scaling and do the scroll logic
             Canvas.SetLeft(background2, background1.Width);
             //background2.Visibility = Visibility.Hidden;
