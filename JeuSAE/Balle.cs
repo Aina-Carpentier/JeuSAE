@@ -112,6 +112,7 @@ namespace JeuSAE
             };
         }
 
+
         public override bool Equals(object? obj)
         {
             return obj is Balle balle &&
@@ -128,6 +129,11 @@ namespace JeuSAE
         public override int GetHashCode()
         {
             return HashCode.Combine(Vitesse, Taille, Type, Tireur, Acceleration, PosX, PosY, Vecteur);
+        }
+
+        public void Deplacement()
+        {
+
         }
     }
 }
