@@ -50,7 +50,7 @@
             VerticalAlignment="Top"
             Content="Jouer"
             FontFamily="Rubik"
-            FontSize="72" />
+            FontSize="72" MouseLeftButtonDown="labJouer_MouseLeftButtonDown" />
         <Label
             x:Name="labMagasin"
             Width="287"
@@ -59,7 +59,7 @@
             VerticalAlignment="Top"
             Content="Magasin"
             FontFamily="Rubik"
-            FontSize="72" />
+            FontSize="72" MouseLeftButtonDown="labMagasin_MouseLeftButtonDown" />
         <Label
             x:Name="labParametre"
             Width="363"
@@ -68,7 +68,7 @@
             VerticalAlignment="Top"
             Content="Parametre"
             FontFamily="Rubik"
-            FontSize="72" />
+            FontSize="72" MouseLeftButtonDown="labParametre_MouseLeftButtonDown" />
         <Label
             x:Name="labQuitter"
             Width="244"
@@ -77,7 +77,7 @@
             VerticalAlignment="Top"
             Content="Quitter"
             FontFamily="Rubik"
-            FontSize="72" />
+            FontSize="72" MouseLeftButtonDown="labQuitter_MouseLeftButtonDown" />
 
     </Grid>
 </Window>

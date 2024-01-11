@@ -20,7 +20,7 @@ namespace JeuSAE
     /// </summary>
     public partial class Menu : Window
     {
-
+        private String choix = "";
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
         public Menu()
         {
@@ -71,8 +71,28 @@ namespace JeuSAE
             }
         }
 
-
-
-
+        private void labJouer_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.choix = "jouer";
+            this.Hide();
         }
+
+        private void labMagasin_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.choix = "magasin";
+            this.Hide();
+        }
+
+        private void labParametre_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.choix = "parametre";
+            this.Hide();
+        }
+
+        private void labQuitter_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.choix = "quitter";
+            this.Hide();
+        }
+    }
 }
