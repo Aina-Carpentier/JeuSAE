@@ -157,10 +157,11 @@ namespace JeuSAE
 #endif
                 tempsRechargeActuel = tempsRechargeArme;
                 Vector2 vecteurTir = new Vector2((float)posEcran.X - 910, (float)posEcran.Y - 490);
-                Balle balleJoueur = new Balle(vitesseBalle, 5, 0, "joueur", 0, (int)posCarte.X, (int)posCarte.Y, vecteurTir);
+                Vector2 vecteurNormalise = Vector2.Normalize(vecteurTir);
+                Balle balleJoueur = new Balle(vitesseBalle, 20, 0, "joueur", 0, 810, 390, vecteurNormalise);
 
-                Canvas.SetTop(balleJoueur.Graphique, posEcran.Y);
-                Canvas.SetLeft(balleJoueur.Graphique, posEcran.X);
+                Canvas.SetTop(balleJoueur.Graphique, 390);
+                Canvas.SetLeft(balleJoueur.Graphique, 810);
                 monCanvas.Children.Add(balleJoueur.Graphique);
             }
             

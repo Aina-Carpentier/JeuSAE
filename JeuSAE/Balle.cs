@@ -30,7 +30,7 @@ namespace JeuSAE
         private int posY;
         private Vector2 vecteur;
         private Rect rect;
-        private Rectangle graphique;
+        private Ellipse graphique;
 
         public double Vitesse
         {
@@ -85,7 +85,7 @@ namespace JeuSAE
 
         public Rect Rect { get => rect; set => rect = value; }
 
-        public Rectangle Graphique 
+        public Ellipse Graphique 
         {
             get { return graphique; }
             set { graphique = value;}
@@ -102,12 +102,13 @@ namespace JeuSAE
             PosY = posY;
             Vecteur = vecteur;
             Rect = new Rect((double)PosX, (Double)posY, Constantes.BALLE_WIDHT, Constantes.BALLE_HEIGHT);
-            Graphique = new Rectangle{
+
+            Graphique = new Ellipse{
                 Tag = "bulletPlayer",
-                Height = 20,
-                Width = 5,
-                Fill = Brushes.White,
-                Stroke = Brushes.Red
+                Width = taille,
+                Height = taille,
+                Fill = Brushes.Red,
+                Stroke = Brushes.Black
             };
         }
 
