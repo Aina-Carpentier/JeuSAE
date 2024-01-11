@@ -20,7 +20,7 @@ namespace JeuSAE
     /// </summary>
     public partial class Menu : Window
     {
-        private String choix = "";
+        public String choix = "";
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
         public Menu()
         {

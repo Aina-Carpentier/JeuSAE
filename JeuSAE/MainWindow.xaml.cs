@@ -25,16 +25,9 @@ namespace JeuSAE
     {
 
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
-
         private int countTick = 0, vitesseJoueur = 150, tempsRechargeArme = 60, tempsRechargeActuel = 0, vitesseBalle = 3;
-
-        
-
         private bool gauche = false, droite = false, haut = false, bas = false, tirer = false;
         private List<Balle> balleList = new List<Balle>();
-
-        
-
         private Rect player = new Rect(910, 490, 50, 50);
 
         double posJoueurX = 0, posJoueurY = 0;
@@ -50,18 +43,25 @@ namespace JeuSAE
 
             Menu menu = new Menu();
             menu.ShowDialog();
+            while (menu.choix != "jouer")
+            {
+
+                switch (menu.choix)
+                {
+                    case "quitter":
+                        Application.Current.Shutdown();
+                        break;
 
 
-
-            rectJoueur.Margin = new Thickness(posJoueurX - rectJoueur.Width/2, posJoueurY - rectJoueur.Height/2, 0, 0);
-
-
-            
+                }
+            }
+            rectJoueur.Margin = new Thickness(posJoueurX - rectJoueur.Width / 2, posJoueurY - rectJoueur.Height / 2, 0, 0);
             dispatcherTimer.Tick += GameEngine;
             // rafraissement toutes les 16 milliseconds
             dispatcherTimer.Interval = TimeSpan.FromMilliseconds(16);
             // lancement du timer
             dispatcherTimer.Start();
+
         }
 
         private void monCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
