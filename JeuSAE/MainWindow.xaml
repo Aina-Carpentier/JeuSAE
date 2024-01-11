@@ -1,4 +1,4 @@
-﻿<Window
+﻿<Window x:Name="fenetrePrincipale"
     x:Class="JeuSAE.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -6,8 +6,8 @@
     xmlns:local="clr-namespace:JeuSAE"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="MainWindow"
-    Width="1920"
-    Height="1080"
+    Height="{x:Static SystemParameters.PrimaryScreenHeight}" 
+    Width="{x:Static SystemParameters.PrimaryScreenWidth}"
     FocusManager.FocusedElement="{Binding ElementName=monCanvas}"
     FontFamily="Cascadia Mono SemiBold"
     ResizeMode="NoResize"
