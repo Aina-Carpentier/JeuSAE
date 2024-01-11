@@ -117,43 +117,77 @@ namespace JeuSAE
         private void MouvementJoueur()
         {
             if (gauche)
-                if (Canvas.GetLeft(carte) + vitesseJoueur < posJoueurX - rectJoueur.Width / 2)
+                if (Canvas.GetLeft(carte) + vitesseJoueur < posJoueurX - rectJoueur.Width / 2)//TODO FIXER CA, QUAND ON VAS VERS LA DROITE CA A L'AIR DE MARCHER
                 {
                     Canvas.SetLeft(carte, Canvas.GetLeft(carte) + vitesseJoueur);
+                    foreach (Balle balle in balleList) { 
+                        Canvas.SetLeft(balle.Graphique, Canvas.GetLeft(carte) + vitesseJoueur);
+                        balle.PosX = Canvas.GetLeft(balle.Graphique);
+                        balle.PosY = Canvas.GetTop(balle.Graphique);
+                    }
                 }
 
                 else
                 {
                     Canvas.SetLeft(carte, posJoueurX - rectJoueur.Width / 2);
-                }
+                    foreach (Balle balle in balleList) { Canvas.SetLeft(balle.Graphique, posJoueurX - rectJoueur.Width / 2);
+                        balle.PosX = Canvas.GetLeft(balle.Graphique);
+                        balle.PosY = Canvas.GetTop(balle.Graphique);
+                    
+                    }
+                    }
             if (droite)
                 if (Canvas.GetLeft(carte) - vitesseJoueur > -carte.Width + rectJoueur.Width/2 + posJoueurX)
                 {
                     Canvas.SetLeft(carte, Canvas.GetLeft(carte) - vitesseJoueur);
+                    foreach (Balle balle in balleList) { Canvas.SetLeft(balle.Graphique, Canvas.GetLeft(carte) - vitesseJoueur); 
+                        balle.PosX = Canvas.GetLeft(balle.Graphique);
+                        balle.PosY = Canvas.GetTop(balle.Graphique);
+                    }
                 }
                 else
                 {
                     Canvas.SetLeft(carte, -carte.Width + rectJoueur.Width/2 + posJoueurX);
+                    foreach (Balle balle in balleList) { Canvas.SetLeft(balle.Graphique, -carte.Width + rectJoueur.Width / 2 + posJoueurX); 
+                                            balle.PosX = Canvas.GetLeft(balle.Graphique);
+                        balle.PosY = Canvas.GetTop(balle.Graphique);
+                    }
                 }
             if (haut)
             {
                 if (Canvas.GetTop(carte) + vitesseJoueur < posJoueurY - rectJoueur.Height / 2)
                 {
                     Canvas.SetTop(carte, Canvas.GetTop(carte) + vitesseJoueur);
+                    foreach (Balle balle in balleList) { Canvas.SetTop(balle.Graphique, Canvas.GetTop(carte) + vitesseJoueur); 
+                                            balle.PosX = Canvas.GetLeft(balle.Graphique);
+                        balle.PosY = Canvas.GetTop(balle.Graphique);
+                    }
                 }
                 else
                 {
                     Canvas.SetTop(carte, posJoueurY - rectJoueur.Height / 2);
+                    foreach (Balle balle in balleList) { Canvas.SetTop(balle.Graphique, posJoueurY - rectJoueur.Height / 2); 
+                                            balle.PosX = Canvas.GetLeft(balle.Graphique);
+                        balle.PosY = Canvas.GetTop(balle.Graphique);
+                    }
                 }
             }
             if (bas)
                 if (Canvas.GetTop(carte) - vitesseJoueur > -carte.Height + rectJoueur.Height / 2 + posJoueurY)
                 {
                     Canvas.SetTop(carte, Canvas.GetTop(carte) - vitesseJoueur);
+                    foreach (Balle balle in balleList) { Canvas.SetTop(balle.Graphique, Canvas.GetTop(carte) - vitesseJoueur); 
+                                            balle.PosX = Canvas.GetLeft(balle.Graphique);
+                        balle.PosY = Canvas.GetTop(balle.Graphique);
+                    }
                 }
                 else
                 {
                     Canvas.SetTop(carte, -carte.Height + rectJoueur.Height/2 + posJoueurY);
+                    foreach (Balle balle in balleList) { Canvas.SetTop(balle.Graphique, -carte.Height + rectJoueur.Height / 2 + posJoueurY); 
+                                            balle.PosX = Canvas.GetLeft(balle.Graphique);
+                        balle.PosY = Canvas.GetTop(balle.Graphique);
+                    }
                 }
         }
 
@@ -181,7 +215,7 @@ namespace JeuSAE
                 */
                 Vector2 vecteurTir = new Vector2((float)posEcran.X - (float)posJoueurX, (float)posEcran.Y - (float)posJoueurY);
 
-                Balle balleJoueur = new Balle(vitesseBalle, 20, 0, "joueur", 0, posJoueurX, posJoueurY, vecteurTir);
+                Balle balleJoueur = new Balle(vitesseBalle, 20, 0, "joueur", 0, posJoueurX-10, posJoueurY-10, vecteurTir);
                 Canvas.SetLeft(balleJoueur.Graphique, balleJoueur.PosX);
                 Canvas.SetTop(balleJoueur.Graphique, balleJoueur.PosY);
 
@@ -214,6 +248,8 @@ namespace JeuSAE
             
             
         }
+
+        
 
         
 
