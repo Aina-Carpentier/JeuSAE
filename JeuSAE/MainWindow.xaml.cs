@@ -24,7 +24,10 @@ namespace JeuSAE
     {
 
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
+
         private int countTick = 0, vitesseJoueur = 150, tempsRechargeArme = 60, tempsRechargeActuel = 0, vitesseBalle = 3;
+
+
         private bool gauche = false, droite = false, haut = false, bas = false, tirer = false;
         private List<Balle> balleList = new List<Balle>();
 
@@ -47,7 +50,8 @@ namespace JeuSAE
 
             Menu menu = new Menu();
             menu.ShowDialog();
-
+            
+            rectJoueur.Margin = new Thickness(fenetrePrincipale.Width/2 - rectJoueur.Width/2, fenetrePrincipale.Height/2 - rectJoueur.Height/2, 0, 0);
 
         }
 
@@ -104,44 +108,43 @@ namespace JeuSAE
         private void MouvementJoueur()
         {
             if (gauche)
-                if (Canvas.GetLeft(carte) + vitesseJoueur < 910)
+                if (Canvas.GetLeft(carte) + vitesseJoueur < fenetrePrincipale.Width / 2 - rectJoueur.Width / 2)
                 {
                     Canvas.SetLeft(carte, Canvas.GetLeft(carte) + vitesseJoueur);
                 }
 
                 else
                 {
-                    Canvas.SetLeft(carte, 910);
+                    Canvas.SetLeft(carte, fenetrePrincipale.Width / 2 - rectJoueur.Width / 2);
                 }
-
             if (droite)
-                if (Canvas.GetLeft(carte) - vitesseJoueur > -18240)
+                if (Canvas.GetLeft(carte) - vitesseJoueur > -carte.Width + rectJoueur.Width/2 + fenetrePrincipale.Width/2)
                 {
                     Canvas.SetLeft(carte, Canvas.GetLeft(carte) - vitesseJoueur);
                 }
                 else
                 {
-                    Canvas.SetLeft(carte, -18240);
+                    Canvas.SetLeft(carte, -carte.Width + rectJoueur.Width/2 + fenetrePrincipale.Width/2);
                 }
             if (haut)
             {
-                if (Canvas.GetTop(carte) + vitesseJoueur < 490)
+                if (Canvas.GetTop(carte) + vitesseJoueur < fenetrePrincipale.Height / 2 - rectJoueur.Height / 2)
                 {
                     Canvas.SetTop(carte, Canvas.GetTop(carte) + vitesseJoueur);
                 }
                 else
                 {
-                    Canvas.SetTop(carte, 490);
+                    Canvas.SetTop(carte, fenetrePrincipale.Height / 2 - rectJoueur.Height / 2);
                 }
             }
             if (bas)
-                if (Canvas.GetTop(carte) - vitesseJoueur > -10360)
+                if (Canvas.GetTop(carte) - vitesseJoueur > -carte.Height + rectJoueur.Height / 2 + fenetrePrincipale.Height/2)
                 {
                     Canvas.SetTop(carte, Canvas.GetTop(carte) - vitesseJoueur);
                 }
                 else
                 {
-                    Canvas.SetTop(carte, -10260);
+                    Canvas.SetTop(carte, -carte.Height + rectJoueur.Height/2 + fenetrePrincipale.Height/2);
                 }
         }
 

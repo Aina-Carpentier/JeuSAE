@@ -53,7 +53,17 @@ namespace JeuSAE
 
         private void GameEngine(object sender, EventArgs e)
         {
-
+            Canvas.SetLeft(background1, Canvas.GetLeft(background1) - 2);
+            Canvas.SetLeft(background2, Canvas.GetLeft(background2) - 2);
+            
+            if (Canvas.GetLeft(background1) + background1.Width < 0)
+            {
+                Canvas.SetLeft(background1, background1.Width);
+            }
+            if (Canvas.GetLeft(background2) + background2.Width < 0)
+            {
+                Canvas.SetLeft(background2, background2.Width);
+            }
         }
 
 
