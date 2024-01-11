@@ -26,8 +26,8 @@ namespace JeuSAE
         private int type;
         private String tireur;
         private double acceleration;
-        private int posX;
-        private int posY;
+        private double posX;
+        private double posY;
         private Vector2 vecteur;
         private Rect rect;
         private Ellipse graphique;
@@ -65,13 +65,13 @@ namespace JeuSAE
             set { acceleration = value; }
         }
 
-        public int PosX
+        public double PosX
         {
             get { return posX; }
             set { posX = value; }
         }
 
-        public int PosY
+        public double PosY
         {
             get { return posY; }
             set { posY = value; }
@@ -91,7 +91,7 @@ namespace JeuSAE
             set { graphique = value;}
         }
 
-        public Balle(double vitesse, double taille, int type, string tireur, double acceleration, int posX, int posY, Vector2 vecteur)
+        public Balle(double vitesse, double taille, int type, string tireur, double acceleration, double posX, double posY, Vector2 vecteur)
         {
             Vitesse = vitesse;
             Taille = taille;
@@ -101,7 +101,7 @@ namespace JeuSAE
             PosX = posX;
             PosY = posY;
             Vecteur = vecteur;
-            Rect = new Rect((double)PosX, (Double)posY, Constantes.BALLE_WIDHT, Constantes.BALLE_HEIGHT);
+            Rect = new Rect(PosX, posY, Constantes.BALLE_WIDHT, Constantes.BALLE_HEIGHT);
 
             Graphique = new Ellipse{
                 Tag = "bulletPlayer",
@@ -138,8 +138,8 @@ namespace JeuSAE
             double newX = PosX + (vecteurNormalize.X * this.Vitesse);
             double newY = PosY + (vecteurNormalize.Y * this.Vitesse);
 
-            this.PosX = (int)newX;
-            this.PosY = (int)newY;
+            this.PosX = newX;
+            this.PosY = newY;
 
 
         }

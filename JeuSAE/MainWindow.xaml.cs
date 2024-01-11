@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.Security.Cryptography.X509Certificates;
 
 namespace JeuSAE
 {
@@ -27,6 +28,7 @@ namespace JeuSAE
 
         private int countTick = 0, vitesseJoueur = 150, tempsRechargeArme = 60, tempsRechargeActuel = 0, vitesseBalle = 3;
 
+        
 
         private bool gauche = false, droite = false, haut = false, bas = false, tirer = false;
         private List<Balle> balleList = new List<Balle>();
@@ -35,11 +37,13 @@ namespace JeuSAE
 
         private Rect player = new Rect(910, 490, 50, 50);
 
-
+        double posJoueurX = 0, posJoueurY = 0;
 
         public MainWindow()
         {
             InitializeComponent();
+            posJoueurX = fenetrePrincipale.Width / 2;
+            posJoueurY = fenetrePrincipale.Height / 2;
             dispatcherTimer.Tick += GameEngine;
             // rafraissement toutes les 16 milliseconds
             dispatcherTimer.Interval = TimeSpan.FromMilliseconds(16);
@@ -50,8 +54,10 @@ namespace JeuSAE
 
             Menu menu = new Menu();
             menu.ShowDialog();
-            
-            rectJoueur.Margin = new Thickness(fenetrePrincipale.Width/2 - rectJoueur.Width/2, fenetrePrincipale.Height/2 - rectJoueur.Height/2, 0, 0);
+
+
+
+            rectJoueur.Margin = new Thickness(posJoueurX - rectJoueur.Width/2, posJoueurY - rectJoueur.Height/2, 0, 0);
 
         }
 
@@ -108,43 +114,43 @@ namespace JeuSAE
         private void MouvementJoueur()
         {
             if (gauche)
-                if (Canvas.GetLeft(carte) + vitesseJoueur < fenetrePrincipale.Width / 2 - rectJoueur.Width / 2)
+                if (Canvas.GetLeft(carte) + vitesseJoueur < posJoueurX - rectJoueur.Width / 2)
                 {
                     Canvas.SetLeft(carte, Canvas.GetLeft(carte) + vitesseJoueur);
                 }
 
                 else
                 {
-                    Canvas.SetLeft(carte, fenetrePrincipale.Width / 2 - rectJoueur.Width / 2);
+                    Canvas.SetLeft(carte, posJoueurX - rectJoueur.Width / 2);
                 }
             if (droite)
-                if (Canvas.GetLeft(carte) - vitesseJoueur > -carte.Width + rectJoueur.Width/2 + fenetrePrincipale.Width/2)
+                if (Canvas.GetLeft(carte) - vitesseJoueur > -carte.Width + rectJoueur.Width/2 + posJoueurX)
                 {
                     Canvas.SetLeft(carte, Canvas.GetLeft(carte) - vitesseJoueur);
                 }
                 else
                 {
-                    Canvas.SetLeft(carte, -carte.Width + rectJoueur.Width/2 + fenetrePrincipale.Width/2);
+                    Canvas.SetLeft(carte, -carte.Width + rectJoueur.Width/2 + posJoueurX);
                 }
             if (haut)
             {
-                if (Canvas.GetTop(carte) + vitesseJoueur < fenetrePrincipale.Height / 2 - rectJoueur.Height / 2)
+                if (Canvas.GetTop(carte) + vitesseJoueur < posJoueurY - rectJoueur.Height / 2)
                 {
                     Canvas.SetTop(carte, Canvas.GetTop(carte) + vitesseJoueur);
                 }
                 else
                 {
-                    Canvas.SetTop(carte, fenetrePrincipale.Height / 2 - rectJoueur.Height / 2);
+                    Canvas.SetTop(carte, posJoueurY - rectJoueur.Height / 2);
                 }
             }
             if (bas)
-                if (Canvas.GetTop(carte) - vitesseJoueur > -carte.Height + rectJoueur.Height / 2 + fenetrePrincipale.Height/2)
+                if (Canvas.GetTop(carte) - vitesseJoueur > -carte.Height + rectJoueur.Height / 2 + posJoueurY)
                 {
                     Canvas.SetTop(carte, Canvas.GetTop(carte) - vitesseJoueur);
                 }
                 else
                 {
-                    Canvas.SetTop(carte, -carte.Height + rectJoueur.Height/2 + fenetrePrincipale.Height/2);
+                    Canvas.SetTop(carte, -carte.Height + rectJoueur.Height/2 + posJoueurY);
                 }
         }
 
@@ -170,9 +176,9 @@ namespace JeuSAE
                 Canvas.SetTop(balleJoueur.Graphique, 390);
                 Canvas.SetLeft(balleJoueur.Graphique, 810);
                 */
-                Vector2 vecteurTir = new Vector2((float)posEcran.X - 910, (float)posEcran.Y - 490);
+                Vector2 vecteurTir = new Vector2((float)posEcran.X - (float)posJoueurX, (float)posEcran.Y - (float)posJoueurY);
 
-                Balle balleJoueur = new Balle(vitesseBalle, 20, 0, "joueur", 0, 910, 490, vecteurTir);
+                Balle balleJoueur = new Balle(vitesseBalle, 20, 0, "joueur", 0, posJoueurX, posJoueurY, vecteurTir);
                 Canvas.SetLeft(balleJoueur.Graphique, balleJoueur.PosX);
                 Canvas.SetTop(balleJoueur.Graphique, balleJoueur.PosY);
 
