@@ -1,17 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Security.Policy;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace JeuSAE
 {
@@ -26,23 +19,45 @@ namespace JeuSAE
 
         private readonly static List<String> REGEX = new List<string> { COIN_BAS_DROIT_REGEX, COIN_BAS_GAUCHE_REGEX, COIN_DROIT_REGEX, COIN_GAUCHE_REGEX, COIN_HAUT_DROIT_REGEX, COIN_HAUT_GAUCHE_REGEX };
 
+        /*
         private readonly static List<ImageBrush> COIN_HAUT_DROITE_IMAGES = new List<ImageBrush> { };
         private readonly static List<ImageBrush> COIN_HAUT_GAUCHE_IMAGES = new List<ImageBrush> { };
         private readonly static List<ImageBrush> COIN_BAS_DROITE_IMAGES = new List<ImageBrush> { };
         private readonly static List<ImageBrush> COIN_BAS_GAUCHE_IMAGES = new List<ImageBrush> { };
         private readonly static List<ImageBrush> COIN_DROITE_IMAGES = new List<ImageBrush> { };
         private readonly static List<ImageBrush> COIN_GAUCHE_IMAGES = new List<ImageBrush> { };
-
+        */
         private static double IMG_WIDTH = 512;
         private static double IMG_HEIGHT = 512;
 
         public static void load(Grid carte)
         {
-            ChargerImages();
-            ChargerGrille(carte);
-            DessinerFond(carte);
-        }
+            //ChargerImages();
+            //ChargerGrille(carte);
+            //DessinerFond(carte);
 
+
+
+            System.Drawing.Image source1 = System.Drawing.Image.FromFile(AppDomain.CurrentDomain.BaseDirectory + "images\\environnement\\grass_1.png");
+            System.Drawing.Image source2 = System.Drawing.Image.FromFile(AppDomain.CurrentDomain.BaseDirectory + "images\\environnement\\grass_2.png");
+            var cible = new Bitmap(source1.Width * 2, source1.Height, PixelFormat.Format32bppArgb);
+            var graphiques = Graphics.FromImage(cible);
+            graphiques.CompositingMode = CompositingMode.SourceOver; // c'est le compositingMode par défault mais juste pour être sûr
+
+            graphiques.DrawImage(source1, 0, 0);
+            graphiques.DrawImage(source2, source1.Width, 0);
+
+
+
+            //cible.Save(/*"C:\\Users\\Ewan\\Desktop\\trucs_scolaires\\BUT\\SAE_DEV\\projet\\JeuSAE\\images\\result.png"*/ AppDomain.CurrentDomain.BaseDirectory + "images\\result.png", ImageFormat.Png);//TODO c'est juste ça qui marche pas correctement
+#if DEBUG
+            Console.WriteLine(System.AppDomain.CurrentDomain.BaseDirectory + "images\\result.png");
+            Console.WriteLine(AppDomain.CurrentDomain.BaseDirectory + "images\\environnement\\grass_1.png");
+#endif
+
+
+        }
+        /*
         private static void ChargerGrille(Grid carte)
         {
             int currentX = 0;
@@ -140,5 +155,6 @@ namespace JeuSAE
                 }
             }
         }
+        */
     }
 }

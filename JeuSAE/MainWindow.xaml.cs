@@ -41,10 +41,11 @@ namespace JeuSAE
 
 
 
-            MapGenerator.load(carte);
+
 
             Menu menu = new Menu();
             menu.ShowDialog();
+            MapGenerator.load(carte);
             while (menu.choix != "jouer")
             {
 
