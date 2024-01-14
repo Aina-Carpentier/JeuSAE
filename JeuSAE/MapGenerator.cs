@@ -4,12 +4,19 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Security.Policy;
 using System.Text.RegularExpressions;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
+using System.Windows.Media;
+using System.Windows.Interop;
+using System.Windows;
+using System.Windows.Shapes;
+using Rectangle = System.Windows.Shapes.Rectangle;
 
 namespace JeuSAE
 {
-    internal class MapGenerator
+    public class MapGenerator
     {
 
         private static readonly Regex SOL_REGEX = new Regex(@"^grass_[0-9]+\.png$");
@@ -40,19 +47,19 @@ namespace JeuSAE
         private static Random rnd = new Random();
 
 
-        private static int IMG_WIDTH = 16;
-        private static int IMG_HEIGHT = 16;
+        private static int IMG_WIDTH = 256;
+        private static int IMG_HEIGHT = 256;
 
 
 
 
-        public static void load(Grid carte)
+        public static void load(MainWindow mainWindow)
         {
             //ChargerImages();
             //ChargerGrille(carte);
             //DessinerFond(carte);
 
-
+            Rectangle carte = mainWindow.carte;
 
 
             String fullDebugUri = AppDomain.CurrentDomain.BaseDirectory + "images\\";
@@ -62,9 +69,9 @@ namespace JeuSAE
             String cutUri1 = uriSplit1[0] + uriSplit1[1];
 
 
-            System.Drawing.Image source1 = System.Drawing.Image.FromFile(cutUri1 + "\\environnement_16x16\\grass_1.png");
-            System.Drawing.Image source2 = System.Drawing.Image.FromFile(cutUri1 + "\\environnement_16x16\\grass_1.png");
-            Bitmap cible = new Bitmap((int)carte.Width, (int)carte.Height, PixelFormat.Format32bppArgb);
+            System.Drawing.Image source1 = System.Drawing.Image.FromFile(cutUri1 + "\\environnement_256x256\\grass_1.png");
+            System.Drawing.Image source2 = System.Drawing.Image.FromFile(cutUri1 + "\\environnement_256x256\\grass_1.png");
+            Bitmap cible = new Bitmap((int)carte.Width, (int)carte.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
             Graphics graphiques = Graphics.FromImage(cible);
             graphiques.CompositingMode = CompositingMode.SourceOver; // c'est le compositingMode par défault mais juste pour être sûr
 
@@ -75,11 +82,11 @@ namespace JeuSAE
                 String[] uriSplit = fullDebugUri.Split("bin\\Debug\\net6.0-windows\\");
                 String cutUri = uriSplit[0] + uriSplit[1];
 
-                lesImageEnvironnement = Directory.GetFiles(cutUri + "environnement_16x16\\");
+                lesImageEnvironnement = Directory.GetFiles(cutUri + "environnement_256x256\\");
             }
             catch (IndexOutOfRangeException e)
             {
-                lesImageEnvironnement = Directory.GetFiles(fullDebugUri + "environnement_16x16\\");
+                lesImageEnvironnement = Directory.GetFiles(fullDebugUri + "environnement_256x256\\");
             }
 
 
@@ -295,7 +302,7 @@ namespace JeuSAE
 
 
 
-                    graphiques.DrawImage(source1, n, i);
+                    graphiques.DrawImage(source1, n, i);//TODO faire du multithreading
                     //test(source1, graphiques, n, i);
 
                     dejaRepondu = false;
@@ -318,13 +325,34 @@ namespace JeuSAE
 
             //#if DEBUG
 
+
+            ImageBrush image = new ImageBrush();
+            image.ImageSource = ToBitmapImage(cible);
+
+            carte.Fill = image;
+
+            /*
+            System.Windows.Controls.Image img = new System.Windows.Controls.Image();
+            img.Source = image.ImageSource;
+
+
+
+            img.Width = carte.Width;
+            img.Height = carte.Height;
+            
+            mainWindow.monCanvas.Children.Add(img);
+            Canvas.SetTop(img, Canvas.GetTop(carte));
+            Canvas.SetLeft(img, Canvas.GetLeft(carte));
+            */
+
+            /*
             try
             {//Si on lance en débug le path n'est pas le même donc :
 
 
                 String[] uriSplit = fullDebugUri.Split("bin\\Debug\\net6.0-windows\\");
                 String cutUri = uriSplit[0] + uriSplit[1];
-                String pathMap = Path.Combine(cutUri, "result.png");
+                String pathMap = System.IO.Path.Combine(cutUri, "result.png");
 
                 if (File.Exists(pathMap))
                 {
@@ -337,14 +365,14 @@ namespace JeuSAE
             }
             catch (IndexOutOfRangeException e)
             {//Et si on lance en normal :
-                String pathMap = Path.Combine(fullDebugUri, "result.png");
+                String pathMap = System.IO.Path.Combine(fullDebugUri, "result.png");
                 if (File.Exists(pathMap))
                 {
                     File.Delete(pathMap);
                 }
                 cible.Save(pathMap, ImageFormat.Png);
             }
-
+            */
 
             //#else
 
@@ -359,5 +387,26 @@ namespace JeuSAE
 
 
         }
+
+
+        private static BitmapImage ToBitmapImage(Bitmap bitmap)
+        {
+            using (var memory = new MemoryStream())
+            {
+                bitmap.Save(memory, ImageFormat.Png);
+                memory.Position = 0;
+
+                var bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.StreamSource = memory;
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapImage.EndInit();
+                bitmapImage.Freeze();
+
+                return bitmapImage;
+            }
+        }
+
+
     }
 }

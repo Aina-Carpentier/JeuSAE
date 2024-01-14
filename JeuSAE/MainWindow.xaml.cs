@@ -45,7 +45,7 @@ namespace JeuSAE
 
             Menu menu = new Menu();
             menu.ShowDialog();
-            MapGenerator.load(carte);
+            MapGenerator.load(this);
             while (menu.choix != "jouer")
             {
 
@@ -269,8 +269,8 @@ namespace JeuSAE
                 {
                     balle.Deplacement();
 #if DEBUG
-                    Console.WriteLine("Balle PosX : " + balle.PosX);
-                    Console.WriteLine("Balle PosY : " + balle.PosY);
+                    //Console.WriteLine("Balle PosX : " + balle.PosX);
+                    //Console.WriteLine("Balle PosY : " + balle.PosY);
 
 #endif
                     

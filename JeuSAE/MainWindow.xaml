@@ -36,12 +36,12 @@
             Fill="#FFF51818"
             Stroke="Black" />
 
-        <Grid
+        <Rectangle
             x:Name="carte"
-            Canvas.Left="-8640"
-            Canvas.Top="-4860"
-            Width="19200"
-            Height="10800" />
+            Canvas.Left="-8768"
+            Canvas.Top="-4884"
+            Width="19456"
+            Height="10752" />
 
     </Canvas>
 
