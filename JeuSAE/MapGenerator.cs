@@ -62,32 +62,17 @@ namespace JeuSAE
             Rectangle carte = mainWindow.carte;
 
 
-            String fullDebugUri = AppDomain.CurrentDomain.BaseDirectory + "images\\";
             String[] lesImageEnvironnement;
 
-            String[] uriSplit1 = fullDebugUri.Split("bin\\Debug\\net6.0-windows\\");
-            String cutUri1 = uriSplit1[0] + uriSplit1[1];
+            String dossierImages = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "images\\");
 
-
-            System.Drawing.Image source1 = System.Drawing.Image.FromFile(cutUri1 + "\\environnement_256x256\\grass_1.png");
-            System.Drawing.Image source2 = System.Drawing.Image.FromFile(cutUri1 + "\\environnement_256x256\\grass_1.png");
+            System.Drawing.Image source1 = System.Drawing.Image.FromFile(dossierImages + "environnement_256x256\\grass_1.png");
+            System.Drawing.Image source2 = System.Drawing.Image.FromFile(dossierImages + "environnement_256x256\\grass_1.png");
             Bitmap cible = new Bitmap((int)carte.Width, (int)carte.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
             Graphics graphiques = Graphics.FromImage(cible);
             graphiques.CompositingMode = CompositingMode.SourceOver; // c'est le compositingMode par défault mais juste pour être sûr
 
-
-
-            try
-            {
-                String[] uriSplit = fullDebugUri.Split("bin\\Debug\\net6.0-windows\\");
-                String cutUri = uriSplit[0] + uriSplit[1];
-
-                lesImageEnvironnement = Directory.GetFiles(cutUri + "environnement_256x256\\");
-            }
-            catch (IndexOutOfRangeException e)
-            {
-                lesImageEnvironnement = Directory.GetFiles(fullDebugUri + "environnement_256x256\\");
-            }
+            lesImageEnvironnement = Directory.GetFiles(dossierImages + "environnement_256x256\\");
 
 
             foreach (String uri in lesImageEnvironnement)
@@ -123,7 +108,7 @@ namespace JeuSAE
                 {
                     listeArreteDroit.Add(uri);
                 }
-                else if (ARRETE_BAS_REGEX.IsMatch(nomImage))
+                else if (ARRETE_BAS_REGEX.IsMatch(nomImage))    
                 {
                     listeArreteBas.Add(uri);
                 }
@@ -331,55 +316,6 @@ namespace JeuSAE
 
             carte.Fill = image;
 
-            /*
-            System.Windows.Controls.Image img = new System.Windows.Controls.Image();
-            img.Source = image.ImageSource;
-
-
-
-            img.Width = carte.Width;
-            img.Height = carte.Height;
-            
-            mainWindow.monCanvas.Children.Add(img);
-            Canvas.SetTop(img, Canvas.GetTop(carte));
-            Canvas.SetLeft(img, Canvas.GetLeft(carte));
-            */
-
-            /*
-            try
-            {//Si on lance en débug le path n'est pas le même donc :
-
-
-                String[] uriSplit = fullDebugUri.Split("bin\\Debug\\net6.0-windows\\");
-                String cutUri = uriSplit[0] + uriSplit[1];
-                String pathMap = System.IO.Path.Combine(cutUri, "result.png");
-
-                if (File.Exists(pathMap))
-                {
-                    File.Delete(pathMap);
-                }
-
-                cible.Save(cutUri + "result.png", ImageFormat.Png);
-
-
-            }
-            catch (IndexOutOfRangeException e)
-            {//Et si on lance en normal :
-                String pathMap = System.IO.Path.Combine(fullDebugUri, "result.png");
-                if (File.Exists(pathMap))
-                {
-                    File.Delete(pathMap);
-                }
-                cible.Save(pathMap, ImageFormat.Png);
-            }
-            */
-
-            //#else
-
-            //#endif
-
-
-            //cible.Save(/*"C:\\Users\\Ewan\\Desktop\\trucs_scolaires\\BUT\\SAE_DEV\\projet\\JeuSAE\\images\\result.png"*/ AppDomain.CurrentDomain.BaseDirectory + "images\\result.png", ImageFormat.Png);//TODO c'est juste ça qui marche pas correctement
 #if DEBUG
             Console.WriteLine(System.AppDomain.CurrentDomain.BaseDirectory + "images\\result.png");
             Console.WriteLine(AppDomain.CurrentDomain.BaseDirectory + "images\\environnement_16x16\\grass_1.png");
