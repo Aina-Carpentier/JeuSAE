@@ -19,7 +19,7 @@
 
     <Canvas
         Name="monCanvas"
-        Background="Black"
+        Background="White"
         Focusable="True"
         KeyDown="CanvasKeyIsDown"
         KeyUp="CanvasKeyIsUp"
@@ -54,11 +54,17 @@
             Height="10752" />
 
         <Image
+            x:Name="imageHUD"
             Canvas.Top="0"
             Width="{x:Static SystemParameters.PrimaryScreenWidth}"
             Height="{x:Static SystemParameters.PrimaryScreenHeight}"
             Panel.ZIndex="50"
-            Source="images/HUD.png" />
+            Source="images/HUD.png"
+            Stretch="Fill" />
+        <Label
+            x:Name="labDiamant"
+            Panel.ZIndex="50"
+            Content="200" HorizontalAlignment="Center" Canvas.Top="132" VerticalAlignment="Top" Canvas.Left="76" FontSize="36" />
     </Canvas>
 
 </Window>
