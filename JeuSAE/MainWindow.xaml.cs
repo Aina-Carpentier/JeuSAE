@@ -25,12 +25,20 @@ namespace JeuSAE
     {
 
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
-        private int countTick = 0, vitesseJoueur = 20, tempsRechargeArme = 15, tempsRechargeActuel = 0, vitesseBalle = 30;
+        private int countTick = 0, vitesseJoueur = 10, tempsRechargeArme = 15, tempsRechargeActuel = 0, vitesseBalle = 25;
         private bool gauche = false, droite = false, haut = false, bas = false, tirer = false, numPadUn = false, numPadQuatre = false;
         private List<Balle> listeBalle = new List<Balle>();
         private List<Balle> listeBalleAEnlever = new List<Balle>();
-        private Rect player = new Rect(910, 490, 50, 50);
 
+        private void monCanvas_MouseMove(object sender, MouseEventArgs e)
+        {
+            Point curseur = e.GetPosition(monCanvas);
+            Canvas.SetTop(curseurPerso, curseur.Y - curseurPerso.Height/2);
+            Canvas.SetLeft(curseurPerso, curseur.X - curseurPerso.Width/2);
+            Cursor = Cursors.None;
+        }
+
+        private Rect player = new Rect(910, 490, 50, 50);
         double posJoueurX = 0, posJoueurY = 0;
 
         public MainWindow()
@@ -45,7 +53,7 @@ namespace JeuSAE
 
             Menu menu = new Menu();
             menu.ShowDialog();
-            MapGenerator.load(this);
+            
             while (menu.choix != "jouer")
             {
 
@@ -58,6 +66,7 @@ namespace JeuSAE
 
                 }
             }
+            MapGenerator.load(this);
             rectJoueur.Margin = new Thickness(posJoueurX - rectJoueur.Width / 2, posJoueurY - rectJoueur.Height / 2, 0, 0);
             dispatcherTimer.Tick += GameEngine;
             // rafraissement toutes les 16 milliseconds
@@ -99,7 +108,7 @@ namespace JeuSAE
                 numPadUn = true;
             if (e.Key == Key.NumPad4)
                 numPadQuatre = true;
-            if (numPadUn && numPadQuatre) { vitesseJoueur = 200; } else { vitesseJoueur = 20; }
+            if (numPadUn && numPadQuatre) { vitesseJoueur = 200; } else { vitesseJoueur = 10; }
 
 //#if DEBUG
 //            vitesseJoueur = 300;
