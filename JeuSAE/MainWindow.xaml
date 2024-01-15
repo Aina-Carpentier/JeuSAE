@@ -54,6 +54,7 @@
             Height="10752" />
 
         <Image
+            Canvas.Top="0"
             Width="{x:Static SystemParameters.PrimaryScreenWidth}"
             Height="{x:Static SystemParameters.PrimaryScreenHeight}"
             Panel.ZIndex="50"
