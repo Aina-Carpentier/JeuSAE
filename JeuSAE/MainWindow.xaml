@@ -19,7 +19,7 @@
 
     <Canvas
         Name="monCanvas"
-        Background="White"
+        Background="#FF00C8FF"
         Focusable="True"
         KeyDown="CanvasKeyIsDown"
         KeyUp="CanvasKeyIsUp"
@@ -63,8 +63,46 @@
             Stretch="Fill" />
         <Label
             x:Name="labDiamant"
+            Canvas.Left="76"
+            Canvas.Top="132"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
             Panel.ZIndex="50"
-            Content="200" HorizontalAlignment="Center" Canvas.Top="132" VerticalAlignment="Top" Canvas.Left="76" FontSize="36" />
+            Content="200"
+            FontSize="36" />
+        <Rectangle
+            x:Name="rectanglePV"
+            Canvas.Left="113"
+            Canvas.Top="21"
+            Width="256"
+            Height="21"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Panel.ZIndex="40"
+            Fill="Red"
+            Stroke="Black" />
+        <Rectangle
+            x:Name="rectangleEXP"
+            Canvas.Left="113"
+            Canvas.Top="93"
+            Width="256"
+            Height="22"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Panel.ZIndex="40"
+            Fill="#FF00AF0B"
+            Stroke="Black" />
+        <Rectangle
+            x:Name="rectangleElimination"
+            Canvas.Left="24"
+            Canvas.Top="828"
+            Width="304"
+            Height="48"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Panel.ZIndex="40"
+            Fill="#FF010400"
+            Stroke="Black" />
     </Canvas>
 
 </Window>
