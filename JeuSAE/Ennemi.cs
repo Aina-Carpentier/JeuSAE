@@ -17,9 +17,9 @@ namespace JeuSAE
         private int posY;
         private Guid id = Guid.NewGuid();
         private Rect rect;
-        private Rectangle graphique;
+        private System.Windows.Shapes.Rectangle graphique;
         private ImageBrush ennemiImage = new ImageBrush();
-        private Uri dossierImage = new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/");
+        private Uri dossierSprites = new Uri(AppDomain.CurrentDomain.BaseDirectory + "images\\sprites\\");
 
 
         public double Vie
@@ -73,7 +73,7 @@ namespace JeuSAE
 
         public Rect Rect { get => rect; set => rect = value; }
 
-        public Rectangle Graphique { get => graphique; set => graphique = value; }
+        public System.Windows.Shapes.Rectangle Graphique { get => graphique; set => graphique = value; }
 
         public Ennemi(int type, int posX, int posY)
         {
@@ -86,7 +86,7 @@ namespace JeuSAE
                     this.Vitesse = Constantes.VITESSE_TRIANGLE_EQ;
                     this.CadenceTir = Constantes.CADENCE_TRIANGLE_EQ;
                     this.Nom = Constantes.NOM_TRIANGLE_EQ;
-                    ennemiImage.ImageSource = new BitmapImage(new Uri(dossierImage + "triangle.png"));// dossierImage c'est un Uri donc ça vas peut-être bugger
+                    ennemiImage.ImageSource = new BitmapImage(new Uri(dossierSprites + "triangle.png"));// dossierImage c'est un Uri donc ça vas peut-être bugger
                     break; //TODO finir de mettre les images sur les ennemis
                     /*
                 case 1:
@@ -101,48 +101,56 @@ namespace JeuSAE
                     this.Vitesse = Constantes.VITESSE_CARRE;
                     this.CadenceTir = Constantes.CADENCE_CARRE;
                     this.Nom = Constantes.NOM_CARRE;
+                    ennemiImage.ImageSource = new BitmapImage(new Uri(dossierSprites + "carre.png"));
                     break;
                 case 2: // Pentagone
                     this.Vie = Constantes.VIE_PENTAGONE;
                     this.Vitesse = Constantes.VITESSE_PENTAGONE;
                     this.CadenceTir = Constantes.CADENCE_PENTAGONE;
                     this.Nom = Constantes.NOM_PENTAGONE;
+                    ennemiImage.ImageSource = new BitmapImage(new Uri(dossierSprites + "pentagone.png"));
                     break;
                 case 3: // Hexagone
                     this.Vie = Constantes.VIE_HEXAGONE;
                     this.Vitesse = Constantes.VITESSE_HEXAGONE;
                     this.CadenceTir = Constantes.CADENCE_HEXAGONE;
                     this.Nom = Constantes.NOM_HEXAGONE;
+                    ennemiImage.ImageSource = new BitmapImage(new Uri(dossierSprites + "hexagone.png"));
                     break;
                 case 4: // Heptagone
                     this.Vie = Constantes.VIE_HEPTAGONE;
                     this.Vitesse = Constantes.VITESSE_HEPTAGONE;
                     this.CadenceTir = Constantes.CADENCE_HEPTAGONE;
                     this.Nom = Constantes.NOM_HEPTAGONE;
+                    ennemiImage.ImageSource = new BitmapImage(new Uri(dossierSprites + "heptagone.png"));
                     break;
                 case 5: // Octogone
                     this.Vie = Constantes.VIE_OCTOGONE;
                     this.Vitesse = Constantes.VITESSE_OCTOGONE;
                     this.CadenceTir = Constantes.CADENCE_OCTOGONE;
                     this.Nom = Constantes.NOM_OCTOGONE;
+                    ennemiImage.ImageSource = new BitmapImage(new Uri(dossierSprites + "octogone.png"));
                     break;
                 case 6: // Cercle
                     this.Vie = Constantes.VIE_CERCLE;
                     this.Vitesse = Constantes.VITESSE_CERCLE;
                     this.CadenceTir = Constantes.CADENCE_CERCLE;
                     this.Nom = Constantes.NOM_CERCLE;
+                    ennemiImage.ImageSource = new BitmapImage(new Uri(dossierSprites + "cercle.png"));
                     break;
                 case 7: // Triangle rectangle
                     this.Vie = Constantes.VIE_TRIANGLE_RECT;
                     this.Vitesse = Constantes.VITESSE_TRIANGLE_RECT;
                     this.CadenceTir = Constantes.CADENCE_TRIANGLE_RECT;
                     this.Nom = Constantes.NOM_TRIANGLE_RECT;
+                    ennemiImage.ImageSource = new BitmapImage(new Uri(dossierSprites + "triangle_rectangle.png"));
                     break; //TODO ajouter plus d'ennemis si on a des idées
             }
             PosX = posX;
             PosY = posY;
-            Rect = new Rect(PosX, PosY, Constantes.ENNEMI_RECT_LARGEUR, Constantes.ENNEMI_RECT_HAUTEUR);
-            Graphique = new Rectangle(PosX, PosY, Constantes.ENNEMI_RECT_LARGEUR, Constantes.ENNEMI_RECT_HAUTEUR);
+            Rect = new Rect (PosX, PosY, Constantes.ENNEMI_RECT_LARGEUR, Constantes.ENNEMI_RECT_HAUTEUR);
+            Graphique = new System.Windows.Shapes.Rectangle()  /*(PosX, PosY, Constantes.ENNEMI_RECT_LARGEUR, Constantes.ENNEMI_RECT_HAUTEUR)*/;
+            Graphique.Fill = ennemiImage;
         }
 
         public override bool Equals(object? obj)

@@ -29,6 +29,8 @@ namespace JeuSAE
         private bool gauche = false, droite = false, haut = false, bas = false, tirer = false, numPadUn = false, numPadQuatre = false;
         private List<Balle> listeBalle = new List<Balle>();
         private List<Balle> listeBalleAEnlever = new List<Balle>();
+        private int compteurSpawn = 0;
+        private int compteurAAtteindre = 180;
 
         private void monCanvas_MouseMove(object sender, MouseEventArgs e)
         {
@@ -160,6 +162,7 @@ namespace JeuSAE
 
             MouvementJoueur();
             TirJoueur();
+            gereLeSpawn();
         }
 
         private void MouvementJoueur()
@@ -311,8 +314,21 @@ namespace JeuSAE
         }
 
         
+        private void gereLeSpawn()
+        {
 
-        
+            if (compteurSpawn >= compteurAAtteindre)
+            {
+                SpawnEnnemi.SpawnUnEnnemi(this);
+
+                compteurSpawn = 0;
+            }
+
+            compteurSpawn++;
+
+
+
+        }
 
 
     }
