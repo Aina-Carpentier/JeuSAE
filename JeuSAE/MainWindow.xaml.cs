@@ -259,7 +259,7 @@ namespace JeuSAE
                 */
                 Vector2 vecteurTir = new Vector2((float)posEcran.X - (float)posJoueurX, (float)posEcran.Y - (float)posJoueurY);
 
-                Balle balleJoueur = new Balle(vitesseBalle, 20, 0, "joueur", 0, posJoueurX-10, posJoueurY-10, vecteurTir);
+                Balle balleJoueur = new Balle(vitesseBalle, 20, 0, "joueur", 0, posJoueurX, posJoueurY, vecteurTir);
                 Canvas.SetLeft(balleJoueur.Graphique, balleJoueur.PosX);
                 Canvas.SetTop(balleJoueur.Graphique, balleJoueur.PosY);
 
@@ -283,10 +283,10 @@ namespace JeuSAE
 
 #endif
                     
-                    if (Canvas.GetLeft(balle.Graphique) <= Canvas.GetLeft(carte) - 100 || 
-                        Canvas.GetTop(balle.Graphique) <= Canvas.GetTop(carte) - 100 ||
-                        Canvas.GetLeft(balle.Graphique) >= Canvas.GetLeft(carte) + carte.Width + 100 ||
-                        Canvas.GetTop(balle.Graphique) >= Canvas.GetTop(carte) + carte.Height + 100) { listeBalleAEnlever.Add(balle); }
+                    if (Canvas.GetLeft(balle.Graphique) <= Canvas.GetLeft(carte) - 400 || 
+                        Canvas.GetTop(balle.Graphique) <= Canvas.GetTop(carte) - 400 ||
+                        Canvas.GetLeft(balle.Graphique) >= Canvas.GetLeft(carte) + carte.Width + 400 ||
+                        Canvas.GetTop(balle.Graphique) >= Canvas.GetTop(carte) + carte.Height + 400) { listeBalleAEnlever.Add(balle); }
 
                     Canvas.SetLeft(balle.Graphique, balle.PosX);
                     Canvas.SetTop(balle.Graphique, balle.PosY);

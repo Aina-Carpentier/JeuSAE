@@ -98,8 +98,8 @@ namespace JeuSAE
             Type = type;
             Tireur = tireur;
             Acceleration = acceleration;
-            PosX = posX;
-            PosY = posY;
+            PosX = posX-taille/2;
+            PosY = posY-taille/2;
             Vecteur = vecteur;
             Rect = new Rect(PosX, posY, Constantes.BALLE_WIDHT, Constantes.BALLE_HEIGHT);
 
