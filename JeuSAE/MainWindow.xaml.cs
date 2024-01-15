@@ -52,6 +52,7 @@ namespace JeuSAE
 
 
             Menu menu = new Menu();
+            Parametres parametres = new Parametres();
             menu.ShowDialog();
             
             while (menu.choix != "jouer")
@@ -63,6 +64,9 @@ namespace JeuSAE
                         Application.Current.Shutdown();
                         break;
 
+                    case "parametre":
+                        parametres.ShowDialog();
+                        break;
 
                 }
             }
