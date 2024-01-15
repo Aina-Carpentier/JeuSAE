@@ -74,6 +74,7 @@ namespace JeuSAE
             }
             MapGenerator.load(this);
             rectJoueur.Margin = new Thickness(posJoueurX - rectJoueur.Width / 2, posJoueurY - rectJoueur.Height / 2, 0, 0);
+            HUDResolution1920x1080();
             dispatcherTimer.Tick += GameEngine;
             // rafraissement toutes les 16 milliseconds
             dispatcherTimer.Interval = TimeSpan.FromMilliseconds(16);
@@ -157,12 +158,10 @@ namespace JeuSAE
             Console.WriteLine(Canvas.GetTop(carte));
 #endif
 
-
-
-
             MouvementJoueur();
             TirJoueur();
             gereLeSpawn();
+
         }
 
         private void MouvementJoueur()
@@ -266,7 +265,7 @@ namespace JeuSAE
                 */
                 Vector2 vecteurTir = new Vector2((float)posEcran.X - (float)posJoueurX, (float)posEcran.Y - (float)posJoueurY);
 
-                Balle balleJoueur = new Balle(vitesseBalle, 20, 0, "joueur", 0, posJoueurX, posJoueurY, vecteurTir);
+                Balle balleJoueur = new Balle(vitesseBalle, 500, 0, "joueur", 0, posJoueurX, posJoueurY, vecteurTir);
                 Canvas.SetLeft(balleJoueur.Graphique, balleJoueur.PosX);
                 Canvas.SetTop(balleJoueur.Graphique, balleJoueur.PosY);
 
@@ -275,8 +274,6 @@ namespace JeuSAE
                 listeBalle.Add(balleJoueur);
                 
             }
-
-
 
             if (listeBalle != null)
             {
@@ -307,9 +304,6 @@ namespace JeuSAE
                 listeBalleAEnlever.Clear();
 
             }
-
-
-            
             
         }
 
@@ -320,16 +314,36 @@ namespace JeuSAE
             if (compteurSpawn >= compteurAAtteindre)
             {
                 SpawnEnnemi.SpawnUnEnnemi(this);
-
                 compteurSpawn = 0;
             }
-
             compteurSpawn++;
-
-
-
         }
 
+        private void HUDResolution1920x1080()
+        {
 
+            //A Verifier
+            if (fenetrePrincipale.Width == 1920 && fenetrePrincipale.Height == 1080)
+            {
+                Canvas.SetLeft(labDiamant, 98);
+                Canvas.SetTop(labDiamant,165);
+
+                Canvas.SetLeft(rectanglePV, 150);
+                Canvas.SetTop(rectanglePV, 37);
+                rectanglePV.Height = 30;
+                rectanglePV.Width = 349;
+
+                Canvas.SetLeft(rectangleEXP, 150);
+                Canvas.SetTop(rectangleEXP, 110);
+                rectangleEXP.Height = 30;
+                rectangleEXP.Width = 345;
+
+                Canvas.SetLeft(rectangleElimination, 32);
+                Canvas.SetTop(rectangleElimination, 991);
+                rectangleElimination.Height = 63;
+                rectangleElimination.Width = 405;
+
+            }
+        }
     }
 }
