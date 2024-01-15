@@ -53,6 +53,11 @@
             Width="19456"
             Height="10752" />
 
+        <Image
+            Width="{x:Static SystemParameters.PrimaryScreenWidth}"
+            Height="{x:Static SystemParameters.PrimaryScreenHeight}"
+            Panel.ZIndex="50"
+            Source="images/HUD.png" />
     </Canvas>
 
 </Window>
