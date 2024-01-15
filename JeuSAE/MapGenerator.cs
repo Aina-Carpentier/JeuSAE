@@ -186,7 +186,7 @@ namespace JeuSAE
                 for (int n = 0; n < carte.Width; n += IMG_WIDTH)
                 {
 
-                    if (rnd.Next(1, 100) > 10)
+                    if (rnd.Next(1, 100) > 20)
                     {
                         herbe = true;
                     }
