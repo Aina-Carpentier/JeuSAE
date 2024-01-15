@@ -24,7 +24,17 @@
         KeyDown="CanvasKeyIsDown"
         KeyUp="CanvasKeyIsUp"
         MouseLeftButtonDown="monCanvas_MouseLeftButtonDown"
-        MouseLeftButtonUp="monCanvas_MouseLeftButtonUp">
+        MouseLeftButtonUp="monCanvas_MouseLeftButtonUp"
+        MouseMove="monCanvas_MouseMove">
+        <Image
+            Name="curseurPerso"
+            Canvas.Left="0"
+            Canvas.Top="0"
+            Width="52"
+            Height="52"
+            Panel.ZIndex="1001"
+            Source="images/viseur.png" />
+
 
         <Rectangle
             x:Name="rectJoueur"
@@ -36,12 +46,12 @@
             Fill="#FFF51818"
             Stroke="Black" />
 
-        <Grid
+        <Rectangle
             x:Name="carte"
-            Canvas.Left="-8640"
-            Canvas.Top="-4860"
-            Width="19200"
-            Height="10800" />
+            Canvas.Left="-8768"
+            Canvas.Top="-4884"
+            Width="19456"
+            Height="10752" />
 
     </Canvas>
 

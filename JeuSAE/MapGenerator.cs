@@ -1,144 +1,348 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
 using System.Security.Policy;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media;
+using System.Windows.Interop;
+using System.Windows;
 using System.Windows.Shapes;
+using Rectangle = System.Windows.Shapes.Rectangle;
 
 namespace JeuSAE
 {
-    internal class MapGenerator
+    public class MapGenerator
     {
-        private const string COIN_HAUT_DROIT_REGEX = "grass_top_right_border_[0-9]+";
-        private const string COIN_DROIT_REGEX = "grass_right_border_[0-9]+";
-        private const string COIN_BAS_DROIT_REGEX = "grass_bottom_right_border_[0-9]+";
-        private const string COIN_HAUT_GAUCHE_REGEX = "grass_top_left_border_[0-9]+";
-        private const string COIN_GAUCHE_REGEX = "grass_left_border_[0-9]+";
-        private const string COIN_BAS_GAUCHE_REGEX = "grass_bottom_left_border_[0-9]+";
 
-        private readonly static List<String> REGEX = new List<string> { COIN_BAS_DROIT_REGEX, COIN_BAS_GAUCHE_REGEX, COIN_DROIT_REGEX, COIN_GAUCHE_REGEX, COIN_HAUT_DROIT_REGEX, COIN_HAUT_GAUCHE_REGEX };
+        private static readonly Regex SOL_REGEX = new Regex(@"^grass_[0-9]+\.png$");
 
-        private readonly static List<ImageBrush> COIN_HAUT_DROITE_IMAGES = new List<ImageBrush> { };
-        private readonly static List<ImageBrush> COIN_HAUT_GAUCHE_IMAGES = new List<ImageBrush> { };
-        private readonly static List<ImageBrush> COIN_BAS_DROITE_IMAGES = new List<ImageBrush> { };
-        private readonly static List<ImageBrush> COIN_BAS_GAUCHE_IMAGES = new List<ImageBrush> { };
-        private readonly static List<ImageBrush> COIN_DROITE_IMAGES = new List<ImageBrush> { };
-        private readonly static List<ImageBrush> COIN_GAUCHE_IMAGES = new List<ImageBrush> { };
+        private static readonly Regex COIN_HAUT_GAUCHE_REGEX = new Regex(@"^grass_top_left_border_[0-9]+\.png$");
+        private static readonly Regex COIN_HAUT_DROIT_REGEX = new Regex(@"^grass_top_right_border_[0-9]+\.png$");
+        private static readonly Regex COIN_BAS_DROIT_REGEX = new Regex(@"^grass_bottom_right_border_[0-9]+\.png$");
+        private static readonly Regex COIN_BAS_GAUCHE_REGEX = new Regex(@"^grass_bottom_left_border_[0-9]+\.png$");
 
-        private static double IMG_WIDTH = 512;
-        private static double IMG_HEIGHT = 512;
+        private static readonly Regex ARRETE_HAUT_REGEX = new Regex(@"^grass_top_border_[0-9]+\.png$");
+        private static readonly Regex ARRETE_DROIT_REGEX = new Regex(@"^grass_right_border_[0-9]+\.png$");
+        private static readonly Regex ARRETE_BAS_REGEX = new Regex(@"^grass_bottom_border_[0-9]+\.png$");
+        private static readonly Regex ARRETE_GAUCHE_REGEX = new Regex(@"^grass_left_border_[0-9]+\.png$");
 
-        public static void load(Grid carte)
+
+        private static List<String> listeSol = new List<String>();
+
+        private static List<String> listeCoinHautGauche = new List<String>();
+        private static List<String> listeCoinHautDroit = new List<String>();
+        private static List<String> listeCoinBasDroit = new List<String>();
+        private static List<String> listeCoinBasGauche = new List<String>();
+
+        private static List<String> listeArreteHaut = new List<String>();
+        private static List<String> listeArreteDroit = new List<String>();
+        private static List<String> listeArreteBas = new List<String>();
+        private static List<String> listeArreteGauche = new List<String>();
+
+        private static Random rnd = new Random();
+
+
+        private static int IMG_WIDTH = 256;
+        private static int IMG_HEIGHT = 256;
+
+
+
+
+        public static void load(MainWindow mainWindow)
         {
-            ChargerImages();
-            ChargerGrille(carte);
-            DessinerFond(carte);
-        }
+            //ChargerImages();
+            //ChargerGrille(carte);
+            //DessinerFond(carte);
 
-        private static void ChargerGrille(Grid carte)
-        {
-            int currentX = 0;
-            int currentY = 0;
-            
-            while (currentX < carte.Width)
+            Rectangle carte = mainWindow.carte;
+
+
+            String[] lesImageEnvironnement;
+
+            String dossierImages = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "images\\");
+
+            System.Drawing.Image source1 = System.Drawing.Image.FromFile(dossierImages + "environnement_256x256\\grass_1.png");
+            System.Drawing.Image source2 = System.Drawing.Image.FromFile(dossierImages + "environnement_256x256\\grass_1.png");
+            Bitmap cible = new Bitmap((int)carte.Width, (int)carte.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+            Graphics graphiques = Graphics.FromImage(cible);
+            graphiques.CompositingMode = CompositingMode.SourceOver; // c'est le compositingMode par défault mais juste pour être sûr
+
+            lesImageEnvironnement = Directory.GetFiles(dossierImages + "environnement_256x256\\");
+
+
+            foreach (String uri in lesImageEnvironnement)
             {
-                carte.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(IMG_WIDTH, GridUnitType.Pixel) });
-                currentX += (int)IMG_WIDTH;
-            }
-
-            while (currentY < carte.Height)
-            {
-                carte.RowDefinitions.Add(new RowDefinition { Height =  new GridLength(IMG_HEIGHT, GridUnitType.Pixel) });
-                currentY += (int)IMG_HEIGHT;
-            }
-        }
-
-        private static void DessinerFond(Grid carte)
-        {
-            int nombreImageDansTableauLargeur = carte.ColumnDefinitions.Count;
-            int nombreImageDansTableauHauteur = carte.RowDefinitions.Count;
-
-            Console.WriteLine("Largeur image nombre: " + nombreImageDansTableauLargeur);
-            Console.WriteLine("Hauteur image nombre: " + nombreImageDansTableauHauteur);
-
-            foreach (ColumnDefinition colonne in carte.ColumnDefinitions)
-            {
-                foreach (RowDefinition ligne in carte.RowDefinitions)
+                String nomImage = uri.Split("\\")[uri.Split("\\").Length - 1];
+                if (SOL_REGEX.IsMatch(nomImage))
                 {
-                    ImageBrush image = ImageAletatoireParmi(COIN_BAS_GAUCHE_IMAGES);
-                    Image img = new Image();
-                    img.Source = image.ImageSource;
-                    img.Width = IMG_WIDTH; 
-                    img.Height = IMG_HEIGHT;
-
-                    Grid.SetColumn(img, carte.ColumnDefinitions.IndexOf(colonne));
-                    Grid.SetRow(img, carte.RowDefinitions.IndexOf(ligne));
-                    carte.Children.Add(img);
+                    listeSol.Add(uri);
                 }
-            }
-        }
 
-        private static ImageBrush ImageAletatoireParmi(List<ImageBrush> images)
-        {
-            Random random = new Random();
-            int index = random.Next(images.Count);
-            ImageBrush imageBrush = images[index];
-            return imageBrush;
-        }
-
-        private static void ChargerImages()
-        {
-            string[] tableau = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory + "images\\environnement\\");
-
-            foreach (string file in tableau)
-            {
-                if (File.Exists(file))
+                else if (COIN_HAUT_GAUCHE_REGEX.IsMatch(nomImage))
                 {
-                    ChargerImage(new Uri(file));
+                    listeCoinHautGauche.Add(uri);
                 }
-            }
-        }
-
-        private static void ChargerImage(Uri uri)
-        {
-            String nomFichier = System.IO.Path.GetFileName(uri.LocalPath);
-            foreach (String regex in REGEX)
-            {
-                if (Regex.IsMatch(nomFichier, regex))
+                else if (COIN_HAUT_DROIT_REGEX.IsMatch(nomImage))
                 {
-                    ImageBrush image = new ImageBrush();
-                    image.ImageSource = new BitmapImage(uri);
-                    // listOuLaCharger.Add(image);
+                    listeCoinHautDroit.Add(uri);
+                }
+                else if (COIN_BAS_DROIT_REGEX.IsMatch(nomImage))
+                {
+                    listeCoinBasDroit.Add(uri);
+                }
+                else if (COIN_BAS_GAUCHE_REGEX.IsMatch(nomImage))
+                {
+                    listeCoinBasGauche.Add(uri);
+                }
 
-                    if (IMG_WIDTH == 0 && IMG_HEIGHT == 0)
+                else if (ARRETE_HAUT_REGEX.IsMatch(nomImage))
+                {
+                    listeArreteHaut.Add(uri);
+                }
+                else if (ARRETE_DROIT_REGEX.IsMatch(nomImage))
+                {
+                    listeArreteDroit.Add(uri);
+                }
+                else if (ARRETE_BAS_REGEX.IsMatch(nomImage))    
+                {
+                    listeArreteBas.Add(uri);
+                }
+                else if (ARRETE_GAUCHE_REGEX.IsMatch(nomImage))
+                {
+                    listeArreteGauche.Add(uri);
+                }
+
+
+            }
+
+
+
+
+            foreach (String uri in listeArreteGauche)
+            {
+                Console.WriteLine(uri);
+            }
+
+
+
+
+
+
+
+
+
+            //var cible = new Bitmap((int)carte.Width, (int)carte.Height, PixelFormat.Format32bppArgb);
+            //var graphiques = Graphics.FromImage(cible);
+            //graphiques.CompositingMode = CompositingMode.SourceOver; // c'est le compositingMode par défault mais juste pour être sûr
+            bool dejaRepondu = false;
+            bool herbe;
+
+            //while (!finiDeCharger)
+            //{
+            //source1 = System.Drawing.Image.FromFile(fullDebugUri + "environnement_16x16\\grass_1.png");
+            //source2 = System.Drawing.Image.FromFile(fullDebugUri + "environnement_16x16\\grass_2.png");
+
+
+            for (int i = 0; i < carte.Height; i += IMG_HEIGHT)
+            {
+                if (rnd.Next(1, 100) > 10)
+                {
+                    herbe = true;
+                } else
+                {
+                    herbe = false;
+                }
+
+                if (i == 0)
+                {// Coin haut gauche
+                    if (herbe)
                     {
-                        IMG_WIDTH = image.ImageSource.Width;
-                        IMG_HEIGHT = image.ImageSource.Height;
+                        source1 = System.Drawing.Image.FromFile(listeCoinHautGauche[0]);
+                    }
+                    else
+                    {
+                        source1 = System.Drawing.Image.FromFile(listeCoinHautGauche[rnd.Next(0, listeCoinHautGauche.Count)]);
+                    }
+                    dejaRepondu = true;
+                }
+                else if (i + IMG_HEIGHT >= carte.Height && dejaRepondu == false) //Coin bas gauche
+                {
+                    if (herbe)
+                    {
+                        source1 = System.Drawing.Image.FromFile(listeCoinBasGauche[0]);
+                    }
+                    else
+                    {
+                        source1 = System.Drawing.Image.FromFile(listeCoinBasGauche[rnd.Next(0, listeCoinBasGauche.Count)]);
+                    }
+                    dejaRepondu = true;
+                }
+
+                for (int n = 0; n < carte.Width; n += IMG_WIDTH)
+                {
+
+                    if (rnd.Next(1, 100) > 20)
+                    {
+                        herbe = true;
+                    }
+                    else
+                    {
+                        herbe = false;
                     }
 
-                    switch (regex)
+                    //------------------------COINS------------------------
+                    if (i == 0 && n + IMG_WIDTH >= carte.Width && dejaRepondu == false) //Coin haut droit
                     {
-                        case COIN_HAUT_DROIT_REGEX: COIN_HAUT_DROITE_IMAGES.Add(image); break;
-                        case COIN_HAUT_GAUCHE_REGEX: COIN_HAUT_GAUCHE_IMAGES.Add(image); break;
-                        case COIN_BAS_DROIT_REGEX: COIN_BAS_DROITE_IMAGES.Add(image); break;
-                        case COIN_BAS_GAUCHE_REGEX: COIN_BAS_GAUCHE_IMAGES.Add(image); break;
-                        case COIN_DROIT_REGEX: COIN_DROITE_IMAGES.Add(image); break;
-                        case COIN_GAUCHE_REGEX: COIN_GAUCHE_IMAGES.Add(image); break;
+                        if (herbe)
+                        {
+                            source1 = System.Drawing.Image.FromFile(listeCoinHautDroit[0]);
+                        }
+                        else
+                        {
+                            source1 = System.Drawing.Image.FromFile(listeCoinHautDroit[rnd.Next(0, listeCoinHautDroit.Count)]);
+                        }
+                        dejaRepondu = true;
                     }
+                    else if (i + IMG_HEIGHT >= carte.Height && n + IMG_WIDTH >= carte.Width && dejaRepondu == false) //Coin bas droit
+                    {
+                        if (herbe)
+                        {
+                            source1 = System.Drawing.Image.FromFile(listeCoinBasDroit[0]);
+                        }
+                        else
+                        {
+                            source1 = System.Drawing.Image.FromFile(listeCoinBasDroit[rnd.Next(0, listeCoinBasDroit.Count)]);
+                        }
+                        dejaRepondu = true;
+                    }
+
+                    //------------------------ARETES------------------------
+                    else if (i == 0 && dejaRepondu == false) //Arête haut
+                    {
+                        if (herbe)
+                        {
+                            source1 = System.Drawing.Image.FromFile(listeArreteHaut[0]);
+                        }
+                        else
+                        {
+                            source1 = System.Drawing.Image.FromFile(listeArreteHaut[rnd.Next(0, listeArreteHaut.Count)]);
+                        }
+                        dejaRepondu = true;
+                    }
+                    else if (n + IMG_WIDTH >= carte.Width && dejaRepondu == false) //Arête droit
+                    {
+                        if (herbe)
+                        {
+                            source1 = System.Drawing.Image.FromFile(listeArreteDroit[0]);
+                        }
+                        else
+                        {
+                            source1 = System.Drawing.Image.FromFile(listeArreteDroit[rnd.Next(0, listeArreteDroit.Count)]);
+                        }
+                        dejaRepondu = true;
+                    }
+                    else if (i + IMG_HEIGHT >= carte.Height && dejaRepondu == false) // Arête bas
+                    {
+                        if (herbe)
+                        {
+                            source1 = System.Drawing.Image.FromFile(listeArreteBas[0]);
+                        }
+                        else
+                        {
+                            source1 = System.Drawing.Image.FromFile(listeArreteBas[rnd.Next(0, listeArreteBas.Count)]);
+                        }
+                        dejaRepondu = true;
+                    }
+                    else if (n == 0 && dejaRepondu == false) // Arête gauche
+                    {
+                        if (herbe)
+                        {
+                            source1 = System.Drawing.Image.FromFile(listeArreteGauche[0]);
+                        }
+                        else
+                        {
+                            source1 = System.Drawing.Image.FromFile(listeArreteGauche[rnd.Next(0, listeArreteGauche.Count)]);
+                        }
+                        dejaRepondu = true;
+                    }
+                    else if (dejaRepondu == false) // Sol
+                    {
+                        if (herbe)
+                        {
+                            source1 = System.Drawing.Image.FromFile(listeSol[0]);
+                        }
+                        else
+                        {
+                            source1 = System.Drawing.Image.FromFile(listeSol[rnd.Next(0, listeSol.Count)]);
+                        }
+                        dejaRepondu = true;
+                    }
+
+                    //if (!dejaRepondu) { finiDeCharger = true; }
+
+
+
+                    graphiques.DrawImage(source1, n, i);//TODO faire du multithreading
+                    //test(source1, graphiques, n, i);
+
+                    dejaRepondu = false;
+
+                }
+
+                Console.WriteLine("Génération de la map : " + Math.Round((i/carte.Height)*100) + " %");
+
+            }
+
+
+            //graphiques.DrawImage(source1, 0, 0);
+            //graphiques.DrawImage(source1, source1.Width, 0);
+
+
+
+            //}
+
+
+
+            //#if DEBUG
+
+
+            ImageBrush image = new ImageBrush();
+            image.ImageSource = ToBitmapImage(cible);
+
+            carte.Fill = image;
 
 #if DEBUG
-                    Console.WriteLine("Chargement de l'image " + nomFichier + " terminé");
+            Console.WriteLine(System.AppDomain.CurrentDomain.BaseDirectory + "images\\result.png");
+            Console.WriteLine(AppDomain.CurrentDomain.BaseDirectory + "images\\environnement_16x16\\grass_1.png");
 #endif
-                }
+
+
+        }
+
+
+        private static BitmapImage ToBitmapImage(Bitmap bitmap)
+        {
+            using (var memory = new MemoryStream())
+            {
+                bitmap.Save(memory, ImageFormat.Png);
+                memory.Position = 0;
+
+                var bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.StreamSource = memory;
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapImage.EndInit();
+                bitmapImage.Freeze();
+
+                return bitmapImage;
             }
         }
+
+
     }
 }
