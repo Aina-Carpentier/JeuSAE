@@ -13,6 +13,8 @@ using System.Windows.Interop;
 using System.Windows;
 using System.Windows.Shapes;
 using Rectangle = System.Windows.Shapes.Rectangle;
+using System.Diagnostics;
+using System.Windows.Xps.Packaging;
 
 namespace JeuSAE
 {
@@ -46,32 +48,18 @@ namespace JeuSAE
 
         private static Random rnd = new Random();
 
-
         private static int IMG_WIDTH = 256;
         private static int IMG_HEIGHT = 256;
 
 
-
-
         public static void load(MainWindow mainWindow)
         {
-            //ChargerImages();
-            //ChargerGrille(carte);
-            //DessinerFond(carte);
-
             Rectangle carte = mainWindow.carte;
-
-
-            String[] lesImageEnvironnement;
-
             String dossierImages = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "images\\");
-
-            System.Drawing.Image source1 = System.Drawing.Image.FromFile(dossierImages + "environnement_256x256\\grass_1.png");
+            String[] lesImageEnvironnement = Directory.GetFiles(dossierImages + "environnement_256x256\\");
+            System.Drawing.Image imageSource = System.Drawing.Image.FromFile(dossierImages + "environnement_256x256\\grass_1.png");
             Bitmap cible = new Bitmap((int)carte.Width, (int)carte.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
             Graphics graphiques = Graphics.FromImage(cible);
-            graphiques.CompositingMode = CompositingMode.SourceOver; // c'est le compositingMode par défault mais juste pour être sûr
-
-            lesImageEnvironnement = Directory.GetFiles(dossierImages + "environnement_256x256\\");
 
 
             foreach (String uri in lesImageEnvironnement)
@@ -117,196 +105,33 @@ namespace JeuSAE
 
             }
 
-
-
-
+#if DEBUG
             foreach (String uri in listeArreteGauche)
             {
                 Console.WriteLine(uri);
             }
+#endif
 
-
-
-
-
-
-
-
-
-            //var cible = new Bitmap((int)carte.Width, (int)carte.Height, PixelFormat.Format32bppArgb);
-            //var graphiques = Graphics.FromImage(cible);
-            //graphiques.CompositingMode = CompositingMode.SourceOver; // c'est le compositingMode par défault mais juste pour être sûr
-            bool dejaRepondu = false;
-            bool herbe;
-
-            //while (!finiDeCharger)
-            //{
-            //source1 = System.Drawing.Image.FromFile(fullDebugUri + "environnement_16x16\\grass_1.png");
-            //source2 = System.Drawing.Image.FromFile(fullDebugUri + "environnement_16x16\\grass_2.png");
-
-
-            for (int i = 0; i < carte.Height; i += IMG_HEIGHT)
+            for (int y = 0; y < carte.Height; y += IMG_HEIGHT)
             {
-                if (rnd.Next(1, 100) > 10)
+                bool herbe = rnd.Next(1, 100) > 20 ? true : false;
+
+                for (int x = 0; x < carte.Width; x += IMG_WIDTH)
                 {
-                    herbe = true;
-                } else
-                {
-                    herbe = false;
+                    List<String> liste = new List<string>();
+                    int xPlusImage = x + IMG_WIDTH;
+                    int yPlusImage = y + IMG_HEIGHT;
+                    double largeurCarte = carte.Width;
+                    double hauteurCarte = carte.Height;
+
+                    if (!PointEstCoin(ref liste, x, y, xPlusImage, yPlusImage, largeurCarte, hauteurCarte)) PointEstArete(ref liste, x, y, xPlusImage, yPlusImage, largeurCarte, hauteurCarte);
+                    
+                    RecupererSourceImage(out imageSource, herbe, liste);
+                    graphiques.DrawImage(imageSource, x, y); //TODO multithreading
                 }
 
-                if (i == 0)
-                {// Coin haut gauche
-                    if (herbe)
-                    {
-                        source1 = System.Drawing.Image.FromFile(listeCoinHautGauche[0]);
-                    }
-                    else
-                    {
-                        source1 = System.Drawing.Image.FromFile(listeCoinHautGauche[rnd.Next(0, listeCoinHautGauche.Count)]);
-                    }
-                    dejaRepondu = true;
-                }
-                else if (i + IMG_HEIGHT >= carte.Height && dejaRepondu == false) //Coin bas gauche
-                {
-                    if (herbe)
-                    {
-                        source1 = System.Drawing.Image.FromFile(listeCoinBasGauche[0]);
-                    }
-                    else
-                    {
-                        source1 = System.Drawing.Image.FromFile(listeCoinBasGauche[rnd.Next(0, listeCoinBasGauche.Count)]);
-                    }
-                    dejaRepondu = true;
-                }
-
-                for (int n = 0; n < carte.Width; n += IMG_WIDTH)
-                {
-
-                    if (rnd.Next(1, 100) > 20)
-                    {
-                        herbe = true;
-                    }
-                    else
-                    {
-                        herbe = false;
-                    }
-
-                    //------------------------COINS------------------------
-                    if (i == 0 && n + IMG_WIDTH >= carte.Width && dejaRepondu == false) //Coin haut droit
-                    {
-                        if (herbe)
-                        {
-                            source1 = System.Drawing.Image.FromFile(listeCoinHautDroit[0]);
-                        }
-                        else
-                        {
-                            source1 = System.Drawing.Image.FromFile(listeCoinHautDroit[rnd.Next(0, listeCoinHautDroit.Count)]);
-                        }
-                        dejaRepondu = true;
-                    }
-                    else if (i + IMG_HEIGHT >= carte.Height && n + IMG_WIDTH >= carte.Width && dejaRepondu == false) //Coin bas droit
-                    {
-                        if (herbe)
-                        {
-                            source1 = System.Drawing.Image.FromFile(listeCoinBasDroit[0]);
-                        }
-                        else
-                        {
-                            source1 = System.Drawing.Image.FromFile(listeCoinBasDroit[rnd.Next(0, listeCoinBasDroit.Count)]);
-                        }
-                        dejaRepondu = true;
-                    }
-
-                    //------------------------ARETES------------------------
-                    else if (i == 0 && dejaRepondu == false) //Arête haut
-                    {
-                        if (herbe)
-                        {
-                            source1 = System.Drawing.Image.FromFile(listeArreteHaut[0]);
-                        }
-                        else
-                        {
-                            source1 = System.Drawing.Image.FromFile(listeArreteHaut[rnd.Next(0, listeArreteHaut.Count)]);
-                        }
-                        dejaRepondu = true;
-                    }
-                    else if (n + IMG_WIDTH >= carte.Width && dejaRepondu == false) //Arête droit
-                    {
-                        if (herbe)
-                        {
-                            source1 = System.Drawing.Image.FromFile(listeArreteDroit[0]);
-                        }
-                        else
-                        {
-                            source1 = System.Drawing.Image.FromFile(listeArreteDroit[rnd.Next(0, listeArreteDroit.Count)]);
-                        }
-                        dejaRepondu = true;
-                    }
-                    else if (i + IMG_HEIGHT >= carte.Height && dejaRepondu == false) // Arête bas
-                    {
-                        if (herbe)
-                        {
-                            source1 = System.Drawing.Image.FromFile(listeArreteBas[0]);
-                        }
-                        else
-                        {
-                            source1 = System.Drawing.Image.FromFile(listeArreteBas[rnd.Next(0, listeArreteBas.Count)]);
-                        }
-                        dejaRepondu = true;
-                    }
-                    else if (n == 0 && dejaRepondu == false) // Arête gauche
-                    {
-                        if (herbe)
-                        {
-                            source1 = System.Drawing.Image.FromFile(listeArreteGauche[0]);
-                        }
-                        else
-                        {
-                            source1 = System.Drawing.Image.FromFile(listeArreteGauche[rnd.Next(0, listeArreteGauche.Count)]);
-                        }
-                        dejaRepondu = true;
-                    }
-                    else if (dejaRepondu == false) // Sol
-                    {
-                        if (herbe)
-                        {
-                            source1 = System.Drawing.Image.FromFile(listeSol[0]);
-                        }
-                        else
-                        {
-                            source1 = System.Drawing.Image.FromFile(listeSol[rnd.Next(0, listeSol.Count)]);
-                        }
-                        dejaRepondu = true;
-                    }
-
-                    //if (!dejaRepondu) { finiDeCharger = true; }
-
-
-
-                    graphiques.DrawImage(source1, n, i);//TODO faire du multithreading
-                    //test(source1, graphiques, n, i);
-
-                    dejaRepondu = false;
-
-                }
-
-                Console.WriteLine("Génération de la map : " + Math.Round((i/carte.Height)*100) + " %");
-
+                Console.WriteLine("Génération de la map : " + Math.Round((y/carte.Height)*100) + " %");
             }
-
-
-            //graphiques.DrawImage(source1, 0, 0);
-            //graphiques.DrawImage(source1, source1.Width, 0);
-
-
-
-            //}
-
-
-
-            //#if DEBUG
-
 
             ImageBrush image = new ImageBrush();
             image.ImageSource = ToBitmapImage(cible);
@@ -314,11 +139,62 @@ namespace JeuSAE
             carte.Fill = image;
 
 #if DEBUG
-            Console.WriteLine(System.AppDomain.CurrentDomain.BaseDirectory + "images\\result.png");
+            Console.WriteLine(AppDomain.CurrentDomain.BaseDirectory + "images\\result.png");
             Console.WriteLine(AppDomain.CurrentDomain.BaseDirectory + "images\\environnement_16x16\\grass_1.png");
 #endif
+        }
 
+        private static void PointEstArete(ref List<String> liste, int x, int y, int xPlusImage, int yPlusImage, double largeurCarte, double hauteurCarte)
+        {
+            if (y == 0) //Arête haut
+            {
+                liste = listeArreteHaut;
+            }
+            else if (xPlusImage >= largeurCarte) //Arête droit
+            {
+                liste = listeArreteDroit;
+            }
+            else if (yPlusImage >= hauteurCarte) // Arête bas
+            {
+                liste = listeArreteBas;
+            }
+            else if (x == 0) // Arête gauche
+            {
+                liste = listeArreteGauche;
+            }
+            else // Sol
+            {
+                liste = listeSol;
+            }
+        }
 
+        private static bool PointEstCoin(ref List<String> liste, int x, int y, int xPlusImage, int yPlusImage, double largeurCarte, double hauteurCarte)
+        {
+            bool res = true;
+            if (y == 0 && xPlusImage >= largeurCarte) //Coin haut droit
+            {
+                liste = listeCoinHautDroit;
+            }
+            else if (yPlusImage >= hauteurCarte && xPlusImage >= largeurCarte) //Coin bas droit
+            {
+                liste = listeCoinBasDroit;
+            }
+            else if (y == 0 && x == 0) // Coin haut gauche
+            {
+                liste = listeCoinHautGauche;
+            }
+            else if (yPlusImage >= hauteurCarte && x == 0) //Coin bas gauche
+            {
+                liste = listeCoinBasGauche;
+            }
+            else res = false;
+            return res;
+        }
+
+        private static void RecupererSourceImage(out System.Drawing.Image image, bool herbeOuFleur, List<String> images)
+        {
+            int index = herbeOuFleur ? 0 : rnd.Next(0, images.Count);
+            image = System.Drawing.Image.FromFile(images[index]);
         }
 
 
@@ -339,7 +215,5 @@ namespace JeuSAE
                 return bitmapImage;
             }
         }
-
-
     }
 }
