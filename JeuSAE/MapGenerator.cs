@@ -116,53 +116,45 @@ namespace JeuSAE
 
                 for (int x = 0; x < carte.Width; x += IMG_WIDTH)
                 {
+                    List<String> liste = new List<string>();
                     if (y == 0 && x + IMG_WIDTH >= carte.Width) //Coin haut droit
                     {
-                        int index = herbe ? 0 : rnd.Next(0, listeCoinHautDroit.Count);
-                        imageSource = System.Drawing.Image.FromFile(listeCoinHautDroit[index]);
+                        liste = listeCoinHautDroit;
                     }
                     else if (y + IMG_HEIGHT >= carte.Height && x + IMG_WIDTH >= carte.Width) //Coin bas droit
                     {
-                        int index = herbe ? 0 : rnd.Next(0, listeCoinBasDroit.Count);
-                        imageSource = System.Drawing.Image.FromFile(listeCoinBasDroit[index]);
+                        liste = listeCoinBasDroit;
                     }
                     else if (y == 0 && x == 0)
                     {
-                        int index = herbe ? 0 : rnd.Next(0, listeCoinHautGauche.Count);
-                        imageSource = System.Drawing.Image.FromFile(listeCoinHautGauche[index]);
+                        liste = listeCoinHautGauche;
                     }
                     else if (y + IMG_HEIGHT >= carte.Height && x == 0) //Coin bas gauche
                     {
-                        int index = herbe ? 0 : rnd.Next(0, listeCoinBasGauche.Count);
-                        imageSource = System.Drawing.Image.FromFile(listeCoinBasGauche[index]);
+                        liste = listeCoinBasGauche;
                     }
                     //------------------------ARETES------------------------
                     else if (y == 0) //Arête haut
                     {
-                        int index = herbe ? 0 : rnd.Next(0, listeArreteHaut.Count);
-                        imageSource = System.Drawing.Image.FromFile(listeArreteHaut[index]);
+                        liste = listeArreteHaut;
                     }
                     else if (x + IMG_WIDTH >= carte.Width) //Arête droit
                     {
-                        int index = herbe ? 0 : rnd.Next(0, listeArreteDroit.Count);
-                        imageSource = System.Drawing.Image.FromFile(listeArreteDroit[index]);
+                        liste = listeArreteDroit;
                     }
                     else if (y + IMG_HEIGHT >= carte.Height) // Arête bas
                     {
-                        int index = herbe ? 0 : rnd.Next(0, listeArreteBas.Count);
-                        imageSource = System.Drawing.Image.FromFile(listeArreteBas[index]);
+                        liste = listeArreteBas;
                     }
                     else if (x == 0) // Arête gauche
                     {
-                        int index = herbe ? 0 : rnd.Next(0, listeArreteGauche.Count);
-                        imageSource = System.Drawing.Image.FromFile(listeArreteGauche[index]);
+                        liste = listeArreteGauche;
                     }
                     else // Sol
                     {
-                        int index = herbe ? 0 : rnd.Next(0, listeSol.Count);
-                        imageSource = System.Drawing.Image.FromFile(listeSol[index]);
+                        liste = listeSol;
                     }
-
+                    imageSource = RecupererSourceImage(herbe, liste);
                     graphiques.DrawImage(imageSource, x, y); //TODO multithreading
                 }
 
@@ -178,6 +170,12 @@ namespace JeuSAE
             Console.WriteLine(AppDomain.CurrentDomain.BaseDirectory + "images\\result.png");
             Console.WriteLine(AppDomain.CurrentDomain.BaseDirectory + "images\\environnement_16x16\\grass_1.png");
 #endif
+        }
+
+        private static System.Drawing.Image RecupererSourceImage(bool herbeOuFleur, List<String> images)
+        {
+            int index = herbeOuFleur ? 0 : rnd.Next(0, images.Count);
+            return System.Drawing.Image.FromFile(images[index]);
         }
 
 
