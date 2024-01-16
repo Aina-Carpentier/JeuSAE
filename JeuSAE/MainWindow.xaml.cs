@@ -23,6 +23,7 @@ namespace JeuSAE
 
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
         private List<Balle> listeBalle = new List<Balle>();
+        public static List<Ennemi> listeEnnemi = new List<Ennemi>();
         private List<Balle> listeBalleAEnlever = new List<Balle>();
         private int vitesseJoueur = 10, tempsRechargeArme = 15, tempsRechargeActuel = 0, vitesseBalle = 25, compteurSpawn = 0, compteurAAtteindre = 1;
         private bool gauche = false, droite = false, haut = false, bas = false, tirer = false, numPadUn = false, numPadQuatre = false;
@@ -166,6 +167,16 @@ namespace JeuSAE
                         balle.PosX = Canvas.GetLeft(balle.Graphique);
                         balle.PosY = Canvas.GetTop(balle.Graphique);
                     }
+
+                    foreach (Ennemi ennemi in listeEnnemi)
+                    {
+                        Canvas.SetLeft(ennemi.Graphique, Canvas.GetLeft(ennemi.Graphique) + vitesseJoueur);
+                        ennemi.PosX = Canvas.GetLeft(ennemi.Graphique);
+                        ennemi.PosY = Canvas.GetTop(ennemi.Graphique);
+                    }
+
+
+
                 }
                 else
                 {
@@ -183,7 +194,13 @@ namespace JeuSAE
                         balle.PosX = Canvas.GetLeft(balle.Graphique);
                         balle.PosY = Canvas.GetTop(balle.Graphique);
                     }
-                }
+                    foreach (Ennemi ennemi in listeEnnemi)
+                    {
+                        Canvas.SetLeft(ennemi.Graphique, Canvas.GetLeft(ennemi.Graphique) - vitesseJoueur);
+                        ennemi.PosX = Canvas.GetLeft(ennemi.Graphique);
+                        ennemi.PosY = Canvas.GetTop(ennemi.Graphique);
+                    }
+                    }
                 else
                 {
                     Canvas.SetLeft(carte, -carte.Width + rectJoueur.Width / 2 + posJoueurX);
@@ -195,10 +212,16 @@ namespace JeuSAE
                 {
                     Canvas.SetTop(carte, Canvas.GetTop(carte) + vitesseJoueur);
                     foreach (Balle balle in listeBalle) { Canvas.SetTop(balle.Graphique, Canvas.GetTop(balle.Graphique) + vitesseJoueur); 
-                                            balle.PosX = Canvas.GetLeft(balle.Graphique);
+                        balle.PosX = Canvas.GetLeft(balle.Graphique);
                         balle.PosY = Canvas.GetTop(balle.Graphique);
                     }
-                }
+                    foreach (Ennemi ennemi in listeEnnemi)
+                    {
+                        Canvas.SetTop(ennemi.Graphique, Canvas.GetTop(ennemi.Graphique) + vitesseJoueur);
+                        ennemi.PosX = Canvas.GetLeft(ennemi.Graphique);
+                        ennemi.PosY = Canvas.GetTop(ennemi.Graphique);
+                    }
+                    }
                 else
                 {
                     Canvas.SetTop(carte, posJoueurY - rectJoueur.Height / 2);
@@ -215,7 +238,13 @@ namespace JeuSAE
                         balle.PosX = Canvas.GetLeft(balle.Graphique);
                         balle.PosY = Canvas.GetTop(balle.Graphique);
                     }
-                }
+                    foreach (Ennemi ennemi in listeEnnemi)
+                    {
+                        Canvas.SetTop(ennemi.Graphique, Canvas.GetTop(ennemi.Graphique) - vitesseJoueur);
+                        ennemi.PosX = Canvas.GetLeft(ennemi.Graphique);
+                        ennemi.PosY = Canvas.GetTop(ennemi.Graphique);
+                    }
+                    }
                 else
                 {
                     Canvas.SetTop(carte, -carte.Height + rectJoueur.Height / 2 + posJoueurY);
@@ -280,7 +309,7 @@ namespace JeuSAE
         {
             if (compteurSpawn >= compteurAAtteindre)
             {
-                SpawnEnnemi.SpawnUnEnnemi(this);
+                Ennemi.SpawnUnEnnemi(this);
                 compteurSpawn = 0;
             }
             compteurSpawn++;
