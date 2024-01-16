@@ -50,19 +50,23 @@ namespace JeuSAE
 
         private static int IMG_WIDTH = 256;
         private static int IMG_HEIGHT = 256;
+        private static int PROBA_HERBE = 20;
 
+        private static string CHEMIN_DOSSIER_IMAGES = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "images\\");
+        private static string CHEMIN_FICHIERS_IMAGES = System.IO.Path.Combine(CHEMIN_DOSSIER_IMAGES, "environnement_256x256\\");
 
         public static void load(MainWindow mainWindow)
         {
             Rectangle carte = mainWindow.carte;
-            String dossierImages = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "images\\");
-            String[] lesImageEnvironnement = Directory.GetFiles(dossierImages + "environnement_256x256\\");
-            System.Drawing.Image imageSource = System.Drawing.Image.FromFile(dossierImages + "environnement_256x256\\grass_1.png");
-            Bitmap cible = new Bitmap((int)carte.Width, (int)carte.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+            int largeurCarte = (int)carte.Width;
+            int hauteurCarte = (int)carte.Height;
+            string[] images = Directory.GetFiles(CHEMIN_FICHIERS_IMAGES);
+            System.Drawing.Image imageSource = System.Drawing.Image.FromFile(CHEMIN_FICHIERS_IMAGES + "grass_1.png");
+            Bitmap cible = new Bitmap(largeurCarte, hauteurCarte, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
             Graphics graphiques = Graphics.FromImage(cible);
 
 
-            foreach (String uri in lesImageEnvironnement)
+            foreach (String uri in images)
             {
                 String nomImage = uri.Split("\\")[uri.Split("\\").Length - 1];
                 if (SOL_REGEX.IsMatch(nomImage))
@@ -114,19 +118,16 @@ namespace JeuSAE
 
             for (int y = 0; y < carte.Height; y += IMG_HEIGHT)
             {
-                bool herbe = rnd.Next(1, 100) > 20 ? true : false;
-
                 for (int x = 0; x < carte.Width; x += IMG_WIDTH)
                 {
                     List<String> liste = new List<string>();
                     int xPlusImage = x + IMG_WIDTH;
                     int yPlusImage = y + IMG_HEIGHT;
-                    double largeurCarte = carte.Width;
-                    double hauteurCarte = carte.Height;
 
                     if (!PointEstCoin(ref liste, x, y, xPlusImage, yPlusImage, largeurCarte, hauteurCarte)) PointEstArete(ref liste, x, y, xPlusImage, yPlusImage, largeurCarte, hauteurCarte);
-                    
-                    RecupererSourceImage(out imageSource, herbe, liste);
+
+                    bool herbeOuFleur = rnd.Next(1, 100) > PROBA_HERBE;
+                    RecupererSourceImage(out imageSource, herbeOuFleur, liste);
                     graphiques.DrawImage(imageSource, x, y); //TODO multithreading
                 }
 
@@ -135,16 +136,10 @@ namespace JeuSAE
 
             ImageBrush image = new ImageBrush();
             image.ImageSource = ToBitmapImage(cible);
-
             carte.Fill = image;
-
-#if DEBUG
-            Console.WriteLine(AppDomain.CurrentDomain.BaseDirectory + "images\\result.png");
-            Console.WriteLine(AppDomain.CurrentDomain.BaseDirectory + "images\\environnement_16x16\\grass_1.png");
-#endif
         }
 
-        private static void PointEstArete(ref List<String> liste, int x, int y, int xPlusImage, int yPlusImage, double largeurCarte, double hauteurCarte)
+        private static void PointEstArete(ref List<String> liste, int x, int y, int xPlusImage, int yPlusImage, int largeurCarte, int hauteurCarte)
         {
             if (y == 0) //Arête haut
             {
@@ -168,7 +163,7 @@ namespace JeuSAE
             }
         }
 
-        private static bool PointEstCoin(ref List<String> liste, int x, int y, int xPlusImage, int yPlusImage, double largeurCarte, double hauteurCarte)
+        private static bool PointEstCoin(ref List<String> liste, int x, int y, int xPlusImage, int yPlusImage, int largeurCarte, int hauteurCarte)
         {
             bool res = true;
             if (y == 0 && xPlusImage >= largeurCarte) //Coin haut droit
