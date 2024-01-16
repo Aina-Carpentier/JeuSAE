@@ -5,13 +5,48 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:JeuSAE"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="fenetreParametre"
     Title="Parametres"
     Width="{x:Static SystemParameters.PrimaryScreenWidth}"
     Height="{x:Static SystemParameters.PrimaryScreenHeight}"
+    FocusManager.FocusedElement="{Binding ElementName=canvasParametre}"
     ResizeMode="NoResize"
-    ShowInTaskbar="False"
     WindowStartupLocation="CenterScreen"
+    WindowState="Maximized"
     WindowStyle="None"
     mc:Ignorable="d">
-    <Grid />
+
+    <Canvas x:Name="canvasParametre">
+        <Canvas.Background>
+            <LinearGradientBrush MappingMode="RelativeToBoundingBox" SpreadMethod="Pad" StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Offset="1" Color="#FF022902" />
+                <GradientStop Offset="0" Color="#FF5BF35D" />
+            </LinearGradientBrush>
+
+
+        </Canvas.Background>
+        <Label
+            x:Name="labParametre"
+            Width="496"
+            Height="117"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Paramètres"
+            FontFamily="Rubik"
+            FontSize="90" />
+        <Label
+            x:Name="labMenu"
+            Width="240"
+            Height="117"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Menu"
+            FontFamily="Rubik"
+            FontSize="90"
+            MouseLeftButtonDown="labMenu_MouseLeftButtonDown" />
+
+
+    </Canvas>
+
+
 </Window>

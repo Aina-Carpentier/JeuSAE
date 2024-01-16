@@ -1,12 +1,48 @@
-﻿<Window x:Class="JeuSAE.Magasin"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:JeuSAE"
-        mc:Ignorable="d"
-        Title="Magasin" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+﻿<Window
+    x:Class="JeuSAE.Magasin"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:JeuSAE"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="fenetreMagasin"
+    Title="Magasin"
+    Width="{x:Static SystemParameters.PrimaryScreenWidth}"
+    Height="{x:Static SystemParameters.PrimaryScreenHeight}"
+    FocusManager.FocusedElement="{Binding ElementName=canvasParametre}"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    WindowState="Maximized"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Canvas x:Name="canvasMagasin">
+        <Canvas.Background>
+            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                <GradientStop Offset="1" Color="#FF1F180E" />
+                <GradientStop Color="#FFFFC26C" />
+                <GradientStop Offset="0.48" Color="#FF885917" />
+            </LinearGradientBrush>
+        </Canvas.Background>
+
+        <Label
+            x:Name="labMagasin"
+            Width="355"
+            Height="117"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Magasin"
+            FontFamily="Rubik"
+            FontSize="90" />
+        <Label
+            x:Name="labMenu"
+            Width="240"
+            Height="120"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Menu"
+            FontFamily="Rubik"
+            FontSize="90"
+            MouseLeftButtonDown="labMenu_MouseLeftButtonDown" />
+
+    </Canvas>
 </Window>
