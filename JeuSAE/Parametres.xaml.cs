@@ -19,9 +19,18 @@ namespace JeuSAE
     /// </summary>
     public partial class Parametres : Window
     {
+        public String choix;
         public Parametres()
         {
             InitializeComponent();
+            labParametre.Margin = new Thickness(fenetreParametre.Width / 2 - labParametre.Width / 2, fenetreParametre.Height * 0.05, 0, 0);
+            labMenu.Margin = new Thickness(labMenu.Width*0.1, fenetreParametre.Height - labMenu.Height, 0, 0);
+        }
+
+        private void labMenu_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.choix = "menu";
+            this.Hide();
         }
     }
 }

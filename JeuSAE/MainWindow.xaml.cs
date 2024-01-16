@@ -28,6 +28,7 @@ namespace JeuSAE
         private bool gauche = false, droite = false, haut = false, bas = false, tirer = false, numPadUn = false, numPadQuatre = false;
         private Rect player = new Rect(910, 490, 50, 50); // Hitbox player
         private double posJoueurX = 0, posJoueurY = 0;
+        public String choix;
 
 
         private void monCanvas_MouseMove(object sender, MouseEventArgs e)
@@ -46,11 +47,14 @@ namespace JeuSAE
 
             Menu menu = new Menu();
             Parametres parametres = new Parametres();
+            Magasin magasin = new Magasin();
             menu.ShowDialog();
+            choix = menu.choix;
             
-            while (menu.choix != "jouer")
+            
+            while (choix != "jouer")
             {
-                switch (menu.choix)
+                switch (choix)
                 {
                     case "quitter":
                         Application.Current.Shutdown();
@@ -58,6 +62,17 @@ namespace JeuSAE
 
                     case "parametre":
                         parametres.ShowDialog();
+                        choix = parametres.choix;
+                        break;
+
+                    case "menu":
+                        menu.ShowDialog();
+                        choix = menu.choix;
+                        break;
+
+                    case "magasin":
+                        magasin.ShowDialog();
+                        choix = magasin.choix;
                         break;
 
                 }
