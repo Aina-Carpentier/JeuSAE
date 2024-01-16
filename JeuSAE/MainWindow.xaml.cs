@@ -265,7 +265,7 @@ namespace JeuSAE
                 */
                 Vector2 vecteurTir = new Vector2((float)posEcran.X - (float)posJoueurX, (float)posEcran.Y - (float)posJoueurY);
 
-                Balle balleJoueur = new Balle(vitesseBalle, 500, 0, "joueur", 0, posJoueurX, posJoueurY, vecteurTir);
+                Balle balleJoueur = new Balle(vitesseBalle, 20, 0, "joueur", 0, posJoueurX, posJoueurY, vecteurTir);
                 Canvas.SetLeft(balleJoueur.Graphique, balleJoueur.PosX);
                 Canvas.SetTop(balleJoueur.Graphique, balleJoueur.PosY);
 
