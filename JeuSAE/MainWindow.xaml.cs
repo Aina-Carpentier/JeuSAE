@@ -24,9 +24,10 @@ namespace JeuSAE
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
         private List<Balle> listeBalle = new List<Balle>();
         public static List<Ennemi> listeEnnemi = new List<Ennemi>();
+        public static List<Ennemi> listeEnnemiAEnlever = new List<Ennemi>();
         public List<Balle> listeBalleAEnlever = new List<Balle>();
         private int vitesseJoueur = 10, tempsRechargeArme = 15, tempsRechargeActuel = 0, vitesseBalle = 25, compteurSpawn = 0, compteurAAtteindre = 1;
-        private bool gauche = false, droite = false, haut = false, bas = false, tirer = false, numPadUn = false, numPadQuatre = false;
+        private bool gauche = false, droite = false, haut = false, bas = false, tirer = false, numPadUn = false, numPadQuatre = false, toucheX = false, toucheC = false;
         private Rect player = new Rect(910, 490, 50, 50); // Hitbox player
         private double posJoueurX = 0, posJoueurY = 0;
         public String choix;
@@ -117,6 +118,20 @@ namespace JeuSAE
                 numPadQuatre = true;
             if (numPadUn && numPadQuatre) { vitesseJoueur = 200; } else { vitesseJoueur = 10; }
 
+            //Clear ennemis
+            if (e.Key == Key.X) { toucheX = true; }
+                
+            if (e.Key == Key.C) { 
+                toucheC = true; 
+            }
+                
+            if (toucheC && toucheX) { 
+                toucheX = false;
+                toucheC = false;
+                EnleverTousLesEnnemis();
+                Ennemi.SpawnUnEnnemi(this);
+            }
+
         }
 
         private void CanvasKeyIsUp(object sender, KeyEventArgs e)
@@ -137,6 +152,12 @@ namespace JeuSAE
                 numPadUn = false;
             if (e.Key == Key.NumPad4)
                 numPadQuatre = false;
+
+            //Clear ennemis
+            if (e.Key == Key.X) { toucheX = false; }
+                
+            if (e.Key == Key.C) { toucheC = false; }
+                
         }
 
 
@@ -339,5 +360,23 @@ namespace JeuSAE
 
             }
         }
+
+
+        private void EnleverTousLesEnnemis()
+        {
+            foreach (Ennemi ennemi in listeEnnemi)
+            {
+                listeEnnemiAEnlever.Add(ennemi);
+            }
+
+            foreach (Ennemi ennemi in listeEnnemiAEnlever)
+            {
+                listeEnnemi.Remove(ennemi);
+                monCanvas.Children.Remove(ennemi.Graphique);
+            }
+            listeEnnemiAEnlever.Clear();
+        }
+
+
     }
 }
