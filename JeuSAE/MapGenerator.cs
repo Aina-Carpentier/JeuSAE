@@ -13,6 +13,8 @@ using System.Windows.Interop;
 using System.Windows;
 using System.Windows.Shapes;
 using Rectangle = System.Windows.Shapes.Rectangle;
+using System.Diagnostics;
+using System.Windows.Xps.Packaging;
 
 namespace JeuSAE
 {
@@ -117,44 +119,14 @@ namespace JeuSAE
                 for (int x = 0; x < carte.Width; x += IMG_WIDTH)
                 {
                     List<String> liste = new List<string>();
-                    if (y == 0 && x + IMG_WIDTH >= carte.Width) //Coin haut droit
-                    {
-                        liste = listeCoinHautDroit;
-                    }
-                    else if (y + IMG_HEIGHT >= carte.Height && x + IMG_WIDTH >= carte.Width) //Coin bas droit
-                    {
-                        liste = listeCoinBasDroit;
-                    }
-                    else if (y == 0 && x == 0)
-                    {
-                        liste = listeCoinHautGauche;
-                    }
-                    else if (y + IMG_HEIGHT >= carte.Height && x == 0) //Coin bas gauche
-                    {
-                        liste = listeCoinBasGauche;
-                    }
-                    //------------------------ARETES------------------------
-                    else if (y == 0) //Arête haut
-                    {
-                        liste = listeArreteHaut;
-                    }
-                    else if (x + IMG_WIDTH >= carte.Width) //Arête droit
-                    {
-                        liste = listeArreteDroit;
-                    }
-                    else if (y + IMG_HEIGHT >= carte.Height) // Arête bas
-                    {
-                        liste = listeArreteBas;
-                    }
-                    else if (x == 0) // Arête gauche
-                    {
-                        liste = listeArreteGauche;
-                    }
-                    else // Sol
-                    {
-                        liste = listeSol;
-                    }
-                    imageSource = RecupererSourceImage(herbe, liste);
+                    int xPlusImage = x + IMG_WIDTH;
+                    int yPlusImage = y + IMG_HEIGHT;
+                    double largeurCarte = carte.Width;
+                    double hauteurCarte = carte.Height;
+
+                    if (!PointEstCoin(ref liste, x, y, xPlusImage, yPlusImage, largeurCarte, hauteurCarte)) PointEstArete(ref liste, x, y, xPlusImage, yPlusImage, largeurCarte, hauteurCarte);
+                    
+                    RecupererSourceImage(out imageSource, herbe, liste);
                     graphiques.DrawImage(imageSource, x, y); //TODO multithreading
                 }
 
@@ -172,10 +144,57 @@ namespace JeuSAE
 #endif
         }
 
-        private static System.Drawing.Image RecupererSourceImage(bool herbeOuFleur, List<String> images)
+        private static void PointEstArete(ref List<String> liste, int x, int y, int xPlusImage, int yPlusImage, double largeurCarte, double hauteurCarte)
+        {
+            if (y == 0) //Arête haut
+            {
+                liste = listeArreteHaut;
+            }
+            else if (xPlusImage >= largeurCarte) //Arête droit
+            {
+                liste = listeArreteDroit;
+            }
+            else if (yPlusImage >= hauteurCarte) // Arête bas
+            {
+                liste = listeArreteBas;
+            }
+            else if (x == 0) // Arête gauche
+            {
+                liste = listeArreteGauche;
+            }
+            else // Sol
+            {
+                liste = listeSol;
+            }
+        }
+
+        private static bool PointEstCoin(ref List<String> liste, int x, int y, int xPlusImage, int yPlusImage, double largeurCarte, double hauteurCarte)
+        {
+            bool res = true;
+            if (y == 0 && xPlusImage >= largeurCarte) //Coin haut droit
+            {
+                liste = listeCoinHautDroit;
+            }
+            else if (yPlusImage >= hauteurCarte && xPlusImage >= largeurCarte) //Coin bas droit
+            {
+                liste = listeCoinBasDroit;
+            }
+            else if (y == 0 && x == 0) // Coin haut gauche
+            {
+                liste = listeCoinHautGauche;
+            }
+            else if (yPlusImage >= hauteurCarte && x == 0) //Coin bas gauche
+            {
+                liste = listeCoinBasGauche;
+            }
+            else res = false;
+            return res;
+        }
+
+        private static void RecupererSourceImage(out System.Drawing.Image image, bool herbeOuFleur, List<String> images)
         {
             int index = herbeOuFleur ? 0 : rnd.Next(0, images.Count);
-            return System.Drawing.Image.FromFile(images[index]);
+            image = System.Drawing.Image.FromFile(images[index]);
         }
 
 
