@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
 namespace JeuSAE
 {
-    internal class Ennemi
+    public class Ennemi
     {
         private double vie;
         private double vitesse; // En pixel/tick
@@ -20,6 +22,7 @@ namespace JeuSAE
         private System.Windows.Shapes.Rectangle graphique;
         private ImageBrush ennemiImage = new ImageBrush();
         private Uri dossierSprites = new Uri(AppDomain.CurrentDomain.BaseDirectory + "images\\sprites\\");
+        private static Random random = new Random();
 
 
         public double Vie
@@ -93,14 +96,14 @@ namespace JeuSAE
                     this.Nom = Constantes.NOM_TRIANGLE_EQ;
                     ennemiImage.ImageSource = new BitmapImage(new Uri(dossierSprites + "triangle.png"));// dossierImage c'est un Uri donc ça vas peut-être bugger
                     break; //TODO finir de mettre les images sur les ennemis
-                    /*
-                case 1:
-                    this.Vie = 5;
-                    this.Vitesse = 1;
-                    this.CadenceTir = 2;
-                    this.Nom = "Rectangle";
-                    break;
-                    */
+                /*
+            case 1:
+                this.Vie = 5;
+                this.Vitesse = 1;
+                this.CadenceTir = 2;
+                this.Nom = "Rectangle";
+                break;
+                */
                 case 1: // Carré
                     this.Vie = Constantes.VIE_CARRE;
                     this.Vitesse = Constantes.VITESSE_CARRE;
@@ -142,8 +145,7 @@ namespace JeuSAE
                     this.CadenceTir = Constantes.CADENCE_CERCLE;
                     this.Nom = Constantes.NOM_CERCLE;
                     ennemiImage.ImageSource = new BitmapImage(new Uri(dossierSprites + "cercle.png"));
-                    break;
-
+                    break; //TODO ajouter plus d'ennemis si on a des idées
             }
             PosX = posX;
             PosY = posY;
@@ -165,5 +167,67 @@ namespace JeuSAE
         {
             return this.Nom;
         }
+
+
+        public static void SpawnUnEnnemi(MainWindow mainWindow)
+        {
+            System.Windows.Shapes.Rectangle carte = mainWindow.carte;
+            double posJoueurX = mainWindow.fenetrePrincipale.Width / 2;
+            double posJoueurY = mainWindow.fenetrePrincipale.Height / 2;
+
+            int y = random.Next(0, 2000);
+            int x = random.Next(500, 2000) - y;
+
+
+
+            if (random.Next(0, 2) == 0)
+            {
+                x = x * (-1);
+            }
+            if (random.Next(0, 2) == 0)
+            {
+                y = y * (-1);
+            }
+
+#if DEBUG
+            Console.WriteLine("pos Joueur x : " + posJoueurX);
+            Console.WriteLine("pos Joueur y : " + posJoueurY);
+
+#endif
+
+
+            if (posJoueurX + x > carte.Width || posJoueurX + x < carte.Width)
+            {
+                x = x * (-1);
+            }
+
+            if (posJoueurX + y > carte.Height || posJoueurY + y < carte.Height)
+            {
+                y = y * (-1);
+            }
+
+
+            Ennemi ennemi = new Ennemi(random.Next(0, 7), x, y);
+            Canvas.SetLeft(ennemi.Graphique, posJoueurX + x);
+            Canvas.SetTop(ennemi.Graphique, posJoueurY + y);
+            Canvas.SetZIndex(ennemi.Graphique, 1);
+
+            if (Canvas.GetLeft(ennemi.Graphique) > carte.Width + Canvas.GetLeft(ennemi.Graphique) || Canvas.GetLeft(ennemi.Graphique) < carte.Width + Canvas.GetLeft(ennemi.Graphique))
+            {
+                Canvas.SetLeft(ennemi.Graphique, (posJoueurX + x) * -1);
+            }
+            if (Canvas.GetTop(ennemi.Graphique) > carte.Height + Canvas.GetTop(ennemi.Graphique) || Canvas.GetTop(ennemi.Graphique) < carte.Height + Canvas.GetTop(ennemi.Graphique))
+            {
+                Canvas.SetTop(ennemi.Graphique, (posJoueurY + y) * -1);//TODO FIX CA
+            }
+
+            mainWindow.monCanvas.Children.Add(ennemi.Graphique);
+
+            MainWindow.listeEnnemi.Add(ennemi);
+
+
+        }
+
+
     }
 }
