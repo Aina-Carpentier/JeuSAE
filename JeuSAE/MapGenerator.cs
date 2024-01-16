@@ -116,9 +116,9 @@ namespace JeuSAE
             }
 #endif
 
-            for (int y = 0; y < carte.Height; y += IMG_HEIGHT)
+            for (int y = 0; y < hauteurCarte; y += IMG_HEIGHT)
             {
-                for (int x = 0; x < carte.Width; x += IMG_WIDTH)
+                for (int x = 0; x < largeurCarte; x += IMG_WIDTH)
                 {
                     List<String> liste = new List<string>();
                     int xPlusImage = x + IMG_WIDTH;

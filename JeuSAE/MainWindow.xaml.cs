@@ -177,105 +177,70 @@ namespace JeuSAE
 
         private void MouvementJoueur()
         {
-            if (gauche)
+            DeplacerEnDirection(gauche, vitesseJoueur, 0, posJoueurX - rectJoueur.Width / 2);
+            DeplacerEnDirection(droite, -vitesseJoueur, 0, -carte.Width + rectJoueur.Width / 2 + posJoueurX); // non
+            DeplacerEnDirection(haut, 0, vitesseJoueur, posJoueurY - rectJoueur.Height / 2);
+            DeplacerEnDirection(bas, 0, -vitesseJoueur, -carte.Height + rectJoueur.Height / 2 + posJoueurY); // non
+        }
+
+        private void DeplacerEnDirection(bool direction, double deplacementX, double deplacementY, double positionLimite)
+        {
+            if (direction)
             {
-                if (Canvas.GetLeft(carte) + vitesseJoueur < posJoueurX - rectJoueur.Width / 2)
-                {
-                    Canvas.SetLeft(carte, Canvas.GetLeft(carte) + vitesseJoueur);
-                    foreach (Balle balle in listeBalle)
-                    {
-                        Canvas.SetLeft(balle.Graphique, Canvas.GetLeft(balle.Graphique) + vitesseJoueur);
-                        balle.PosX = Canvas.GetLeft(balle.Graphique);
-                        balle.PosY = Canvas.GetTop(balle.Graphique);
-                    }
+                if (EstDansLesLimites(deplacementX, deplacementY, positionLimite))
+               {
 
-                    foreach (Ennemi ennemi in listeEnnemi)
-                    {
-                        Canvas.SetLeft(ennemi.Graphique, Canvas.GetLeft(ennemi.Graphique) + vitesseJoueur);
-                        ennemi.PosX = Canvas.GetLeft(ennemi.Graphique);
-                        ennemi.PosY = Canvas.GetTop(ennemi.Graphique);
-                    }
-
-
-
+                    if (deplacementX != 0) Canvas.SetLeft(carte, Canvas.GetLeft(carte) + deplacementX);
+                    else Canvas.SetTop(carte, Canvas.GetTop(carte) + deplacementY);
+                    DeplacerObjets(listeBalle, deplacementX, deplacementY);
+                    DeplacerObjets(listeEnnemi, deplacementX, deplacementY);
                 }
                 else
                 {
-                    Canvas.SetLeft(carte, posJoueurX - rectJoueur.Width / 2);
-                }
-            }
-            if (droite)
-            {
-                if (Canvas.GetLeft(carte) - vitesseJoueur > -carte.Width + rectJoueur.Width / 2 + posJoueurX)
-                {
-                    Canvas.SetLeft(carte, Canvas.GetLeft(carte) - vitesseJoueur);
-                    foreach (Balle balle in listeBalle)
-                    {
-                        Canvas.SetLeft(balle.Graphique, Canvas.GetLeft(balle.Graphique) - vitesseJoueur);
-                        balle.PosX = Canvas.GetLeft(balle.Graphique);
-                        balle.PosY = Canvas.GetTop(balle.Graphique);
-                    }
-                    foreach (Ennemi ennemi in listeEnnemi)
-                    {
-                        Canvas.SetLeft(ennemi.Graphique, Canvas.GetLeft(ennemi.Graphique) - vitesseJoueur);
-                        ennemi.PosX = Canvas.GetLeft(ennemi.Graphique);
-                        ennemi.PosY = Canvas.GetTop(ennemi.Graphique);
-                    }
-                    }
-                else
-                {
-                    Canvas.SetLeft(carte, -carte.Width + rectJoueur.Width / 2 + posJoueurX);
-                }
-            }
-            if (haut)
-            {
-                if (Canvas.GetTop(carte) + vitesseJoueur < posJoueurY - rectJoueur.Height / 2)
-                {
-                    Canvas.SetTop(carte, Canvas.GetTop(carte) + vitesseJoueur);
-                    foreach (Balle balle in listeBalle) { Canvas.SetTop(balle.Graphique, Canvas.GetTop(balle.Graphique) + vitesseJoueur); 
-                        balle.PosX = Canvas.GetLeft(balle.Graphique);
-                        balle.PosY = Canvas.GetTop(balle.Graphique);
-                    }
-                    foreach (Ennemi ennemi in listeEnnemi)
-                    {
-                        Canvas.SetTop(ennemi.Graphique, Canvas.GetTop(ennemi.Graphique) + vitesseJoueur);
-                        ennemi.PosX = Canvas.GetLeft(ennemi.Graphique);
-                        ennemi.PosY = Canvas.GetTop(ennemi.Graphique);
-                    }
-                    }
-                else
-                {
-                    Canvas.SetTop(carte, posJoueurY - rectJoueur.Height / 2);
-                }
-            }
-            if (bas)
-            {
-                if (Canvas.GetTop(carte) - vitesseJoueur > -carte.Height + rectJoueur.Height / 2 + posJoueurY)
-                {
-                    Canvas.SetTop(carte, Canvas.GetTop(carte) - vitesseJoueur);
-                    foreach (Balle balle in listeBalle)
-                    {
-                        Canvas.SetTop(balle.Graphique, Canvas.GetTop(balle.Graphique) - vitesseJoueur);
-                        balle.PosX = Canvas.GetLeft(balle.Graphique);
-                        balle.PosY = Canvas.GetTop(balle.Graphique);
-                    }
-                    foreach (Ennemi ennemi in listeEnnemi)
-                    {
-                        Canvas.SetTop(ennemi.Graphique, Canvas.GetTop(ennemi.Graphique) - vitesseJoueur);
-                        ennemi.PosX = Canvas.GetLeft(ennemi.Graphique);
-                        ennemi.PosY = Canvas.GetTop(ennemi.Graphique);
-                    }
-                    }
-                else
-                {
-                    Canvas.SetTop(carte, -carte.Height + rectJoueur.Height / 2 + posJoueurY);
-                    //foreach (Balle balle in balleList) { Canvas.SetTop(balle.Graphique, -carte.Height + rectJoueur.Height / 2 + posJoueurY); 
-                    //                        balle.PosX = Canvas.GetLeft(balle.Graphique);
-                    //    balle.PosY = Canvas.GetTop(balle.Graphique);
-                    //}
+                    if (deplacementX != 0) Canvas.SetLeft(carte, positionLimite);
+                    else Canvas.SetTop(carte, positionLimite);
                 }
             }
         }
+
+        private void DeplacerObjets(List<Balle> objets, double deplacementX, double deplacementY)
+        {
+            foreach (Balle objet in objets)
+            {
+                Canvas.SetLeft(objet.Graphique, Canvas.GetLeft(objet.Graphique) + deplacementX);
+                Canvas.SetTop(objet.Graphique, Canvas.GetTop(objet.Graphique) + deplacementY);
+
+                objet.PosX = Canvas.GetLeft(objet.Graphique);
+                objet.PosY = Canvas.GetTop(objet.Graphique);
+            }
+        }
+
+        private void DeplacerObjets(List<Ennemi> objets, double deplacementX, double deplacementY)
+        {
+            foreach (Ennemi objet in objets)
+            {
+                Canvas.SetLeft(objet.Graphique, Canvas.GetLeft(objet.Graphique) + deplacementX);
+                Canvas.SetTop(objet.Graphique, Canvas.GetTop(objet.Graphique) + deplacementY);
+
+                objet.PosX = Canvas.GetLeft(objet.Graphique);
+                objet.PosY = Canvas.GetTop(objet.Graphique);
+            }
+        }
+
+        private bool EstDansLesLimites(double deplacementX, double deplacementY, double positionLimite)
+        {
+            if (deplacementX != 0)
+            {
+                return deplacementX < 0 ? Canvas.GetLeft(carte) + deplacementX > positionLimite : Canvas.GetLeft(carte) + deplacementX < positionLimite;
+            }
+            else if (deplacementY != 0)
+            {
+                return deplacementY < 0 ? Canvas.GetTop(carte) + deplacementY > positionLimite : Canvas.GetTop(carte) + deplacementY < positionLimite;
+            }
+
+            return false;
+        }
+
 
         private void TirJoueur()
         {
