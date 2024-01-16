@@ -17,9 +17,10 @@ namespace JeuSAE
             double posJoueurX = mainWindow.fenetrePrincipale.Width / 2;
             double posJoueurY = mainWindow.fenetrePrincipale.Height / 2;
 
+            int y = random.Next(0, 2000);
+            int x = random.Next(500, 2000) - y;
 
-            int x = random.Next(300, 1001);
-            int y = random.Next(300, 1001);
+
 
             if (random.Next(0,2) == 0)
             {
@@ -34,7 +35,6 @@ namespace JeuSAE
             Ennemi ennemi = new Ennemi(random.Next(0, 8), x, y);
             Canvas.SetLeft(ennemi.Graphique, posJoueurX + x);
             Canvas.SetTop(ennemi.Graphique, posJoueurY + y);
-            Canvas.SetZIndex(ennemi.Graphique, 200);
 
 
             mainWindow.monCanvas.Children.Add(ennemi.Graphique);

@@ -30,7 +30,7 @@ namespace JeuSAE
         private List<Balle> listeBalle = new List<Balle>();
         private List<Balle> listeBalleAEnlever = new List<Balle>();
         private int compteurSpawn = 0;
-        private int compteurAAtteindre = 180;
+        private int compteurAAtteindre = 1;
 
         private void monCanvas_MouseMove(object sender, MouseEventArgs e)
         {

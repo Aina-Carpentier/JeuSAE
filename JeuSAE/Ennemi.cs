@@ -79,6 +79,11 @@ namespace JeuSAE
         {
             Type = type;
 
+            Rect = new Rect(PosX, PosY, Constantes.ENNEMI_RECT_LARGEUR, Constantes.ENNEMI_RECT_HAUTEUR);
+            Graphique = new System.Windows.Shapes.Rectangle()  /*(PosX, PosY, Constantes.ENNEMI_RECT_LARGEUR, Constantes.ENNEMI_RECT_HAUTEUR)*/;
+            this.Graphique.Width = Constantes.ENNEMI_RECT_LARGEUR;
+            this.Graphique.Height = Constantes.ENNEMI_RECT_LARGEUR;
+
             switch (type)
             {
                 case 0: // Triangle équilatéral
@@ -148,8 +153,6 @@ namespace JeuSAE
             }
             PosX = posX;
             PosY = posY;
-            Rect = new Rect (PosX, PosY, Constantes.ENNEMI_RECT_LARGEUR, Constantes.ENNEMI_RECT_HAUTEUR);
-            Graphique = new System.Windows.Shapes.Rectangle()  /*(PosX, PosY, Constantes.ENNEMI_RECT_LARGEUR, Constantes.ENNEMI_RECT_HAUTEUR)*/;
             Graphique.Fill = ennemiImage;
         }
 
