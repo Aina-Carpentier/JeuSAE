@@ -244,53 +244,84 @@ namespace JeuSAE
 
         private void TirJoueur()
         {
-            if (tempsRechargeActuel > 0)
-                tempsRechargeActuel--;
+            GestionTempsRecharge();
 
-            
             if (tirer && tempsRechargeActuel <= 0)
             {
-                Point posEcran = Mouse.GetPosition(Application.Current.MainWindow);
-                Point posCarte = Mouse.GetPosition(carte);
-#if DEBUG
-                Console.WriteLine(posCarte.X.ToString() + "  " + posCarte.Y.ToString());
-#endif
-                tempsRechargeActuel = tempsRechargeArme;
-                Vector2 vecteurTir = new Vector2((float)posEcran.X - (float)posJoueurX, (float)posEcran.Y - (float)posJoueurY);
-
-                Balle balleJoueur = new Balle(vitesseBalle, 20, 0, "joueur", 0, posJoueurX, posJoueurY, vecteurTir);
-                Canvas.SetLeft(balleJoueur.Graphique, balleJoueur.PosX);
-                Canvas.SetTop(balleJoueur.Graphique, balleJoueur.PosY);
-
-                monCanvas.Children.Add(balleJoueur.Graphique);
-                listeBalle.Add(balleJoueur);
-                
+                CreerNouvelleBalle();
             }
 
+            GestionDeplacementBalles();
+        }
+
+        private void GestionTempsRecharge()
+        {
+            if (tempsRechargeActuel > 0)
+                tempsRechargeActuel--;
+        }
+
+        private void CreerNouvelleBalle()
+        {
+            tempsRechargeActuel = tempsRechargeArme;
+
+            Point posEcran = Mouse.GetPosition(Application.Current.MainWindow);
+            Point posCarte = Mouse.GetPosition(carte);
+
+#if DEBUG
+            Console.WriteLine(posCarte.X.ToString() + "  " + posCarte.Y.ToString());
+#endif
+
+            Vector2 vecteurTir = new Vector2((float)posEcran.X - (float)posJoueurX, (float)posEcran.Y - (float)posJoueurY);
+
+            Balle balleJoueur = new Balle(vitesseBalle, 20, 0, "joueur", 0, posJoueurX, posJoueurY, vecteurTir);
+            PositionnerBalle(balleJoueur);
+
+            monCanvas.Children.Add(balleJoueur.Graphique);
+            listeBalle.Add(balleJoueur);
+        }
+
+        private void PositionnerBalle(Balle balle)
+        {
+            Canvas.SetLeft(balle.Graphique, balle.PosX);
+            Canvas.SetTop(balle.Graphique, balle.PosY);
+        }
+
+        private void GestionDeplacementBalles()
+        {
             if (listeBalle != null)
             {
                 foreach (Balle balle in listeBalle)
                 {
                     balle.Deplacement();
-                    
-                    if (Canvas.GetLeft(balle.Graphique) <= Canvas.GetLeft(carte) - 400 || 
-                        Canvas.GetTop(balle.Graphique) <= Canvas.GetTop(carte) - 400 ||
-                        Canvas.GetLeft(balle.Graphique) >= Canvas.GetLeft(carte) + carte.Width + 400 ||
-                        Canvas.GetTop(balle.Graphique) >= Canvas.GetTop(carte) + carte.Height + 400) { listeBalleAEnlever.Add(balle); }
 
-                    Canvas.SetLeft(balle.Graphique, balle.PosX);
-                    Canvas.SetTop(balle.Graphique, balle.PosY);
+                    if (BalleHorsLimite(balle))
+                    {
+                        listeBalleAEnlever.Add(balle);
+                    }
+
+                    PositionnerBalle(balle);
                 }
+
                 foreach (Balle balle in listeBalleAEnlever)
                 {
                     listeBalle.Remove(balle);
                     monCanvas.Children.Remove(balle.Graphique);
                 }
+
                 listeBalleAEnlever.Clear();
             }
         }
 
-        
+        private bool BalleHorsLimite(Balle balle)
+        {
+            return Canvas.GetLeft(balle.Graphique) <= Canvas.GetLeft(carte) - 400 ||
+                   Canvas.GetTop(balle.Graphique) <= Canvas.GetTop(carte) - 400 ||
+                   Canvas.GetLeft(balle.Graphique) >= Canvas.GetLeft(carte) + carte.Width + 400 ||
+                   Canvas.GetTop(balle.Graphique) >= Canvas.GetTop(carte) + carte.Height + 400;
+        }
+
+
+
         private void gereLeSpawn()
         {
             if (compteurSpawn >= compteurAAtteindre)
