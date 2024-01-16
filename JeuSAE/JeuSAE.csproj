@@ -57,6 +57,7 @@
     <None Remove="images\HUD.png" />
     <None Remove="images\menu_background.png" />
     <None Remove="images\viseur.png" />
+    <None Remove="water_1.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -211,6 +212,10 @@
 
   <ItemGroup>
     <PackageReference Include="System.Drawing.Common" Version="8.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="water_1.png" />
   </ItemGroup>
 
   <ItemGroup>

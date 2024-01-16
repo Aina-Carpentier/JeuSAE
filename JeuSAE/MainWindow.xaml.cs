@@ -329,8 +329,8 @@ namespace JeuSAE
                 Canvas.SetTop(labDiamant,165);
 
                 Canvas.SetLeft(rectanglePV, 150);
-                Canvas.SetTop(rectanglePV, 37);
-                rectanglePV.Height = 30;
+                Canvas.SetTop(rectanglePV, 19);
+                rectanglePV.Height = 32;
                 rectanglePV.Width = 349;
 
                 Canvas.SetLeft(rectangleEXP, 150);
