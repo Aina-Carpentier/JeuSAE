@@ -13,8 +13,8 @@ namespace JeuSAE
         private double cadenceTir; // En seconde/tir donc si = 3 alors l'ennemi tir une fois toutes les 3 secondes, donc pour 3 fois par seconde c'est approx 0.33
         private int type;
         private String nom;
-        private int posX;
-        private int posY;
+        private double posX;
+        private double posY;
         private Guid id = Guid.NewGuid();
         private Rect rect;
         private System.Windows.Shapes.Rectangle graphique;
@@ -54,13 +54,13 @@ namespace JeuSAE
             set { nom = value; }
         }
 
-        public int PosX
+        public double PosX
         {
             get { return posX; }
             set { posX = value; }
         }
 
-        public int PosY
+        public double PosY
         {
             get { return posY; }
             set { posY = value; }
@@ -75,7 +75,7 @@ namespace JeuSAE
 
         public System.Windows.Shapes.Rectangle Graphique { get => graphique; set => graphique = value; }
 
-        public Ennemi(int type, int posX, int posY)
+        public Ennemi(int type, double posX, double posY)
         {
             Type = type;
 
