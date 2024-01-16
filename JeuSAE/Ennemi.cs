@@ -218,7 +218,7 @@ namespace JeuSAE
             }
             if (Canvas.GetTop(ennemi.Graphique) > carte.Height + Canvas.GetTop(ennemi.Graphique) || Canvas.GetTop(ennemi.Graphique) < carte.Height + Canvas.GetTop(ennemi.Graphique))
             {
-                Canvas.SetTop(ennemi.Graphique, (posJoueurY + y) * -1);
+                Canvas.SetTop(ennemi.Graphique, (posJoueurY + y) * -1);//TODO FIX CA
             }
 
             mainWindow.monCanvas.Children.Add(ennemi.Graphique);
