@@ -67,7 +67,6 @@ namespace JeuSAE
             String dossierImages = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "images\\");
 
             System.Drawing.Image source1 = System.Drawing.Image.FromFile(dossierImages + "environnement_256x256\\grass_1.png");
-            System.Drawing.Image source2 = System.Drawing.Image.FromFile(dossierImages + "environnement_256x256\\grass_1.png");
             Bitmap cible = new Bitmap((int)carte.Width, (int)carte.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
             Graphics graphiques = Graphics.FromImage(cible);
             graphiques.CompositingMode = CompositingMode.SourceOver; // c'est le compositingMode par défault mais juste pour être sûr
@@ -82,7 +81,6 @@ namespace JeuSAE
                 {
                     listeSol.Add(uri);
                 }
-
                 else if (COIN_HAUT_GAUCHE_REGEX.IsMatch(nomImage))
                 {
                     listeCoinHautGauche.Add(uri);
@@ -116,7 +114,6 @@ namespace JeuSAE
                 {
                     listeArreteGauche.Add(uri);
                 }
-
 
             }
 
