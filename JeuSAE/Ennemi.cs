@@ -1,25 +1,28 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
 namespace JeuSAE
 {
-    internal class Ennemi
+    public class Ennemi
     {
         private double vie;
         private double vitesse; // En pixel/tick
         private double cadenceTir; // En seconde/tir donc si = 3 alors l'ennemi tir une fois toutes les 3 secondes, donc pour 3 fois par seconde c'est approx 0.33
         private int type;
         private String nom;
-        private int posX;
-        private int posY;
+        private double posX;
+        private double posY;
         private Guid id = Guid.NewGuid();
         private Rect rect;
         private System.Windows.Shapes.Rectangle graphique;
         private ImageBrush ennemiImage = new ImageBrush();
         private Uri dossierSprites = new Uri(AppDomain.CurrentDomain.BaseDirectory + "images\\sprites\\");
+        private static Random random = new Random();
 
 
         public double Vie
@@ -54,13 +57,13 @@ namespace JeuSAE
             set { nom = value; }
         }
 
-        public int PosX
+        public double PosX
         {
             get { return posX; }
             set { posX = value; }
         }
 
-        public int PosY
+        public double PosY
         {
             get { return posY; }
             set { posY = value; }
@@ -142,13 +145,6 @@ namespace JeuSAE
                     this.CadenceTir = Constantes.CADENCE_CERCLE;
                     this.Nom = Constantes.NOM_CERCLE;
                     ennemiImage.ImageSource = new BitmapImage(new Uri(dossierSprites + "cercle.png"));
-                    break;
-                case 7: // Triangle rectangle
-                    this.Vie = Constantes.VIE_TRIANGLE_RECT;
-                    this.Vitesse = Constantes.VITESSE_TRIANGLE_RECT;
-                    this.CadenceTir = Constantes.CADENCE_TRIANGLE_RECT;
-                    this.Nom = Constantes.NOM_TRIANGLE_RECT;
-                    ennemiImage.ImageSource = new BitmapImage(new Uri(dossierSprites + "triangle_rectangle.png"));
                     break; //TODO ajouter plus d'ennemis si on a des idées
             }
             PosX = posX;
@@ -171,5 +167,67 @@ namespace JeuSAE
         {
             return this.Nom;
         }
+
+
+        public static void SpawnUnEnnemi(MainWindow mainWindow)
+        {
+            System.Windows.Shapes.Rectangle carte = mainWindow.carte;
+            double posJoueurX = mainWindow.fenetrePrincipale.Width / 2;
+            double posJoueurY = mainWindow.fenetrePrincipale.Height / 2;
+
+            int y = random.Next(0, 2000);
+            int x = random.Next(500, 2000) - y;
+
+
+
+            if (random.Next(0, 2) == 0)
+            {
+                x = x * (-1);
+            }
+            if (random.Next(0, 2) == 0)
+            {
+                y = y * (-1);
+            }
+
+#if DEBUG
+            Console.WriteLine("pos Joueur x : " + posJoueurX);
+            Console.WriteLine("pos Joueur y : " + posJoueurY);
+
+#endif
+
+
+            if (posJoueurX + x > carte.Width || posJoueurX + x < carte.Width)
+            {
+                x = x * (-1);
+            }
+
+            if (posJoueurX + y > carte.Height || posJoueurY + y < carte.Height)
+            {
+                y = y * (-1);
+            }
+
+
+            Ennemi ennemi = new Ennemi(random.Next(0, 7), x, y);
+            Canvas.SetLeft(ennemi.Graphique, posJoueurX + x);
+            Canvas.SetTop(ennemi.Graphique, posJoueurY + y);
+            Canvas.SetZIndex(ennemi.Graphique, 1);
+
+            if (Canvas.GetLeft(ennemi.Graphique) > carte.Width + Canvas.GetLeft(ennemi.Graphique) || Canvas.GetLeft(ennemi.Graphique) < carte.Width + Canvas.GetLeft(ennemi.Graphique))
+            {
+                Canvas.SetLeft(ennemi.Graphique, (posJoueurX + x) * -1);
+            }
+            if (Canvas.GetTop(ennemi.Graphique) > carte.Height + Canvas.GetTop(ennemi.Graphique) || Canvas.GetTop(ennemi.Graphique) < carte.Height + Canvas.GetTop(ennemi.Graphique))
+            {
+                Canvas.SetTop(ennemi.Graphique, (posJoueurY + y) * -1);
+            }
+
+            mainWindow.monCanvas.Children.Add(ennemi.Graphique);
+
+            MainWindow.listeEnnemi.Add(ennemi);
+            
+
+        }
+
+
     }
 }

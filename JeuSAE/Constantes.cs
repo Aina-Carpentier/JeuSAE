@@ -26,7 +26,6 @@ namespace JeuSAE
         public const double VIE_HEPTAGONE = 14;
         public const double VIE_OCTOGONE = 20;
         public const double VIE_CERCLE = Math.PI;
-        public const double VIE_TRIANGLE_RECT = 10;
 
 
         // VITESSE
@@ -38,7 +37,6 @@ namespace JeuSAE
         public const double VITESSE_HEPTAGONE = 2;
         public const double VITESSE_OCTOGONE = 8;
         public const double VITESSE_CERCLE = Math.PI;
-        public const double VITESSE_TRIANGLE_RECT = 3;
 
 
         // CADENCE DE TIR
@@ -50,7 +48,6 @@ namespace JeuSAE
         public const double CADENCE_HEPTAGONE = 0.5;
         public const double CADENCE_OCTOGONE = 0.4;
         public const double CADENCE_CERCLE = Math.PI;
-        public const double CADENCE_TRIANGLE_RECT = 4;
 
 
         // NOM
@@ -62,7 +59,6 @@ namespace JeuSAE
         public const String NOM_HEPTAGONE = "Heptagone";
         public const String NOM_OCTOGONE = "Octogone";
         public const String NOM_CERCLE = "Cercle";
-        public const String NOM_TRIANGLE_RECT = "Triangle rectangle";
 
 
     }

@@ -662,4 +662,8 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="audio\sfx\" />
+  </ItemGroup>
+
 </Project>
