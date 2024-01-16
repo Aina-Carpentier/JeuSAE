@@ -143,13 +143,7 @@ namespace JeuSAE
                     this.Nom = Constantes.NOM_CERCLE;
                     ennemiImage.ImageSource = new BitmapImage(new Uri(dossierSprites + "cercle.png"));
                     break;
-                case 7: // Triangle rectangle
-                    this.Vie = Constantes.VIE_TRIANGLE_RECT;
-                    this.Vitesse = Constantes.VITESSE_TRIANGLE_RECT;
-                    this.CadenceTir = Constantes.CADENCE_TRIANGLE_RECT;
-                    this.Nom = Constantes.NOM_TRIANGLE_RECT;
-                    ennemiImage.ImageSource = new BitmapImage(new Uri(dossierSprites + "triangle_rectangle.png"));
-                    break; //TODO ajouter plus d'ennemis si on a des idées
+
             }
             PosX = posX;
             PosY = posY;

@@ -32,7 +32,7 @@ namespace JeuSAE
             }
 
 
-            Ennemi ennemi = new Ennemi(random.Next(0, 8), x, y);
+            Ennemi ennemi = new Ennemi(random.Next(0, 7), x, y);
             Canvas.SetLeft(ennemi.Graphique, posJoueurX + x);
             Canvas.SetTop(ennemi.Graphique, posJoueurY + y);
             Canvas.SetZIndex(ennemi.Graphique, 1); 
