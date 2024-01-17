@@ -99,6 +99,8 @@ namespace JeuSAE
             MouvementJoueur();
             TirJoueur();
             gereLeSpawn();
+            CollisionBalleJoueur();
+            SupprimerEnnemis();
         }
 
         private void monCanvas_MouseMove(object sender, MouseEventArgs e)
@@ -257,7 +259,7 @@ namespace JeuSAE
 
             if (tirer && tempsRechargeActuel <= 0)
             {
-                CreerNouvelleBalle();
+                CreerBalleJoueur();
             }
 
             GestionDeplacementBalles();
@@ -269,7 +271,7 @@ namespace JeuSAE
                 tempsRechargeActuel--;
         }
 
-        private void CreerNouvelleBalle()
+        private void CreerBalleJoueur()
         {
             tempsRechargeActuel = tempsRechargeArme;
 
@@ -282,7 +284,7 @@ namespace JeuSAE
 
             Vector2 vecteurTir = new Vector2((float)posEcran.X - (float)posJoueurX, (float)posEcran.Y - (float)posJoueurY);
 
-            Balle balleJoueur = new Balle(vitesseBalle, 20, 0, "joueur", 0, posJoueurX, posJoueurY, vecteurTir);
+            Balle balleJoueur = new Balle(vitesseBalle, 500, 0, "joueur", 0, posJoueurX, posJoueurY, vecteurTir);
             PositionnerBalle(balleJoueur);
 
             monCanvas.Children.Add(balleJoueur.Graphique);
@@ -309,6 +311,7 @@ namespace JeuSAE
                     }
 
                     PositionnerBalle(balle);
+
                 }
 
                 foreach (Balle balle in listeBalleAEnlever)
@@ -318,6 +321,19 @@ namespace JeuSAE
                 }
 
                 listeBalleAEnlever.Clear();
+            }
+        }
+        private void CollisionBalleJoueur()
+        {
+            foreach(Balle balle in listeBalle)
+            {
+                foreach(Ennemi ennemi in listeEnnemi)
+                {
+                    if (balle.Rect.IntersectsWith(ennemi.Rect))
+                    {
+                        listeEnnemiAEnlever.Add(ennemi);
+                    }
+                }
             }
         }
 
@@ -364,6 +380,16 @@ namespace JeuSAE
                 rectangleElimination.Width = 405;
 
             }
+        }
+
+        private void SupprimerEnnemis()
+        {
+            foreach (Ennemi ennemi in listeEnnemiAEnlever)
+            {
+                listeEnnemi.Remove(ennemi);
+                monCanvas.Children.Remove(ennemi.Graphique);
+            }
+            listeEnnemiAEnlever.Clear();
         }
 
 

@@ -18,7 +18,6 @@ namespace JeuSAE
         private double posX;
         private double posY;
         private Guid id = Guid.NewGuid();
-        private Rect rect;
         private System.Windows.Shapes.Rectangle graphique;
         private ImageBrush ennemiImage = new ImageBrush();
         private Uri dossierSprites = new Uri(AppDomain.CurrentDomain.BaseDirectory + "images\\sprites\\");
@@ -74,7 +73,7 @@ namespace JeuSAE
             get { return id; }
         }
 
-        public Rect Rect { get => rect; set => rect = value; }
+        public Rect Rect { get => new Rect(PosX, PosY, Constantes.ENNEMI_RECT_LARGEUR, Constantes.ENNEMI_RECT_HAUTEUR);}
 
         public System.Windows.Shapes.Rectangle Graphique { get => graphique; set => graphique = value; }
 
@@ -82,7 +81,6 @@ namespace JeuSAE
         {
             Type = type;
 
-            Rect = new Rect(PosX, PosY, Constantes.ENNEMI_RECT_LARGEUR, Constantes.ENNEMI_RECT_HAUTEUR);
             Graphique = new System.Windows.Shapes.Rectangle()  /*(PosX, PosY, Constantes.ENNEMI_RECT_LARGEUR, Constantes.ENNEMI_RECT_HAUTEUR)*/;
             this.Graphique.Width = Constantes.ENNEMI_RECT_LARGEUR;
             this.Graphique.Height = Constantes.ENNEMI_RECT_LARGEUR;
