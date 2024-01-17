@@ -96,12 +96,14 @@ namespace JeuSAE
             Console.WriteLine(Canvas.GetTop(carte));
 #endif
 
+            
             MouvementJoueur();
             TirJoueur();
             gereLeSpawn();
+            LogiqueEnnemis();
             CollisionBalleJoueur();
             //SupprimerEnnemis();
-            LogiqueEnnemis();
+
         }
 
         private void monCanvas_MouseMove(object sender, MouseEventArgs e)
@@ -211,6 +213,12 @@ namespace JeuSAE
                     if (deplacementX != 0) Canvas.SetLeft(carte, positionLimite);
                     else Canvas.SetTop(carte, positionLimite);
                 }
+
+                foreach(Ennemi ennemi in listeEnnemi)
+                {
+                    ennemi.Tir();// Aucune idée de pourquoi les ennemis tirent pas quand on bouge ducoup j'ai mis ça là
+                }
+
             }
         }
 

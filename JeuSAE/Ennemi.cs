@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Drawing;
 using System.Numerics;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace JeuSAE
 {
@@ -15,7 +12,7 @@ namespace JeuSAE
         private double vie;
         private double vitesse; // En pixel/tick
         private double cadenceTir; // En tick/tir donc si = 3 alors l'ennemi tir une fois tous les 3 tick, donc pour 3 fois par seconde c'est approx 20
-        private double cooldownTir; // La valeur utiliser pour calculer quand l'ennemi tire en fonction de la cadence
+        private double cooldownTir = 180; // La valeur utiliser pour calculer quand l'ennemi tire en fonction de la cadence
         private int type;
         private String nom;
         private double posX;
@@ -83,7 +80,7 @@ namespace JeuSAE
             get { return id; }
         }
 
-        public Rect Rect { get => new Rect(PosX, PosY, Constantes.ENNEMI_RECT_LARGEUR, Constantes.ENNEMI_RECT_HAUTEUR);}
+        public Rect Rect { get => new Rect(PosX, PosY, Constantes.ENNEMI_RECT_LARGEUR, Constantes.ENNEMI_RECT_HAUTEUR); }
 
         public System.Windows.Shapes.Rectangle Graphique { get => graphique; set => graphique = value; }
 
@@ -103,7 +100,7 @@ namespace JeuSAE
                     this.CadenceTir = Constantes.CADENCE_TRIANGLE_EQ;
                     this.Nom = Constantes.NOM_TRIANGLE_EQ;
                     ennemiImage.ImageSource = new BitmapImage(new Uri(dossierSprites + "triangle.png"));// dossierImage c'est un Uri donc ça vas peut-être bugger
-                    break; 
+                    break;
                 case 1: // Carré
                     this.Vie = Constantes.VIE_CARRE;
                     this.Vitesse = Constantes.VITESSE_CARRE;
@@ -210,7 +207,7 @@ namespace JeuSAE
 
             if (Canvas.GetLeft(ennemi.Graphique) + x < Canvas.GetLeft(carte) || Canvas.GetLeft(ennemi.Graphique) > carte.Width + Canvas.GetLeft(carte))
             {
-                Canvas.SetLeft(ennemi.Graphique, (posJoueurX  -x));
+                Canvas.SetLeft(ennemi.Graphique, (posJoueurX - x));
             }
             if (Canvas.GetTop(ennemi.Graphique) + y < Canvas.GetTop(carte) || Canvas.GetTop(ennemi.Graphique) > carte.Height + Canvas.GetTop(carte))
             {
@@ -229,22 +226,27 @@ namespace JeuSAE
 
         public void Tir()
         {
-            if (this.CooldownTir <= 0) { 
-            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+            if (this.CooldownTir <= 0)
+            {
+                MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
 
-            double posJoueurX = mainWindow.fenetrePrincipale.Width / 2 - mainWindow.rectJoueur.Width * 0.75;
-            double posJoueurY = mainWindow.fenetrePrincipale.Height / 2 - mainWindow.rectJoueur.Height * 0.75;
+                double posJoueurX = mainWindow.fenetrePrincipale.Width / 2 - mainWindow.rectJoueur.Width * 0.75;
+                double posJoueurY = mainWindow.fenetrePrincipale.Height / 2 - mainWindow.rectJoueur.Height * 0.75;
 
-            Vector2 vecteurDeplace = new Vector2((float)this.PosX  - (float)posJoueurX, (float)this.PosY  - (float)posJoueurY);
+                Vector2 vecteurDeplace = new Vector2((float)this.PosX - (float)posJoueurX, (float)this.PosY - (float)posJoueurY);
                 // Pas besoin de normaliser le vecteur car la classe Balle le fait déjà
 
 
-            Balle balle = new Balle(5, 20, 1, this.id.ToString(), 0, PosX + (float)this.Graphique.Width / 2, PosY + (float)this.Graphique.Height / 2, -vecteurDeplace);
-            mainWindow.listeBalle.Add(balle);
+                Balle balle = new Balle(5, 20, 1, this.id.ToString(), 0, PosX + (float)this.Graphique.Width / 2, PosY + (float)this.Graphique.Height / 2, -vecteurDeplace);
                 mainWindow.monCanvas.Children.Add(balle.Graphique);
-            this.CooldownTir = this.CadenceTir;
-        }
-            this.CooldownTir--;
+                mainWindow.listeBalle.Add(balle);
+
+                this.CooldownTir = this.CadenceTir;
+            }
+            else
+            {
+                this.CooldownTir--;
+            }
 
 
         }

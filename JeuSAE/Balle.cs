@@ -97,19 +97,46 @@ namespace JeuSAE
             Type = type;
             Tireur = tireur;
             Acceleration = acceleration;
-            PosX = posX-taille/2 + Vector2.Normalize(vecteur).X;
-            PosY = posY-taille/2 + Vector2.Normalize(vecteur).Y;
+            PosX = posX - taille / 2 + Vector2.Normalize(vecteur).X;
+            PosY = posY - taille / 2 + Vector2.Normalize(vecteur).Y;
             Vecteur = vecteur;
             //Rect = new Rect(PosX, posY, Constantes.BALLE_WIDHT, Constantes.BALLE_HEIGHT);
 
-
-            Graphique = new Ellipse{
+            if (tireur == "joueur") {
+            Graphique = new Ellipse
+            {
                 Tag = "bulletPlayer",
                 Width = taille,
                 Height = taille,
                 Fill = Brushes.Red,
                 Stroke = Brushes.Black
             };
+        } else
+            {
+                switch (this.Type)
+                {
+                    case 1:
+                        Graphique = new Ellipse
+                        {
+                            Tag = "bulletEnnemy",
+                            Width = taille,
+                            Height = taille,
+                            Fill = Brushes.Red,
+                            Stroke = Brushes.Black
+                        };
+                        break;
+                        case 2:
+                        Graphique = new Ellipse
+                        {
+                            Tag = "bulletEnnemySin",
+                            Width = taille,
+                            Height = taille,
+                            Fill = Brushes.DarkBlue,
+                            Stroke = Brushes.Black
+                        };
+                        break;
+                }
+            }
         }
 
 
