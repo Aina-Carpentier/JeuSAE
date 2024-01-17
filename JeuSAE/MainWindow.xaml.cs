@@ -28,12 +28,13 @@ namespace JeuSAE
         public static List<Ennemi> listeEnnemi = new List<Ennemi>();
         public static List<Ennemi> listeEnnemiAEnlever = new List<Ennemi>();
         public List<Balle> listeBalleAEnlever = new List<Balle>();
-        private int vitesseJoueur = 20, tempsRechargeArme = 15, tempsRechargeActuel = 0, vitesseBalle = 25, compteurSpawn = 0, compteurAAtteindre = 150;
-        private bool gauche = false, droite = false, haut = false, bas = false, tirer = false, numPadUn = false, numPadQuatre = false, toucheX = false, toucheC = false;
+        private int vitesseJoueur = 20, tempsRechargeArme = 15, tempsRechargeActuel = 0, vitesseBalle = 25, compteurSpawn = 0, compteurAAtteindre = 150, tickAnimation = 0;
+        private bool gauche = false, droite = false, haut = false, bas = false, regardeADroite = true, tirer = false, numPadUn = false, numPadQuatre = false, toucheX = false, toucheC = false;
         private Rect player = new Rect(910, 490, 50, 50); // Hitbox player
         private double posJoueurX = 0, posJoueurY = 0;
-        public String choix;
-
+        public String choix, cheminSprite;
+        private ImageBrush apparenceJoueur = new ImageBrush();
+        
 
 
 
@@ -102,7 +103,8 @@ namespace JeuSAE
             gereLeSpawn();
             LogiqueEnnemis();
             CollisionBalleJoueur();
-            //SupprimerEnnemis();
+            AnimationJoueur();
+            SupprimerEnnemis();
 
         }
 
@@ -128,8 +130,8 @@ namespace JeuSAE
         {
             if (e.Key == Key.Left)
                 gauche = true;
-            if (e.Key == Key.Right)
-                droite = true;
+            if (e.Key == Key.Right) 
+                droite = true; 
             if (e.Key == Key.Up)
                 haut = true;
             if (e.Key == Key.Down)
@@ -198,6 +200,10 @@ namespace JeuSAE
 
         private void DeplacerEnDirection(bool direction, double deplacementX, double deplacementY, double positionLimite)
         {
+            if (droite)
+                regardeADroite = true;
+            if (gauche)
+                regardeADroite = false;
             if (direction)
             {
                 if (EstDansLesLimites(deplacementX, deplacementY, positionLimite))
@@ -437,6 +443,46 @@ namespace JeuSAE
 
         }
 
+        private void AnimationJoueur()
+        {
+            cheminSprite = AppDomain.CurrentDomain.BaseDirectory + "images\\sprites\\personnage\\";
+            tickAnimation++;
+            rectJoueur.Fill = apparenceJoueur;
+            Console.WriteLine(tickAnimation);
+            if (regardeADroite)
+                cheminSprite += "droite\\";
+            else
+                cheminSprite += "gauche\\";
 
+
+
+            //marche
+            if (bas || haut || droite || gauche)
+                {
+                    if (tickAnimation >= 30)
+                        tickAnimation = 0;
+                    apparenceJoueur.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\marche\\marche{tickAnimation / 5 + 1}.png"));
+                }
+            //idle
+            else
+            {
+                if (tickAnimation >= 20)
+                    tickAnimation = 0;
+                apparenceJoueur.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\idle\\idle{tickAnimation / 5 + 1}.png"));
+            }
+
+
+            
+        }
+       
+        private void SupprimerEnnemis()
+        {
+            foreach (Ennemi ennemi in listeEnnemiAEnlever)
+            {
+                listeEnnemi.Remove(ennemi);
+                monCanvas.Children.Remove(ennemi.Graphique);
+            }
+            listeEnnemiAEnlever.Clear();
+        }
     }
 }

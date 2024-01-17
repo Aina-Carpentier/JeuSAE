@@ -38,8 +38,8 @@
 
         <Rectangle
             x:Name="rectJoueur"
-            Width="48"
-            Height="48"
+            Width="120"
+            Height="120"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Panel.ZIndex="1000"
