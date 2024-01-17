@@ -134,7 +134,7 @@ namespace JeuSAE
         public void Deplacement()
         {
 
-            Vector2 vecteurNormalize = Vector2.Normalize(vecteur);
+            Vector2 vecteurNormalize = Vector2.Normalize(this.Vecteur);
             double newX = PosX + (vecteurNormalize.X * this.Vitesse);
             double newY = PosY + (vecteurNormalize.Y * this.Vitesse);
 

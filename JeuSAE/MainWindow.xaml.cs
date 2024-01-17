@@ -172,6 +172,7 @@ namespace JeuSAE
             MouvementJoueur();
             TirJoueur();
             gereLeSpawn();
+            DeplacementEnnemis();
 
         }
 
@@ -226,6 +227,11 @@ namespace JeuSAE
                 objet.PosY = Canvas.GetTop(objet.Graphique);
             }
         }
+
+
+
+
+
 
         private bool EstDansLesLimites(double deplacementX, double deplacementY, double positionLimite)
         {
@@ -371,6 +377,30 @@ namespace JeuSAE
                 monCanvas.Children.Remove(ennemi.Graphique);
             }
             listeEnnemiAEnlever.Clear();
+        }
+
+        private void DeplacementEnnemis()
+        {
+            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+            double posJoueurX = mainWindow.fenetrePrincipale.Width / 2;
+            double posJoueurY = mainWindow.fenetrePrincipale.Height / 2;
+
+            foreach (Ennemi ennemi in listeEnnemi)
+            {
+                Vector2 vecteurDeplace = new Vector2((float)ennemi.PosX - (float)posJoueurX, (float)ennemi.PosY - (float)posJoueurY);
+                Vector2.Normalize(vecteurDeplace);
+
+                double newPosEnnemiX = ennemi.PosX + (vecteurDeplace.X * ennemi.Vitesse);
+                double newPosEnnemiY = ennemi.PosY + (vecteurDeplace.Y * ennemi.Vitesse);
+
+                ennemi.PosX = newPosEnnemiX;
+                ennemi.PosY = newPosEnnemiY;
+
+                Canvas.SetLeft(ennemi.Graphique, newPosEnnemiX);
+                Canvas.SetTop(ennemi.Graphique, newPosEnnemiY);
+            }
+
+
         }
 
 

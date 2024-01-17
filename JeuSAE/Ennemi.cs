@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Drawing;
+using System.Numerics;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -214,6 +216,9 @@ namespace JeuSAE
             Ennemi ennemi = new Ennemi(random.Next(0, 7), x, y);
             Canvas.SetLeft(ennemi.Graphique, posJoueurX + x);
             Canvas.SetTop(ennemi.Graphique, posJoueurY + y);
+
+
+
             Canvas.SetZIndex(ennemi.Graphique, 1);
             Console.WriteLine("width : " + Canvas.GetLeft(ennemi.Graphique) +" et " + Canvas.GetLeft(carte));
 
@@ -225,6 +230,10 @@ namespace JeuSAE
             {
                 Canvas.SetTop(ennemi.Graphique, (posJoueurY - y));
             }
+            ennemi.PosX = Canvas.GetLeft(ennemi.Graphique);
+            ennemi.PosY = Canvas.GetTop(ennemi.Graphique);
+
+
 
             mainWindow.monCanvas.Children.Add(ennemi.Graphique);
 
@@ -232,6 +241,8 @@ namespace JeuSAE
 
 
         }
+
+
 
 
     }
