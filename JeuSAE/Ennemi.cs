@@ -20,7 +20,6 @@ namespace JeuSAE
         private double posX;
         private double posY;
         private Guid id = Guid.NewGuid();
-        private Rect rect;
         private System.Windows.Shapes.Rectangle graphique;
         private ImageBrush ennemiImage = new ImageBrush();
         private Uri dossierSprites = new Uri(AppDomain.CurrentDomain.BaseDirectory + "images\\sprites\\");
@@ -61,13 +60,13 @@ namespace JeuSAE
 
         public double PosX
         {
-            get { return posX; }
+            get { return Canvas.GetLeft(this.graphique); }
             set { posX = value; }
         }
 
         public double PosY
         {
-            get { return posY; }
+            get { return Canvas.GetTop(this.graphique); }
             set { posY = value; }
         }
 
@@ -76,7 +75,7 @@ namespace JeuSAE
             get { return id; }
         }
 
-        public Rect Rect { get => rect; set => rect = value; }
+        public Rect Rect { get => new Rect(PosX, PosY, Constantes.ENNEMI_RECT_LARGEUR, Constantes.ENNEMI_RECT_HAUTEUR);}
 
         public System.Windows.Shapes.Rectangle Graphique { get => graphique; set => graphique = value; }
 
@@ -84,7 +83,6 @@ namespace JeuSAE
         {
             Type = type;
 
-            Rect = new Rect(PosX, PosY, Constantes.ENNEMI_RECT_LARGEUR, Constantes.ENNEMI_RECT_HAUTEUR);
             Graphique = new System.Windows.Shapes.Rectangle()  /*(PosX, PosY, Constantes.ENNEMI_RECT_LARGEUR, Constantes.ENNEMI_RECT_HAUTEUR)*/;
             this.Graphique.Width = Constantes.ENNEMI_RECT_LARGEUR;
             this.Graphique.Height = Constantes.ENNEMI_RECT_LARGEUR;
@@ -201,18 +199,6 @@ namespace JeuSAE
 
 #endif
 
-            /*
-            if (posJoueurX + x > carte.Width || posJoueurX + x < carte.Width)
-            {
-                x = x * (-1);
-            }
-
-            if (posJoueurX + y > carte.Height || posJoueurY + y < carte.Height)
-            {
-                y = y * (-1);
-            }
-            */
-
             Ennemi ennemi = new Ennemi(random.Next(0, 7), x, y);
             Canvas.SetLeft(ennemi.Graphique, posJoueurX + x);
             Canvas.SetTop(ennemi.Graphique, posJoueurY + y);
@@ -220,7 +206,7 @@ namespace JeuSAE
 
 
             Canvas.SetZIndex(ennemi.Graphique, 1);
-            Console.WriteLine("width : " + Canvas.GetLeft(ennemi.Graphique) +" et " + Canvas.GetLeft(carte));
+            Console.WriteLine("width : " + Canvas.GetLeft(ennemi.Graphique) + " et " + Canvas.GetLeft(carte));
 
             if (Canvas.GetLeft(ennemi.Graphique) + x < Canvas.GetLeft(carte) || Canvas.GetLeft(ennemi.Graphique) > carte.Width + Canvas.GetLeft(carte))
             {
@@ -236,7 +222,6 @@ namespace JeuSAE
 
 
             mainWindow.monCanvas.Children.Add(ennemi.Graphique);
-
             MainWindow.listeEnnemi.Add(ennemi);
 
 

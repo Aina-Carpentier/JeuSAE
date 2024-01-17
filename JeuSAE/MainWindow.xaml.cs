@@ -15,12 +15,14 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Security.Cryptography.X509Certificates;
+using Microsoft.Win32;
+using System.Media;
 
 namespace JeuSAE
 {
     public partial class MainWindow : Window
     {
-
+        private SoundPlayer lecteurMusiqueMenu = new SoundPlayer(AppDomain.CurrentDomain.BaseDirectory + "audio\\musiques\\music_menu.wav");
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
         private List<Balle> listeBalle = new List<Balle>();
         public static List<Ennemi> listeEnnemi = new List<Ennemi>();
@@ -33,23 +35,19 @@ namespace JeuSAE
         public String choix;
 
 
-        private void monCanvas_MouseMove(object sender, MouseEventArgs e)
-        {
-            Point curseur = e.GetPosition(monCanvas);
-            Canvas.SetTop(curseurPerso, curseur.Y - curseurPerso.Height/2);
-            Canvas.SetLeft(curseurPerso, curseur.X - curseurPerso.Width/2);
-            Cursor = Cursors.None;
-        }
+
 
         public MainWindow()
         {
             InitializeComponent();
+            lecteurMusiqueMenu.Load();
             posJoueurX = fenetrePrincipale.Width / 2;
             posJoueurY = fenetrePrincipale.Height / 2;
 
             Menu menu = new Menu();
             Parametres parametres = new Parametres();
             Magasin magasin = new Magasin();
+            lecteurMusiqueMenu.PlayLooping();
             menu.ShowDialog();
             choix = menu.choix;
             
@@ -79,13 +77,38 @@ namespace JeuSAE
 
                 }
             }
+
             MapGenerator.load(this);
+            lecteurMusiqueMenu.Stop();
             rectJoueur.Margin = new Thickness(posJoueurX - rectJoueur.Width / 2, posJoueurY - rectJoueur.Height / 2, 0, 0);
             HUDResolution1920x1080();
             dispatcherTimer.Tick += GameEngine;
             dispatcherTimer.Interval = TimeSpan.FromMilliseconds(16);
             dispatcherTimer.Start();
 
+        }
+
+        private void GameEngine(object sender, EventArgs e)
+        {
+
+#if DEBUG
+            Console.WriteLine(Canvas.GetLeft(carte));
+            Console.WriteLine(Canvas.GetTop(carte));
+#endif
+
+            MouvementJoueur();
+            TirJoueur();
+            gereLeSpawn();
+            CollisionBalleJoueur();
+            SupprimerEnnemis();
+        }
+
+        private void monCanvas_MouseMove(object sender, MouseEventArgs e)
+        {
+            Point curseur = e.GetPosition(monCanvas);
+            Canvas.SetTop(curseurPerso, curseur.Y - curseurPerso.Height / 2);
+            Canvas.SetLeft(curseurPerso, curseur.X - curseurPerso.Width / 2);
+            Cursor = Cursors.None;
         }
 
         private void monCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -161,13 +184,6 @@ namespace JeuSAE
         }
 
 
-        private void GameEngine(object sender, EventArgs e)
-        {
-            
-#if DEBUG
-            Console.WriteLine(Canvas.GetLeft(carte));
-            Console.WriteLine(Canvas.GetTop(carte));
-#endif
 
             MouvementJoueur();
             TirJoueur();
@@ -254,7 +270,7 @@ namespace JeuSAE
 
             if (tirer && tempsRechargeActuel <= 0)
             {
-                CreerNouvelleBalle();
+                CreerBalleJoueur();
             }
 
             GestionDeplacementBalles();
@@ -266,7 +282,7 @@ namespace JeuSAE
                 tempsRechargeActuel--;
         }
 
-        private void CreerNouvelleBalle()
+        private void CreerBalleJoueur()
         {
             tempsRechargeActuel = tempsRechargeArme;
 
@@ -279,7 +295,7 @@ namespace JeuSAE
 
             Vector2 vecteurTir = new Vector2((float)posEcran.X - (float)posJoueurX, (float)posEcran.Y - (float)posJoueurY);
 
-            Balle balleJoueur = new Balle(vitesseBalle, 20, 0, "joueur", 0, posJoueurX, posJoueurY, vecteurTir);
+            Balle balleJoueur = new Balle(vitesseBalle, 500, 0, "joueur", 0, posJoueurX, posJoueurY, vecteurTir);
             PositionnerBalle(balleJoueur);
 
             monCanvas.Children.Add(balleJoueur.Graphique);
@@ -306,6 +322,7 @@ namespace JeuSAE
                     }
 
                     PositionnerBalle(balle);
+
                 }
 
                 foreach (Balle balle in listeBalleAEnlever)
@@ -315,6 +332,19 @@ namespace JeuSAE
                 }
 
                 listeBalleAEnlever.Clear();
+            }
+        }
+        private void CollisionBalleJoueur()
+        {
+            foreach(Balle balle in listeBalle)
+            {
+                foreach(Ennemi ennemi in listeEnnemi)
+                {
+                    if (balle.Rect.IntersectsWith(ennemi.Rect))
+                    {
+                        listeEnnemiAEnlever.Add(ennemi);
+                    }
+                }
             }
         }
 
@@ -361,6 +391,16 @@ namespace JeuSAE
                 rectangleElimination.Width = 405;
 
             }
+        }
+
+        private void SupprimerEnnemis()
+        {
+            foreach (Ennemi ennemi in listeEnnemiAEnlever)
+            {
+                listeEnnemi.Remove(ennemi);
+                monCanvas.Children.Remove(ennemi.Graphique);
+            }
+            listeEnnemiAEnlever.Clear();
         }
 
 
