@@ -100,7 +100,8 @@ namespace JeuSAE
             TirJoueur();
             gereLeSpawn();
             CollisionBalleJoueur();
-            SupprimerEnnemis();
+            //SupprimerEnnemis();
+            DeplacementEnnemis();
         }
 
         private void monCanvas_MouseMove(object sender, MouseEventArgs e)
@@ -183,14 +184,7 @@ namespace JeuSAE
                 
         }
 
-
-
-            MouvementJoueur();
-            TirJoueur();
-            gereLeSpawn();
-            DeplacementEnnemis();
-
-        }
+        
 
         private void MouvementJoueur()
         {
@@ -422,16 +416,18 @@ namespace JeuSAE
         private void DeplacementEnnemis()
         {
             MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
-            double posJoueurX = mainWindow.fenetrePrincipale.Width / 2;
-            double posJoueurY = mainWindow.fenetrePrincipale.Height / 2;
+            double posJoueurX = mainWindow.fenetrePrincipale.Width / 2 - mainWindow.rectJoueur.Width/2;
+            double posJoueurY = mainWindow.fenetrePrincipale.Height / 2 - mainWindow.rectJoueur.Width/2;
 
             foreach (Ennemi ennemi in listeEnnemi)
             {
+                ennemi.PosX = Canvas.GetLeft(ennemi.Graphique);
+                ennemi.PosY = Canvas.GetTop(ennemi.Graphique);
                 Vector2 vecteurDeplace = new Vector2((float)ennemi.PosX - (float)posJoueurX, (float)ennemi.PosY - (float)posJoueurY);
-                Vector2.Normalize(vecteurDeplace);
+                Vector2 vecteurDeplaceNormalise = Vector2.Normalize(vecteurDeplace);
 
-                double newPosEnnemiX = ennemi.PosX + (vecteurDeplace.X * ennemi.Vitesse);
-                double newPosEnnemiY = ennemi.PosY + (vecteurDeplace.Y * ennemi.Vitesse);
+                double newPosEnnemiX = ennemi.PosX - (vecteurDeplaceNormalise.X * ennemi.Vitesse);
+                double newPosEnnemiY = ennemi.PosY - (vecteurDeplaceNormalise.Y * ennemi.Vitesse);
 
                 ennemi.PosX = newPosEnnemiX;
                 ennemi.PosY = newPosEnnemiY;
