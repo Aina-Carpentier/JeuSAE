@@ -188,8 +188,6 @@ namespace JeuSAE
                 
         }
 
-        
-
         private void MouvementJoueur()
         {
             DeplacerEnDirection(gauche, vitesseJoueur, 0, posJoueurX - rectJoueur.Width / 2);
@@ -252,11 +250,6 @@ namespace JeuSAE
             }
         }
 
-
-
-
-
-
         private bool EstDansLesLimites(double deplacementX, double deplacementY, double positionLimite)
         {
             if (deplacementX != 0)
@@ -270,7 +263,6 @@ namespace JeuSAE
 
             return false;
         }
-
 
         private void TirJoueur()
         {
@@ -342,6 +334,7 @@ namespace JeuSAE
                 listeBalleAEnlever.Clear();
             }
         }
+
         private void CollisionBalleJoueur()
         {
             foreach(Balle balle in listeBalle)
@@ -363,8 +356,6 @@ namespace JeuSAE
                    Canvas.GetLeft(balle.Graphique) >= Canvas.GetLeft(carte) + carte.Width + 400 ||
                    Canvas.GetTop(balle.Graphique) >= Canvas.GetTop(carte) + carte.Height + 400;
         }
-
-
 
         private void gereLeSpawn()
         {
@@ -400,7 +391,6 @@ namespace JeuSAE
 
             }
         }
-
 
         private void EnleverTousLesEnnemis()
         {
