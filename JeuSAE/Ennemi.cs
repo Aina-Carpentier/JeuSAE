@@ -199,23 +199,11 @@ namespace JeuSAE
 
 #endif
 
-            /*
-            if (posJoueurX + x > carte.Width || posJoueurX + x < carte.Width)
-            {
-                x = x * (-1);
-            }
-
-            if (posJoueurX + y > carte.Height || posJoueurY + y < carte.Height)
-            {
-                y = y * (-1);
-            }
-            */
-
             Ennemi ennemi = new Ennemi(random.Next(0, 7), x, y);
             Canvas.SetLeft(ennemi.Graphique, posJoueurX + x);
             Canvas.SetTop(ennemi.Graphique, posJoueurY + y);
             Canvas.SetZIndex(ennemi.Graphique, 1);
-            Console.WriteLine("width : " + Canvas.GetLeft(ennemi.Graphique) +" et " + Canvas.GetLeft(carte));
+            Console.WriteLine("width : " + Canvas.GetLeft(ennemi.Graphique) + " et " + Canvas.GetLeft(carte));
 
             if (Canvas.GetLeft(ennemi.Graphique) + x < Canvas.GetLeft(carte) || Canvas.GetLeft(ennemi.Graphique) > carte.Width + Canvas.GetLeft(carte))
             {
@@ -227,7 +215,6 @@ namespace JeuSAE
             }
 
             mainWindow.monCanvas.Children.Add(ennemi.Graphique);
-
             MainWindow.listeEnnemi.Add(ennemi);
 
 

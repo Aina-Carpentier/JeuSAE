@@ -22,8 +22,7 @@ namespace JeuSAE
 {
     public partial class MainWindow : Window
     {
-        private SoundPlayer lecteurMusique = new SoundPlayer(AppDomain.CurrentDomain.BaseDirectory + "audio\\musiques\\music_menu.wav");
-        bool sonFini = true;
+        private SoundPlayer lecteurMusiqueMenu = new SoundPlayer(AppDomain.CurrentDomain.BaseDirectory + "audio\\musiques\\music_menu.wav");
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
         private List<Balle> listeBalle = new List<Balle>();
         public static List<Ennemi> listeEnnemi = new List<Ennemi>();
@@ -36,25 +35,19 @@ namespace JeuSAE
         public String choix;
 
 
-        private void monCanvas_MouseMove(object sender, MouseEventArgs e)
-        {
-            Point curseur = e.GetPosition(monCanvas);
-            Canvas.SetTop(curseurPerso, curseur.Y - curseurPerso.Height/2);
-            Canvas.SetLeft(curseurPerso, curseur.X - curseurPerso.Width/2);
-            Cursor = Cursors.None;
-        }
+
 
         public MainWindow()
         {
             InitializeComponent();
-            lecteurMusique.Load();
+            lecteurMusiqueMenu.Load();
             posJoueurX = fenetrePrincipale.Width / 2;
             posJoueurY = fenetrePrincipale.Height / 2;
 
             Menu menu = new Menu();
             Parametres parametres = new Parametres();
             Magasin magasin = new Magasin();
-            lecteurMusique.PlayLooping();
+            lecteurMusiqueMenu.PlayLooping();
             menu.ShowDialog();
             choix = menu.choix;
             
@@ -84,14 +77,36 @@ namespace JeuSAE
 
                 }
             }
+
             MapGenerator.load(this);
-            lecteurMusique.Stop();
+            lecteurMusiqueMenu.Stop();
             rectJoueur.Margin = new Thickness(posJoueurX - rectJoueur.Width / 2, posJoueurY - rectJoueur.Height / 2, 0, 0);
             HUDResolution1920x1080();
             dispatcherTimer.Tick += GameEngine;
             dispatcherTimer.Interval = TimeSpan.FromMilliseconds(16);
             dispatcherTimer.Start();
 
+        }
+
+        private void GameEngine(object sender, EventArgs e)
+        {
+
+#if DEBUG
+            Console.WriteLine(Canvas.GetLeft(carte));
+            Console.WriteLine(Canvas.GetTop(carte));
+#endif
+
+            MouvementJoueur();
+            TirJoueur();
+            gereLeSpawn();
+        }
+
+        private void monCanvas_MouseMove(object sender, MouseEventArgs e)
+        {
+            Point curseur = e.GetPosition(monCanvas);
+            Canvas.SetTop(curseurPerso, curseur.Y - curseurPerso.Height / 2);
+            Canvas.SetLeft(curseurPerso, curseur.X - curseurPerso.Width / 2);
+            Cursor = Cursors.None;
         }
 
         private void monCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -167,18 +182,7 @@ namespace JeuSAE
         }
 
 
-        private void GameEngine(object sender, EventArgs e)
-        {
-            
-#if DEBUG
-            Console.WriteLine(Canvas.GetLeft(carte));
-            Console.WriteLine(Canvas.GetTop(carte));
-#endif
 
-            MouvementJoueur();
-            TirJoueur();
-            gereLeSpawn();
-        }
 
         private void MouvementJoueur()
         {
