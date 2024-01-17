@@ -58,13 +58,13 @@ namespace JeuSAE
 
         public double PosX
         {
-            get { return posX; }
+            get { return Canvas.GetLeft(this.graphique); }
             set { posX = value; }
         }
 
         public double PosY
         {
-            get { return posY; }
+            get { return Canvas.GetTop(this.graphique); }
             set { posY = value; }
         }
 
