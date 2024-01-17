@@ -52,7 +52,10 @@
             Content="Jouer"
             FontFamily="Rubik"
             FontSize="72"
-            MouseLeftButtonDown="labJouer_MouseLeftButtonDown" />
+            MouseEnter="labJouer_MouseEnter"
+            MouseLeave="labJouer_MouseLeave"
+            MouseLeftButtonDown="labJouer_MouseLeftButtonDown"
+            Opacity="0.8" />
         <Label
             x:Name="labMagasin"
             Width="287"
@@ -62,7 +65,10 @@
             Content="Magasin"
             FontFamily="Rubik"
             FontSize="72"
-            MouseLeftButtonDown="labMagasin_MouseLeftButtonDown" />
+            MouseEnter="labMagasin_MouseEnter"
+            MouseLeave="labMagasin_MouseLeave"
+            MouseLeftButtonDown="labMagasin_MouseLeftButtonDown"
+            Opacity="0.8" />
         <Label
             x:Name="labParametre"
             Width="363"
@@ -72,7 +78,10 @@
             Content="Parametre"
             FontFamily="Rubik"
             FontSize="72"
-            MouseLeftButtonDown="labParametre_MouseLeftButtonDown" />
+            MouseEnter="labParametre_MouseEnter"
+            MouseLeave="labParametre_MouseLeave"
+            MouseLeftButtonDown="labParametre_MouseLeftButtonDown"
+            Opacity="0.8" />
         <Label
             x:Name="labQuitter"
             Width="244"
@@ -82,7 +91,10 @@
             Content="Quitter"
             FontFamily="Rubik"
             FontSize="72"
-            MouseLeftButtonDown="labQuitter_MouseLeftButtonDown" />
+            MouseEnter="labQuitter_MouseEnter"
+            MouseLeave="labQuitter_MouseLeave"
+            MouseLeftButtonDown="labQuitter_MouseLeftButtonDown"
+            Opacity="0.8" />
 
     </Grid>
 </Window>

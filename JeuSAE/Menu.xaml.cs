@@ -94,5 +94,56 @@ namespace JeuSAE
             this.choix = "quitter";
             this.Hide();
         }
+
+        private void labJouer_MouseEnter(object sender, MouseEventArgs e)
+        {
+            labJouer.Foreground = Brushes.LightCoral;
+            labJouer.Opacity = 1;
+        }
+
+        private void labJouer_MouseLeave(object sender, MouseEventArgs e)
+        {
+            labJouer.Foreground = Brushes.Black;
+            labJouer.Opacity = 0.8;
+        }
+
+        private void labMagasin_MouseEnter(object sender, MouseEventArgs e)
+        {
+            labMagasin.Foreground = Brushes.Sienna;
+            labMagasin.Opacity = 1;
+
+        }
+
+        private void labMagasin_MouseLeave(object sender, MouseEventArgs e)
+        {
+            labMagasin.Foreground = Brushes.Black;
+            labMagasin.Opacity = 0.8;
+        }
+
+        private void labParametre_MouseEnter(object sender, MouseEventArgs e)
+        {
+            labParametre.Foreground = Brushes.LightSlateGray;
+            labParametre.Opacity = 1;
+
+        }
+
+        private void labParametre_MouseLeave(object sender, MouseEventArgs e)
+        {
+            labParametre.Foreground = Brushes.Black;
+            labParametre.Opacity = 0.8;
+        }
+
+        private void labQuitter_MouseEnter(object sender, MouseEventArgs e)
+        {
+            labQuitter.Foreground = Brushes.Red;
+            labQuitter.Opacity = 1;
+
+        }
+
+        private void labQuitter_MouseLeave(object sender, MouseEventArgs e)
+        {
+            labQuitter.Foreground = Brushes.Black;
+            labQuitter.Opacity = 0.8;
+        }
     }
 }

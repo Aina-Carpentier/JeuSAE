@@ -32,5 +32,15 @@ namespace JeuSAE
             this.choix = "menu";
             this.Hide();
         }
+
+        private void labMenu_MouseEnter(object sender, MouseEventArgs e)
+        {
+            labMenu.Foreground = Brushes.LightSlateGray;
+        }
+
+        private void labMenu_MouseLeave(object sender, MouseEventArgs e)
+        {
+            labMenu.Foreground = Brushes.Black;
+        }
     }
 }

@@ -42,7 +42,7 @@
             Content="Menu"
             FontFamily="Rubik"
             FontSize="90"
-            MouseLeftButtonDown="labMenu_MouseLeftButtonDown" />
+            MouseLeftButtonDown="labMenu_MouseLeftButtonDown" MouseEnter="labMenu_MouseEnter" MouseLeave="labMenu_MouseLeave" />
 
     </Canvas>
 </Window>
