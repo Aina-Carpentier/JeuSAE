@@ -15,12 +15,15 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Security.Cryptography.X509Certificates;
+using Microsoft.Win32;
+using System.Media;
 
 namespace JeuSAE
 {
     public partial class MainWindow : Window
     {
-
+        private SoundPlayer lecteurMusique = new SoundPlayer(AppDomain.CurrentDomain.BaseDirectory + "audio\\musiques\\music_menu.wav");
+        bool sonFini = true;
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
         private List<Balle> listeBalle = new List<Balle>();
         public static List<Ennemi> listeEnnemi = new List<Ennemi>();
@@ -44,12 +47,14 @@ namespace JeuSAE
         public MainWindow()
         {
             InitializeComponent();
+            lecteurMusique.Load();
             posJoueurX = fenetrePrincipale.Width / 2;
             posJoueurY = fenetrePrincipale.Height / 2;
 
             Menu menu = new Menu();
             Parametres parametres = new Parametres();
             Magasin magasin = new Magasin();
+            lecteurMusique.PlayLooping();
             menu.ShowDialog();
             choix = menu.choix;
             
@@ -80,6 +85,7 @@ namespace JeuSAE
                 }
             }
             MapGenerator.load(this);
+            lecteurMusique.Stop();
             rectJoueur.Margin = new Thickness(posJoueurX - rectJoueur.Width / 2, posJoueurY - rectJoueur.Height / 2, 0, 0);
             HUDResolution1920x1080();
             dispatcherTimer.Tick += GameEngine;
@@ -172,7 +178,6 @@ namespace JeuSAE
             MouvementJoueur();
             TirJoueur();
             gereLeSpawn();
-
         }
 
         private void MouvementJoueur()
@@ -372,7 +377,6 @@ namespace JeuSAE
             }
             listeEnnemiAEnlever.Clear();
         }
-
 
     }
 }
