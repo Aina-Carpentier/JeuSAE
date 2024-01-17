@@ -175,6 +175,8 @@ namespace JeuSAE
             double posJoueurX = mainWindow.fenetrePrincipale.Width / 2;
             double posJoueurY = mainWindow.fenetrePrincipale.Height / 2;
 
+
+
             int y = random.Next(0, 2000);
             int x = random.Next(500, 2000) - y;
 
@@ -190,12 +192,14 @@ namespace JeuSAE
             }
 
 #if DEBUG
-            Console.WriteLine("pos Joueur x : " + posJoueurX);
-            Console.WriteLine("pos Joueur y : " + posJoueurY);
+            //Console.WriteLine("pos Joueur x : " + posJoueurX);
+            //Console.WriteLine("pos Joueur y : " + posJoueurY);
+            //Console.WriteLine("pos Joueur canvas x : " + Canvas.GetLeft(mainWindow));
+            //Console.WriteLine("pos Joueur canvas y : " + Canvas.GetTop(mainWindow.rectJoueur));
 
 #endif
 
-
+            /*
             if (posJoueurX + x > carte.Width || posJoueurX + x < carte.Width)
             {
                 x = x * (-1);
@@ -205,20 +209,21 @@ namespace JeuSAE
             {
                 y = y * (-1);
             }
-
+            */
 
             Ennemi ennemi = new Ennemi(random.Next(0, 7), x, y);
             Canvas.SetLeft(ennemi.Graphique, posJoueurX + x);
             Canvas.SetTop(ennemi.Graphique, posJoueurY + y);
             Canvas.SetZIndex(ennemi.Graphique, 1);
+            Console.WriteLine("width : " + Canvas.GetLeft(ennemi.Graphique) +" et " + Canvas.GetLeft(carte));
 
-            if (Canvas.GetLeft(ennemi.Graphique) > carte.Width + Canvas.GetLeft(ennemi.Graphique) || Canvas.GetLeft(ennemi.Graphique) < carte.Width + Canvas.GetLeft(ennemi.Graphique))
+            if (Canvas.GetLeft(ennemi.Graphique) + x < Canvas.GetLeft(carte) || Canvas.GetLeft(ennemi.Graphique) > carte.Width + Canvas.GetLeft(carte))
             {
-                Canvas.SetLeft(ennemi.Graphique, (posJoueurX + x) * -1);
+                Canvas.SetLeft(ennemi.Graphique, (posJoueurX  -x));
             }
-            if (Canvas.GetTop(ennemi.Graphique) > carte.Height + Canvas.GetTop(ennemi.Graphique) || Canvas.GetTop(ennemi.Graphique) < carte.Height + Canvas.GetTop(ennemi.Graphique))
+            if (Canvas.GetTop(ennemi.Graphique) + y < Canvas.GetTop(carte) || Canvas.GetTop(ennemi.Graphique) > carte.Height + Canvas.GetTop(carte))
             {
-                Canvas.SetTop(ennemi.Graphique, (posJoueurY + y) * -1);//TODO FIX CA
+                Canvas.SetTop(ennemi.Graphique, (posJoueurY - y));
             }
 
             mainWindow.monCanvas.Children.Add(ennemi.Graphique);
