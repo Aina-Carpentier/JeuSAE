@@ -35,19 +35,19 @@ namespace JeuSAE
         public const double VITESSE_PENTAGONE = 3;
         public const double VITESSE_HEXAGONE = 3;
         public const double VITESSE_HEPTAGONE = 2;
-        public const double VITESSE_OCTOGONE = 8;
+        public const double VITESSE_OCTOGONE = 6;
         public const double VITESSE_CERCLE = Math.PI;
 
 
         // CADENCE DE TIR
 
-        public const double CADENCE_TRIANGLE_EQ = 3;
-        public const double CADENCE_CARRE = 3;
-        public const double CADENCE_PENTAGONE = 1.5;
-        public const double CADENCE_HEXAGONE = 1;
-        public const double CADENCE_HEPTAGONE = 0.5;
-        public const double CADENCE_OCTOGONE = 0.4;
-        public const double CADENCE_CERCLE = Math.PI;
+        public const double CADENCE_TRIANGLE_EQ = 3*60;
+        public const double CADENCE_CARRE = 3*60;
+        public const double CADENCE_PENTAGONE = 1.5*60d;
+        public const double CADENCE_HEXAGONE = 1 * 60;
+        public const double CADENCE_HEPTAGONE = 0.5 * 60d;
+        public const double CADENCE_OCTOGONE = 0.4 * 60d;
+        public const double CADENCE_CERCLE = Math.PI * 60d;
 
 
         // NOM

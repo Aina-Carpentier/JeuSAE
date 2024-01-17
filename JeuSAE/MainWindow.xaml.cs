@@ -24,11 +24,11 @@ namespace JeuSAE
     {
         private SoundPlayer lecteurMusiqueMenu = new SoundPlayer(AppDomain.CurrentDomain.BaseDirectory + "audio\\musiques\\music_menu.wav");
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
-        private List<Balle> listeBalle = new List<Balle>();
+        public List<Balle> listeBalle = new List<Balle>();
         public static List<Ennemi> listeEnnemi = new List<Ennemi>();
         public static List<Ennemi> listeEnnemiAEnlever = new List<Ennemi>();
         public List<Balle> listeBalleAEnlever = new List<Balle>();
-        private int vitesseJoueur = 10, tempsRechargeArme = 15, tempsRechargeActuel = 0, vitesseBalle = 25, compteurSpawn = 0, compteurAAtteindre = 1;
+        private int vitesseJoueur = 20, tempsRechargeArme = 15, tempsRechargeActuel = 0, vitesseBalle = 25, compteurSpawn = 0, compteurAAtteindre = 150;
         private bool gauche = false, droite = false, haut = false, bas = false, tirer = false, numPadUn = false, numPadQuatre = false, toucheX = false, toucheC = false;
         private Rect player = new Rect(910, 490, 50, 50); // Hitbox player
         private double posJoueurX = 0, posJoueurY = 0;
@@ -101,7 +101,7 @@ namespace JeuSAE
             gereLeSpawn();
             CollisionBalleJoueur();
             //SupprimerEnnemis();
-            DeplacementEnnemis();
+            LogiqueEnnemis();
         }
 
         private void monCanvas_MouseMove(object sender, MouseEventArgs e)
@@ -387,16 +387,6 @@ namespace JeuSAE
             }
         }
 
-        private void SupprimerEnnemis()
-        {
-            foreach (Ennemi ennemi in listeEnnemiAEnlever)
-            {
-                listeEnnemi.Remove(ennemi);
-                monCanvas.Children.Remove(ennemi.Graphique);
-            }
-            listeEnnemiAEnlever.Clear();
-        }
-
 
         private void EnleverTousLesEnnemis()
         {
@@ -413,11 +403,10 @@ namespace JeuSAE
             listeEnnemiAEnlever.Clear();
         }
 
-        private void DeplacementEnnemis()
+        private void LogiqueEnnemis()
         {
-            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
-            double posJoueurX = mainWindow.fenetrePrincipale.Width / 2 - mainWindow.rectJoueur.Width/2;
-            double posJoueurY = mainWindow.fenetrePrincipale.Height / 2 - mainWindow.rectJoueur.Width/2;
+            double posJoueurX = fenetrePrincipale.Width / 2 - rectJoueur.Width*0.75;
+            double posJoueurY = fenetrePrincipale.Height / 2 - rectJoueur.Height*0.75;
 
             foreach (Ennemi ennemi in listeEnnemi)
             {
@@ -434,6 +423,7 @@ namespace JeuSAE
 
                 Canvas.SetLeft(ennemi.Graphique, newPosEnnemiX);
                 Canvas.SetTop(ennemi.Graphique, newPosEnnemiY);
+                ennemi.Tir();
             }
 
 

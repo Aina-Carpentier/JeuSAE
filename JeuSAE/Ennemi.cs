@@ -14,7 +14,8 @@ namespace JeuSAE
     {
         private double vie;
         private double vitesse; // En pixel/tick
-        private double cadenceTir; // En seconde/tir donc si = 3 alors l'ennemi tir une fois toutes les 3 secondes, donc pour 3 fois par seconde c'est approx 0.33
+        private double cadenceTir; // En tick/tir donc si = 3 alors l'ennemi tir une fois tous les 3 tick, donc pour 3 fois par seconde c'est approx 20
+        private double cooldownTir; // La valeur utiliser pour calculer quand l'ennemi tire en fonction de la cadence
         private int type;
         private String nom;
         private double posX;
@@ -44,6 +45,13 @@ namespace JeuSAE
             get { return cadenceTir; }
             set { cadenceTir = value; }
         }
+
+        public double CooldownTir
+        {
+            get { return cooldownTir; }
+            set { cooldownTir = value; }
+        }
+
 
         public int Type
         {
@@ -95,15 +103,7 @@ namespace JeuSAE
                     this.CadenceTir = Constantes.CADENCE_TRIANGLE_EQ;
                     this.Nom = Constantes.NOM_TRIANGLE_EQ;
                     ennemiImage.ImageSource = new BitmapImage(new Uri(dossierSprites + "triangle.png"));// dossierImage c'est un Uri donc ça vas peut-être bugger
-                    break; //TODO finir de mettre les images sur les ennemis
-                /*
-            case 1:
-                this.Vie = 5;
-                this.Vitesse = 1;
-                this.CadenceTir = 2;
-                this.Nom = "Rectangle";
-                break;
-                */
+                    break; 
                 case 1: // Carré
                     this.Vie = Constantes.VIE_CARRE;
                     this.Vitesse = Constantes.VITESSE_CARRE;
@@ -227,6 +227,47 @@ namespace JeuSAE
 
         }
 
+        public void Tir()
+        {
+            if (this.CooldownTir <= 0) { 
+            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+
+            double posJoueurX = mainWindow.fenetrePrincipale.Width / 2 - mainWindow.rectJoueur.Width * 0.75;
+            double posJoueurY = mainWindow.fenetrePrincipale.Height / 2 - mainWindow.rectJoueur.Height * 0.75;
+
+            Vector2 vecteurDeplace = new Vector2((float)this.PosX  - (float)posJoueurX, (float)this.PosY  - (float)posJoueurY);
+                // Pas besoin de normaliser le vecteur car la classe Balle le fait déjà
+
+
+            Balle balle = new Balle(5, 20, 1, this.id.ToString(), 0, PosX + (float)this.Graphique.Width / 2, PosY + (float)this.Graphique.Height / 2, -vecteurDeplace);
+            mainWindow.listeBalle.Add(balle);
+                mainWindow.monCanvas.Children.Add(balle.Graphique);
+            this.CooldownTir = this.CadenceTir;
+        }
+            this.CooldownTir--;
+
+
+        }
+
+
+        /*private void DeplaceTir()
+        {
+            MainWindow mainWindow = (MainWindow) Application.Current.MainWindow;
+
+            double posJoueurX = mainWindow.fenetrePrincipale.Width / 2 - mainWindow.rectJoueur.Width * 0.75;
+            double posJoueurY = mainWindow.fenetrePrincipale.Height / 2 - mainWindow.rectJoueur.Height * 0.75;
+
+            Vector2 vecteurDeplace = new Vector2((float)this.PosX - (float)posJoueurX, (float)this.PosY - (float)posJoueurY);
+            Vector2 vecteurDeplaceNormalise = Vector2.Normalize(vecteurDeplace);
+
+            double newPosBalleX = this.PosX - (vecteurDeplaceNormalise.X * this.);
+            double newPosBalleY = this.PosY - (vecteurDeplaceNormalise.Y * this.Vitesse);
+
+            
+
+
+
+        }*/
 
 
 
