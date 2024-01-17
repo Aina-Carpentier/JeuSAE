@@ -100,7 +100,7 @@ namespace JeuSAE
             TirJoueur();
             gereLeSpawn();
             CollisionBalleJoueur();
-            //SupprimerEnnemis();
+            SupprimerEnnemis();
             DeplacementEnnemis();
         }
 

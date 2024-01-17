@@ -9,7 +9,7 @@
     Title="Magasin"
     Width="{x:Static SystemParameters.PrimaryScreenWidth}"
     Height="{x:Static SystemParameters.PrimaryScreenHeight}"
-    FocusManager.FocusedElement="{Binding ElementName=canvasParametre}"
+    FocusManager.FocusedElement="{Binding ElementName=canvasMagasin}"
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
     WindowState="Maximized"
