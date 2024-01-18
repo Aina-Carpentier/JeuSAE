@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JeuSAE.classes;
+using System;
 using System.Numerics;
 using System.Windows;
 using System.Windows.Controls;

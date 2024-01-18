@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JeuSAE
+namespace JeuSAE.classes
 {
     internal class Constantes
     {
@@ -44,9 +44,9 @@ namespace JeuSAE
 
         // CADENCE DE TIR
 
-        public const double CADENCE_TRIANGLE_EQ = 3*60;
-        public const double CADENCE_CARRE = 3*60;
-        public const double CADENCE_PENTAGONE = 1.5*60d;
+        public const double CADENCE_TRIANGLE_EQ = 3 * 60;
+        public const double CADENCE_CARRE = 3 * 60;
+        public const double CADENCE_PENTAGONE = 1.5 * 60d;
         public const double CADENCE_HEXAGONE = 1 * 60;
         public const double CADENCE_HEPTAGONE = 0.5 * 60d;
         public const double CADENCE_OCTOGONE = 0.4 * 60d;
@@ -55,13 +55,13 @@ namespace JeuSAE
 
         // NOM
 
-        public const String NOM_TRIANGLE_EQ = "Triangle équilatéral";
-        public const String NOM_CARRE = "Carré";
-        public const String NOM_PENTAGONE = "Pentagone";
-        public const String NOM_HEXAGONE = "Hexagone";
-        public const String NOM_HEPTAGONE = "Heptagone";
-        public const String NOM_OCTOGONE = "Octogone";
-        public const String NOM_CERCLE = "Cercle";
+        public const string NOM_TRIANGLE_EQ = "Triangle équilatéral";
+        public const string NOM_CARRE = "Carré";
+        public const string NOM_PENTAGONE = "Pentagone";
+        public const string NOM_HEXAGONE = "Hexagone";
+        public const string NOM_HEPTAGONE = "Heptagone";
+        public const string NOM_OCTOGONE = "Octogone";
+        public const string NOM_CERCLE = "Cercle";
 
 
     }

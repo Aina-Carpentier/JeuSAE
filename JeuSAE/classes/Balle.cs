@@ -6,14 +6,14 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 
 
-namespace JeuSAE
+namespace JeuSAE.classes
 {
     public class Balle
     {
         private double vitesse;
         private double taille;
         private int type;
-        private String tireur;
+        private string tireur;
         private double acceleration;
         private double posX;
         private double posY;
@@ -45,7 +45,7 @@ namespace JeuSAE
             set { type = value; }
         }
 
-        public String Tireur
+        public string Tireur
         {
             get { return tireur; }
             set { tireur = value; }
@@ -115,7 +115,7 @@ namespace JeuSAE
             }
             else
             {
-                switch (this.Type)
+                switch (Type)
                 {
                     case 1:
                         Graphique = new Ellipse

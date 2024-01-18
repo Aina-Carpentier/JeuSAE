@@ -17,6 +17,7 @@ using System.Windows.Threading;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.Win32;
 using System.Media;
+using JeuSAE.classes;
 
 namespace JeuSAE
 {

@@ -16,7 +16,7 @@ using Rectangle = System.Windows.Shapes.Rectangle;
 using System.Diagnostics;
 using System.Windows.Xps.Packaging;
 
-namespace JeuSAE
+namespace JeuSAE.classes
 {
     public class MapGenerator
     {
@@ -34,17 +34,17 @@ namespace JeuSAE
         private static readonly Regex ARRETE_GAUCHE_REGEX = new Regex(@"^grass_left_border_[0-9]+\.png$");
 
 
-        private static List<String> listeSol = new List<String>();
+        private static List<string> listeSol = new List<string>();
 
-        private static List<String> listeCoinHautGauche = new List<String>();
-        private static List<String> listeCoinHautDroit = new List<String>();
-        private static List<String> listeCoinBasDroit = new List<String>();
-        private static List<String> listeCoinBasGauche = new List<String>();
+        private static List<string> listeCoinHautGauche = new List<string>();
+        private static List<string> listeCoinHautDroit = new List<string>();
+        private static List<string> listeCoinBasDroit = new List<string>();
+        private static List<string> listeCoinBasGauche = new List<string>();
 
-        private static List<String> listeArreteHaut = new List<String>();
-        private static List<String> listeArreteDroit = new List<String>();
-        private static List<String> listeArreteBas = new List<String>();
-        private static List<String> listeArreteGauche = new List<String>();
+        private static List<string> listeArreteHaut = new List<string>();
+        private static List<string> listeArreteDroit = new List<string>();
+        private static List<string> listeArreteBas = new List<string>();
+        private static List<string> listeArreteGauche = new List<string>();
 
         private static Random rnd = new Random();
 
@@ -66,9 +66,9 @@ namespace JeuSAE
             Graphics graphiques = Graphics.FromImage(cible);
 
 
-            foreach (String uri in images)
+            foreach (string uri in images)
             {
-                String nomImage = uri.Split("\\")[uri.Split("\\").Length - 1];
+                string nomImage = uri.Split("\\")[uri.Split("\\").Length - 1];
                 if (SOL_REGEX.IsMatch(nomImage))
                 {
                     listeSol.Add(uri);
@@ -98,7 +98,7 @@ namespace JeuSAE
                 {
                     listeArreteDroit.Add(uri);
                 }
-                else if (ARRETE_BAS_REGEX.IsMatch(nomImage))    
+                else if (ARRETE_BAS_REGEX.IsMatch(nomImage))
                 {
                     listeArreteBas.Add(uri);
                 }
@@ -110,7 +110,7 @@ namespace JeuSAE
             }
 
 #if DEBUG
-            foreach (String uri in listeArreteGauche)
+            foreach (string uri in listeArreteGauche)
             {
                 Console.WriteLine(uri);
             }
@@ -120,7 +120,7 @@ namespace JeuSAE
             {
                 for (int x = 0; x < largeurCarte; x += IMG_WIDTH)
                 {
-                    List<String> liste = new List<string>();
+                    List<string> liste = new List<string>();
                     int xPlusImage = x + IMG_WIDTH;
                     int yPlusImage = y + IMG_HEIGHT;
 
@@ -131,7 +131,7 @@ namespace JeuSAE
                     graphiques.DrawImage(imageSource, x, y); //TODO multithreading
                 }
 
-                Console.WriteLine("Génération de la map : " + Math.Round((y/carte.Height)*100) + " %");
+                Console.WriteLine("Génération de la map : " + Math.Round(y / carte.Height * 100) + " %");
             }
 
             ImageBrush image = new ImageBrush();
@@ -139,7 +139,7 @@ namespace JeuSAE
             carte.Fill = image;
         }
 
-        private static void PointEstArete(ref List<String> liste, int x, int y, int xPlusImage, int yPlusImage, int largeurCarte, int hauteurCarte)
+        private static void PointEstArete(ref List<string> liste, int x, int y, int xPlusImage, int yPlusImage, int largeurCarte, int hauteurCarte)
         {
             if (y == 0) //Arête haut
             {
@@ -163,7 +163,7 @@ namespace JeuSAE
             }
         }
 
-        private static bool PointEstCoin(ref List<String> liste, int x, int y, int xPlusImage, int yPlusImage, int largeurCarte, int hauteurCarte)
+        private static bool PointEstCoin(ref List<string> liste, int x, int y, int xPlusImage, int yPlusImage, int largeurCarte, int hauteurCarte)
         {
             bool res = true;
             if (y == 0 && xPlusImage >= largeurCarte) //Coin haut droit
@@ -186,7 +186,7 @@ namespace JeuSAE
             return res;
         }
 
-        private static void RecupererSourceImage(out System.Drawing.Image image, bool herbeOuFleur, List<String> images)
+        private static void RecupererSourceImage(out System.Drawing.Image image, bool herbeOuFleur, List<string> images)
         {
             int index = herbeOuFleur ? 0 : rnd.Next(0, images.Count);
             image = System.Drawing.Image.FromFile(images[index]);
