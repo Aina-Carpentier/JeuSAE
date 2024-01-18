@@ -467,7 +467,13 @@ namespace JeuSAE
 
         private void AnimationJoueur()
         {
-            
+            Point posEcran = Mouse.GetPosition(Application.Current.MainWindow);
+            Vector2 vecteurTir = new Vector2((float)posEcran.X - (float)posJoueurX, (float)posEcran.Y - (float)posJoueurY);
+            float normalVecteurX = Vector2.Normalize(vecteurTir).X, normalVecteurY = Vector2.Normalize(vecteurTir).Y;
+#if DEBUG
+            Console.WriteLine("vecteur x " + normalVecteurX.ToString());
+            Console.WriteLine("vecteur y " + normalVecteurY.ToString());
+#endif
 
             cheminSprite = AppDomain.CurrentDomain.BaseDirectory + "images\\sprites\\personnage\\";
             tickAnimation++;
@@ -483,11 +489,11 @@ namespace JeuSAE
 
             //marche
             if (bas || haut || droite || gauche)
-                {
-                    if (tickAnimation >= 30)
-                        tickAnimation = 0;
-                    apparenceJoueur.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\marche\\marche{tickAnimation / 5 + 1}.png"));
-                }
+            {
+                if (tickAnimation >= 30)
+                    tickAnimation = 0;
+                apparenceJoueur.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\marche\\marche{tickAnimation / 5 + 1}.png"));
+            }
             //idle
             else
             {
@@ -496,10 +502,21 @@ namespace JeuSAE
                 apparenceJoueur.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\idle\\idle{tickAnimation / 5 + 1}.png"));
             }
             //faire varier en fonction de la position du curseur
-            apparenceArme.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\arme\\arme1_{1}.png"));
+            if (Math.Abs(normalVecteurX) < 0.2 && normalVecteurY > 0.8)
+                apparenceArme.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\arme\\arme1_5.png"));
+            else if (Math.Abs(normalVecteurX) < 0.2 && normalVecteurY < -0.8)
+                apparenceArme.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\arme\\arme1_1.png"));
+            else if (Math.Abs(normalVecteurX) < 0.96 && normalVecteurY > 0.25)
+                apparenceArme.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\arme\\arme1_4.png"));
+            else if (Math.Abs(normalVecteurX) < 0.96 && normalVecteurY < -0.25)
+                apparenceArme.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\arme\\arme1_2.png"));
+            else
+                apparenceArme.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\arme\\arme1_3.png"));
+
+
 
         }
-       
+
         private void SupprimerEnnemis()
         {
             foreach (Ennemi ennemi in listeEnnemiAEnlever)
