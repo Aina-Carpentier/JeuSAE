@@ -341,7 +341,7 @@ namespace JeuSAE
             {
                 foreach(Ennemi ennemi in listeEnnemi)
                 {
-                    if (balle.Rect.IntersectsWith(ennemi.Rect))
+                    if (balle.Rect.IntersectsWith(ennemi.Rect) && balle.Tireur == "joueur")
                     {
                         listeEnnemiAEnlever.Add(ennemi);
                     }
