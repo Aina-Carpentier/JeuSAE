@@ -107,9 +107,11 @@ namespace JeuSAE
             TirJoueur();
             gereLeSpawn();
             LogiqueEnnemis();
+            CollisionEnnemi();
             CollisionBalle();
             AnimationJoueur();
             SupprimerEnnemis();
+
 
         }
 
@@ -377,6 +379,19 @@ namespace JeuSAE
                         HUD.AjouteElimination(1);
                         HUD.AjouteExp(coefEXP);
                     }
+                    
+                }
+            }
+        }
+
+        private void CollisionEnnemi()
+        {
+            foreach (Ennemi ennemi in listeEnnemi)
+            {
+                if (player.IntersectsWith(ennemi.Rect))
+                {
+                    HUD.AjouteVie(-Constantes.DEGATS_COLLISION);
+                    //rajouter frames d'invicibilité + knockback
                 }
             }
         }
