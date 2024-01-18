@@ -102,7 +102,7 @@ namespace JeuSAE
             TirJoueur();
             gereLeSpawn();
             LogiqueEnnemis();
-            CollisionBalleJoueur();
+            CollisionBalle();
             AnimationJoueur();
             SupprimerEnnemis();
 
@@ -335,10 +335,14 @@ namespace JeuSAE
             }
         }
 
-        private void CollisionBalleJoueur()
+        private void CollisionBalle()
         {
             foreach(Balle balle in listeBalle)
             {
+                if (balle.Rect.IntersectsWith(player) && balle.Tireur != "joueur")
+                {
+                    Application.Current.Shutdown();
+                }
                 foreach(Ennemi ennemi in listeEnnemi)
                 {
                     if (balle.Rect.IntersectsWith(ennemi.Rect) && balle.Tireur == "joueur")
