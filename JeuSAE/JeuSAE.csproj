@@ -728,6 +728,21 @@
     <None Update="images\sprites\personnage\droite\mort\mort6.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="images\sprites\personnage\gauche\arme\arme1_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="images\sprites\personnage\gauche\arme\arme1_2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="images\sprites\personnage\gauche\arme\arme1_3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="images\sprites\personnage\gauche\arme\arme1_4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="images\sprites\personnage\gauche\arme\arme1_5.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="images\sprites\personnage\gauche\degat\degat1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
