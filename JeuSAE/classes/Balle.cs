@@ -197,11 +197,11 @@ namespace JeuSAE.classes
 
 #endif
 
-                    coefSin += 0.1f;
-                    if (coefSin > Math.PI * 2) { coefSin = 0; }
-                    vecteurNormalize.X = vecteurNormalize.X* (float)Math.Cos(coefSin) - vecteurNormalize.Y* (float)Math.Sin(coefSin);
-                    vecteurNormalize.Y = vecteurNormalize.X*(float)Math.Sin(coefSin) + vecteurNormalize.Y* (float)Math.Cos(coefSin);
-
+                        coefSin += 0.1f;
+                        if (coefSin > Math.PI * 2) { coefSin = 0; }
+                        vecteurNormalize.X = vecteurNormalize.X + vecteurNormalize.X * (float)Math.Cos(coefSin) - vecteurNormalize.Y * (float)Math.Sin(coefSin);
+                        vecteurNormalize.Y = vecteurNormalize.Y + vecteurNormalize.X * (float)Math.Sin(coefSin) + vecteurNormalize.Y * (float)Math.Cos(coefSin);
+                    
 
                     this.PosX = PosX + (vecteurNormalize.X * this.Vitesse);
                     this.PosY = PosY + (vecteurNormalize.Y * this.Vitesse);
