@@ -164,18 +164,27 @@ namespace JeuSAE.classes
 
         public void Deplacement()
         {
-
-
             Vector2 vecteurNormalize = Vector2.Normalize(this.Vecteur);
             switch (this.Type)
             {
-                case 1:
-                    double newX = PosX + (vecteurNormalize.X * this.Vitesse);
-                    double newY = PosY + (vecteurNormalize.Y * this.Vitesse);
+                case 0:
+                    {
+                        double newX = PosX + (vecteurNormalize.X * this.Vitesse);
+                        double newY = PosY + (vecteurNormalize.Y * this.Vitesse);
 
-                    this.PosX = newX;
-                    this.PosY = newY;
-                    break;
+                        this.PosX = newX;
+                        this.PosY = newY;
+                        break;
+                    }
+                case 1:
+                    {
+                        double newX = PosX + (vecteurNormalize.X * this.Vitesse);
+                        double newY = PosY + (vecteurNormalize.Y * this.Vitesse);
+
+                        this.PosX = newX;
+                        this.PosY = newY;
+                        break;
+                    }
 
 
                 case 2:
@@ -209,8 +218,6 @@ namespace JeuSAE.classes
                     break;
 
             }
-
-
         }
     }
 }
