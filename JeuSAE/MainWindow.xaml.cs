@@ -58,7 +58,7 @@ namespace JeuSAE
                 switch (choix)
                 {
                     case "quitter":
-                        Application.Current.Shutdown();
+                        Environment.Exit(0);
                         break;
 
                     case "parametre":
@@ -113,6 +113,10 @@ namespace JeuSAE
             Point curseur = e.GetPosition(monCanvas);
             Canvas.SetTop(curseurPerso, curseur.Y - curseurPerso.Height / 2);
             Canvas.SetLeft(curseurPerso, curseur.X - curseurPerso.Width / 2);
+            if (curseur.X > fenetrePrincipale.Width / 2)
+                regardeADroite = true;
+            else
+                regardeADroite = false;
             Cursor = Cursors.None;
         }
 
@@ -198,10 +202,6 @@ namespace JeuSAE
 
         private void DeplacerEnDirection(bool direction, double deplacementX, double deplacementY, double positionLimite)
         {
-            if (droite)
-                regardeADroite = true;
-            if (gauche)
-                regardeADroite = false;
             if (direction)
             {
                 if (EstDansLesLimites(deplacementX, deplacementY, positionLimite))
