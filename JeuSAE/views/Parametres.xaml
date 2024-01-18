@@ -44,6 +44,20 @@
             FontFamily="Rubik"
             FontSize="90"
             MouseLeftButtonDown="labMenu_MouseLeftButtonDown" MouseEnter="labMenu_MouseEnter" MouseLeave="labMenu_MouseLeave" />
+        <Label x:Name="labSon"
+            Height="117"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Audio"
+            FontFamily="Rubik"
+            FontSize="70" Width="203" MouseEnter="labSon_MouseEnter" MouseLeave="labSon_MouseLeave" MouseLeftButtonDown="labSon_MouseLeftButtonDown"/>
+        <Label x:Name="labTouche"
+            Height="117"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Configuration des touches"
+            FontFamily="Rubik"
+            FontSize="70" Width="876" MouseEnter="labTouche_MouseEnter" MouseLeave="labTouche_MouseLeave" MouseLeftButtonDown="labTouche_MouseLeftButtonDown"/>
 
 
     </Canvas>

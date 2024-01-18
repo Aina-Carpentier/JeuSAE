@@ -1,0 +1,36 @@
+﻿<Window
+    x:Class="JeuSAE.Touche"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:JeuSAE"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="fenetreTouche"
+    Title="Touche"
+    Width="{x:Static SystemParameters.PrimaryScreenWidth}"
+    Height="{x:Static SystemParameters.PrimaryScreenHeight}"
+    FocusManager.FocusedElement="{Binding ElementName=canvasTouche}"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    WindowState="Maximized"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Canvas x:Name="canvasTouche">
+        <Canvas.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF290707" Offset="1"/>
+                <GradientStop Color="#FFCAB5B5" Offset="0"/>
+            </LinearGradientBrush>
+        </Canvas.Background>
+        <Label
+            x:Name="labMenu"
+            Width="240"
+            Height="120"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Menu"
+            FontFamily="Rubik"
+            FontSize="90"
+            MouseLeftButtonDown="labMenu_MouseLeftButtonDown" MouseEnter="labMenu_MouseEnter" MouseLeave="labMenu_MouseLeave" />
+    </Canvas>
+</Window>
