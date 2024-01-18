@@ -45,6 +45,15 @@
             Panel.ZIndex="1000"
             Fill="#FFF51818"
             Stroke="Black" />
+        <Rectangle
+            x:Name="rectArme"
+            Width="120"
+            Height="120"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Panel.ZIndex="1001"
+            Fill="#FF0000FF"
+            Stroke="Black" />
 
         <Rectangle
             x:Name="carte"
