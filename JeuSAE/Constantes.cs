@@ -10,6 +10,9 @@ namespace JeuSAE
     {
         public const int BALLE_WIDHT = 25;
         public const int BALLE_HEIGHT = 10;
+        public const double VIE_JOUEUR = 100d;
+        public const int DEGATS_BALLE_UN = 10;
+        public const int DEGATS_BALLE_DEUX = 5;
 
 
         //-------------------------------------------ENNEMI-------------------------------------------

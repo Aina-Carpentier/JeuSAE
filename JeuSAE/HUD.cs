@@ -8,5 +8,18 @@ namespace JeuSAE
 {
     public class HUD
     {
+
+
+        public static void ChangeBarreDeVie(double pourcentage)
+        {
+
+
+        }
+
+
+
+
+
+
     }
 }

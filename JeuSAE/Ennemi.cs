@@ -237,7 +237,7 @@ namespace JeuSAE
                 // Pas besoin de normaliser le vecteur car la classe Balle le fait déjà
 
 
-                Balle balle = new Balle(5, 20, 1, this.id.ToString(), 0, PosX + (float)this.Graphique.Width / 2, PosY + (float)this.Graphique.Height / 2, -vecteurDeplace);
+                Balle balle = new Balle(5, 20, 2, this.id.ToString(), 0, PosX + (float)this.Graphique.Width / 2, PosY + (float)this.Graphique.Height / 2, -vecteurDeplace);
                 mainWindow.monCanvas.Children.Add(balle.Graphique);
                 mainWindow.listeBalle.Add(balle);
 

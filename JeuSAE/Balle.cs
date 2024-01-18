@@ -1,20 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 //using System.Drawing;
-using System.Linq;
 using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Windows.Threading;
 
 
 namespace JeuSAE
@@ -28,8 +17,11 @@ namespace JeuSAE
         private double acceleration;
         private double posX;
         private double posY;
+        private double degats;
         private Vector2 vecteur;
         private Ellipse graphique;
+        private Vector2 vecteurSin;
+        private float coefSin = 0;
 
         public double Vitesse
         {
@@ -40,9 +32,10 @@ namespace JeuSAE
         public double Taille
         {
             get { return taille; }
-            set { 
+            set
+            {
                 if (value <= 0) { throw new ArgumentException("La taille ne peut pas être inférieure ou égale à 0. "); }
-                taille = value; 
+                taille = value;
             }
         }
 
@@ -76,18 +69,25 @@ namespace JeuSAE
             set { posY = value; }
         }
 
+        public double Degats
+        {
+            get { return degats; }
+            set { degats = value; }
+        }
+
+
         public Vector2 Vecteur
         {
             get { return vecteur; }
             set { vecteur = value; }
         }
 
-        public Rect Rect { get => new Rect(PosX, PosY, Taille, Taille);}
+        public Rect Rect { get => new Rect(PosX, PosY, Taille, Taille); }
 
-        public Ellipse Graphique 
+        public Ellipse Graphique
         {
             get { return graphique; }
-            set { graphique = value;}
+            set { graphique = value; }
         }
 
         public Balle(double vitesse, double taille, int type, string tireur, double acceleration, double posX, double posY, Vector2 vecteur)
@@ -102,16 +102,18 @@ namespace JeuSAE
             Vecteur = vecteur;
             //Rect = new Rect(PosX, posY, Constantes.BALLE_WIDHT, Constantes.BALLE_HEIGHT);
 
-            if (tireur == "joueur") {
-            Graphique = new Ellipse
+            if (tireur == "joueur")
             {
-                Tag = "bulletPlayer",
-                Width = taille,
-                Height = taille,
-                Fill = Brushes.Red,
-                Stroke = Brushes.Black
-            };
-        } else
+                Graphique = new Ellipse
+                {
+                    Tag = "bulletPlayer",
+                    Width = taille,
+                    Height = taille,
+                    Fill = Brushes.Red,
+                    Stroke = Brushes.Black
+                };
+            }
+            else
             {
                 switch (this.Type)
                 {
@@ -124,8 +126,9 @@ namespace JeuSAE
                             Fill = Brushes.Red,
                             Stroke = Brushes.Black
                         };
+                        Degats = Constantes.DEGATS_BALLE_UN;
                         break;
-                        case 2:
+                    case 2:
                         Graphique = new Ellipse
                         {
                             Tag = "bulletEnnemySin",
@@ -134,6 +137,7 @@ namespace JeuSAE
                             Fill = Brushes.DarkBlue,
                             Stroke = Brushes.Black
                         };
+                        Degats = Constantes.DEGATS_BALLE_DEUX;
                         break;
                 }
             }
@@ -161,12 +165,50 @@ namespace JeuSAE
         public void Deplacement()
         {
 
-            Vector2 vecteurNormalize = Vector2.Normalize(this.Vecteur);
-            double newX = PosX + (vecteurNormalize.X * this.Vitesse);
-            double newY = PosY + (vecteurNormalize.Y * this.Vitesse);
 
-            this.PosX = newX;
-            this.PosY = newY;
+            Vector2 vecteurNormalize = Vector2.Normalize(this.Vecteur);
+            switch (this.Type)
+            {
+                case 1:
+                    double newX = PosX + (vecteurNormalize.X * this.Vitesse);
+                    double newY = PosY + (vecteurNormalize.Y * this.Vitesse);
+
+                    this.PosX = newX;
+                    this.PosY = newY;
+                    break;
+
+
+                case 2:
+                    /* if (vecteurSin == Vector2.Zero)
+                     {
+                         vecteurSin = new Vector2(vecteurNormalize.Y, -vecteurNormalize.X);
+                     }
+                     coefSin += 0.1f;
+                     if (coefSin > Math.PI*2) { coefSin = 0; }
+                     float sinus = (float)Math.Sin(coefSin);
+                     Vector2.Multiply(vecteurSin, sinus);
+                     Vector2 vecteurTraj = vecteurNormalize * vecteurSin;
+                    */
+
+#if DEBUG
+                    //Console.WriteLine(vecteurTraj);
+                    //Console.WriteLine("coef : " + coefSin);
+
+
+#endif
+
+                    coefSin += 0.1f;
+                    if (coefSin > Math.PI * 2) { coefSin = 0; }
+                    vecteurNormalize.X = vecteurNormalize.X* (float)Math.Cos(coefSin) - vecteurNormalize.Y* (float)Math.Sin(coefSin);
+                    vecteurNormalize.Y = vecteurNormalize.X*(float)Math.Sin(coefSin) + vecteurNormalize.Y* (float)Math.Cos(coefSin);
+
+
+                    this.PosX = PosX + (vecteurNormalize.X * this.Vitesse);
+                    this.PosY = PosY + (vecteurNormalize.Y * this.Vitesse);
+
+                    break;
+
+            }
 
 
         }

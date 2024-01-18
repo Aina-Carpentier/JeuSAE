@@ -341,7 +341,10 @@ namespace JeuSAE
             {
                 if (balle.Rect.IntersectsWith(player) && balle.Tireur != "joueur")
                 {
-                    Application.Current.Shutdown();
+                    //Application.Current.Shutdown();
+                    HUD.ChangeBarreDeVie(balle.Degats);
+
+
                 }
                 foreach(Ennemi ennemi in listeEnnemi)
                 {
