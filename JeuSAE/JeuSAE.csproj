@@ -659,6 +659,21 @@
     <None Update="images\sprites\pentagone.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="images\sprites\personnage\droite\arme\arme1_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="images\sprites\personnage\droite\arme\arme1_2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="images\sprites\personnage\droite\arme\arme1_3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="images\sprites\personnage\droite\arme\arme1_4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="images\sprites\personnage\droite\arme\arme1_5.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="images\sprites\personnage\droite\degat\degat1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
