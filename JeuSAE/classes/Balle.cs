@@ -17,14 +17,14 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 
 
-namespace JeuSAE
+namespace JeuSAE.classes
 {
     public class Balle
     {
         private double vitesse;
         private double taille;
         private int type;
-        private String tireur;
+        private string tireur;
         private double acceleration;
         private double posX;
         private double posY;
@@ -40,9 +40,10 @@ namespace JeuSAE
         public double Taille
         {
             get { return taille; }
-            set { 
+            set
+            {
                 if (value <= 0) { throw new ArgumentException("La taille ne peut pas être inférieure ou égale à 0. "); }
-                taille = value; 
+                taille = value;
             }
         }
 
@@ -52,7 +53,7 @@ namespace JeuSAE
             set { type = value; }
         }
 
-        public String Tireur
+        public string Tireur
         {
             get { return tireur; }
             set { tireur = value; }
@@ -82,12 +83,12 @@ namespace JeuSAE
             set { vecteur = value; }
         }
 
-        public Rect Rect { get => new Rect(PosX, PosY, Taille, Taille);}
+        public Rect Rect { get => new Rect(PosX, PosY, Taille, Taille); }
 
-        public Ellipse Graphique 
+        public Ellipse Graphique
         {
             get { return graphique; }
-            set { graphique = value;}
+            set { graphique = value; }
         }
 
         public Balle(double vitesse, double taille, int type, string tireur, double acceleration, double posX, double posY, Vector2 vecteur)
@@ -102,18 +103,20 @@ namespace JeuSAE
             Vecteur = vecteur;
             //Rect = new Rect(PosX, posY, Constantes.BALLE_WIDHT, Constantes.BALLE_HEIGHT);
 
-            if (tireur == "joueur") {
-            Graphique = new Ellipse
+            if (tireur == "joueur")
             {
-                Tag = "bulletPlayer",
-                Width = taille,
-                Height = taille,
-                Fill = Brushes.Red,
-                Stroke = Brushes.Black
-            };
-        } else
+                Graphique = new Ellipse
+                {
+                    Tag = "bulletPlayer",
+                    Width = taille,
+                    Height = taille,
+                    Fill = Brushes.Red,
+                    Stroke = Brushes.Black
+                };
+            }
+            else
             {
-                switch (this.Type)
+                switch (Type)
                 {
                     case 1:
                         Graphique = new Ellipse
@@ -125,7 +128,7 @@ namespace JeuSAE
                             Stroke = Brushes.Black
                         };
                         break;
-                        case 2:
+                    case 2:
                         Graphique = new Ellipse
                         {
                             Tag = "bulletEnnemySin",
@@ -161,12 +164,12 @@ namespace JeuSAE
         public void Deplacement()
         {
 
-            Vector2 vecteurNormalize = Vector2.Normalize(this.Vecteur);
-            double newX = PosX + (vecteurNormalize.X * this.Vitesse);
-            double newY = PosY + (vecteurNormalize.Y * this.Vitesse);
+            Vector2 vecteurNormalize = Vector2.Normalize(Vecteur);
+            double newX = PosX + vecteurNormalize.X * Vitesse;
+            double newY = PosY + vecteurNormalize.Y * Vitesse;
 
-            this.PosX = newX;
-            this.PosY = newY;
+            PosX = newX;
+            PosY = newY;
 
 
         }

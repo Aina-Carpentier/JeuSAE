@@ -33,7 +33,7 @@
             Width="52"
             Height="52"
             Panel.ZIndex="1001"
-            Source="images/viseur.png" />
+            Source="../images/viseur.png" />
 
 
         <Rectangle
@@ -59,7 +59,7 @@
             Width="{x:Static SystemParameters.PrimaryScreenWidth}"
             Height="{x:Static SystemParameters.PrimaryScreenHeight}"
             Panel.ZIndex="50"
-            Source="images/HUD.png"
+            Source="../images/HUD.png"
             Stretch="Fill" />
         <Label
             x:Name="labDiamant"
@@ -104,5 +104,4 @@
             Fill="#FF010400"
             Stroke="Black" />
     </Canvas>
-
 </Window>

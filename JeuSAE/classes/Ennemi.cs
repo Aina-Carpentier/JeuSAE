@@ -5,7 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace JeuSAE
+namespace JeuSAE.classes
 {
     public class Ennemi
     {
@@ -14,7 +14,7 @@ namespace JeuSAE
         private double cadenceTir; // En tick/tir donc si = 3 alors l'ennemi tir une fois tous les 3 tick, donc pour 3 fois par seconde c'est approx 20
         private double cooldownTir = 180; // La valeur utiliser pour calculer quand l'ennemi tire en fonction de la cadence
         private int type;
-        private String nom;
+        private string nom;
         private double posX;
         private double posY;
         private Guid id = Guid.NewGuid();
@@ -57,7 +57,7 @@ namespace JeuSAE
         }
 
 
-        public String Nom
+        public string Nom
         {
             get { return nom; }
             set { nom = value; }
@@ -65,13 +65,13 @@ namespace JeuSAE
 
         public double PosX
         {
-            get { return Canvas.GetLeft(this.graphique); }
+            get { return Canvas.GetLeft(graphique); }
             set { posX = value; }
         }
 
         public double PosY
         {
-            get { return Canvas.GetTop(this.graphique); }
+            get { return Canvas.GetTop(graphique); }
             set { posY = value; }
         }
 
@@ -89,58 +89,58 @@ namespace JeuSAE
             Type = type;
 
             Graphique = new System.Windows.Shapes.Rectangle()  /*(PosX, PosY, Constantes.ENNEMI_RECT_LARGEUR, Constantes.ENNEMI_RECT_HAUTEUR)*/;
-            this.Graphique.Width = Constantes.ENNEMI_RECT_LARGEUR;
-            this.Graphique.Height = Constantes.ENNEMI_RECT_LARGEUR;
+            Graphique.Width = Constantes.ENNEMI_RECT_LARGEUR;
+            Graphique.Height = Constantes.ENNEMI_RECT_LARGEUR;
 
             switch (type)
             {
                 case 0: // Triangle équilatéral
-                    this.Vie = Constantes.VIE_TRIANGLE_EQ;
-                    this.Vitesse = Constantes.VITESSE_TRIANGLE_EQ;
-                    this.CadenceTir = Constantes.CADENCE_TRIANGLE_EQ;
-                    this.Nom = Constantes.NOM_TRIANGLE_EQ;
+                    Vie = Constantes.VIE_TRIANGLE_EQ;
+                    Vitesse = Constantes.VITESSE_TRIANGLE_EQ;
+                    CadenceTir = Constantes.CADENCE_TRIANGLE_EQ;
+                    Nom = Constantes.NOM_TRIANGLE_EQ;
                     ennemiImage.ImageSource = new BitmapImage(new Uri(dossierSprites + "triangle.png"));// dossierImage c'est un Uri donc ça vas peut-être bugger
                     break;
                 case 1: // Carré
-                    this.Vie = Constantes.VIE_CARRE;
-                    this.Vitesse = Constantes.VITESSE_CARRE;
-                    this.CadenceTir = Constantes.CADENCE_CARRE;
-                    this.Nom = Constantes.NOM_CARRE;
+                    Vie = Constantes.VIE_CARRE;
+                    Vitesse = Constantes.VITESSE_CARRE;
+                    CadenceTir = Constantes.CADENCE_CARRE;
+                    Nom = Constantes.NOM_CARRE;
                     ennemiImage.ImageSource = new BitmapImage(new Uri(dossierSprites + "carre.png"));
                     break;
                 case 2: // Pentagone
-                    this.Vie = Constantes.VIE_PENTAGONE;
-                    this.Vitesse = Constantes.VITESSE_PENTAGONE;
-                    this.CadenceTir = Constantes.CADENCE_PENTAGONE;
-                    this.Nom = Constantes.NOM_PENTAGONE;
+                    Vie = Constantes.VIE_PENTAGONE;
+                    Vitesse = Constantes.VITESSE_PENTAGONE;
+                    CadenceTir = Constantes.CADENCE_PENTAGONE;
+                    Nom = Constantes.NOM_PENTAGONE;
                     ennemiImage.ImageSource = new BitmapImage(new Uri(dossierSprites + "pentagone.png"));
                     break;
                 case 3: // Hexagone
-                    this.Vie = Constantes.VIE_HEXAGONE;
-                    this.Vitesse = Constantes.VITESSE_HEXAGONE;
-                    this.CadenceTir = Constantes.CADENCE_HEXAGONE;
-                    this.Nom = Constantes.NOM_HEXAGONE;
+                    Vie = Constantes.VIE_HEXAGONE;
+                    Vitesse = Constantes.VITESSE_HEXAGONE;
+                    CadenceTir = Constantes.CADENCE_HEXAGONE;
+                    Nom = Constantes.NOM_HEXAGONE;
                     ennemiImage.ImageSource = new BitmapImage(new Uri(dossierSprites + "hexagone.png"));
                     break;
                 case 4: // Heptagone
-                    this.Vie = Constantes.VIE_HEPTAGONE;
-                    this.Vitesse = Constantes.VITESSE_HEPTAGONE;
-                    this.CadenceTir = Constantes.CADENCE_HEPTAGONE;
-                    this.Nom = Constantes.NOM_HEPTAGONE;
+                    Vie = Constantes.VIE_HEPTAGONE;
+                    Vitesse = Constantes.VITESSE_HEPTAGONE;
+                    CadenceTir = Constantes.CADENCE_HEPTAGONE;
+                    Nom = Constantes.NOM_HEPTAGONE;
                     ennemiImage.ImageSource = new BitmapImage(new Uri(dossierSprites + "heptagone.png"));
                     break;
                 case 5: // Octogone
-                    this.Vie = Constantes.VIE_OCTOGONE;
-                    this.Vitesse = Constantes.VITESSE_OCTOGONE;
-                    this.CadenceTir = Constantes.CADENCE_OCTOGONE;
-                    this.Nom = Constantes.NOM_OCTOGONE;
+                    Vie = Constantes.VIE_OCTOGONE;
+                    Vitesse = Constantes.VITESSE_OCTOGONE;
+                    CadenceTir = Constantes.CADENCE_OCTOGONE;
+                    Nom = Constantes.NOM_OCTOGONE;
                     ennemiImage.ImageSource = new BitmapImage(new Uri(dossierSprites + "octogone.png"));
                     break;
                 case 6: // Cercle
-                    this.Vie = Constantes.VIE_CERCLE;
-                    this.Vitesse = Constantes.VITESSE_CERCLE;
-                    this.CadenceTir = Constantes.CADENCE_CERCLE;
-                    this.Nom = Constantes.NOM_CERCLE;
+                    Vie = Constantes.VIE_CERCLE;
+                    Vitesse = Constantes.VITESSE_CERCLE;
+                    CadenceTir = Constantes.CADENCE_CERCLE;
+                    Nom = Constantes.NOM_CERCLE;
                     ennemiImage.ImageSource = new BitmapImage(new Uri(dossierSprites + "cercle.png"));
                     break; //TODO ajouter plus d'ennemis si on a des idées
             }
@@ -157,12 +157,12 @@ namespace JeuSAE
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(this.Id);
+            return HashCode.Combine(Id);
         }
 
         public override string? ToString()
         {
-            return this.Nom;
+            return Nom;
         }
 
 
@@ -181,11 +181,11 @@ namespace JeuSAE
 
             if (random.Next(0, 2) == 0)
             {
-                x = x * (-1);
+                x = x * -1;
             }
             if (random.Next(0, 2) == 0)
             {
-                y = y * (-1);
+                y = y * -1;
             }
 
 #if DEBUG
@@ -202,16 +202,16 @@ namespace JeuSAE
 
 
 
-            Canvas.SetZIndex(ennemi.Graphique, 1);
+            Panel.SetZIndex(ennemi.Graphique, 1);
             Console.WriteLine("width : " + Canvas.GetLeft(ennemi.Graphique) + " et " + Canvas.GetLeft(carte));
 
             if (Canvas.GetLeft(ennemi.Graphique) + x < Canvas.GetLeft(carte) || Canvas.GetLeft(ennemi.Graphique) > carte.Width + Canvas.GetLeft(carte))
             {
-                Canvas.SetLeft(ennemi.Graphique, (posJoueurX - x));
+                Canvas.SetLeft(ennemi.Graphique, posJoueurX - x);
             }
             if (Canvas.GetTop(ennemi.Graphique) + y < Canvas.GetTop(carte) || Canvas.GetTop(ennemi.Graphique) > carte.Height + Canvas.GetTop(carte))
             {
-                Canvas.SetTop(ennemi.Graphique, (posJoueurY - y));
+                Canvas.SetTop(ennemi.Graphique, posJoueurY - y);
             }
             ennemi.PosX = Canvas.GetLeft(ennemi.Graphique);
             ennemi.PosY = Canvas.GetTop(ennemi.Graphique);
@@ -226,26 +226,26 @@ namespace JeuSAE
 
         public void Tir()
         {
-            if (this.CooldownTir <= 0)
+            if (CooldownTir <= 0)
             {
                 MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
 
                 double posJoueurX = mainWindow.fenetrePrincipale.Width / 2 - mainWindow.rectJoueur.Width * 0.75;
                 double posJoueurY = mainWindow.fenetrePrincipale.Height / 2 - mainWindow.rectJoueur.Height * 0.75;
 
-                Vector2 vecteurDeplace = new Vector2((float)this.PosX - (float)posJoueurX, (float)this.PosY - (float)posJoueurY);
+                Vector2 vecteurDeplace = new Vector2((float)PosX - (float)posJoueurX, (float)PosY - (float)posJoueurY);
                 // Pas besoin de normaliser le vecteur car la classe Balle le fait déjà
 
 
-                Balle balle = new Balle(5, 20, 1, this.id.ToString(), 0, PosX + (float)this.Graphique.Width / 2, PosY + (float)this.Graphique.Height / 2, -vecteurDeplace);
+                Balle balle = new Balle(5, 20, 1, id.ToString(), 0, PosX + (float)Graphique.Width / 2, PosY + (float)Graphique.Height / 2, -vecteurDeplace);
                 mainWindow.monCanvas.Children.Add(balle.Graphique);
                 mainWindow.listeBalle.Add(balle);
 
-                this.CooldownTir = this.CadenceTir;
+                CooldownTir = CadenceTir;
             }
             else
             {
-                this.CooldownTir--;
+                CooldownTir--;
             }
 
 

@@ -217,7 +217,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="water_1.png" />
+    <Resource Include="images\water_1.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -777,6 +777,11 @@
 
   <ItemGroup>
     <Folder Include="audio\sfx\" />
+    <Folder Include="views\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Include="App.xaml" />
   </ItemGroup>
 
 </Project>
