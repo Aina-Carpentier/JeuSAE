@@ -34,8 +34,8 @@ namespace JeuSAE
         private Rect player = new Rect(910, 490, 50, 50); // Hitbox player
         private double posJoueurX = 0, posJoueurY = 0;
         public String choix, cheminSprite;
-        private ImageBrush apparenceJoueur = new ImageBrush();
-        
+        private ImageBrush apparenceJoueur = new ImageBrush(), apparenceArme = new ImageBrush();
+
 
 
 
@@ -83,6 +83,7 @@ namespace JeuSAE
             MapGenerator.load(this);
             lecteurMusiqueMenu.Stop();
             rectJoueur.Margin = new Thickness(posJoueurX - rectJoueur.Width / 2, posJoueurY - rectJoueur.Height / 2, 0, 0);
+            rectArme.Margin = new Thickness(posJoueurX - rectJoueur.Width / 2, posJoueurY - rectJoueur.Height / 2, 0, 0);
             HUDResolution1920x1080();
             dispatcherTimer.Tick += GameEngine;
             dispatcherTimer.Interval = TimeSpan.FromMilliseconds(16);
@@ -114,6 +115,10 @@ namespace JeuSAE
             Point curseur = e.GetPosition(monCanvas);
             Canvas.SetTop(curseurPerso, curseur.Y - curseurPerso.Height / 2);
             Canvas.SetLeft(curseurPerso, curseur.X - curseurPerso.Width / 2);
+            if (curseur.X > fenetrePrincipale.Width / 2)
+                regardeADroite = true;
+            else
+                regardeADroite = false;
             Cursor = Cursors.None;
         }
 
@@ -199,10 +204,7 @@ namespace JeuSAE
 
         private void DeplacerEnDirection(bool direction, double deplacementX, double deplacementY, double positionLimite)
         {
-            if (droite)
-                regardeADroite = true;
-            if (gauche)
-                regardeADroite = false;
+
             if (direction)
             {
                 if (EstDansLesLimites(deplacementX, deplacementY, positionLimite))
@@ -446,6 +448,7 @@ namespace JeuSAE
             cheminSprite = AppDomain.CurrentDomain.BaseDirectory + "images\\sprites\\personnage\\";
             tickAnimation++;
             rectJoueur.Fill = apparenceJoueur;
+            rectArme.Fill = apparenceArme;
             Console.WriteLine(tickAnimation);
             if (regardeADroite)
                 cheminSprite += "droite\\";
@@ -469,8 +472,8 @@ namespace JeuSAE
                 apparenceJoueur.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\idle\\idle{tickAnimation / 5 + 1}.png"));
             }
 
+            apparenceArme.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\arme\\arme1_{1}.png"));
 
-            
         }
        
         private void SupprimerEnnemis()
