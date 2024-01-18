@@ -2,6 +2,7 @@
 //using System.Drawing;
 using System.Numerics;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -22,6 +23,7 @@ namespace JeuSAE.classes
         private Ellipse graphique;
         private Vector2 vecteurSin;
         private float coefSin = 0;
+        private bool inverseSin = false;
 
         public double Vitesse
         {
@@ -164,6 +166,7 @@ namespace JeuSAE.classes
 
         public void Deplacement()
         {
+            MainWindow mainWindow = (MainWindow)App.Current.MainWindow;
             Vector2 vecteurNormalize = Vector2.Normalize(this.Vecteur);
             switch (this.Type)
             {
@@ -205,15 +208,33 @@ namespace JeuSAE.classes
 
 
 #endif
+                    if (!inverseSin)
+                    {
+                        coefSin += 0.05f;
+                        if (coefSin > Math.PI / 2) { inverseSin = true; }
+                    } else
+                    {
+                        coefSin -= 0.05f;
+                        if (coefSin <= 0) { inverseSin = false; }
+                    }
+                    vecteurNormalize.X = vecteurNormalize.X + (vecteurNormalize.X * (float)Math.Cos(coefSin) - vecteurNormalize.Y * (float)Math.Sin(coefSin));
+                    vecteurNormalize.Y = vecteurNormalize.Y + (vecteurNormalize.X * (float)Math.Sin(coefSin) + vecteurNormalize.Y * (float)Math.Cos(coefSin));
 
-                        coefSin += 0.1f;
-                        if (coefSin > Math.PI * 2) { coefSin = 0; }
-                        vecteurNormalize.X = vecteurNormalize.X + vecteurNormalize.X * (float)Math.Cos(coefSin) - vecteurNormalize.Y * (float)Math.Sin(coefSin);
-                        vecteurNormalize.Y = vecteurNormalize.Y + vecteurNormalize.X * (float)Math.Sin(coefSin) + vecteurNormalize.Y * (float)Math.Cos(coefSin);
-                    
+                    //Vector2 vectorDoubleNormalize = Vector2.Normalize(vecteurNormalize);
 
                     this.PosX = PosX + (vecteurNormalize.X * this.Vitesse);
                     this.PosY = PosY + (vecteurNormalize.Y * this.Vitesse);
+
+                    /*
+                    Rectangle rectangle = new Rectangle();
+                    rectangle.Width = 10;
+                    rectangle.Height = 10;
+                    rectangle.Fill = Brushes.Red;
+                    rectangle.Stroke = Brushes.Black;
+                    Canvas.SetLeft(rectangle, this.PosX);
+                    Canvas.SetTop(rectangle, this.PosY);
+                    mainWindow.monCanvas.Children.Add(rectangle);
+                    */
 
                     break;
 

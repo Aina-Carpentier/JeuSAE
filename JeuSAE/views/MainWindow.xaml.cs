@@ -30,7 +30,7 @@ namespace JeuSAE
         public static List<Ennemi> listeEnnemiAEnlever = new List<Ennemi>();
         public List<Balle> listeBalleAEnlever = new List<Balle>();
         private int vitesseJoueur = 20, tempsRechargeArme = 15, tempsRechargeActuel = 0, vitesseBalle = 25, compteurSpawn = 0, compteurAAtteindre = 150, tickAnimation = 0;
-        private bool gauche = false, droite = false, haut = false, bas = false, regardeADroite = true, tirer = false, numPadUn = false, numPadQuatre = false, toucheX = false, toucheC = false;
+        private bool gauche = false, droite = false, haut = false, bas = false, regardeADroite = true, tirer = false, numPadUn = false, numPadQuatre = false, toucheX = false, toucheC = false, toucheR = false;
         private Rect player = new Rect(910, 490, 50, 50); // Hitbox player
         private double posJoueurX = 0, posJoueurY = 0;
         public String choix, cheminSprite;
@@ -161,6 +161,19 @@ namespace JeuSAE
                 Ennemi.SpawnUnEnnemi(this);
             }
 
+
+            //Spawn cercle
+
+            if (e.Key == Key.R) { toucheR = true; }
+
+            if (toucheC && toucheR)
+            {
+                toucheC = false;
+                toucheR = false;
+                Ennemi.SpawnUnEnnemi(this, 6);
+            }
+
+
         }
 
         private void CanvasKeyIsUp(object sender, KeyEventArgs e)
@@ -186,6 +199,9 @@ namespace JeuSAE
             if (e.Key == Key.X) { toucheX = false; }
                 
             if (e.Key == Key.C) { toucheC = false; }
+
+            //Spawn cercle
+            if (e.Key == Key.R) { toucheR = false; }
                 
         }
 

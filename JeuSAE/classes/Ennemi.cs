@@ -225,6 +225,59 @@ namespace JeuSAE
 
         }
 
+
+        public static void SpawnUnEnnemi(MainWindow mainWindow, int type)
+        {
+            System.Windows.Shapes.Rectangle carte = mainWindow.carte;
+            double posJoueurX = mainWindow.fenetrePrincipale.Width / 2;
+            double posJoueurY = mainWindow.fenetrePrincipale.Height / 2;
+
+
+
+            int y = random.Next(0, 2000);
+            int x = random.Next(500, 2000) - y;
+
+
+
+            if (random.Next(0, 2) == 0)
+            {
+                x = x * (-1);
+            }
+            if (random.Next(0, 2) == 0)
+            {
+                y = y * (-1);
+            }
+
+            Ennemi ennemi = new Ennemi(type, x, y);
+            Canvas.SetLeft(ennemi.Graphique, posJoueurX + x);
+            Canvas.SetTop(ennemi.Graphique, posJoueurY + y);
+
+
+
+            Canvas.SetZIndex(ennemi.Graphique, 1);
+            Console.WriteLine("width : " + Canvas.GetLeft(ennemi.Graphique) + " et " + Canvas.GetLeft(carte));
+
+            if (Canvas.GetLeft(ennemi.Graphique) + x < Canvas.GetLeft(carte) || Canvas.GetLeft(ennemi.Graphique) > carte.Width + Canvas.GetLeft(carte))
+            {
+                Canvas.SetLeft(ennemi.Graphique, (posJoueurX - x));
+            }
+            if (Canvas.GetTop(ennemi.Graphique) + y < Canvas.GetTop(carte) || Canvas.GetTop(ennemi.Graphique) > carte.Height + Canvas.GetTop(carte))
+            {
+                Canvas.SetTop(ennemi.Graphique, (posJoueurY - y));
+            }
+            ennemi.PosX = Canvas.GetLeft(ennemi.Graphique);
+            ennemi.PosY = Canvas.GetTop(ennemi.Graphique);
+
+
+
+            mainWindow.monCanvas.Children.Add(ennemi.Graphique);
+            MainWindow.listeEnnemi.Add(ennemi);
+
+
+        }
+
+
+
         public void Tir()
         {
             if (this.CooldownTir <= 0)
