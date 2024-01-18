@@ -445,6 +445,8 @@ namespace JeuSAE
 
         private void AnimationJoueur()
         {
+            
+
             cheminSprite = AppDomain.CurrentDomain.BaseDirectory + "images\\sprites\\personnage\\";
             tickAnimation++;
             rectJoueur.Fill = apparenceJoueur;
@@ -471,7 +473,7 @@ namespace JeuSAE
                     tickAnimation = 0;
                 apparenceJoueur.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\idle\\idle{tickAnimation / 5 + 1}.png"));
             }
-
+            //faire varier en fonction de la position du curseur
             apparenceArme.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\arme\\arme1_{1}.png"));
 
         }
