@@ -221,7 +221,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="audio\musiques\music_menu.wav">
+    <None Update="audio\musiques\musique_menu.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="images\environnement_16x16\grass_1.png">

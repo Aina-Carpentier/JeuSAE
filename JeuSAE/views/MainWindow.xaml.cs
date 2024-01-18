@@ -23,7 +23,7 @@ namespace JeuSAE
 {
     public partial class MainWindow : Window
     {
-        private SoundPlayer lecteurMusiqueMenu = new SoundPlayer(AppDomain.CurrentDomain.BaseDirectory + "audio\\musiques\\music_menu.wav");
+        private SoundPlayer lecteurMusiqueMenu = new SoundPlayer(AppDomain.CurrentDomain.BaseDirectory + "audio\\musiques\\musique_menu.wav");
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
         public List<Balle> listeBalle = new List<Balle>();
         public static List<Ennemi> listeEnnemi = new List<Ennemi>();
@@ -35,6 +35,7 @@ namespace JeuSAE
         private double posJoueurX = 0, posJoueurY = 0;
         public String choix, cheminSprite;
         private ImageBrush apparenceJoueur = new ImageBrush(), apparenceArme = new ImageBrush();
+        public int coefEXP = 1;
 
 
 
@@ -85,6 +86,8 @@ namespace JeuSAE
             rectJoueur.Margin = new Thickness(posJoueurX - rectJoueur.Width / 2, posJoueurY - rectJoueur.Height / 2, 0, 0);
             rectArme.Margin = new Thickness(posJoueurX - rectJoueur.Width / 2, posJoueurY - rectJoueur.Height / 2, 0, 0);
             HUDResolution1920x1080();
+            HUD.ChangeBarreEliminations(0);
+            HUD.ChangeBarreExp(0);
             dispatcherTimer.Tick += GameEngine;
             dispatcherTimer.Interval = TimeSpan.FromMilliseconds(16);
             dispatcherTimer.Start();
@@ -371,6 +374,8 @@ namespace JeuSAE
                     if (balle.Rect.IntersectsWith(ennemi.Rect) && balle.Tireur == "joueur")
                     {
                         listeEnnemiAEnlever.Add(ennemi);
+                        HUD.AjouteElimination(1);
+                        HUD.AjouteExp(coefEXP);
                     }
                 }
             }
