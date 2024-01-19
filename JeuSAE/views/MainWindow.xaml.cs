@@ -668,5 +668,30 @@ namespace JeuSAE
 
         }
 
+        private void RemetValeursAZero()
+        {
+            mort = false;
+            mortDroite = true; 
+            regardeADroite = true;
+            listeBalle.Clear();
+            listeEnnemi.Clear();
+            listeEnnemiAEnlever.Clear();
+            listeBalleAEnlever.Clear();
+            coefEXP = 1;
+            tickAnimation = 0;
+            gauche = false;
+            droite = false;
+            haut = false;
+            bas = false;
+            tirer = false;
+            numPadUn = false;
+            numPadQuatre = false;
+            toucheX = false;
+            toucheC = false; 
+            toucheR = false;
+
+
+    }
+
     }
 }
