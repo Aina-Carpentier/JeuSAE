@@ -18,6 +18,7 @@ using System.Security.Cryptography.X509Certificates;
 using Microsoft.Win32;
 using System.Media;
 using JeuSAE.classes;
+using JeuSAE.data;
 
 namespace JeuSAE
 {
@@ -25,6 +26,7 @@ namespace JeuSAE
     {
         private SoundPlayer lecteurMusiqueMenu = new SoundPlayer(AppDomain.CurrentDomain.BaseDirectory + "audio\\musiques\\musique_menu.wav");
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
+        public Key toucheHaut = Key.Z, toucheBas = Key.S, toucheDroite = Key.D, toucheGauche = Key.Q;
         public List<Balle> listeBalle = new List<Balle>();
         public static List<Ennemi> listeEnnemi = new List<Ennemi>();
         public static List<Ennemi> listeEnnemiAEnlever = new List<Ennemi>();
@@ -35,8 +37,9 @@ namespace JeuSAE
         private double posJoueurX = 0, posJoueurY = 0;
         public String choix, cheminSprite;
         private ImageBrush apparenceJoueur = new ImageBrush(), apparenceArme = new ImageBrush();
+        private static string cheminFichierJson = AppDomain.CurrentDomain.BaseDirectory + "data\\database.json";
+        private static BaseDeDonnee baseDeDonnee = JsonUtilitaire.LireFichier(cheminFichierJson);
         public int coefEXP = 1;
-        public int eliminations = 0;
 
 
 
@@ -51,7 +54,7 @@ namespace JeuSAE
             Menu menu = new Menu();
             Parametres parametres = new Parametres();
             Magasin magasin = new Magasin();
-            Touche touche = new Touche();
+            Touche touche = new Touche(toucheHaut, toucheBas, toucheDroite, toucheGauche);
 
             lecteurMusiqueMenu.PlayLooping();
             menu.ShowDialog();
@@ -84,6 +87,7 @@ namespace JeuSAE
                     case "touche":
                         touche.ShowDialog();
                         choix = touche.choix;
+                        toucheHaut = touche.tHaut; toucheBas = touche.tBas; toucheDroite = touche.tDroite; toucheGauche = touche.tGauche;
                         break;
 
                 }
@@ -109,8 +113,8 @@ namespace JeuSAE
             Console.WriteLine(Canvas.GetLeft(carte));
             Console.WriteLine(Canvas.GetTop(carte));
 #endif
+            labDiamant.Content = baseDeDonnee.argent;
 
-            
             MouvementJoueur();
             TirJoueur();
             gereLeSpawn();
@@ -119,7 +123,7 @@ namespace JeuSAE
             CollisionBalle();
             AnimationJoueur();
             SupprimerEnnemis();
-
+            MettreAJourBdd();
 
         }
 
@@ -147,13 +151,13 @@ namespace JeuSAE
 
         private void CanvasKeyIsDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Left)
+            if (e.Key == toucheGauche)
                 gauche = true;
-            if (e.Key == Key.Right) 
+            if (e.Key == toucheDroite) 
                 droite = true; 
-            if (e.Key == Key.Up)
+            if (e.Key == toucheHaut)
                 haut = true;
-            if (e.Key == Key.Down)
+            if (e.Key == toucheBas)
                 bas = true;
 
             //------------------------------------------- CODES DE TRICHE -------------------------------------------
@@ -196,13 +200,13 @@ namespace JeuSAE
 
         private void CanvasKeyIsUp(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Left)
+            if (e.Key == toucheGauche)
                 gauche = false;
-            if (e.Key == Key.Right)
+            if (e.Key == toucheDroite)
                 droite = false;
-            if (e.Key == Key.Up)
+            if (e.Key == toucheHaut)
                 haut = false;
-            if (e.Key == Key.Down)
+            if (e.Key == toucheBas)
                 bas = false;
 
             //------------------------------------------- CODES DE TRICHE -------------------------------------------
@@ -383,23 +387,9 @@ namespace JeuSAE
                 {
                     if (balle.Rect.IntersectsWith(ennemi.Rect) && balle.Tireur == "joueur")
                     {
-                        if (!balle.ListeEnnemisPerces.Contains(ennemi.Id))
-                        {
-                            ennemi.Vie -= balle.Degats;
-                            balle.ListeEnnemisPerces.Add(ennemi.Id);
-                        }
-
-                        if (balle.ListeEnnemisPerces.Count >= balle.NombrePerce)
-                        {
-                            listeBalleAEnlever.Add(balle);
-                        }
-                        if (ennemi.Vie <= 0)
-                        {
-                            listeEnnemiAEnlever.Add(ennemi);
-                            HUD.AjouteElimination(1);
-                            eliminations++;
-                            HUD.AjouteExp(coefEXP);
-                        }
+                        listeEnnemiAEnlever.Add(ennemi);
+                        HUD.AjouteElimination(1);
+                        HUD.AjouteExp(coefEXP);
                     }
                     
                 }
@@ -540,15 +530,15 @@ namespace JeuSAE
             }
             //faire varier en fonction de la position du curseur
             if (Math.Abs(normalVecteurX) < 0.2 && normalVecteurY > 0.8)
-                apparenceArme.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\arme\\arme3_5.png"));
+                apparenceArme.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\arme\\arme1_5.png"));
             else if (Math.Abs(normalVecteurX) < 0.2 && normalVecteurY < -0.8)
-                apparenceArme.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\arme\\arme3_1.png"));
+                apparenceArme.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\arme\\arme1_1.png"));
             else if (Math.Abs(normalVecteurX) < 0.96 && normalVecteurY > 0.25)
-                apparenceArme.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\arme\\arme3_4.png"));
+                apparenceArme.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\arme\\arme1_4.png"));
             else if (Math.Abs(normalVecteurX) < 0.96 && normalVecteurY < -0.25)
-                apparenceArme.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\arme\\arme3_2.png"));
+                apparenceArme.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\arme\\arme1_2.png"));
             else
-                apparenceArme.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\arme\\arme3_3.png"));
+                apparenceArme.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\arme\\arme1_3.png"));
 
 
 
@@ -558,10 +548,21 @@ namespace JeuSAE
         {
             foreach (Ennemi ennemi in listeEnnemiAEnlever)
             {
+                NouvelleElimination();
                 listeEnnemi.Remove(ennemi);
                 monCanvas.Children.Remove(ennemi.Graphique);
             }
             listeEnnemiAEnlever.Clear();
+        }
+        private void NouvelleElimination()
+        {
+            baseDeDonnee.eliminations += 1;
+            MettreAJourBdd();
+        }
+
+        private void MettreAJourBdd()
+        {
+            JsonUtilitaire.Ecriture(baseDeDonnee, cheminFichierJson);
         }
     }
 }
