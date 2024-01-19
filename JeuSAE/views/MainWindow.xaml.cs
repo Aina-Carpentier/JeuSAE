@@ -18,6 +18,7 @@ using System.Security.Cryptography.X509Certificates;
 using Microsoft.Win32;
 using System.Media;
 using JeuSAE.classes;
+using JeuSAE.data;
 
 namespace JeuSAE
 {
@@ -36,10 +37,9 @@ namespace JeuSAE
         public String choix, cheminSprite;
         private ImageBrush apparenceJoueur = new ImageBrush(), apparenceArme = new ImageBrush();
         public int coefEXP = 1;
+        private static string cheminFichierJson = AppDomain.CurrentDomain.BaseDirectory + "data\\database.json";
+        private static BaseDeDonnee baseDeDonnee = JsonUtilitaire.LireFichier(cheminFichierJson);
         public int eliminations = 0;
-
-
-
 
         public MainWindow()
         {
@@ -110,7 +110,6 @@ namespace JeuSAE
             Console.WriteLine(Canvas.GetTop(carte));
 #endif
 
-            
             MouvementJoueur();
             TirJoueur();
             gereLeSpawn();
@@ -119,8 +118,6 @@ namespace JeuSAE
             CollisionBalle();
             AnimationJoueur();
             SupprimerEnnemis();
-
-
         }
 
         private void monCanvas_MouseMove(object sender, MouseEventArgs e)
@@ -549,19 +546,28 @@ namespace JeuSAE
                 apparenceArme.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\arme\\arme3_2.png"));
             else
                 apparenceArme.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\arme\\arme3_3.png"));
-
-
-
         }
 
         private void SupprimerEnnemis()
         {
             foreach (Ennemi ennemi in listeEnnemiAEnlever)
             {
+                NouvelleElimination();
                 listeEnnemi.Remove(ennemi);
                 monCanvas.Children.Remove(ennemi.Graphique);
             }
             listeEnnemiAEnlever.Clear();
+        }
+
+        private void NouvelleElimination()
+        {
+            baseDeDonnee.eliminations += 1;
+            MettreAJourBdd();
+        }
+
+        private void MettreAJourBdd()
+        {
+            JsonUtilitaire.Ecriture(baseDeDonnee, cheminFichierJson);
         }
     }
 }
