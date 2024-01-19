@@ -79,6 +79,15 @@
             Panel.ZIndex="50"
             Content="200"
             FontSize="36" />
+        <Label
+            x:Name="labEliminations"
+            Canvas.Left="146"
+            Canvas.Top="242"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Panel.ZIndex="50"
+            Content="0"
+            FontSize="40" />
         <Rectangle
             x:Name="rectanglePV"
             Canvas.Left="113"
