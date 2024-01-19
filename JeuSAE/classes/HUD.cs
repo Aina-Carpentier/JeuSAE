@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Effects;
+using System.Windows.Media.Imaging;
 
 namespace JeuSAE.classes
 {
@@ -30,14 +34,17 @@ namespace JeuSAE.classes
             
             
                 double nouvelleLargeur = ((nombrePV) / 100d) * largeurBarVieMax;
-                if (nouvelleLargeur + mainWindow.rectanglePV.Width >= largeurBarVieMax)
-                {// Si la vie ajoutée fait dépasser la vie max, on la met juste au max
-                    mainWindow.rectanglePV.Width = largeurBarVieMax;
-                }
-                else if (nouvelleLargeur + mainWindow.rectanglePV.Width <= 0)
-                {// Si la vie ajoutée (enlevée dans ce cas) rends la vie plus petite que 0, on la met à 0
-                    mainWindow.rectanglePV.Width = 0; //TODO activer le killscreen ici
-                } else
+            if (nouvelleLargeur + mainWindow.rectanglePV.Width >= largeurBarVieMax)
+            {// Si la vie ajoutée fait dépasser la vie max, on la met juste au max
+                mainWindow.rectanglePV.Width = largeurBarVieMax;
+            }
+            else if (nouvelleLargeur + mainWindow.rectanglePV.Width <= 0)
+            {// Si la vie ajoutée (enlevée dans ce cas) rends la vie plus petite que 0, on la met à 0
+                mainWindow.rectanglePV.Width = 0; //TODO activer le killscreen ici
+                BlurBitmapEffect myBlurEffect = new BlurBitmapEffect();
+                myBlurEffect.Radius = 10;
+                mainWindow.carte.BitmapEffect = myBlurEffect;
+            } else
                 {// Sinon on ajoute la vie
                     mainWindow.rectanglePV.Width += nouvelleLargeur;
                 }

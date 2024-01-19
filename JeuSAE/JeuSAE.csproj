@@ -644,6 +644,9 @@
     <None Update="images\result.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="images\skull.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="images\sprites\carre.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

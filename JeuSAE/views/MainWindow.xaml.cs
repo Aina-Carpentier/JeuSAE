@@ -119,6 +119,7 @@ namespace JeuSAE
             Console.WriteLine(Canvas.GetTop(carte));
 #endif
             labDiamant.Content = baseDeDonnee.argent;
+            labEliminations.Content = baseDeDonnee.eliminations;
 
             MouvementJoueur();
             TirJoueur();
@@ -129,7 +130,6 @@ namespace JeuSAE
             AnimationJoueur();
             SupprimerEnnemis();
             MettreAJourBdd();
-
         }
 
         private void monCanvas_MouseMove(object sender, MouseEventArgs e)
