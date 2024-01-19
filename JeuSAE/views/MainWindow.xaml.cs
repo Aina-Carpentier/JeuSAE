@@ -18,6 +18,7 @@ using System.Security.Cryptography.X509Certificates;
 using Microsoft.Win32;
 using System.Media;
 using JeuSAE.classes;
+using JeuSAE.data;
 
 namespace JeuSAE
 {
@@ -36,6 +37,8 @@ namespace JeuSAE
         private double posJoueurX = 0, posJoueurY = 0;
         public String choix, cheminSprite;
         private ImageBrush apparenceJoueur = new ImageBrush(), apparenceArme = new ImageBrush();
+        private static string cheminFichierJson = AppDomain.CurrentDomain.BaseDirectory + "data\\database.json";
+        private static BaseDeDonnee baseDeDonnee = JsonUtilitaire.LireFichier(cheminFichierJson);
         public int coefEXP = 1;
 
 
@@ -110,8 +113,8 @@ namespace JeuSAE
             Console.WriteLine(Canvas.GetLeft(carte));
             Console.WriteLine(Canvas.GetTop(carte));
 #endif
+            labDiamant.Content = baseDeDonnee.argent;
 
-            
             MouvementJoueur();
             TirJoueur();
             gereLeSpawn();
@@ -120,7 +123,7 @@ namespace JeuSAE
             CollisionBalle();
             AnimationJoueur();
             SupprimerEnnemis();
-
+            MettreAJourBdd();
 
         }
 
@@ -545,10 +548,21 @@ namespace JeuSAE
         {
             foreach (Ennemi ennemi in listeEnnemiAEnlever)
             {
+                NouvelleElimination();
                 listeEnnemi.Remove(ennemi);
                 monCanvas.Children.Remove(ennemi.Graphique);
             }
             listeEnnemiAEnlever.Clear();
+        }
+        private void NouvelleElimination()
+        {
+            baseDeDonnee.eliminations += 1;
+            MettreAJourBdd();
+        }
+
+        private void MettreAJourBdd()
+        {
+            JsonUtilitaire.Ecriture(baseDeDonnee, cheminFichierJson);
         }
     }
 }
