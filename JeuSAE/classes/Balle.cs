@@ -212,16 +212,6 @@ namespace JeuSAE.classes
 
 
                 case 2:
-                    /* if (vecteurSin == Vector2.Zero)
-                     {
-                         vecteurSin = new Vector2(vecteurNormalize.Y, -vecteurNormalize.X);
-                     }
-                     coefSin += 0.1f;
-                     if (coefSin > Math.PI*2) { coefSin = 0; }
-                     float sinus = (float)Math.Sin(coefSin);
-                     Vector2.Multiply(vecteurSin, sinus);
-                     Vector2 vecteurTraj = vecteurNormalize * vecteurSin;
-                    */
 
 #if DEBUG
                     //Console.WriteLine(vecteurTraj);
@@ -229,23 +219,32 @@ namespace JeuSAE.classes
 
 
 #endif
+
+
+
+                    double sinus = Math.Sin(coefSin) * 2;
+                    double cosinus = Math.Cos(coefSin) *2;
+
+                    Vector2 vecteurNormal = new Vector2(vecteurNormalize.Y, -vecteurNormalize.X);
+
+                    double nouveauX = PosX + (vecteurNormal.X * cosinus - vecteurNormal.Y * sinus) * this.Vitesse;
+                    double nouveauY = PosY + (vecteurNormal.X * sinus + vecteurNormal.Y * cosinus) * this.Vitesse;
+
+                    this.PosX = nouveauX;
+                    this.PosY = nouveauY;
+
+                    
                     if (!inverseSin)
                     {
                         coefSin += 0.05f;
-                        if (coefSin > Math.PI / 2) { inverseSin = true; }
-                    } else
+                        if (coefSin > Math.PI) { inverseSin = true; }
+                    }
+                    else
                     {
                         coefSin -= 0.05f;
                         if (coefSin <= 0) { inverseSin = false; }
                     }
-                    vecteurNormalize.X = vecteurNormalize.X + (vecteurNormalize.X * (float)Math.Cos(coefSin) - vecteurNormalize.Y * (float)Math.Sin(coefSin));
-                    vecteurNormalize.Y = vecteurNormalize.Y + (vecteurNormalize.X * (float)Math.Sin(coefSin) + vecteurNormalize.Y * (float)Math.Cos(coefSin));
-
-                    //Vector2 vectorDoubleNormalize = Vector2.Normalize(vecteurNormalize);
-
-                    this.PosX = PosX + (vecteurNormalize.X * this.Vitesse);
-                    this.PosY = PosY + (vecteurNormalize.Y * this.Vitesse);
-
+                    
                     /*
                     Rectangle rectangle = new Rectangle();
                     rectangle.Width = 10;
@@ -256,7 +255,6 @@ namespace JeuSAE.classes
                     Canvas.SetTop(rectangle, this.PosY);
                     mainWindow.monCanvas.Children.Add(rectangle);
                     */
-
                     break;
 
             }
