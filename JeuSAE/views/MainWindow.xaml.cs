@@ -34,16 +34,11 @@ namespace JeuSAE
         public static List<Ennemi> listeEnnemiAEnlever = new List<Ennemi>();
         public List<Balle> listeBalleAEnlever = new List<Balle>();
         private int vitesseJoueur = 20, tempsRechargeArme = 15, tempsRechargeActuel = 0, vitesseBalle = 25, compteurSpawn = 0, compteurAAtteindre = 150, armeChoisie = 1;
-        private bool gauche = false, droite = false, haut = false, bas = false, tirer = false, numPadUn = false, numPadQuatre = false, toucheX = false, toucheC = false, toucheR = false;
         private Rect player = new Rect(940, 500, 40, 80); // Hitbox player
-        private double posJoueurX = 0, posJoueurY = 0;
-        public String choix, cheminSprite;
-        private ImageBrush apparenceJoueur = new ImageBrush(), apparenceArme = new ImageBrush();
         private static string cheminFichierJson = AppDomain.CurrentDomain.BaseDirectory + "data\\database.json";
-        private static BaseDeDonnee baseDeDonnee = JsonUtilitaire.LireFichier(cheminFichierJson);
         public int coefEXP = 1, tickAnimation = 0;
 
-        private static bool gauche = false, droite = false, haut = false, bas = false, regardeADroite = true, tirer = false, numPadUn = false, numPadQuatre = false, toucheX = false, toucheC = false, toucheR = false;
+        private static bool gauche = false, droite = false, haut = false, bas = false,  tirer = false, numPadUn = false, numPadQuatre = false, toucheX = false, toucheC = false, toucheR = false;
         public static string choix, cheminSprite;
 
         private static ImageBrush apparenceJoueur = new ImageBrush(), apparenceArme = new ImageBrush();
@@ -51,6 +46,7 @@ namespace JeuSAE
         private static Rect hitboxJoueur = new Rect(910, 490, 50, 50);
 
         private static BaseDeDonnee baseDeDonnee = JsonUtilitaire.LireFichier(Constantes.CHEMIN_BDD);
+        private static BlurBitmapEffect myBlurEffect = new BlurBitmapEffect();
 
 
         public MainWindow()
@@ -66,6 +62,7 @@ namespace JeuSAE
             Parametres parametres = new Parametres();
             Magasin magasin = new Magasin();
             Touche touche = new Touche(Constantes.TOUCHE_HAUT, Constantes.TOUCHE_BAS, Constantes.TOUCHE_DROITE, Constantes.TOUCHE_GAUCHE);
+            PreJeu preJeu = new PreJeu();
 
             menu.ShowDialog();
             choix = menu.choix;
@@ -100,12 +97,19 @@ namespace JeuSAE
                         Constantes.TOUCHE_HAUT = touche.tHaut; Constantes.TOUCHE_BAS = touche.tBas; Constantes.TOUCHE_DROITE = touche.tDroite; Constantes.TOUCHE_GAUCHE = touche.tGauche;
                         break;
 
+                    case "difficulte":
+                        preJeu.ShowDialog();
+                        choix = preJeu.choix;
+                        break;
+
                 }
             }
             MapGenerator.load(this);
             Constantes.LECTEUR_MUSIQUE_MENU.Stop();
             rectJoueur.Margin = new Thickness(posJoueurX - rectJoueur.Width / 2, posJoueurY - rectJoueur.Height / 2, 0, 0);
             rectArme.Margin = new Thickness(posJoueurX - rectJoueur.Width / 2, posJoueurY - rectJoueur.Height / 2, 0, 0);
+            labRejouer.Margin = new Thickness(fenetrePrincipale.Width / 2 - labRejouer.Width / 2, fenetrePrincipale.Height*0.2, 0, 0);
+            labRetour.Margin = new Thickness(fenetrePrincipale.Width / 2 - labRetour.Width / 2, fenetrePrincipale.Height * 0.35, 0, 0);
             HUDResolution1920x1080();
             HUD.ChangeBarreEliminations(0);
             HUD.ChangeBarreExp(0);
@@ -582,7 +586,6 @@ namespace JeuSAE
 
         private void AnimationMort()
         {
-            BlurBitmapEffect myBlurEffect = new BlurBitmapEffect();
             myBlurEffect.Radius = 10;
             labRejouer.Visibility = Visibility.Visible;
             labRetour.Visibility = Visibility.Visible;

@@ -300,7 +300,7 @@ namespace JeuSAE
                 }
 
                 mainWindow.monCanvas.Children.Add(balle.Graphique);
-                MainWindow.listeBalle.Add(balle);
+                mainWindow.listeBalle.Add(balle);
 
                 this.CooldownTir = this.CadenceTir;
             }

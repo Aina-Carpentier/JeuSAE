@@ -121,8 +121,6 @@
             Stroke="Black" />
         <Label
             x:Name="labRejouer"
-            Canvas.Left="822"
-            Canvas.Top="158"
             Width="276"
             Height="108"
             HorizontalAlignment="Left"
@@ -133,8 +131,6 @@
             Visibility="Hidden" />
         <Label
             x:Name="labRetour"
-            Canvas.Left="528"
-            Canvas.Top="384"
             Width="864"
             Height="108"
             HorizontalAlignment="Left"
