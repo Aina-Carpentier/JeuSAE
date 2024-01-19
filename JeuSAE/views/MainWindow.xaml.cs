@@ -410,9 +410,25 @@ namespace JeuSAE
                 {
                     if (balle.Rect.IntersectsWith(ennemi.Rect) && balle.Tireur == "joueur")
                     {
-                        listeEnnemiAEnlever.Add(ennemi);
-                        HUD.AjouteElimination(1);
-                        HUD.AjouteExp(Constantes.COEFFICIENT_EXPERIENCE);
+
+
+                        if (!balle.ListeEnnemisPerces.Contains(ennemi.Id))
+                        {
+                            ennemi.Vie -= balle.Degats;
+                            balle.ListeEnnemisPerces.Add(ennemi.Id);
+                        }
+
+                        if (balle.ListeEnnemisPerces.Count >= balle.NombrePerce)
+                        {
+                            listeBalleAEnlever.Add(balle);
+                        }
+
+                        if (ennemi.Vie <= 0)
+                        {
+                            listeEnnemiAEnlever.Add(ennemi);
+                            HUD.AjouteElimination(1);
+                            HUD.AjouteExp(Constantes.COEFFICIENT_EXPERIENCE);
+                        }
                     }
                     
                 }

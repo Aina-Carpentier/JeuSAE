@@ -25,7 +25,7 @@ namespace JeuSAE.classes
         private Vector2 vecteurSin;
         private float coefSin = 0;
         private bool inverseSin = false;
-        private int nombrePerce = 1;
+        private int nombrePerce = 3;
         private List<Guid> listeEnnemisPerces = new List<Guid>();
 
         public double Vitesse
