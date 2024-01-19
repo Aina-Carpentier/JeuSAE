@@ -525,15 +525,15 @@ namespace JeuSAE
             }
             //faire varier en fonction de la position du curseur
             if (Math.Abs(normalVecteurX) < 0.2 && normalVecteurY > 0.8)
-                apparenceArme.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\arme\\arme1_5.png"));
+                apparenceArme.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\arme\\arme3_5.png"));
             else if (Math.Abs(normalVecteurX) < 0.2 && normalVecteurY < -0.8)
-                apparenceArme.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\arme\\arme1_1.png"));
+                apparenceArme.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\arme\\arme3_1.png"));
             else if (Math.Abs(normalVecteurX) < 0.96 && normalVecteurY > 0.25)
-                apparenceArme.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\arme\\arme1_4.png"));
+                apparenceArme.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\arme\\arme3_4.png"));
             else if (Math.Abs(normalVecteurX) < 0.96 && normalVecteurY < -0.25)
-                apparenceArme.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\arme\\arme1_2.png"));
+                apparenceArme.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\arme\\arme3_2.png"));
             else
-                apparenceArme.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\arme\\arme1_3.png"));
+                apparenceArme.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\arme\\arme3_3.png"));
 
 
 
