@@ -19,6 +19,7 @@ using Microsoft.Win32;
 using System.Media;
 using JeuSAE.classes;
 using JeuSAE.data;
+using System.Windows.Media.Effects;
 
 namespace JeuSAE
 {
@@ -26,20 +27,21 @@ namespace JeuSAE
     {
         private SoundPlayer lecteurMusiqueMenu = new SoundPlayer(AppDomain.CurrentDomain.BaseDirectory + "audio\\musiques\\musique_menu.wav");
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
+        public bool mort = false, mortDroite, regardeADroite = true;
         public Key toucheHaut = Key.Z, toucheBas = Key.S, toucheDroite = Key.D, toucheGauche = Key.Q;
         public List<Balle> listeBalle = new List<Balle>();
         public static List<Ennemi> listeEnnemi = new List<Ennemi>();
         public static List<Ennemi> listeEnnemiAEnlever = new List<Ennemi>();
         public List<Balle> listeBalleAEnlever = new List<Balle>();
-        private int vitesseJoueur = 20, tempsRechargeArme = 15, tempsRechargeActuel = 0, vitesseBalle = 25, compteurSpawn = 0, compteurAAtteindre = 150, tickAnimation = 0, armeChoisie = 1;
-        private bool gauche = false, droite = false, haut = false, bas = false, regardeADroite = true, tirer = false, numPadUn = false, numPadQuatre = false, toucheX = false, toucheC = false, toucheR = false;
+        private int vitesseJoueur = 20, tempsRechargeArme = 15, tempsRechargeActuel = 0, vitesseBalle = 25, compteurSpawn = 0, compteurAAtteindre = 150, armeChoisie = 1;
+        private bool gauche = false, droite = false, haut = false, bas = false, tirer = false, numPadUn = false, numPadQuatre = false, toucheX = false, toucheC = false, toucheR = false;
         private Rect player = new Rect(940, 500, 40, 80); // Hitbox player
         private double posJoueurX = 0, posJoueurY = 0;
         public String choix, cheminSprite;
         private ImageBrush apparenceJoueur = new ImageBrush(), apparenceArme = new ImageBrush();
         private static string cheminFichierJson = AppDomain.CurrentDomain.BaseDirectory + "data\\database.json";
         private static BaseDeDonnee baseDeDonnee = JsonUtilitaire.LireFichier(cheminFichierJson);
-        public int coefEXP = 1;
+        public int coefEXP = 1, tickAnimation = 0;
 
 
 
@@ -121,15 +123,22 @@ namespace JeuSAE
             labDiamant.Content = baseDeDonnee.argent;
             labEliminations.Content = baseDeDonnee.eliminations;
 
-            MouvementJoueur();
-            TirJoueur();
-            gereLeSpawn();
-            LogiqueEnnemis();
-            CollisionEnnemi();
-            CollisionBalle();
-            AnimationJoueur();
-            SupprimerEnnemis();
-            MettreAJourBdd();
+            if (mort)
+            {
+                AnimationMort();
+            }
+            else
+            {
+                MouvementJoueur();
+                TirJoueur();
+                gereLeSpawn();
+                LogiqueEnnemis();
+                CollisionEnnemi();
+                CollisionBalle();
+                AnimationJoueur();
+                SupprimerEnnemis();
+                MettreAJourBdd();
+            }
         }
 
         private void monCanvas_MouseMove(object sender, MouseEventArgs e)
@@ -520,7 +529,6 @@ namespace JeuSAE
                 cheminSprite += "gauche\\";
 
 
-
             //marche
             if (bas || haut || droite || gauche)
             {
@@ -570,6 +578,27 @@ namespace JeuSAE
         private void MettreAJourBdd()
         {
             JsonUtilitaire.Ecriture(baseDeDonnee, cheminFichierJson);
+        }
+
+        private void AnimationMort()
+        {
+            BlurBitmapEffect myBlurEffect = new BlurBitmapEffect();
+            myBlurEffect.Radius = 10;
+            labRejouer.Visibility = Visibility.Visible;
+            labRetour.Visibility = Visibility.Visible;
+            carte.BitmapEffect = myBlurEffect;
+
+            cheminSprite = AppDomain.CurrentDomain.BaseDirectory + "images\\sprites\\personnage\\";
+            if (tickAnimation < 40)
+                tickAnimation++;
+            rectArme.Visibility = Visibility.Hidden;
+            Console.WriteLine(tickAnimation);
+            if (mortDroite)
+                cheminSprite += "droite\\";
+            else
+                cheminSprite += "gauche\\";
+            
+            apparenceJoueur.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\mort\\mort{tickAnimation / 10 + 1}.png"));
         }
     }
 }

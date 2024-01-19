@@ -120,6 +120,7 @@
             Fill="#FF010400"
             Stroke="Black" />
         <Label
+            x:Name="labRejouer"
             Canvas.Left="822"
             Canvas.Top="158"
             Width="276"
@@ -129,8 +130,9 @@
             Content="Rejouer"
             FontFamily="Rubik"
             FontSize="72"
-            RenderTransformOrigin="0.997,1.407" />
+            Visibility="Hidden" />
         <Label
+            x:Name="labRetour"
             Canvas.Left="528"
             Canvas.Top="384"
             Width="864"
@@ -140,6 +142,7 @@
             Content="Retour au menu principal"
             FontFamily="Rubik"
             FontSize="72"
-            RenderTransformOrigin="0.997,1.407" />
+            RenderTransformOrigin="0.997,1.407"
+            Visibility="Hidden" />
     </Canvas>
 </Window>
