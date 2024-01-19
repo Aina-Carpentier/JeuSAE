@@ -20,6 +20,9 @@ using System.Media;
 using JeuSAE.classes;
 using JeuSAE.data;
 using System.Windows.Media.Effects;
+using System.Windows.Forms;
+using System.Reflection;
+using System.Diagnostics;
 
 namespace JeuSAE
 {
@@ -52,6 +55,7 @@ namespace JeuSAE
 
         public MainWindow()
         {
+            Menu:
             InitializeComponent();
             Constantes.LECTEUR_MUSIQUE_MENU.Load();
             Constantes.LECTEUR_MUSIQUE_MENU.PlayLooping();
@@ -108,6 +112,7 @@ namespace JeuSAE
             }
             MapGenerator.load(this);
             Constantes.LECTEUR_MUSIQUE_MENU.Stop();
+            Cursor = Cursors.None;
             rectJoueur.Margin = new Thickness(posJoueurX - rectJoueur.Width / 2, posJoueurY - rectJoueur.Height / 2, 0, 0);
             rectArme.Margin = new Thickness(posJoueurX - rectJoueur.Width / 2, posJoueurY - rectJoueur.Height / 2, 0, 0);
             labRejouer.Margin = new Thickness(fenetrePrincipale.Width / 2 - labRejouer.Width / 2, fenetrePrincipale.Height*0.2, 0, 0);
@@ -156,7 +161,7 @@ namespace JeuSAE
                 regardeADroite = true;
             else
                 regardeADroite = false;
-            Cursor = Cursors.None;
+            
         }
 
         private void monCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -605,8 +610,6 @@ namespace JeuSAE
         private void AnimationMort()
         {
             myBlurEffect.Radius = 10;
-            labRejouer.Visibility = Visibility.Visible;
-            labRetour.Visibility = Visibility.Visible;
             
             foreach (UIElement children in monCanvas.Children)
             {
@@ -630,6 +633,24 @@ namespace JeuSAE
                 cheminSprite += "gauche\\";
             
             apparenceJoueur.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\mort\\mort{tickAnimation / 10 + 1}.png"));
+        }
+
+
+        private void labRetour_MouseEnter(object sender, MouseEventArgs e)
+        {
+            fenetrePrincipale.labRetour.Foreground = Brushes.LightSlateGray;
+        }
+
+        private void labRetour_MouseLeave(object sender, MouseEventArgs e)
+        {
+            fenetrePrincipale.labRetour.Foreground = Brushes.Black;
+        }
+
+        private void labRetour_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.ShowDialog();
         }
     }
 }

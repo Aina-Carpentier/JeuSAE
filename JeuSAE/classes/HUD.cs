@@ -5,7 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
@@ -45,6 +47,10 @@ namespace JeuSAE.classes
                 mainWindow.mort = true;
                 //pour l'animation de mort
                 mainWindow.tickAnimation = 0;
+                mainWindow.curseurPerso.Visibility = Visibility.Hidden;
+                mainWindow.Cursor = Cursors.Arrow;
+                mainWindow.labRejouer.Visibility = Visibility.Visible;
+                mainWindow.labRetour.Visibility = Visibility.Visible;
                 mainWindow.mortDroite = mainWindow.regardeADroite;
             } else
                 {// Sinon on ajoute la vie

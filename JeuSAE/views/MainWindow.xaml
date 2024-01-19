@@ -125,20 +125,24 @@
             Height="108"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
+            Panel.ZIndex="900"
             Content="Rejouer"
             FontFamily="Rubik"
             FontSize="72"
             Visibility="Hidden" />
         <Label
             x:Name="labRetour"
-            Width="864"
-            Height="108"
+            Width="852"
+            Height="97"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
+            Panel.ZIndex="900"
             Content="Retour au menu principal"
             FontFamily="Rubik"
             FontSize="72"
-            RenderTransformOrigin="0.997,1.407"
+            MouseEnter="labRetour_MouseEnter"
+            MouseLeave="labRetour_MouseLeave"
+            MouseLeftButtonDown="labRetour_MouseLeftButtonDown"
             Visibility="Hidden" />
     </Canvas>
 </Window>
