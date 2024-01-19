@@ -112,5 +112,27 @@
             Panel.ZIndex="40"
             Fill="#FF010400"
             Stroke="Black" />
+        <Label
+            Canvas.Left="822"
+            Canvas.Top="158"
+            Width="276"
+            Height="108"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Content="Rejouer"
+            FontFamily="Rubik"
+            FontSize="72"
+            RenderTransformOrigin="0.997,1.407" />
+        <Label
+            Canvas.Left="528"
+            Canvas.Top="384"
+            Width="864"
+            Height="108"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Content="Retour au menu principal"
+            FontFamily="Rubik"
+            FontSize="72"
+            RenderTransformOrigin="0.997,1.407" />
     </Canvas>
 </Window>
