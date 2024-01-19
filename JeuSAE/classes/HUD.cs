@@ -42,34 +42,10 @@ namespace JeuSAE.classes
             else if (nouvelleLargeur + mainWindow.rectanglePV.Width <= 0)
             {// Si la vie ajoutée (enlevée dans ce cas) rends la vie plus petite que 0, on la met à 0
                 mainWindow.rectanglePV.Width = 0; //TODO activer le killscreen ici
-                BlurBitmapEffect myBlurEffect = new BlurBitmapEffect();
-                myBlurEffect.Radius = 20;
-                mainWindow.carte.BitmapEffect = myBlurEffect;
-                //System.Windows.Controls.Image grayImage = new System.Windows.Controls.Image();
-
-
-                //FormatConvertedBitmap grayBitmap = new FormatConvertedBitmap();
-
-
-                //    grayBitmap.BeginInit();
-
-                //    grayBitmap.Source = MapGenerator.ToBitmapImage(MapGenerator.cible);
-
-                //    grayBitmap.DestinationFormat = PixelFormats.Gray8;
-
-                //    grayBitmap.EndInit();
-
-
-
-                //    // Set Source property of Image
-
-                //    grayImage.Source = grayBitmap;
-
-
-
-                //    mainWindow.monCanvas.Children.Add(grayImage);
-
-
+                mainWindow.mort = true;
+                //pour l'animation de mort
+                mainWindow.tickAnimation = 0;
+                mainWindow.mortDroite = mainWindow.regardeADroite;
             } else
                 {// Sinon on ajoute la vie
                     mainWindow.rectanglePV.Width += nouvelleLargeur;

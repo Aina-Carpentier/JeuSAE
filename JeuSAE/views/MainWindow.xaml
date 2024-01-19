@@ -43,8 +43,7 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Panel.ZIndex="1000"
-            Fill="#FFF51818"
-            Stroke="Black" />
+            Fill="#FFF51818" />
         <Rectangle
             x:Name="rectArme"
             Width="120"
@@ -52,8 +51,7 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Panel.ZIndex="1001"
-            Fill="#FF0000FF"
-            Stroke="Black" />
+            Fill="#FF0000FF" />
 
         <Rectangle
             x:Name="carte"
@@ -79,6 +77,15 @@
             Panel.ZIndex="50"
             Content="200"
             FontSize="36" />
+        <Label
+            x:Name="labEliminations"
+            Canvas.Left="146"
+            Canvas.Top="242"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Panel.ZIndex="50"
+            Content="0"
+            FontSize="40" />
         <Rectangle
             x:Name="rectanglePV"
             Canvas.Left="113"
@@ -113,8 +120,7 @@
             Fill="#FF010400"
             Stroke="Black" />
         <Label
-            Canvas.Left="822"
-            Canvas.Top="158"
+            x:Name="labRejouer"
             Width="276"
             Height="108"
             HorizontalAlignment="Left"
@@ -122,10 +128,9 @@
             Content="Rejouer"
             FontFamily="Rubik"
             FontSize="72"
-            RenderTransformOrigin="0.997,1.407" />
+            Visibility="Hidden" />
         <Label
-            Canvas.Left="528"
-            Canvas.Top="384"
+            x:Name="labRetour"
             Width="864"
             Height="108"
             HorizontalAlignment="Left"
@@ -133,6 +138,7 @@
             Content="Retour au menu principal"
             FontFamily="Rubik"
             FontSize="72"
-            RenderTransformOrigin="0.997,1.407" />
+            RenderTransformOrigin="0.997,1.407"
+            Visibility="Hidden" />
     </Canvas>
 </Window>

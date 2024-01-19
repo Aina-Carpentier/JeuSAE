@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Numerics;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +19,7 @@ using Microsoft.Win32;
 using System.Media;
 using JeuSAE.classes;
 using JeuSAE.data;
+using System.Windows.Media.Effects;
 
 namespace JeuSAE
 {
@@ -26,37 +27,43 @@ namespace JeuSAE
     {
         private SoundPlayer lecteurMusiqueMenu = new SoundPlayer(AppDomain.CurrentDomain.BaseDirectory + "audio\\musiques\\musique_menu.wav");
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
+        public bool mort = false, mortDroite, regardeADroite = true;
         public Key toucheHaut = Key.Z, toucheBas = Key.S, toucheDroite = Key.D, toucheGauche = Key.Q;
         public List<Balle> listeBalle = new List<Balle>();
         public static List<Ennemi> listeEnnemi = new List<Ennemi>();
         public static List<Ennemi> listeEnnemiAEnlever = new List<Ennemi>();
         public List<Balle> listeBalleAEnlever = new List<Balle>();
-        private int vitesseJoueur = 20, tempsRechargeArme = 15, tempsRechargeActuel = 0, vitesseBalle = 25, compteurSpawn = 0, compteurAAtteindre = 150, tickAnimation = 0;
-        private bool gauche = false, droite = false, haut = false, bas = false, regardeADroite = true, tirer = false, numPadUn = false, numPadQuatre = false, toucheX = false, toucheC = false, toucheR = false;
-        private Rect player = new Rect(910, 490, 50, 50); // Hitbox player
-        private double posJoueurX = 0, posJoueurY = 0;
-        public String choix, cheminSprite;
-        private ImageBrush apparenceJoueur = new ImageBrush(), apparenceArme = new ImageBrush();
+        private int vitesseJoueur = 20, tempsRechargeArme = 15, tempsRechargeActuel = 0, vitesseBalle = 25, compteurSpawn = 0, compteurAAtteindre = 150, armeChoisie = 1;
+        private Rect player = new Rect(940, 500, 40, 80); // Hitbox player
         private static string cheminFichierJson = AppDomain.CurrentDomain.BaseDirectory + "data\\database.json";
-        private static BaseDeDonnee baseDeDonnee = JsonUtilitaire.LireFichier(cheminFichierJson);
-        public int coefEXP = 1;
+        public int coefEXP = 1, tickAnimation = 0;
 
+        private static bool gauche = false, droite = false, haut = false, bas = false,  tirer = false, numPadUn = false, numPadQuatre = false, toucheX = false, toucheC = false, toucheR = false;
+        public static string choix, cheminSprite;
 
+        private static ImageBrush apparenceJoueur = new ImageBrush(), apparenceArme = new ImageBrush();
+        private static double posJoueurX = 0, posJoueurY = 0;
+        private static Rect hitboxJoueur = new Rect(910, 490, 50, 50);
+
+        private static BaseDeDonnee baseDeDonnee = JsonUtilitaire.LireFichier(Constantes.CHEMIN_BDD);
+        private static BlurBitmapEffect myBlurEffect = new BlurBitmapEffect();
 
 
         public MainWindow()
         {
             InitializeComponent();
-            lecteurMusiqueMenu.Load();
+            Constantes.LECTEUR_MUSIQUE_MENU.Load();
+            Constantes.LECTEUR_MUSIQUE_MENU.PlayLooping();
+
             posJoueurX = fenetrePrincipale.Width / 2;
             posJoueurY = fenetrePrincipale.Height / 2;
 
             Menu menu = new Menu();
             Parametres parametres = new Parametres();
             Magasin magasin = new Magasin();
-            Touche touche = new Touche(toucheHaut, toucheBas, toucheDroite, toucheGauche);
+            Touche touche = new Touche(Constantes.TOUCHE_HAUT, Constantes.TOUCHE_BAS, Constantes.TOUCHE_DROITE, Constantes.TOUCHE_GAUCHE);
+            PreJeu preJeu = new PreJeu();
 
-            lecteurMusiqueMenu.PlayLooping();
             menu.ShowDialog();
             choix = menu.choix;
             
@@ -87,16 +94,22 @@ namespace JeuSAE
                     case "touche":
                         touche.ShowDialog();
                         choix = touche.choix;
-                        toucheHaut = touche.tHaut; toucheBas = touche.tBas; toucheDroite = touche.tDroite; toucheGauche = touche.tGauche;
+                        Constantes.TOUCHE_HAUT = touche.tHaut; Constantes.TOUCHE_BAS = touche.tBas; Constantes.TOUCHE_DROITE = touche.tDroite; Constantes.TOUCHE_GAUCHE = touche.tGauche;
+                        break;
+
+                    case "difficulte":
+                        preJeu.ShowDialog();
+                        choix = preJeu.choix;
                         break;
 
                 }
             }
-
             MapGenerator.load(this);
-            lecteurMusiqueMenu.Stop();
+            Constantes.LECTEUR_MUSIQUE_MENU.Stop();
             rectJoueur.Margin = new Thickness(posJoueurX - rectJoueur.Width / 2, posJoueurY - rectJoueur.Height / 2, 0, 0);
             rectArme.Margin = new Thickness(posJoueurX - rectJoueur.Width / 2, posJoueurY - rectJoueur.Height / 2, 0, 0);
+            labRejouer.Margin = new Thickness(fenetrePrincipale.Width / 2 - labRejouer.Width / 2, fenetrePrincipale.Height*0.2, 0, 0);
+            labRetour.Margin = new Thickness(fenetrePrincipale.Width / 2 - labRetour.Width / 2, fenetrePrincipale.Height * 0.35, 0, 0);
             HUDResolution1920x1080();
             HUD.ChangeBarreEliminations(0);
             HUD.ChangeBarreExp(0);
@@ -113,18 +126,23 @@ namespace JeuSAE
             Console.WriteLine(Canvas.GetLeft(carte));
             Console.WriteLine(Canvas.GetTop(carte));
 #endif
-            labDiamant.Content = baseDeDonnee.argent;
 
-            MouvementJoueur();
-            TirJoueur();
-            gereLeSpawn();
-            LogiqueEnnemis();
-            CollisionEnnemi();
-            CollisionBalle();
-            AnimationJoueur();
-            SupprimerEnnemis();
-            MettreAJourBdd();
-
+            if (mort)
+            {
+                AnimationMort();
+            }
+            else
+            {
+                MouvementJoueur();
+                TirJoueur();
+                gereLeSpawn();
+                LogiqueEnnemis();
+                CollisionEnnemi();
+                CollisionBalle();
+                AnimationJoueur();
+                SupprimerEnnemis();
+                MettreAJourBdd();
+            }
         }
 
         private void monCanvas_MouseMove(object sender, MouseEventArgs e)
@@ -151,13 +169,13 @@ namespace JeuSAE
 
         private void CanvasKeyIsDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == toucheGauche)
+            if (e.Key == Constantes.TOUCHE_GAUCHE)
                 gauche = true;
-            if (e.Key == toucheDroite) 
+            if (e.Key == Constantes.TOUCHE_DROITE) 
                 droite = true; 
-            if (e.Key == toucheHaut)
+            if (e.Key == Constantes.TOUCHE_HAUT)
                 haut = true;
-            if (e.Key == toucheBas)
+            if (e.Key == Constantes.TOUCHE_BAS)
                 bas = true;
 
             //------------------------------------------- CODES DE TRICHE -------------------------------------------
@@ -167,7 +185,7 @@ namespace JeuSAE
                 numPadUn = true;
             if (e.Key == Key.NumPad4)
                 numPadQuatre = true;
-            if (numPadUn && numPadQuatre) { vitesseJoueur = 200; } else { vitesseJoueur = 10; }
+            if (numPadUn && numPadQuatre) { Constantes.VITESSE_JOUEUR = 200; } else { Constantes.VITESSE_JOUEUR = 10; }
 
             //Clear ennemis
             if (e.Key == Key.X) { toucheX = true; }
@@ -200,13 +218,13 @@ namespace JeuSAE
 
         private void CanvasKeyIsUp(object sender, KeyEventArgs e)
         {
-            if (e.Key == toucheGauche)
+            if (e.Key == Constantes.TOUCHE_GAUCHE)
                 gauche = false;
-            if (e.Key == toucheDroite)
+            if (e.Key == Constantes.TOUCHE_DROITE)
                 droite = false;
-            if (e.Key == toucheHaut)
+            if (e.Key == Constantes.TOUCHE_HAUT)
                 haut = false;
-            if (e.Key == toucheBas)
+            if (e.Key == Constantes.TOUCHE_BAS)
                 bas = false;
 
             //------------------------------------------- CODES DE TRICHE -------------------------------------------
@@ -229,10 +247,10 @@ namespace JeuSAE
 
         private void MouvementJoueur()
         {
-            DeplacerEnDirection(gauche, vitesseJoueur, 0, posJoueurX - rectJoueur.Width / 2);
-            DeplacerEnDirection(droite, -vitesseJoueur, 0, -carte.Width + rectJoueur.Width / 2 + posJoueurX); // non
-            DeplacerEnDirection(haut, 0, vitesseJoueur, posJoueurY - rectJoueur.Height / 2);
-            DeplacerEnDirection(bas, 0, -vitesseJoueur, -carte.Height + rectJoueur.Height / 2 + posJoueurY); // non
+            DeplacerEnDirection(gauche, Constantes.VITESSE_JOUEUR, 0, posJoueurX - rectJoueur.Width / 2);
+            DeplacerEnDirection(droite, -Constantes.VITESSE_JOUEUR, 0, -carte.Width + rectJoueur.Width / 2 + posJoueurX); // non
+            DeplacerEnDirection(haut, 0, Constantes.VITESSE_JOUEUR, posJoueurY - rectJoueur.Height / 2);
+            DeplacerEnDirection(bas, 0, -Constantes.VITESSE_JOUEUR, -carte.Height + rectJoueur.Height / 2 + posJoueurY); // non
         }
 
         private void DeplacerEnDirection(bool direction, double deplacementX, double deplacementY, double positionLimite)
@@ -304,7 +322,7 @@ namespace JeuSAE
         {
             GestionTempsRecharge();
 
-            if (tirer && tempsRechargeActuel <= 0)
+            if (tirer && Constantes.TEMPS_RECHARGE_ACTUEL <= 0)
             {
                 CreerBalleJoueur();
             }
@@ -314,13 +332,13 @@ namespace JeuSAE
 
         private void GestionTempsRecharge()
         {
-            if (tempsRechargeActuel > 0)
-                tempsRechargeActuel--;
+            if (Constantes.TEMPS_RECHARGE_ACTUEL > 0)
+                Constantes.TEMPS_RECHARGE_ACTUEL--;
         }
 
         private void CreerBalleJoueur()
         {
-            tempsRechargeActuel = tempsRechargeArme;
+            Constantes.TEMPS_RECHARGE_ACTUEL = Constantes.TEMPS_RECHARGE_ARME;
 
             Point posEcran = Mouse.GetPosition(Application.Current.MainWindow);
             Point posCarte = Mouse.GetPosition(carte);
@@ -331,7 +349,7 @@ namespace JeuSAE
 
             Vector2 vecteurTir = new Vector2((float)posEcran.X - (float)posJoueurX, (float)posEcran.Y - (float)posJoueurY);
 
-            Balle balleJoueur = new Balle(vitesseBalle, 500, 0, "joueur", 0, posJoueurX, posJoueurY, vecteurTir);
+            Balle balleJoueur = new Balle(Constantes.VITESSE_BALLE, 500, 0, "joueur", 0, posJoueurX, posJoueurY, vecteurTir);
             PositionnerBalle(balleJoueur);
 
             monCanvas.Children.Add(balleJoueur.Graphique);
@@ -375,7 +393,7 @@ namespace JeuSAE
         {
             foreach(Balle balle in listeBalle)
             {
-                if (balle.Rect.IntersectsWith(player) && balle.Tireur != "joueur")
+                if (balle.Rect.IntersectsWith(hitboxJoueur) && balle.Tireur != "joueur")
                 {
                     //Application.Current.Shutdown();
                     listeBalleAEnlever.Add(balle);
@@ -389,7 +407,7 @@ namespace JeuSAE
                     {
                         listeEnnemiAEnlever.Add(ennemi);
                         HUD.AjouteElimination(1);
-                        HUD.AjouteExp(coefEXP);
+                        HUD.AjouteExp(Constantes.COEFFICIENT_EXPERIENCE);
                     }
                     
                 }
@@ -400,7 +418,7 @@ namespace JeuSAE
         {
             foreach (Ennemi ennemi in listeEnnemi)
             {
-                if (player.IntersectsWith(ennemi.Rect))
+                if (hitboxJoueur.IntersectsWith(ennemi.Rect))
                 {
                     HUD.AjouteVie(-Constantes.DEGATS_COLLISION);
                     //rajouter frames d'invicibilité + knockback
@@ -418,12 +436,12 @@ namespace JeuSAE
 
         private void gereLeSpawn()
         {
-            if (compteurSpawn >= compteurAAtteindre)
+            if (Constantes.COMPTEUR_SPAWN >= Constantes.TICK_REQUIS_POUR_SPAWN_ENNEMI)
             {
                 Ennemi.SpawnUnEnnemi(this);
-                compteurSpawn = 0;
+                Constantes.COMPTEUR_SPAWN = 0;
             }
-            compteurSpawn++;
+            Constantes.COMPTEUR_SPAWN++;
         }
 
         private void HUDResolution1920x1080()
@@ -503,30 +521,29 @@ namespace JeuSAE
 #endif
 
             cheminSprite = AppDomain.CurrentDomain.BaseDirectory + "images\\sprites\\personnage\\";
-            tickAnimation++;
+            Constantes.TICK_ANIMATION++;
             rectJoueur.Fill = apparenceJoueur;
             rectArme.Fill = apparenceArme;
-            Console.WriteLine(tickAnimation);
+            Console.WriteLine(Constantes.TICK_ANIMATION);
             if (regardeADroite)
                 cheminSprite += "droite\\";
             else
                 cheminSprite += "gauche\\";
 
 
-
             //marche
             if (bas || haut || droite || gauche)
             {
-                if (tickAnimation >= 30)
-                    tickAnimation = 0;
-                apparenceJoueur.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\marche\\marche{tickAnimation / 5 + 1}.png"));
+                if (Constantes.TICK_ANIMATION >= 30)
+                    Constantes.TICK_ANIMATION = 0;
+                apparenceJoueur.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\marche\\marche{Constantes.TICK_ANIMATION / 5 + 1}.png"));
             }
             //idle
             else
             {
-                if (tickAnimation >= 20)
-                    tickAnimation = 0;
-                apparenceJoueur.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\idle\\idle{tickAnimation / 5 + 1}.png"));
+                if (Constantes.TICK_ANIMATION >= 20)
+                    Constantes.TICK_ANIMATION = 0;
+                apparenceJoueur.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\idle\\idle{Constantes.TICK_ANIMATION / 5 + 1}.png"));
             }
             //faire varier en fonction de la position du curseur
             if (Math.Abs(normalVecteurX) < 0.2 && normalVecteurY > 0.8)
@@ -562,7 +579,29 @@ namespace JeuSAE
 
         private void MettreAJourBdd()
         {
-            JsonUtilitaire.Ecriture(baseDeDonnee, cheminFichierJson);
+            JsonUtilitaire.Ecriture(baseDeDonnee, Constantes.CHEMIN_BDD);
+            labDiamant.Content = baseDeDonnee.argent;
+            labEliminations.Content = baseDeDonnee.eliminations;
+        }
+
+        private void AnimationMort()
+        {
+            myBlurEffect.Radius = 10;
+            labRejouer.Visibility = Visibility.Visible;
+            labRetour.Visibility = Visibility.Visible;
+            carte.BitmapEffect = myBlurEffect;
+
+            cheminSprite = AppDomain.CurrentDomain.BaseDirectory + "images\\sprites\\personnage\\";
+            if (tickAnimation < 40)
+                tickAnimation++;
+            rectArme.Visibility = Visibility.Hidden;
+            Console.WriteLine(tickAnimation);
+            if (mortDroite)
+                cheminSprite += "droite\\";
+            else
+                cheminSprite += "gauche\\";
+            
+            apparenceJoueur.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\mort\\mort{tickAnimation / 10 + 1}.png"));
         }
     }
 }

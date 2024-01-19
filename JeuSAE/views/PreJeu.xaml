@@ -1,12 +1,88 @@
-﻿<Window x:Class="JeuSAE.PreJeu"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:JeuSAE"
-        mc:Ignorable="d"
-        Title="PreJeu" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+﻿<Window
+    x:Class="JeuSAE.PreJeu"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:JeuSAE"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="fenetrePreJeu"
+    Title="PreJeu"
+    Width="{x:Static SystemParameters.PrimaryScreenWidth}"
+    Height="{x:Static SystemParameters.PrimaryScreenHeight}"
+    FocusManager.FocusedElement="{Binding ElementName=canvasTouche}"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    WindowState="Maximized"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Canvas x:Name="canvasPreJeu">
+        <Canvas.Background>
+            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                <GradientStop Offset="1" Color="#FF1D1E1F" />
+                <GradientStop Offset="0" Color="#FF389DEC" />
+            </LinearGradientBrush>
+        </Canvas.Background>
+
+        <Label
+            x:Name="labRetour"
+            Width="294"
+            Height="120"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Retour"
+            FontFamily="Rubik"
+            FontSize="90"
+            MouseEnter="labRetour_MouseEnter"
+            MouseLeave="labRetour_MouseLeave"
+            MouseLeftButtonDown="labRetour_MouseLeftButtonDown" />
+
+        <Label
+            x:Name="labFacile"
+            Width="197"
+            Height="120"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Facile"
+            FontFamily="Rubik"
+            FontSize="70"
+            MouseEnter="labFacile_MouseEnter"
+            MouseLeave="labFacile_MouseLeave"
+            MouseLeftButtonDown="labFacile_MouseLeftButtonDown" />
+
+        <Label
+            x:Name="labMoyen"
+            Width="231"
+            Height="120"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Moyen"
+            FontFamily="Rubik"
+            FontSize="70"
+            MouseEnter="labMoyen_MouseEnter"
+            MouseLeave="labMoyen_MouseLeave"
+            MouseLeftButtonDown="labMoyen_MouseLeftButtonDown" />
+
+        <Label
+            x:Name="labDifficile"
+            Width="256"
+            Height="120"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Difficile"
+            FontFamily="Rubik"
+            FontSize="70"
+            MouseEnter="labDifficile_MouseEnter"
+            MouseLeave="labDifficile_MouseLeave"
+            MouseLeftButtonDown="labDifficile_MouseLeftButtonDown" />
+
+        <Label
+            x:Name="labChoix"
+            Width="857"
+            Height="120"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Choix de la difficulté"
+            FontFamily="Rubik"
+            FontSize="90" />
+    </Canvas>
 </Window>
