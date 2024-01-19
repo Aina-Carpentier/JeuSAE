@@ -298,8 +298,9 @@ namespace JeuSAE
                 {
                     balle = new Balle(5, 20, 1, this.id.ToString(), 0, PosX + (float)this.Graphique.Width / 2, PosY + (float)this.Graphique.Height / 2, -vecteurDeplace);
                 }
+
                 mainWindow.monCanvas.Children.Add(balle.Graphique);
-                mainWindow.listeBalle.Add(balle);
+                MainWindow.listeBalle.Add(balle);
 
                 this.CooldownTir = this.CadenceTir;
             }

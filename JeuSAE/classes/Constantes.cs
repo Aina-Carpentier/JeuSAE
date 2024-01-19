@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace JeuSAE.classes
 {
@@ -16,6 +18,20 @@ namespace JeuSAE.classes
         public const int DEGAT_BALLE_JOUEUR = 1;
         public const int DEGATS_COLLISION = 10;
 
+        public static readonly SoundPlayer LECTEUR_MUSIQUE_MENU = new SoundPlayer(AppDomain.CurrentDomain.BaseDirectory + "audio\\musiques\\musique_menu.wav");
+
+
+        public static string CHEMIN_BDD = AppDomain.CurrentDomain.BaseDirectory + "data\\database.json";
+        public static int COEFFICIENT_EXPERIENCE = 1;
+        public static Key TOUCHE_HAUT = Key.Z, TOUCHE_BAS = Key.S, TOUCHE_DROITE = Key.D, TOUCHE_GAUCHE = Key.Q;
+
+        public static int VITESSE_JOUEUR = 20;
+        public static int TEMPS_RECHARGE_ARME = 15;
+        public static int TEMPS_RECHARGE_ACTUEL = 0;
+        public static int VITESSE_BALLE = 25;
+        public static int COMPTEUR_SPAWN = 0;
+        public static int TICK_REQUIS_POUR_SPAWN_ENNEMI = 150;
+        public static int TICK_ANIMATION = 0;
 
         //-------------------------------------------ENNEMI-------------------------------------------
         public const int ENNEMI_RECT_LARGEUR = 75;

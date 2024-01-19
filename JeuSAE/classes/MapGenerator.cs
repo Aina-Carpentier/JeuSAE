@@ -57,6 +57,7 @@ namespace JeuSAE.classes
 
         public static void load(MainWindow mainWindow)
         {
+            Console.WriteLine("Chargement");
             Rectangle carte = mainWindow.carte;
             int largeurCarte = (int)carte.Width;
             int hauteurCarte = (int)carte.Height;
