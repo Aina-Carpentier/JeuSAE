@@ -31,9 +31,9 @@ namespace JeuSAE
         public static List<Ennemi> listeEnnemi = new List<Ennemi>();
         public static List<Ennemi> listeEnnemiAEnlever = new List<Ennemi>();
         public List<Balle> listeBalleAEnlever = new List<Balle>();
-        private int vitesseJoueur = 20, tempsRechargeArme = 15, tempsRechargeActuel = 0, vitesseBalle = 25, compteurSpawn = 0, compteurAAtteindre = 150, tickAnimation = 0;
+        private int vitesseJoueur = 20, tempsRechargeArme = 15, tempsRechargeActuel = 0, vitesseBalle = 25, compteurSpawn = 0, compteurAAtteindre = 150, tickAnimation = 0, armeChoisie = 1;
         private bool gauche = false, droite = false, haut = false, bas = false, regardeADroite = true, tirer = false, numPadUn = false, numPadQuatre = false, toucheX = false, toucheC = false, toucheR = false;
-        private Rect player = new Rect(910, 490, 50, 50); // Hitbox player
+        private Rect player = new Rect(940, 500, 40, 80); // Hitbox player
         private double posJoueurX = 0, posJoueurY = 0;
         public String choix, cheminSprite;
         private ImageBrush apparenceJoueur = new ImageBrush(), apparenceArme = new ImageBrush();
@@ -55,6 +55,7 @@ namespace JeuSAE
             Parametres parametres = new Parametres();
             Magasin magasin = new Magasin();
             Touche touche = new Touche(toucheHaut, toucheBas, toucheDroite, toucheGauche);
+            PreJeu preJeu = new PreJeu();
 
             lecteurMusiqueMenu.PlayLooping();
             menu.ShowDialog();
@@ -90,6 +91,10 @@ namespace JeuSAE
                         toucheHaut = touche.tHaut; toucheBas = touche.tBas; toucheDroite = touche.tDroite; toucheGauche = touche.tGauche;
                         break;
 
+                    case "difficulte":
+                        preJeu.ShowDialog();
+                        choix = preJeu.choix;
+                        break;
                 }
             }
 
@@ -497,9 +502,11 @@ namespace JeuSAE
             Point posEcran = Mouse.GetPosition(Application.Current.MainWindow);
             Vector2 vecteurTir = new Vector2((float)posEcran.X - (float)posJoueurX, (float)posEcran.Y - (float)posJoueurY);
             float normalVecteurX = Vector2.Normalize(vecteurTir).X, normalVecteurY = Vector2.Normalize(vecteurTir).Y;
+            
 #if DEBUG
             Console.WriteLine("vecteur x " + normalVecteurX.ToString());
             Console.WriteLine("vecteur y " + normalVecteurY.ToString());
+            Console.WriteLine("souris : " + Mouse.GetPosition(monCanvas).X + ", " + Mouse.GetPosition(monCanvas).Y);
 #endif
 
             cheminSprite = AppDomain.CurrentDomain.BaseDirectory + "images\\sprites\\personnage\\";
@@ -530,15 +537,15 @@ namespace JeuSAE
             }
             //faire varier en fonction de la position du curseur
             if (Math.Abs(normalVecteurX) < 0.2 && normalVecteurY > 0.8)
-                apparenceArme.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\arme\\arme1_5.png"));
+                apparenceArme.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\arme\\arme{armeChoisie}_5.png"));
             else if (Math.Abs(normalVecteurX) < 0.2 && normalVecteurY < -0.8)
-                apparenceArme.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\arme\\arme1_1.png"));
+                apparenceArme.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\arme\\arme{armeChoisie}_1.png"));
             else if (Math.Abs(normalVecteurX) < 0.96 && normalVecteurY > 0.25)
-                apparenceArme.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\arme\\arme1_4.png"));
+                apparenceArme.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\arme\\arme{armeChoisie}_4.png"));
             else if (Math.Abs(normalVecteurX) < 0.96 && normalVecteurY < -0.25)
-                apparenceArme.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\arme\\arme1_2.png"));
+                apparenceArme.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\arme\\arme{armeChoisie}_2.png"));
             else
-                apparenceArme.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\arme\\arme1_3.png"));
+                apparenceArme.ImageSource = new BitmapImage(new Uri(cheminSprite + $"\\arme\\arme{armeChoisie}_3.png"));
 
 
 
