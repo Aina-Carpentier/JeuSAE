@@ -36,6 +36,7 @@ namespace JeuSAE
         public String choix, cheminSprite;
         private ImageBrush apparenceJoueur = new ImageBrush(), apparenceArme = new ImageBrush();
         public int coefEXP = 1;
+        public int eliminations = 0;
 
 
 
@@ -382,9 +383,15 @@ namespace JeuSAE
                 {
                     if (balle.Rect.IntersectsWith(ennemi.Rect) && balle.Tireur == "joueur")
                     {
-                        listeEnnemiAEnlever.Add(ennemi);
-                        HUD.AjouteElimination(1);
-                        HUD.AjouteExp(coefEXP);
+                        ennemi.Vie -= balle.Degats;
+                        listeBalleAEnlever.Add(balle); //TODO substracter 1 à la variable piercing si elle existe un jour
+
+                        if (ennemi.Vie <= 0)
+                        {
+                            listeEnnemiAEnlever.Add(ennemi);
+                            HUD.AjouteElimination(1);
+                            HUD.AjouteExp(coefEXP);
+                        }
                     }
                     
                 }

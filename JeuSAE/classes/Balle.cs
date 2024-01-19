@@ -102,6 +102,7 @@ namespace JeuSAE.classes
             PosX = posX - taille / 2 + Vector2.Normalize(vecteur).X;
             PosY = posY - taille / 2 + Vector2.Normalize(vecteur).Y;
             Vecteur = vecteur;
+            Degats = degats;
             //Rect = new Rect(PosX, posY, Constantes.BALLE_WIDHT, Constantes.BALLE_HEIGHT);
 
             if (tireur == "joueur")
@@ -114,6 +115,7 @@ namespace JeuSAE.classes
                     Fill = Brushes.Red,
                     Stroke = Brushes.Black
                 };
+                Degats = Constantes.DEGAT_BALLE_JOUEUR;
             }
             else
             {
