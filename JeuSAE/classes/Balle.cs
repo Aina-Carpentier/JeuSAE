@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 //using System.Drawing;
 using System.Numerics;
 using System.Windows;
@@ -24,6 +25,8 @@ namespace JeuSAE.classes
         private Vector2 vecteurSin;
         private float coefSin = 0;
         private bool inverseSin = false;
+        private int nombrePerce = 1;
+        private List<Guid> listeEnnemisPerces = new List<Guid>();
 
         public double Vitesse
         {
@@ -84,6 +87,22 @@ namespace JeuSAE.classes
             set { vecteur = value; }
         }
 
+        public int NombrePerce
+        {
+            get { return nombrePerce; }
+            set { 
+                if (value < 0) { throw new ArgumentException("Le nombre d'ennemis à percer ne peut pas être négatif."); }
+                nombrePerce = value; }
+        }
+
+        public List<Guid> ListeEnnemisPerces
+        {
+            get { return listeEnnemisPerces; }
+            set { listeEnnemisPerces = value; }
+        }
+
+
+
         public Rect Rect { get => new Rect(PosX, PosY, Taille, Taille); }
 
         public Ellipse Graphique
@@ -102,6 +121,7 @@ namespace JeuSAE.classes
             PosX = posX - taille / 2 + Vector2.Normalize(vecteur).X;
             PosY = posY - taille / 2 + Vector2.Normalize(vecteur).Y;
             Vecteur = vecteur;
+            Degats = degats;
             //Rect = new Rect(PosX, posY, Constantes.BALLE_WIDHT, Constantes.BALLE_HEIGHT);
 
             if (tireur == "joueur")
@@ -114,6 +134,7 @@ namespace JeuSAE.classes
                     Fill = Brushes.Red,
                     Stroke = Brushes.Black
                 };
+                Degats = Constantes.DEGAT_BALLE_JOUEUR;
             }
             else
             {
@@ -239,6 +260,8 @@ namespace JeuSAE.classes
                     break;
 
             }
+
         }
+
     }
 }
