@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 //using System.Drawing;
 using System.Numerics;
 using System.Windows;
@@ -24,6 +25,8 @@ namespace JeuSAE.classes
         private Vector2 vecteurSin;
         private float coefSin = 0;
         private bool inverseSin = false;
+        private int nombrePerce = 1;
+        private List<Guid> listeEnnemisPerces = new List<Guid>();
 
         public double Vitesse
         {
@@ -83,6 +86,22 @@ namespace JeuSAE.classes
             get { return vecteur; }
             set { vecteur = value; }
         }
+
+        public int NombrePerce
+        {
+            get { return nombrePerce; }
+            set { 
+                if (value < 0) { throw new ArgumentException("Le nombre d'ennemis à percer ne peut pas être négatif."); }
+                nombrePerce = value; }
+        }
+
+        public List<Guid> ListeEnnemisPerces
+        {
+            get { return listeEnnemisPerces; }
+            set { listeEnnemisPerces = value; }
+        }
+
+
 
         public Rect Rect { get => new Rect(PosX, PosY, Taille, Taille); }
 
@@ -241,6 +260,8 @@ namespace JeuSAE.classes
                     break;
 
             }
+
         }
+
     }
 }
