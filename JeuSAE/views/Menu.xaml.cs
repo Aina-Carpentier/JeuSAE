@@ -73,7 +73,7 @@ namespace JeuSAE
 
         private void labJouer_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            this.choix = "difficulte";
+            this.choix = "jouer";
             this.Hide();
         }
 
