@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -42,8 +43,33 @@ namespace JeuSAE.classes
             {// Si la vie ajoutée (enlevée dans ce cas) rends la vie plus petite que 0, on la met à 0
                 mainWindow.rectanglePV.Width = 0; //TODO activer le killscreen ici
                 BlurBitmapEffect myBlurEffect = new BlurBitmapEffect();
-                myBlurEffect.Radius = 10;
+                myBlurEffect.Radius = 20;
                 mainWindow.carte.BitmapEffect = myBlurEffect;
+                //System.Windows.Controls.Image grayImage = new System.Windows.Controls.Image();
+
+
+                //FormatConvertedBitmap grayBitmap = new FormatConvertedBitmap();
+
+
+                //    grayBitmap.BeginInit();
+
+                //    grayBitmap.Source = MapGenerator.ToBitmapImage(MapGenerator.cible);
+
+                //    grayBitmap.DestinationFormat = PixelFormats.Gray8;
+
+                //    grayBitmap.EndInit();
+
+
+
+                //    // Set Source property of Image
+
+                //    grayImage.Source = grayBitmap;
+
+
+
+                //    mainWindow.monCanvas.Children.Add(grayImage);
+
+
             } else
                 {// Sinon on ajoute la vie
                     mainWindow.rectanglePV.Width += nouvelleLargeur;
@@ -125,10 +151,6 @@ namespace JeuSAE.classes
             mainWindow.labDiamant.Content = (nombreDiamants + nombreDiamantDansLabel).ToString();
 
         }
-
-
-
-
 
 
     }
