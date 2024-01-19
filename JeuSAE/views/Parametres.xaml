@@ -35,15 +35,14 @@
             FontFamily="Rubik"
             FontSize="90" />
         <Label
-            x:Name="labMenu"
-            Width="240"
-            Height="117"
+            x:Name="labRetour"
+            Height="120"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Content="Menu"
+            Content="Retour"
             FontFamily="Rubik"
             FontSize="90"
-            MouseLeftButtonDown="labMenu_MouseLeftButtonDown" MouseEnter="labMenu_MouseEnter" MouseLeave="labMenu_MouseLeave" />
+            MouseLeftButtonDown="labRetour_MouseLeftButtonDown" MouseEnter="labRetour_MouseEnter" MouseLeave="labRetour_MouseLeave" Width="294" />
         <Label x:Name="labSon"
             Height="117"
             HorizontalAlignment="Left"

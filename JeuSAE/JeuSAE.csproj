@@ -807,7 +807,6 @@
 
   <ItemGroup>
     <Folder Include="audio\sfx\" />
-    <Folder Include="views\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -15,7 +15,7 @@
     WindowState="Maximized"
     WindowStyle="None"
     mc:Ignorable="d">
-    <Canvas x:Name="canvasTouche">
+    <Canvas x:Name="canvasTouche" Focusable="True">
         <Canvas.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                 <GradientStop Color="#FF290707" Offset="1"/>
@@ -23,14 +23,41 @@
             </LinearGradientBrush>
         </Canvas.Background>
         <Label
-            x:Name="labMenu"
-            Width="240"
+            x:Name="labRetour"
             Height="120"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Content="Menu"
+            Content="Retour"
             FontFamily="Rubik"
             FontSize="90"
-            MouseLeftButtonDown="labMenu_MouseLeftButtonDown" MouseEnter="labMenu_MouseEnter" MouseLeave="labMenu_MouseLeave" />
+            MouseLeftButtonDown="labRetour_MouseLeftButtonDown" MouseEnter="labRetour_MouseEnter" MouseLeave="labRetour_MouseLeave" Width="294" />
+
+        <Label x:Name="labTouche"
+        Height="117"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Content="Configuration des touches"
+        FontFamily="Rubik"
+        FontSize="90" Width="1118" />
+        
+        <Label x:Name="labHaut" Content="Haut" FontSize="60" Height="90" Width="147" FontFamily="Rubik"/>
+        <Label x:Name="labBas" Content="Bas" FontSize="60" Height="90" Width="112" FontFamily="Rubik"/>
+        <Label x:Name="labGauche" Content="Gauche" FontSize="60" Height="90" Width="222" FontFamily="Rubik"/>
+        <Label x:Name="labDroite" Content="Droite" FontSize="60" Height="90" Width="184" FontFamily="Rubik"/>
+        
+        <TextBox x:Name="tbHaut" TextWrapping="Wrap" Text="" Width="200" Height="90" FontSize="60" TextAlignment="Center" MaxLines="1" MaxLength="1" IsReadOnly="True" FontFamily="Rubik"/>
+        <TextBox x:Name="tbBas" TextWrapping="Wrap" Text="" Width="200" Height="90" FontSize="60" TextAlignment="Center" MaxLines="1" MaxLength="1" IsReadOnly="True" FontFamily="Rubik"/>
+        <TextBox x:Name="tbGauche" TextWrapping="Wrap" Text="" Width="200" Height="90" FontSize="60" TextAlignment="Center" MaxLines="1" MaxLength="1" IsReadOnly="True" FontFamily="Rubik"/>
+        <TextBox x:Name="tbDroite" TextWrapping="Wrap" Text="" Width="200" Height="90" FontSize="60" TextAlignment="Center" MaxLines="1" MaxLength="1" IsReadOnly="True" FontFamily="Rubik"/>
+        
+        <Button x:Name="butHaut" Content="Modifier" Width="150" Height="90" FontSize="30" FontFamily="Rubik"/>
+        <Button x:Name="butBas" Content="Modifier" Width="150" Height="90" FontSize="30" FontFamily="Rubik"/>
+        <Button x:Name="butGauche" Content="Modifier" Width="150" Height="90" FontSize="30" FontFamily="Rubik"/>
+        <Button x:Name="butDroite" Content="Modifier" Width="150" Height="90" FontSize="30" FontFamily="Rubik"/>
+
+
+
+
+
     </Canvas>
 </Window>

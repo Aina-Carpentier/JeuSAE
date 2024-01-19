@@ -24,12 +24,12 @@ namespace JeuSAE
         {
             InitializeComponent();
             labParametre.Margin = new Thickness(fenetreParametre.Width / 2 - labParametre.Width / 2, fenetreParametre.Height * 0.05, 0, 0);
-            labMenu.Margin = new Thickness(labMenu.Width*0.1, fenetreParametre.Height - labMenu.Height, 0, 0);
+            labRetour.Margin = new Thickness(labRetour.Width * 0.1, fenetreParametre.Height - labRetour.Height, 0, 0);
             labSon.Margin = new Thickness(fenetreParametre.Width / 2 - labSon.Width / 2, fenetreParametre.Height * 0.3, 0, 0);
             labTouche.Margin = new Thickness(fenetreParametre.Width / 2 - labTouche.Width / 2, fenetreParametre.Height * 0.45, 0, 0);
         }
 
-        private void labMenu_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void labRetour_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.choix = "menu";
             this.Hide();
@@ -47,14 +47,14 @@ namespace JeuSAE
             this.Hide();
         }
 
-        private void labMenu_MouseEnter(object sender, MouseEventArgs e)
+        private void labRetour_MouseEnter(object sender, MouseEventArgs e)
         {
-            labMenu.Foreground = Brushes.LightSlateGray;
+            labRetour.Foreground = Brushes.LightSlateGray;
         }
 
-        private void labMenu_MouseLeave(object sender, MouseEventArgs e)
+        private void labRetour_MouseLeave(object sender, MouseEventArgs e)
         {
-            labMenu.Foreground = Brushes.Black;
+            labRetour.Foreground = Brushes.Black;
         }
 
         private void labTouche_MouseEnter(object sender, MouseEventArgs e)

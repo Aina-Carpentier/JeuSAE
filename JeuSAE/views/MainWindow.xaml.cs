@@ -50,6 +50,8 @@ namespace JeuSAE
             Menu menu = new Menu();
             Parametres parametres = new Parametres();
             Magasin magasin = new Magasin();
+            Touche touche = new Touche();
+
             lecteurMusiqueMenu.PlayLooping();
             menu.ShowDialog();
             choix = menu.choix;
@@ -60,7 +62,7 @@ namespace JeuSAE
                 switch (choix)
                 {
                     case "quitter":
-                        Application.Current.Shutdown();
+                        Environment.Exit(0);
                         break;
 
                     case "parametre":
@@ -76,6 +78,11 @@ namespace JeuSAE
                     case "magasin":
                         magasin.ShowDialog();
                         choix = magasin.choix;
+                        break;
+
+                    case "touche":
+                        touche.ShowDialog();
+                        choix = touche.choix;
                         break;
 
                 }
