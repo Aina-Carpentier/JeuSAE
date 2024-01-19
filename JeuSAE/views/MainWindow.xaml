@@ -129,6 +129,9 @@
             Content="Rejouer"
             FontFamily="Rubik"
             FontSize="72"
+            MouseEnter="labRejouer_MouseEnter"
+            MouseLeave="labRejouer_MouseLeave"
+            MouseLeftButtonDown="labRejouer_MouseLeftButtonDown"
             Visibility="Hidden" />
         <Label
             x:Name="labRetour"

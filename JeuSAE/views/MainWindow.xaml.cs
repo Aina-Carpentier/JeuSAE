@@ -30,15 +30,13 @@ namespace JeuSAE
     {
         private SoundPlayer lecteurMusiqueMenu = new SoundPlayer(AppDomain.CurrentDomain.BaseDirectory + "audio\\musiques\\musique_menu.wav");
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
-        public bool mort = false, mortDroite, regardeADroite = true;
+        public bool mort = false, mortDroite = true, regardeADroite = true;
         public Key toucheHaut = Key.Z, toucheBas = Key.S, toucheDroite = Key.D, toucheGauche = Key.Q;
         public List<Balle> listeBalle = new List<Balle>();
         public static List<Ennemi> listeEnnemi = new List<Ennemi>();
         public static List<Ennemi> listeEnnemiAEnlever = new List<Ennemi>();
         public List<Balle> listeBalleAEnlever = new List<Balle>();
-        private int vitesseJoueur = 20, tempsRechargeArme = 15, tempsRechargeActuel = 0, vitesseBalle = 25, compteurSpawn = 0, compteurAAtteindre = 150, armeChoisie = 1;
-        private Rect player = new Rect(940, 500, 40, 80); // Hitbox player
-        private static string cheminFichierJson = AppDomain.CurrentDomain.BaseDirectory + "data\\database.json";
+        private Rect hitboxJoueur = new Rect(940, 500, 40, 80); // Hitbox player
         public int coefEXP = 1, tickAnimation = 0;
 
         private static bool gauche = false, droite = false, haut = false, bas = false,  tirer = false, numPadUn = false, numPadQuatre = false, toucheX = false, toucheC = false, toucheR = false;
@@ -46,7 +44,6 @@ namespace JeuSAE
 
         private static ImageBrush apparenceJoueur = new ImageBrush(), apparenceArme = new ImageBrush();
         private static double posJoueurX = 0, posJoueurY = 0;
-        private static Rect hitboxJoueur = new Rect(910, 490, 50, 50);
 
         private static BaseDeDonnee baseDeDonnee = JsonUtilitaire.LireFichier(Constantes.CHEMIN_BDD);
         private static BlurBitmapEffect myBlurEffect = new BlurBitmapEffect();
@@ -55,7 +52,6 @@ namespace JeuSAE
 
         public MainWindow()
         {
-            Menu:
             InitializeComponent();
             Constantes.LECTEUR_MUSIQUE_MENU.Load();
             Constantes.LECTEUR_MUSIQUE_MENU.PlayLooping();
@@ -638,19 +634,39 @@ namespace JeuSAE
 
         private void labRetour_MouseEnter(object sender, MouseEventArgs e)
         {
-            fenetrePrincipale.labRetour.Foreground = Brushes.LightSlateGray;
+            labRetour.Foreground = Brushes.LightSlateGray;
         }
 
         private void labRetour_MouseLeave(object sender, MouseEventArgs e)
         {
-            fenetrePrincipale.labRetour.Foreground = Brushes.Black;
+            labRetour.Foreground = Brushes.Black;
         }
 
         private void labRetour_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            
+            this.Close();
             MainWindow mainWindow = new MainWindow();
             mainWindow.ShowDialog();
+            
         }
+
+        private void labRejouer_MouseEnter(object sender, MouseEventArgs e)
+        {
+            labRejouer.Foreground = Brushes.LightSlateGray;
+        }
+
+        private void labRejouer_MouseLeave(object sender, MouseEventArgs e)
+        {
+            labRejouer.Foreground = Brushes.Black;
+        }
+
+        private void labRejouer_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.Close();
+            PreJeu preJeu = new PreJeu();
+            preJeu.ShowDialog();
+
+        }
+
     }
 }
