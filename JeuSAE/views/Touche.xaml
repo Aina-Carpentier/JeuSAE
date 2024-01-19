@@ -15,48 +15,177 @@
     WindowState="Maximized"
     WindowStyle="None"
     mc:Ignorable="d">
-    <Canvas x:Name="canvasTouche" Focusable="True">
+    <Canvas
+        x:Name="canvasTouche"
+        Focusable="True"
+        KeyDown="canvasTouche_KeyDown"
+        RenderTransformOrigin="0.5,0.5">
+        <Canvas.RenderTransform>
+            <TransformGroup>
+                <ScaleTransform />
+                <SkewTransform />
+                <RotateTransform Angle="0" />
+                <TranslateTransform />
+            </TransformGroup>
+        </Canvas.RenderTransform>
         <Canvas.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="#FF290707" Offset="1"/>
-                <GradientStop Color="#FFCAB5B5" Offset="0"/>
+            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                <GradientStop Offset="1" Color="#FF290707" />
+                <GradientStop Offset="0" Color="#FFCAB5B5" />
             </LinearGradientBrush>
         </Canvas.Background>
         <Label
             x:Name="labRetour"
+            Width="294"
             Height="120"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Content="Retour"
             FontFamily="Rubik"
             FontSize="90"
-            MouseLeftButtonDown="labRetour_MouseLeftButtonDown" MouseEnter="labRetour_MouseEnter" MouseLeave="labRetour_MouseLeave" Width="294" />
+            MouseEnter="labRetour_MouseEnter"
+            MouseLeave="labRetour_MouseLeave"
+            MouseLeftButtonDown="labRetour_MouseLeftButtonDown" />
 
-        <Label x:Name="labTouche"
-        Height="117"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Top"
-        Content="Configuration des touches"
-        FontFamily="Rubik"
-        FontSize="90" Width="1118" />
-        
-        <Label x:Name="labHaut" Content="Haut" FontSize="60" Height="90" Width="147" FontFamily="Rubik"/>
-        <Label x:Name="labBas" Content="Bas" FontSize="60" Height="90" Width="112" FontFamily="Rubik"/>
-        <Label x:Name="labGauche" Content="Gauche" FontSize="60" Height="90" Width="222" FontFamily="Rubik"/>
-        <Label x:Name="labDroite" Content="Droite" FontSize="60" Height="90" Width="184" FontFamily="Rubik"/>
-        
-        <TextBox x:Name="tbHaut" TextWrapping="Wrap" Text="" Width="200" Height="90" FontSize="60" TextAlignment="Center" MaxLines="1" MaxLength="1" IsReadOnly="True" FontFamily="Rubik"/>
-        <TextBox x:Name="tbBas" TextWrapping="Wrap" Text="" Width="200" Height="90" FontSize="60" TextAlignment="Center" MaxLines="1" MaxLength="1" IsReadOnly="True" FontFamily="Rubik"/>
-        <TextBox x:Name="tbGauche" TextWrapping="Wrap" Text="" Width="200" Height="90" FontSize="60" TextAlignment="Center" MaxLines="1" MaxLength="1" IsReadOnly="True" FontFamily="Rubik"/>
-        <TextBox x:Name="tbDroite" TextWrapping="Wrap" Text="" Width="200" Height="90" FontSize="60" TextAlignment="Center" MaxLines="1" MaxLength="1" IsReadOnly="True" FontFamily="Rubik"/>
-        
-        <Button x:Name="butHaut" Content="Modifier" Width="150" Height="90" FontSize="30" FontFamily="Rubik"/>
-        <Button x:Name="butBas" Content="Modifier" Width="150" Height="90" FontSize="30" FontFamily="Rubik"/>
-        <Button x:Name="butGauche" Content="Modifier" Width="150" Height="90" FontSize="30" FontFamily="Rubik"/>
-        <Button x:Name="butDroite" Content="Modifier" Width="150" Height="90" FontSize="30" FontFamily="Rubik"/>
+        <Label
+            x:Name="labTouche"
+            Width="1118"
+            Height="117"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Configuration des touches"
+            FontFamily="Rubik"
+            FontSize="90" />
+
+        <Label
+            x:Name="labHaut"
+            Width="147"
+            Height="90"
+            Content="Haut"
+            FontFamily="Rubik"
+            FontSize="60" />
+        <Label
+            x:Name="labBas"
+            Width="112"
+            Height="90"
+            Content="Bas"
+            FontFamily="Rubik"
+            FontSize="60" />
+        <Label
+            x:Name="labGauche"
+            Width="222"
+            Height="90"
+            Content="Gauche"
+            FontFamily="Rubik"
+            FontSize="60" />
+        <Label
+            x:Name="labDroite"
+            Width="184"
+            Height="90"
+            Content="Droite"
+            FontFamily="Rubik"
+            FontSize="60" />
+
+        <TextBox
+            x:Name="tbHaut"
+            Width="200"
+            Height="90"
+            FontFamily="Rubik"
+            FontSize="45"
+            IsReadOnly="True"
+            MaxLength="1"
+            MaxLines="1"
+            Text=""
+            TextAlignment="Center"
+            TextWrapping="Wrap" />
+        <TextBox
+            x:Name="tbBas"
+            Width="200"
+            Height="90"
+            FontFamily="Rubik"
+            FontSize="45"
+            IsReadOnly="True"
+            MaxLength="1"
+            MaxLines="1"
+            Text=""
+            TextAlignment="Center"
+            TextWrapping="Wrap" />
+        <TextBox
+            x:Name="tbGauche"
+            Width="200"
+            Height="90"
+            FontFamily="Rubik"
+            FontSize="45"
+            IsReadOnly="True"
+            MaxLength="1"
+            MaxLines="1"
+            Text=""
+            TextAlignment="Center"
+            TextWrapping="Wrap" />
+        <TextBox
+            x:Name="tbDroite"
+            Width="200"
+            Height="90"
+            FontFamily="Rubik"
+            FontSize="45"
+            IsReadOnly="True"
+            MaxLength="1"
+            MaxLines="1"
+            Text=""
+            TextAlignment="Center"
+            TextWrapping="Wrap" />
+
+        <Button
+            x:Name="butHaut"
+            Width="150"
+            Height="90"
+            Click="butHaut_Click"
+            Content="Modifier"
+            FontFamily="Rubik"
+            FontSize="30" />
+        <Button
+            x:Name="butBas"
+            Width="150"
+            Height="90"
+            Click="butBas_Click"
+            Content="Modifier"
+            FontFamily="Rubik"
+            FontSize="30" />
+        <Button
+            x:Name="butGauche"
+            Width="150"
+            Height="90"
+            Click="butGauche_Click"
+            Content="Modifier"
+            FontFamily="Rubik"
+            FontSize="30" />
+        <Button
+            x:Name="butDroite"
+            Width="150"
+            Height="90"
+            Click="butDroite_Click"
+            Content="Modifier"
+            FontFamily="Rubik"
+            FontSize="30" />
 
 
-
+        <Rectangle
+            x:Name="rectConfig"
+            Width="950"
+            Height="500"
+            Panel.ZIndex="2"
+            Fill="#FFE64848"
+            Visibility="Hidden" />
+        <Label
+            x:Name="labConfig"
+            Width="718"
+            Height="129"
+            Panel.ZIndex="2"
+            Content="Veuillez appuyer sur la touche &#10;que vous souhaitez assigner"
+            FontFamily="Rubik"
+            FontSize="50"
+            FontStyle="Italic"
+            Visibility="Hidden" />
 
 
     </Canvas>
