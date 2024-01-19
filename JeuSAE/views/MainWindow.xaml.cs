@@ -47,6 +47,7 @@ namespace JeuSAE
 
         private static BaseDeDonnee baseDeDonnee = JsonUtilitaire.LireFichier(Constantes.CHEMIN_BDD);
         private static BlurBitmapEffect myBlurEffect = new BlurBitmapEffect();
+        private static BlurBitmapEffect nonFloue = new BlurBitmapEffect();
 
 
         public MainWindow()
@@ -57,6 +58,7 @@ namespace JeuSAE
 
             posJoueurX = fenetrePrincipale.Width / 2;
             posJoueurY = fenetrePrincipale.Height / 2;
+            nonFloue.Radius = 0;
 
             Menu menu = new Menu();
             Parametres parametres = new Parametres();
@@ -605,7 +607,17 @@ namespace JeuSAE
             myBlurEffect.Radius = 10;
             labRejouer.Visibility = Visibility.Visible;
             labRetour.Visibility = Visibility.Visible;
-            carte.BitmapEffect = myBlurEffect;
+            
+            foreach (UIElement children in monCanvas.Children)
+            {
+                    children.BitmapEffect = myBlurEffect;
+            }
+
+            labRejouer.BitmapEffect = nonFloue;
+            labRetour.BitmapEffect = nonFloue;
+            rectJoueur.BitmapEffect = nonFloue;
+
+            //carte.BitmapEffect = myBlurEffect;
 
             cheminSprite = AppDomain.CurrentDomain.BaseDirectory + "images\\sprites\\personnage\\";
             if (tickAnimation < 40)
