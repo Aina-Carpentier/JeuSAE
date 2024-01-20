@@ -44,7 +44,7 @@ namespace JeuSAE.classes
                 mainWindow.tickAnimation = 0;
                 mainWindow.curseurPerso.Visibility = Visibility.Hidden;
                 mainWindow.Cursor = Cursors.Arrow;
-                mainWindow.labRejouer.Visibility = Visibility.Visible;
+                mainWindow.labQuitter.Visibility = Visibility.Visible;
                 mainWindow.labRetour.Visibility = Visibility.Visible;
                 mainWindow.mortDroite = mainWindow.regardeADroite;
             } 

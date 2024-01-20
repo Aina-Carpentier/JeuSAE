@@ -24,6 +24,7 @@ using System.Windows.Forms;
 using System.Reflection;
 using System.Diagnostics;
 
+
 namespace JeuSAE
 {
     public partial class MainWindow : Window
@@ -111,8 +112,8 @@ namespace JeuSAE
             Cursor = Cursors.None;
             rectJoueur.Margin = new Thickness(posJoueurX - rectJoueur.Width / 2, posJoueurY - rectJoueur.Height / 2, 0, 0);
             rectArme.Margin = new Thickness(posJoueurX - rectJoueur.Width / 2, posJoueurY - rectJoueur.Height / 2, 0, 0);
-            labRejouer.Margin = new Thickness(fenetrePrincipale.Width / 2 - labRejouer.Width / 2, fenetrePrincipale.Height*0.2, 0, 0);
-            labRetour.Margin = new Thickness(fenetrePrincipale.Width / 2 - labRetour.Width / 2, fenetrePrincipale.Height * 0.35, 0, 0);
+            labQuitter.Margin = new Thickness(fenetrePrincipale.Width / 2 - labQuitter.Width / 2, fenetrePrincipale.Height*0.35, 0, 0);
+            labRetour.Margin = new Thickness(fenetrePrincipale.Width / 2 - labRetour.Width / 2, fenetrePrincipale.Height * 0.2, 0, 0);
             HUDResolution1920x1080();
             HUD.ChangeBarreEliminations(0);
             HUD.ChangeBarreExp(0);
@@ -612,7 +613,7 @@ namespace JeuSAE
                     children.BitmapEffect = myBlurEffect;
             }
 
-            labRejouer.BitmapEffect = nonFloue;
+            labQuitter.BitmapEffect = nonFloue;
             labRetour.BitmapEffect = nonFloue;
             rectJoueur.BitmapEffect = nonFloue;
 
@@ -644,28 +645,24 @@ namespace JeuSAE
 
         private void labRetour_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            this.Close();
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.ShowDialog();
-            
+            Process.Start(Process.GetCurrentProcess().MainModule.FileName);
+            Application.Current.Shutdown();
+
         }
 
-        private void labRejouer_MouseEnter(object sender, MouseEventArgs e)
+        private void labQuitter_MouseEnter(object sender, MouseEventArgs e)
         {
-            labRejouer.Foreground = Brushes.LightSlateGray;
+            labQuitter.Foreground = Brushes.LightSlateGray;
         }
 
-        private void labRejouer_MouseLeave(object sender, MouseEventArgs e)
+        private void labQuitter_MouseLeave(object sender, MouseEventArgs e)
         {
-            labRejouer.Foreground = Brushes.Black;
+            labQuitter.Foreground = Brushes.Black;
         }
 
-        private void labRejouer_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void labQuitter_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            this.Close();
-            PreJeu preJeu = new PreJeu();
-            preJeu.ShowDialog();
-
+            Environment.Exit(0);
         }
 
         private void RemetValeursAZero()
