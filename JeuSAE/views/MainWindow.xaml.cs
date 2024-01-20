@@ -48,7 +48,6 @@ namespace JeuSAE
         private static BaseDeDonnee baseDeDonnee = JsonUtilitaire.LireFichier(Constantes.CHEMIN_BDD);
         private static BlurBitmapEffect myBlurEffect = new BlurBitmapEffect();
         private static BlurBitmapEffect nonFloue = new BlurBitmapEffect();
-        private double degatsJoueur = 10;
 
 
         public MainWindow()
@@ -353,7 +352,7 @@ namespace JeuSAE
 
             Vector2 vecteurTir = new Vector2((float)posEcran.X - (float)posJoueurX, (float)posEcran.Y - (float)posJoueurY);
 
-            Balle balleJoueur = new Balle(Constantes.VITESSE_BALLE, 50, 0, "joueur", 0, posJoueurX, posJoueurY, vecteurTir, degatsJoueur);
+            Balle balleJoueur = new Balle(Constantes.VITESSE_BALLE_JOUEUR, 50, 0, "joueur", 0, posJoueurX, posJoueurY, vecteurTir, Constantes.DEGATS_JOUEUR);
             PositionnerBalle(balleJoueur);
 
             monCanvas.Children.Add(balleJoueur.Graphique);

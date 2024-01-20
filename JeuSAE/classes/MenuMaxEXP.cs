@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Input;
 
 namespace JeuSAE.classes
@@ -28,6 +29,7 @@ namespace JeuSAE.classes
              * taille des balles
              * vie
              * cadence de tir améliorée
+             * piercing des balles
              */
 
 
@@ -53,37 +55,46 @@ namespace JeuSAE.classes
             for (int i = 0; i < listeAmeliorations.Count; i++)
             {
                 int numSwitch = 0;
-                int valeurActuelle;
+                double valeurActuelle= 0;
                 switch (listeAmeliorations[i])
                 {
                     case 0:
                         ameliorationString = "Dégats + 1";
-                        
+                        valeurActuelle = Constantes.DEGATS_JOUEUR;
                         numSwitch = 0;
                         break;
                     case 1:
                         ameliorationString = "Vitesse Balles + 20 %";
+                        valeurActuelle = Constantes.VITESSE_BALLE_JOUEUR;
                         numSwitch = 1;
                         break;
                     case 2:
                         ameliorationString = "Vitesse + 20 %";
+                        valeurActuelle = Constantes.VITESSE_JOUEUR;
                         numSwitch = 2;
                         break;
                     case 3:
-                        ameliorationString = "Taille des Balles + 10 px";
+                        ameliorationString = "Taille des Balles + 10";
+                        valeurActuelle = Constantes.TAILLE_BALLE_JOUEUR;
                         numSwitch = 3;
                         break;
                     case 4:
                         ameliorationString = "Vie + 20";
+                        valeurActuelle = Constantes.VIE_JOUEUR;
                         numSwitch = 4;
                         break;
                     case 5:
                         ameliorationString = "Cadence de tir + 20 %";
+                        valeurActuelle = 60/Constantes.TEMPS_RECHARGE_ARME;
                         numSwitch = 5;
+                        break;
+                        case 6:
+                        valeurActuelle = Constantes.BALLE_NOMBRE_PERCE;
+                        ameliorationString = "Perçage +1";
                         break;
                 }
 
-                AssigneAmeliorations(ameliorationString, i, numSwitch);
+                AssigneAmeliorations(ameliorationString, i, valeurActuelle, numSwitch);
 
 
             }
@@ -132,15 +143,31 @@ namespace JeuSAE.classes
 
         }
 
-        private static void AssigneAmeliorations(String ameliorationString, int numLabel, int numSwitch)
+        private static void AssigneAmeliorations(String ameliorationString, int numLabel, double valeur, int numSwitch)
         {
-            String valeurActuelle = "";
+            String stringActuelle = "Valeur actuelle : " + valeur.ToString();
+
+            if (numSwitch == 5)
+            {
+                stringActuelle += " tir/s";
+            }
 
 
 
-            if (numLabel == 0) { mainWindow.labAmelioration1.Content = ameliorationString; }
-            else if (numLabel == 1) { mainWindow.labAmelioration2.Content = ameliorationString; }
-            else if (numLabel == 2) { mainWindow.labAmelioration3.Content = ameliorationString; }
+            if (numLabel == 0) { 
+                mainWindow.labAmelioration1.Content = ameliorationString;
+                mainWindow.labActuelle1.Content = stringActuelle;
+            }
+            else if (numLabel == 1) { 
+                mainWindow.labAmelioration2.Content = ameliorationString; 
+                mainWindow.labActuelle2.Content = stringActuelle;
+            }
+            else if (numLabel == 2) { 
+                mainWindow.labAmelioration3.Content = ameliorationString; 
+                mainWindow.labActuelle3.Content = stringActuelle;
+            }
+
+
 
 
         }
