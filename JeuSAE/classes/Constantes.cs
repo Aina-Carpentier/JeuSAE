@@ -12,23 +12,27 @@ namespace JeuSAE.classes
     {
         public const int BALLE_WIDHT = 25;
         public const int BALLE_HEIGHT = 10;
-        public const double VIE_JOUEUR = 100d;
+        public static double VIE_JOUEUR = 100d;
         public const int DEGATS_BALLE_UN = 10;
         public const int DEGATS_BALLE_DEUX = 5;
-        public const int DEGAT_BALLE_JOUEUR = 1;
+        //public const int DEGAT_BALLE_JOUEUR = 1;
         public const int DEGATS_COLLISION = 10;
+        public const int NOMBRE_AMELIORATIONS = 7;
 
         public static readonly SoundPlayer LECTEUR_MUSIQUE_MENU = new SoundPlayer(AppDomain.CurrentDomain.BaseDirectory + "audio\\musiques\\musique_menu.wav");
 
 
         public static string CHEMIN_BDD = AppDomain.CurrentDomain.BaseDirectory + "data\\database.json";
-        public static int COEFFICIENT_EXPERIENCE = 1;
+        public static double COEFFICIENT_EXPERIENCE = 20;
         public static Key TOUCHE_HAUT = Key.Z, TOUCHE_BAS = Key.S, TOUCHE_DROITE = Key.D, TOUCHE_GAUCHE = Key.Q;
-        public static int BALLE_NOMBRE_PERCE = 3;
+        public static int BALLE_NOMBRE_PERCE = 1;
 
-        public static int VITESSE_JOUEUR = 20;
-        public static int TEMPS_RECHARGE_ARME = 15;
+        public static double VITESSE_JOUEUR = 10;
+        public static double TEMPS_RECHARGE_ARME = 15;
         public static int TEMPS_RECHARGE_ACTUEL = 0;
+        public static int TAILLE_BALLE_JOUEUR = 50;
+        public static double VITESSE_BALLE_JOUEUR = 25;
+        public static int DEGATS_JOUEUR = 1;
         public static int VITESSE_BALLE = 25;
         public static int COMPTEUR_SPAWN = 0;
         public static int TICK_REQUIS_POUR_SPAWN_ENNEMI = 150;

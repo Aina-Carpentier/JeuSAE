@@ -30,7 +30,7 @@ namespace JeuSAE.classes
 
         public static void AjouteVie(int nombrePV)
         {
-            double nouvelleLargeur = ((nombrePV) / 100d) * largeurBarVieMax;
+            double nouvelleLargeur = ((nombrePV) / Constantes.VIE_JOUEUR) * largeurBarVieMax;
 
             if (nouvelleLargeur + mainWindow.rectanglePV.Width >= largeurBarVieMax)
             {// Si la vie ajoutée fait dépasser la vie max, on la met juste au max
@@ -44,7 +44,7 @@ namespace JeuSAE.classes
                 mainWindow.tickAnimation = 0;
                 mainWindow.curseurPerso.Visibility = Visibility.Hidden;
                 mainWindow.Cursor = Cursors.Arrow;
-                mainWindow.labRejouer.Visibility = Visibility.Visible;
+                mainWindow.labQuitter.Visibility = Visibility.Visible;
                 mainWindow.labRetour.Visibility = Visibility.Visible;
                 mainWindow.mortDroite = mainWindow.regardeADroite;
             } 
@@ -67,7 +67,8 @@ namespace JeuSAE.classes
                 double nouvelleLargeur = ((nombreEXP) / 100d) * largeurBarExpMax;
                 if (nouvelleLargeur + mainWindow.rectangleEXP.Width >= largeurBarExpMax)
                 {
-                    mainWindow.rectangleEXP.Width = largeurBarExpMax;
+                    mainWindow.rectangleEXP.Width = 0;
+                    MenuMaxEXP.AfficheMenu();
                 }
                 else
                 {
