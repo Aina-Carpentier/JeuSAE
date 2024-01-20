@@ -58,6 +58,8 @@
     <None Remove="images\environnement_256x256\water_1.png" />
     <None Remove="images\HUD.png" />
     <None Remove="images\menu_background.png" />
+    <None Remove="images\rectangle_upgrade.png" />
+    <None Remove="images\tableau_upgrades.png" />
     <None Remove="images\viseur.png" />
     <None Remove="water_1.png" />
   </ItemGroup>
@@ -207,6 +209,12 @@
     <Content Include="images\menu_background.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="images\rectangle_upgrade.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\tableau_upgrades.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="images\viseur.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -222,6 +230,18 @@
 
   <ItemGroup>
     <None Update="audio\musiques\musique_menu.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="audio\sfx\autre_son_difficile.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="audio\sfx\son_difficile.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="audio\sfx\son_facile.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="audio\sfx\son_moyen.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="data\database.json">
@@ -875,10 +895,6 @@
     <None Update="images\sprites\triangle_rectangle.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="audio\sfx\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -15,7 +15,7 @@ namespace JeuSAE.classes
         public const double VIE_JOUEUR = 100d;
         public const int DEGATS_BALLE_UN = 10;
         public const int DEGATS_BALLE_DEUX = 5;
-        public const int DEGAT_BALLE_JOUEUR = 1;
+        //public const int DEGAT_BALLE_JOUEUR = 1;
         public const int DEGATS_COLLISION = 10;
 
         public static readonly SoundPlayer LECTEUR_MUSIQUE_MENU = new SoundPlayer(AppDomain.CurrentDomain.BaseDirectory + "audio\\musiques\\musique_menu.wav");

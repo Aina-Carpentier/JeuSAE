@@ -292,11 +292,11 @@ namespace JeuSAE
                 Balle balle;
                 if (this.Type == 6)
                 {
-                    balle = new Balle(5, 20, 2, this.id.ToString(), 0, PosX + (float)this.Graphique.Width / 2, PosY + (float)this.Graphique.Height / 2, -vecteurDeplace);
+                    balle = new Balle(5, 20, 2, this.id.ToString(), 0, PosX + (float)this.Graphique.Width / 2, PosY + (float)this.Graphique.Height / 2, -vecteurDeplace, 1);
                 }
                 else
                 {
-                    balle = new Balle(5, 20, 1, this.id.ToString(), 0, PosX + (float)this.Graphique.Width / 2, PosY + (float)this.Graphique.Height / 2, -vecteurDeplace);
+                    balle = new Balle(5, 20, 1, this.id.ToString(), 0, PosX + (float)this.Graphique.Width / 2, PosY + (float)this.Graphique.Height / 2, -vecteurDeplace, 1);
                 }
 
                 mainWindow.monCanvas.Children.Add(balle.Graphique);

@@ -25,7 +25,7 @@ namespace JeuSAE.classes
         private Vector2 vecteurSin;
         private float coefSin = 0;
         private bool inverseSin = false;
-        private int nombrePerce = 3;
+        private int nombrePerce = 1;
         private List<Guid> listeEnnemisPerces = new List<Guid>();
 
         public double Vitesse
@@ -111,7 +111,7 @@ namespace JeuSAE.classes
             set { graphique = value; }
         }
 
-        public Balle(double vitesse, double taille, int type, string tireur, double acceleration, double posX, double posY, Vector2 vecteur)
+        public Balle(double vitesse, double taille, int type, string tireur, double acceleration, double posX, double posY, Vector2 vecteur, double degats)
         {
             Vitesse = vitesse;
             Taille = taille;
@@ -129,12 +129,11 @@ namespace JeuSAE.classes
                 Graphique = new Ellipse
                 {
                     Tag = "bulletPlayer",
-                    Width = taille,
-                    Height = taille,
+                    Width = Taille,
+                    Height = Taille,
                     Fill = Brushes.Red,
                     Stroke = Brushes.Black
                 };
-                Degats = Constantes.DEGAT_BALLE_JOUEUR;
             }
             else
             {
@@ -144,8 +143,8 @@ namespace JeuSAE.classes
                         Graphique = new Ellipse
                         {
                             Tag = "bulletEnnemy",
-                            Width = taille,
-                            Height = taille,
+                            Width = Taille,
+                            Height = Taille,
                             Fill = Brushes.Red,
                             Stroke = Brushes.Black
                         };
@@ -155,8 +154,8 @@ namespace JeuSAE.classes
                         Graphique = new Ellipse
                         {
                             Tag = "bulletEnnemySin",
-                            Width = taille,
-                            Height = taille,
+                            Width = Taille,
+                            Height = Taille,
                             Fill = Brushes.DarkBlue,
                             Stroke = Brushes.Black
                         };
