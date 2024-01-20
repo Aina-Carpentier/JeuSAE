@@ -120,19 +120,18 @@
             Fill="#FF010400"
             Stroke="Black" />
         <Label
-            x:Name="labRejouer"
+            x:Name="labQuitter"
             Width="276"
-            Height="108"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
             Panel.ZIndex="900"
-            Content="Rejouer"
+            Content="Quitter"
             FontFamily="Rubik"
             FontSize="72"
-            MouseEnter="labRejouer_MouseEnter"
-            MouseLeave="labRejouer_MouseLeave"
-            MouseLeftButtonDown="labRejouer_MouseLeftButtonDown"
-            Visibility="Hidden" />
+            MouseEnter="labQuitter_MouseEnter"
+            MouseLeave="labQuitter_MouseLeave"
+            MouseLeftButtonDown="labQuitter_MouseLeftButtonDown"
+            Visibility="Hidden" Height="94" />
         <Label
             x:Name="labRetour"
             Width="852"
