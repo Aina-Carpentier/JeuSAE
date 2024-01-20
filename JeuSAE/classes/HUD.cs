@@ -84,6 +84,11 @@ namespace JeuSAE.classes
             mainWindow.rectangleElimination.Width = largeurBarEliminationsMax * pourcentage;
 
         }
+        
+        public static bool BossDoitSpawn()
+        {
+            return (mainWindow.rectangleElimination.Width / largeurBarEliminationsMax) == 1;
+        }
 
         public static void AjouteElimination(int nombreEliminations)
         {

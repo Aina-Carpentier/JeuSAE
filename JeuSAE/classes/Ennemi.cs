@@ -15,7 +15,7 @@ namespace JeuSAE
         private double cadenceTir; // En tick/tir donc si = 3 alors l'ennemi tir une fois tous les 3 tick, donc pour 3 fois par seconde c'est approx 20
         private double cooldownTir = 180; // La valeur utiliser pour calculer quand l'ennemi tire en fonction de la cadence
         private int type;
-        private String nom;
+        private string nom;
         private double posX;
         private double posY;
         private Guid id = Guid.NewGuid();
@@ -166,6 +166,42 @@ namespace JeuSAE
             return this.Nom;
         }
 
+        public static void SpawnUnBoss(MainWindow mainWindow)
+        {
+            System.Windows.Shapes.Rectangle carte = mainWindow.carte;
+            double posJoueurX = mainWindow.fenetrePrincipale.Width / 2;
+            double posJoueurY = mainWindow.fenetrePrincipale.Height / 2;
+
+            int y = random.Next(0, 2000);
+            int x = random.Next(500, 2000) - y;
+
+            if (random.Next(0, 2) == 0)
+            {
+                x = x * (-1);
+            }
+            if (random.Next(0, 2) == 0)
+            {
+                y = y * (-1);
+            }
+
+            Boss ennemi = new Boss(random.Next(0, 7), x, y);
+            Canvas.SetLeft(ennemi.Graphique, posJoueurX + x);
+            Canvas.SetTop(ennemi.Graphique, posJoueurY + y);
+
+            if (Canvas.GetLeft(ennemi.Graphique) + x < Canvas.GetLeft(carte) || Canvas.GetLeft(ennemi.Graphique) > carte.Width + Canvas.GetLeft(carte))
+            {
+                Canvas.SetLeft(ennemi.Graphique, (posJoueurX - x));
+            }
+            if (Canvas.GetTop(ennemi.Graphique) + y < Canvas.GetTop(carte) || Canvas.GetTop(ennemi.Graphique) > carte.Height + Canvas.GetTop(carte))
+            {
+                Canvas.SetTop(ennemi.Graphique, (posJoueurY - y));
+            }
+            ennemi.PosX = Canvas.GetLeft(ennemi.Graphique);
+            ennemi.PosY = Canvas.GetTop(ennemi.Graphique);
+
+            mainWindow.monCanvas.Children.Add(ennemi.Graphique);
+            MainWindow.listeEnnemi.Add(ennemi);
+        }
 
         public static void SpawnUnEnnemi(MainWindow mainWindow)
         {

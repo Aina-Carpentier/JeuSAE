@@ -461,6 +461,13 @@ namespace JeuSAE
                 Constantes.COMPTEUR_SPAWN = 0;
             }
             Constantes.COMPTEUR_SPAWN++;
+
+            // Boss
+            if (HUD.BossDoitSpawn())
+            {
+                Ennemi.SpawnUnBoss(this);
+                HUD.ChangeBarreExp(0);
+            }
         }
 
         private void HUDResolution1920x1080()

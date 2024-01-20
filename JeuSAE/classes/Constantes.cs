@@ -38,6 +38,9 @@ namespace JeuSAE.classes
         public const int ENNEMI_RECT_LARGEUR = 75;
         public const int ENNEMI_RECT_HAUTEUR = 75;
 
+        public const int BOSS_RECT_LARGEUR = 130;
+        public const int BOSS_RECT_HAUTEUR = 130;
+
 
         // VIE
 
@@ -47,6 +50,7 @@ namespace JeuSAE.classes
         public const double VIE_HEXAGONE = 12;
         public const double VIE_HEPTAGONE = 14;
         public const double VIE_OCTOGONE = 20;
+        public const double VIE_BOSS = 45;
         public const double VIE_CERCLE = Math.PI;
 
 
@@ -58,6 +62,7 @@ namespace JeuSAE.classes
         public const double VITESSE_HEXAGONE = 3;
         public const double VITESSE_HEPTAGONE = 2;
         public const double VITESSE_OCTOGONE = 6;
+        public const double VITESSE_BOSS = 9;
         public const double VITESSE_CERCLE = Math.PI;
 
 
@@ -69,6 +74,7 @@ namespace JeuSAE.classes
         public const double CADENCE_HEXAGONE = 1 * 60;
         public const double CADENCE_HEPTAGONE = 0.5 * 60d;
         public const double CADENCE_OCTOGONE = 0.4 * 60d;
+        public const double CADENCE_BOSS = 2.5 * 60d;
         public const double CADENCE_CERCLE = Math.PI * 60d;
 
 
@@ -80,6 +86,7 @@ namespace JeuSAE.classes
         public const string NOM_HEXAGONE = "Hexagone";
         public const string NOM_HEPTAGONE = "Heptagone";
         public const string NOM_OCTOGONE = "Octogone";
+        public const string NOM_BOSS = "Boss";
         public const string NOM_CERCLE = "Cercle";
 
     }
