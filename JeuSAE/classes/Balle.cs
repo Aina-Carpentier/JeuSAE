@@ -25,7 +25,7 @@ namespace JeuSAE.classes
         private Vector2 vecteurSin;
         private float coefSin = 0;
         private bool inverseSin = false;
-        private int nombrePerce = 3;
+        
         private List<Guid> listeEnnemisPerces = new List<Guid>();
 
         public double Vitesse
@@ -89,10 +89,10 @@ namespace JeuSAE.classes
 
         public int NombrePerce
         {
-            get { return nombrePerce; }
+            get { return Constantes.BALLE_NOMBRE_PERCE; }
             set { 
                 if (value < 0) { throw new ArgumentException("Le nombre d'ennemis à percer ne peut pas être négatif."); }
-                nombrePerce = value; }
+                Constantes.BALLE_NOMBRE_PERCE = value; }
         }
 
         public List<Guid> ListeEnnemisPerces
@@ -122,7 +122,6 @@ namespace JeuSAE.classes
             PosY = posY - taille / 2 + Vector2.Normalize(vecteur).Y;
             Vecteur = vecteur;
             Degats = degats;
-            //Rect = new Rect(PosX, posY, Constantes.BALLE_WIDHT, Constantes.BALLE_HEIGHT);
 
             if (tireur == "joueur")
             {
@@ -189,39 +188,29 @@ namespace JeuSAE.classes
         {
             MainWindow mainWindow = (MainWindow)App.Current.MainWindow;
             Vector2 vecteurNormalize = Vector2.Normalize(this.Vecteur);
+
             switch (this.Type)
             {
                 case 0:
-                    {
-                        double newX = PosX + (vecteurNormalize.X * this.Vitesse);
-                        double newY = PosY + (vecteurNormalize.Y * this.Vitesse);
+                {
+                    double newX = PosX + (vecteurNormalize.X * this.Vitesse);
+                    double newY = PosY + (vecteurNormalize.Y * this.Vitesse);
 
-                        this.PosX = newX;
-                        this.PosY = newY;
-                        break;
-                    }
+                    this.PosX = newX;
+                    this.PosY = newY;
+                    break;
+                }
                 case 1:
-                    {
-                        double newX = PosX + (vecteurNormalize.X * this.Vitesse);
-                        double newY = PosY + (vecteurNormalize.Y * this.Vitesse);
+                {
+                    double newX = PosX + (vecteurNormalize.X * this.Vitesse);
+                    double newY = PosY + (vecteurNormalize.Y * this.Vitesse);
 
-                        this.PosX = newX;
-                        this.PosY = newY;
-                        break;
-                    }
-
-
+                    this.PosX = newX;
+                    this.PosY = newY;
+                    break;
+                }
                 case 2:
-
-#if DEBUG
-                    //Console.WriteLine(vecteurTraj);
-                    //Console.WriteLine("coef : " + coefSin);
-
-
-#endif
-
-
-
+                {
                     double sinus = Math.Sin(coefSin) * 2;
                     double cosinus = Math.Cos(coefSin) *2;
 
@@ -244,22 +233,9 @@ namespace JeuSAE.classes
                         coefSin -= 0.05f;
                         if (coefSin <= 0) { inverseSin = false; }
                     }
-                    
-                    /*
-                    Rectangle rectangle = new Rectangle();
-                    rectangle.Width = 10;
-                    rectangle.Height = 10;
-                    rectangle.Fill = Brushes.Red;
-                    rectangle.Stroke = Brushes.Black;
-                    Canvas.SetLeft(rectangle, this.PosX);
-                    Canvas.SetTop(rectangle, this.PosY);
-                    mainWindow.monCanvas.Children.Add(rectangle);
-                    */
                     break;
-
+                }
             }
-
         }
-
     }
 }
