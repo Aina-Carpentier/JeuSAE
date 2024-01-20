@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Input;
 
 namespace JeuSAE.classes
@@ -9,6 +8,7 @@ namespace JeuSAE.classes
     {
         static MainWindow mainWindow = (MainWindow)App.Current.MainWindow;
         static Random random = new Random();
+        public static int numAmeliorationBouttonUn = 0, numAmeliorationBouttonDeux = 0, numAmeliorationBouttonTrois = 0;
 
 
         public static void AfficheMenu()
@@ -30,6 +30,7 @@ namespace JeuSAE.classes
              * vie
              * cadence de tir améliorée
              * piercing des balles
+             * life leech
              */
 
 
@@ -55,7 +56,7 @@ namespace JeuSAE.classes
             for (int i = 0; i < listeAmeliorations.Count; i++)
             {
                 int numSwitch = 0;
-                double valeurActuelle= 0;
+                double valeurActuelle = 0;
                 switch (listeAmeliorations[i])
                 {
                     case 0:
@@ -65,12 +66,12 @@ namespace JeuSAE.classes
                         break;
                     case 1:
                         ameliorationString = "Vitesse Balles + 20 %";
-                        valeurActuelle = Constantes.VITESSE_BALLE_JOUEUR;
+                        valeurActuelle = Math.Round( Constantes.VITESSE_BALLE_JOUEUR, 1);
                         numSwitch = 1;
                         break;
                     case 2:
                         ameliorationString = "Vitesse + 20 %";
-                        valeurActuelle = Constantes.VITESSE_JOUEUR;
+                        valeurActuelle = Math.Round( Constantes.VITESSE_JOUEUR, 1);
                         numSwitch = 2;
                         break;
                     case 3:
@@ -85,12 +86,13 @@ namespace JeuSAE.classes
                         break;
                     case 5:
                         ameliorationString = "Cadence de tir + 20 %";
-                        valeurActuelle = 60/Constantes.TEMPS_RECHARGE_ARME;
+                        valeurActuelle = Math.Round( 60 / Constantes.TEMPS_RECHARGE_ARME , 1);
                         numSwitch = 5;
                         break;
-                        case 6:
-                        valeurActuelle = Constantes.BALLE_NOMBRE_PERCE;
+                    case 6:
                         ameliorationString = "Perçage +1";
+                        valeurActuelle = Constantes.BALLE_NOMBRE_PERCE;
+                        numSwitch = 6;
                         break;
                 }
 
@@ -118,6 +120,7 @@ namespace JeuSAE.classes
             mainWindow.labBonus.Visibility = System.Windows.Visibility.Visible;
             mainWindow.Cursor = Cursors.Arrow;
 
+            MainWindow.ouvreMenuMaxEXP = true;
 
 
         }
@@ -139,13 +142,15 @@ namespace JeuSAE.classes
             mainWindow.labBonus.Visibility = System.Windows.Visibility.Hidden;
             mainWindow.Cursor = Cursors.None;
 
+            MainWindow.ouvreMenuMaxEXP = false;
+            Constantes.COEFFICIENT_EXPERIENCE *= 0.9;
 
 
         }
 
         private static void AssigneAmeliorations(String ameliorationString, int numLabel, double valeur, int numSwitch)
         {
-            String stringActuelle = "Valeur actuelle : " + valeur.ToString();
+            String stringActuelle = "Valeur actuelle : " + Environment.NewLine + valeur.ToString();
 
             if (numSwitch == 5)
             {
@@ -154,19 +159,74 @@ namespace JeuSAE.classes
 
 
 
-            if (numLabel == 0) { 
+            if (numLabel == 0)
+            {
                 mainWindow.labAmelioration1.Content = ameliorationString;
                 mainWindow.labActuelle1.Content = stringActuelle;
+                numAmeliorationBouttonUn = numSwitch;
             }
-            else if (numLabel == 1) { 
-                mainWindow.labAmelioration2.Content = ameliorationString; 
+            else if (numLabel == 1)
+            {
+                mainWindow.labAmelioration2.Content = ameliorationString;
                 mainWindow.labActuelle2.Content = stringActuelle;
+                numAmeliorationBouttonDeux = numSwitch;
             }
-            else if (numLabel == 2) { 
-                mainWindow.labAmelioration3.Content = ameliorationString; 
+            else if (numLabel == 2)
+            {
+                mainWindow.labAmelioration3.Content = ameliorationString;
                 mainWindow.labActuelle3.Content = stringActuelle;
+                numAmeliorationBouttonTrois = numSwitch;
             }
 
+
+
+
+        }
+
+        public static void AppliqueBonusAuJoueur(int numBoutton)
+        {
+            int valeurUtilise = 0;
+            switch (numBoutton)
+            {
+                case 1:
+                    valeurUtilise = numAmeliorationBouttonUn;
+                    break;
+                case 2:
+                    valeurUtilise = numAmeliorationBouttonDeux;
+                    break;
+                case 3:
+                    valeurUtilise = numAmeliorationBouttonTrois;
+                    break;
+            }
+
+
+            switch (valeurUtilise)
+            {
+                case 0:
+                    Constantes.DEGATS_JOUEUR += 1;
+                    break;
+                case 1:
+                    Constantes.VITESSE_BALLE_JOUEUR *= 1.2;
+                    break;
+                case 2:
+                    Constantes.VITESSE_JOUEUR *= 1.2;
+                    break;
+                case 3:
+                    Constantes.TAILLE_BALLE_JOUEUR += 10;
+                    break;
+                case 4:
+                    Constantes.VIE_JOUEUR += 20;
+                    break;
+                case 5:
+                    Constantes.TEMPS_RECHARGE_ARME *= 0.8;
+                    break;
+                case 6:
+                    Constantes.BALLE_NOMBRE_PERCE += 1;
+                    break;
+            }
+
+
+            CacheMenu();
 
 
 

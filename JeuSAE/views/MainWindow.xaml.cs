@@ -31,6 +31,7 @@ namespace JeuSAE
         private SoundPlayer lecteurMusiqueMenu = new SoundPlayer(AppDomain.CurrentDomain.BaseDirectory + "audio\\musiques\\musique_menu.wav");
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
         public bool mort = false, mortDroite = true, regardeADroite = true;
+        public static bool ouvreMenuMaxEXP = false;
         public Key toucheHaut = Key.Z, toucheBas = Key.S, toucheDroite = Key.D, toucheGauche = Key.Q;
         public List<Balle> listeBalle = new List<Balle>();
         public static List<Ennemi> listeEnnemi = new List<Ennemi>();
@@ -48,6 +49,8 @@ namespace JeuSAE
         private static BaseDeDonnee baseDeDonnee = JsonUtilitaire.LireFichier(Constantes.CHEMIN_BDD);
         private static BlurBitmapEffect myBlurEffect = new BlurBitmapEffect();
         private static BlurBitmapEffect nonFloue = new BlurBitmapEffect();
+        private BitmapImage bouttonAmelioration = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images\\rectangle_upgrade.png"));
+        private BitmapImage bouttonAmeliorationPresse = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images\\rectangle_upgrade_presse.png"));
 
 
         public MainWindow()
@@ -133,6 +136,9 @@ namespace JeuSAE
             if (mort)
             {
                 AnimationMort();
+            } else if (ouvreMenuMaxEXP)
+            {
+
             }
             else
             {
@@ -188,7 +194,7 @@ namespace JeuSAE
                 numPadUn = true;
             if (e.Key == Key.NumPad4)
                 numPadQuatre = true;
-            if (numPadUn && numPadQuatre) { Constantes.VITESSE_JOUEUR = 200; } else { Constantes.VITESSE_JOUEUR = 10; }
+            if (numPadUn && numPadQuatre) { Constantes.VITESSE_JOUEUR = 200; }
 
             //Clear ennemis
             if (e.Key == Key.X) { toucheX = true; }
@@ -341,7 +347,7 @@ namespace JeuSAE
 
         private void CreerBalleJoueur()
         {
-            Constantes.TEMPS_RECHARGE_ACTUEL = Constantes.TEMPS_RECHARGE_ARME;
+            Constantes.TEMPS_RECHARGE_ACTUEL = (int) Constantes.TEMPS_RECHARGE_ARME;
 
             Point posEcran = Mouse.GetPosition(Application.Current.MainWindow);
             Point posCarte = Mouse.GetPosition(carte);
@@ -352,7 +358,7 @@ namespace JeuSAE
 
             Vector2 vecteurTir = new Vector2((float)posEcran.X - (float)posJoueurX, (float)posEcran.Y - (float)posJoueurY);
 
-            Balle balleJoueur = new Balle(Constantes.VITESSE_BALLE_JOUEUR, 50, 0, "joueur", 0, posJoueurX, posJoueurY, vecteurTir, Constantes.DEGATS_JOUEUR);
+            Balle balleJoueur = new Balle(Constantes.VITESSE_BALLE_JOUEUR, Constantes.TAILLE_BALLE_JOUEUR, 0, "joueur", 0, posJoueurX, posJoueurY, vecteurTir, Constantes.DEGATS_JOUEUR);
             PositionnerBalle(balleJoueur);
 
             monCanvas.Children.Add(balleJoueur.Graphique);
@@ -425,12 +431,57 @@ namespace JeuSAE
                         {
                             listeEnnemiAEnlever.Add(ennemi);
                             HUD.AjouteElimination(1);
-                            HUD.AjouteExp(Constantes.COEFFICIENT_EXPERIENCE);
+                            HUD.AjouteExp((int) Constantes.COEFFICIENT_EXPERIENCE);
                         }
                     }
                     
                 }
             }
+        }
+
+        private void bouttonUpgrade1_MouseEnter(object sender, MouseEventArgs e)
+        {
+            bouttonUpgrade1.Source = bouttonAmeliorationPresse;
+        }
+
+        private void bouttonUpgrade1_MouseLeave(object sender, MouseEventArgs e)
+        {
+            bouttonUpgrade1.Source = bouttonAmelioration;
+        }
+
+        private void bouttonUpgrade2_MouseEnter(object sender, MouseEventArgs e)
+        {
+            bouttonUpgrade2.Source = bouttonAmeliorationPresse;
+        }
+
+        private void bouttonUpgrade2_MouseLeave(object sender, MouseEventArgs e)
+        {
+            bouttonUpgrade2.Source = bouttonAmelioration;
+        }
+
+        private void bouttonUpgrade3_MouseEnter(object sender, MouseEventArgs e)
+        {
+            bouttonUpgrade3.Source = bouttonAmeliorationPresse;
+        }
+
+        private void bouttonUpgrade3_MouseLeave(object sender, MouseEventArgs e)
+        {
+            bouttonUpgrade3.Source = bouttonAmelioration;
+        }
+
+        private void bouttonUpgrade1_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            MenuMaxEXP.AppliqueBonusAuJoueur(1);
+        }
+
+        private void bouttonUpgrade2_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            MenuMaxEXP.AppliqueBonusAuJoueur(2);
+        }
+
+        private void bouttonUpgrade3_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            MenuMaxEXP.AppliqueBonusAuJoueur(3);
         }
 
         private void CollisionEnnemi()

@@ -59,6 +59,7 @@
     <None Remove="images\HUD.png" />
     <None Remove="images\menu_background.png" />
     <None Remove="images\rectangle_upgrade.png" />
+    <None Remove="images\rectangle_upgrade_presse.png" />
     <None Remove="images\tableau_upgrades.png" />
     <None Remove="images\viseur.png" />
     <None Remove="water_1.png" />
@@ -210,6 +211,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="images\rectangle_upgrade.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\rectangle_upgrade_presse.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="images\tableau_upgrades.png">
