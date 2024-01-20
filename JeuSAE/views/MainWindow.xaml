@@ -159,6 +159,7 @@
 
         <Label x:Name="labAmelioration3" Content="Amélioration 3" Canvas.Left="1253" Canvas.Top="364" Foreground="White" FontSize="36" Height="72" Width="426" VerticalAlignment="Top" FontFamily="Rubik" FontWeight="Bold" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Panel.ZIndex="1004" Visibility="Hidden"/>
         <Label x:Name="labActuelle3" Content="Actuelle :" Canvas.Left="1253" Canvas.Top="441" Foreground="White" FontSize="36" Height="65" Width="426" VerticalAlignment="Top" FontFamily="Rubik" FontWeight="Bold" HorizontalAlignment="Center" VerticalContentAlignment="Bottom" Panel.ZIndex="1004" Visibility="Hidden"/>
+        <Label x:Name="labBonus" Content="BONUS !" Canvas.Left="749" Canvas.Top="132" Foreground="White" FontSize="100" Height="106" Width="422" VerticalAlignment="Center" FontFamily="Rubik" FontWeight="Bold" HorizontalAlignment="Left" Panel.ZIndex="1004" HorizontalContentAlignment="Center" Visibility="Hidden"/>
 
     </Canvas>
 </Window>

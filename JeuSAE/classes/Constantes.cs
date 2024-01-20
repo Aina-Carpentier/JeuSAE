@@ -17,12 +17,13 @@ namespace JeuSAE.classes
         public const int DEGATS_BALLE_DEUX = 5;
         //public const int DEGAT_BALLE_JOUEUR = 1;
         public const int DEGATS_COLLISION = 10;
+        public const int NOMBRE_AMELIORATIONS = 6;
 
         public static readonly SoundPlayer LECTEUR_MUSIQUE_MENU = new SoundPlayer(AppDomain.CurrentDomain.BaseDirectory + "audio\\musiques\\musique_menu.wav");
 
 
         public static string CHEMIN_BDD = AppDomain.CurrentDomain.BaseDirectory + "data\\database.json";
-        public static int COEFFICIENT_EXPERIENCE = 1;
+        public static int COEFFICIENT_EXPERIENCE = 30;
         public static Key TOUCHE_HAUT = Key.Z, TOUCHE_BAS = Key.S, TOUCHE_DROITE = Key.D, TOUCHE_GAUCHE = Key.Q;
         public static int BALLE_NOMBRE_PERCE = 3;
 

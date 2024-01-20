@@ -68,7 +68,7 @@ namespace JeuSAE.classes
                 if (nouvelleLargeur + mainWindow.rectangleEXP.Width >= largeurBarExpMax)
                 {
                     mainWindow.rectangleEXP.Width = largeurBarExpMax;
-                    MenuMaxEXP.afficheMenu();
+                    MenuMaxEXP.AfficheMenu();
                 }
                 else
                 {
