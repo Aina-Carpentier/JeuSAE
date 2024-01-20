@@ -24,19 +24,14 @@ namespace JeuSAE.classes
 
         public static void ChangeBarreDeVie(double pourcentage)
         {
-
             mainWindow.rectanglePV.Width = largeurBarVieMax * pourcentage;
-            
-
         }
 
 
         public static void AjouteVie(int nombrePV)
         {
+            double nouvelleLargeur = ((nombrePV) / 100d) * largeurBarVieMax;
 
-            
-            
-                double nouvelleLargeur = ((nombrePV) / 100d) * largeurBarVieMax;
             if (nouvelleLargeur + mainWindow.rectanglePV.Width >= largeurBarVieMax)
             {// Si la vie ajoutée fait dépasser la vie max, on la met juste au max
                 mainWindow.rectanglePV.Width = largeurBarVieMax;
@@ -52,21 +47,16 @@ namespace JeuSAE.classes
                 mainWindow.labRejouer.Visibility = Visibility.Visible;
                 mainWindow.labRetour.Visibility = Visibility.Visible;
                 mainWindow.mortDroite = mainWindow.regardeADroite;
-            } else
-                {// Sinon on ajoute la vie
-                    mainWindow.rectanglePV.Width += nouvelleLargeur;
-                }
-
-            
-
+            } 
+            else
+            {// Sinon on ajoute la vie
+                mainWindow.rectanglePV.Width += nouvelleLargeur;
+            }
         }
-
 
         public static void ChangeBarreExp(double pourcentage)
         {
-
             mainWindow.rectangleEXP.Width = largeurBarExpMax * pourcentage;
-
         }
 
         public static void AjouteExp(int nombreEXP)
@@ -89,8 +79,6 @@ namespace JeuSAE.classes
 
         }
 
-
-
         public static void ChangeBarreEliminations(double pourcentage)
         {
 
@@ -112,12 +100,8 @@ namespace JeuSAE.classes
                 {
                     mainWindow.rectangleElimination.Width += nouvelleLargeur;
                 }
-
             }
-
         }
-
-
 
         public static void FixeNombreDiamants(int nombreDiamants)
         {
@@ -128,13 +112,8 @@ namespace JeuSAE.classes
 
         public static void AjouteNombreDiamants(int nombreDiamants)
         {
-
             int nombreDiamantDansLabel = int.Parse(mainWindow.labDiamant.Content.ToString());
-
             mainWindow.labDiamant.Content = (nombreDiamants + nombreDiamantDansLabel).ToString();
-
         }
-
-
     }
 }

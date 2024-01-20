@@ -24,6 +24,7 @@ namespace JeuSAE.classes
         public static string CHEMIN_BDD = AppDomain.CurrentDomain.BaseDirectory + "data\\database.json";
         public static int COEFFICIENT_EXPERIENCE = 1;
         public static Key TOUCHE_HAUT = Key.Z, TOUCHE_BAS = Key.S, TOUCHE_DROITE = Key.D, TOUCHE_GAUCHE = Key.Q;
+        public static int BALLE_NOMBRE_PERCE = 3;
 
         public static int VITESSE_JOUEUR = 20;
         public static int TEMPS_RECHARGE_ARME = 15;
@@ -80,7 +81,6 @@ namespace JeuSAE.classes
         public const string NOM_HEPTAGONE = "Heptagone";
         public const string NOM_OCTOGONE = "Octogone";
         public const string NOM_CERCLE = "Cercle";
-
 
     }
 }
