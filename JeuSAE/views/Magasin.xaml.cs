@@ -86,6 +86,7 @@ namespace JeuSAE
         private void labMenu_MouseLeave(object sender, MouseEventArgs e)
         {
             labMenu.Foreground = Brushes.Black;
+            //Ca modifie pas le .json bizarre ?
             JsonUtilitaire.Ecriture(baseDeDonnee, Constantes.CHEMIN_BDD);
         }
 
