@@ -1,929 +1,929 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
-    <Nullable>enable</Nullable>
-    <UseWPF>true</UseWPF>
-    <Platforms>AnyCPU;ARM64</Platforms>
-    <PlatformTarget>x64</PlatformTarget>
-  </PropertyGroup>
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net6.0-windows</TargetFramework>
+        <Nullable>enable</Nullable>
+        <UseWPF>true</UseWPF>
+        <Platforms>AnyCPU;ARM64</Platforms>
+        <PlatformTarget>x64</PlatformTarget>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="images\environnement_256x256\grass_1.png" />
-    <None Remove="images\environnement_256x256\grass_10.png" />
-    <None Remove="images\environnement_256x256\grass_11.png" />
-    <None Remove="images\environnement_256x256\grass_12.png" />
-    <None Remove="images\environnement_256x256\grass_2.png" />
-    <None Remove="images\environnement_256x256\grass_3.png" />
-    <None Remove="images\environnement_256x256\grass_4.png" />
-    <None Remove="images\environnement_256x256\grass_5.png" />
-    <None Remove="images\environnement_256x256\grass_6.png" />
-    <None Remove="images\environnement_256x256\grass_7.png" />
-    <None Remove="images\environnement_256x256\grass_8.png" />
-    <None Remove="images\environnement_256x256\grass_9.png" />
-    <None Remove="images\environnement_256x256\grass_bottom_border_1.png" />
-    <None Remove="images\environnement_256x256\grass_bottom_border_2.png" />
-    <None Remove="images\environnement_256x256\grass_bottom_border_3.png" />
-    <None Remove="images\environnement_256x256\grass_bottom_border_4.png" />
-    <None Remove="images\environnement_256x256\grass_bottom_left_border_1.png" />
-    <None Remove="images\environnement_256x256\grass_bottom_left_border_2.png" />
-    <None Remove="images\environnement_256x256\grass_bottom_left_border_3.png" />
-    <None Remove="images\environnement_256x256\grass_bottom_right_border_1.png" />
-    <None Remove="images\environnement_256x256\grass_bottom_right_border_2.png" />
-    <None Remove="images\environnement_256x256\grass_bottom_right_border_3.png" />
-    <None Remove="images\environnement_256x256\grass_left_border_1.png" />
-    <None Remove="images\environnement_256x256\grass_left_border_2.png" />
-    <None Remove="images\environnement_256x256\grass_left_border_3.png" />
-    <None Remove="images\environnement_256x256\grass_right_border_1.png" />
-    <None Remove="images\environnement_256x256\grass_right_border_2.png" />
-    <None Remove="images\environnement_256x256\grass_right_border_3.png" />
-    <None Remove="images\environnement_256x256\grass_right_border_4.png" />
-    <None Remove="images\environnement_256x256\grass_right_border_5.png" />
-    <None Remove="images\environnement_256x256\grass_right_border_6.png" />
-    <None Remove="images\environnement_256x256\grass_right_border_7.png" />
-    <None Remove="images\environnement_256x256\grass_top_border_1.png" />
-    <None Remove="images\environnement_256x256\grass_top_border_2.png" />
-    <None Remove="images\environnement_256x256\grass_top_border_3.png" />
-    <None Remove="images\environnement_256x256\grass_top_left_border_1.png" />
-    <None Remove="images\environnement_256x256\grass_top_left_border_2.png" />
-    <None Remove="images\environnement_256x256\grass_top_left_border_3.png" />
-    <None Remove="images\environnement_256x256\grass_top_right_border_1.png" />
-    <None Remove="images\environnement_256x256\grass_top_right_border_2.png" />
-    <None Remove="images\environnement_256x256\grass_top_right_border_3.png" />
-    <None Remove="images\environnement_256x256\grass_top_right_border_4.png" />
-    <None Remove="images\environnement_256x256\grass_top_right_border_5.png" />
-    <None Remove="images\environnement_256x256\grass_top_right_border_6.png" />
-    <None Remove="images\environnement_256x256\grass_top_right_border_7.png" />
-    <None Remove="images\environnement_256x256\water_1.png" />
-    <None Remove="images\HUD.png" />
-    <None Remove="images\menu_background.png" />
-    <None Remove="images\rectangle_upgrade.png" />
-    <None Remove="images\rectangle_upgrade_presse.png" />
-    <None Remove="images\tableau_upgrades.png" />
-    <None Remove="images\viseur.png" />
-    <None Remove="water_1.png" />
-  </ItemGroup>
+    <ItemGroup>
+        <None Remove="images\environnement_256x256\grass_1.png"/>
+        <None Remove="images\environnement_256x256\grass_10.png"/>
+        <None Remove="images\environnement_256x256\grass_11.png"/>
+        <None Remove="images\environnement_256x256\grass_12.png"/>
+        <None Remove="images\environnement_256x256\grass_2.png"/>
+        <None Remove="images\environnement_256x256\grass_3.png"/>
+        <None Remove="images\environnement_256x256\grass_4.png"/>
+        <None Remove="images\environnement_256x256\grass_5.png"/>
+        <None Remove="images\environnement_256x256\grass_6.png"/>
+        <None Remove="images\environnement_256x256\grass_7.png"/>
+        <None Remove="images\environnement_256x256\grass_8.png"/>
+        <None Remove="images\environnement_256x256\grass_9.png"/>
+        <None Remove="images\environnement_256x256\grass_bottom_border_1.png"/>
+        <None Remove="images\environnement_256x256\grass_bottom_border_2.png"/>
+        <None Remove="images\environnement_256x256\grass_bottom_border_3.png"/>
+        <None Remove="images\environnement_256x256\grass_bottom_border_4.png"/>
+        <None Remove="images\environnement_256x256\grass_bottom_left_border_1.png"/>
+        <None Remove="images\environnement_256x256\grass_bottom_left_border_2.png"/>
+        <None Remove="images\environnement_256x256\grass_bottom_left_border_3.png"/>
+        <None Remove="images\environnement_256x256\grass_bottom_right_border_1.png"/>
+        <None Remove="images\environnement_256x256\grass_bottom_right_border_2.png"/>
+        <None Remove="images\environnement_256x256\grass_bottom_right_border_3.png"/>
+        <None Remove="images\environnement_256x256\grass_left_border_1.png"/>
+        <None Remove="images\environnement_256x256\grass_left_border_2.png"/>
+        <None Remove="images\environnement_256x256\grass_left_border_3.png"/>
+        <None Remove="images\environnement_256x256\grass_right_border_1.png"/>
+        <None Remove="images\environnement_256x256\grass_right_border_2.png"/>
+        <None Remove="images\environnement_256x256\grass_right_border_3.png"/>
+        <None Remove="images\environnement_256x256\grass_right_border_4.png"/>
+        <None Remove="images\environnement_256x256\grass_right_border_5.png"/>
+        <None Remove="images\environnement_256x256\grass_right_border_6.png"/>
+        <None Remove="images\environnement_256x256\grass_right_border_7.png"/>
+        <None Remove="images\environnement_256x256\grass_top_border_1.png"/>
+        <None Remove="images\environnement_256x256\grass_top_border_2.png"/>
+        <None Remove="images\environnement_256x256\grass_top_border_3.png"/>
+        <None Remove="images\environnement_256x256\grass_top_left_border_1.png"/>
+        <None Remove="images\environnement_256x256\grass_top_left_border_2.png"/>
+        <None Remove="images\environnement_256x256\grass_top_left_border_3.png"/>
+        <None Remove="images\environnement_256x256\grass_top_right_border_1.png"/>
+        <None Remove="images\environnement_256x256\grass_top_right_border_2.png"/>
+        <None Remove="images\environnement_256x256\grass_top_right_border_3.png"/>
+        <None Remove="images\environnement_256x256\grass_top_right_border_4.png"/>
+        <None Remove="images\environnement_256x256\grass_top_right_border_5.png"/>
+        <None Remove="images\environnement_256x256\grass_top_right_border_6.png"/>
+        <None Remove="images\environnement_256x256\grass_top_right_border_7.png"/>
+        <None Remove="images\environnement_256x256\water_1.png"/>
+        <None Remove="images\HUD.png"/>
+        <None Remove="images\menu_background.png"/>
+        <None Remove="images\rectangle_upgrade.png"/>
+        <None Remove="images\rectangle_upgrade_presse.png"/>
+        <None Remove="images\tableau_upgrades.png"/>
+        <None Remove="images\viseur.png"/>
+        <None Remove="water_1.png"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <Content Include="images\environnement_256x256\grass_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\environnement_256x256\grass_10.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\environnement_256x256\grass_11.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\environnement_256x256\grass_12.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\environnement_256x256\grass_2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\environnement_256x256\grass_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\environnement_256x256\grass_4.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\environnement_256x256\grass_5.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\environnement_256x256\grass_6.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\environnement_256x256\grass_7.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\environnement_256x256\grass_8.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\environnement_256x256\grass_9.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\environnement_256x256\grass_bottom_border_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\environnement_256x256\grass_bottom_border_2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\environnement_256x256\grass_bottom_border_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\environnement_256x256\grass_bottom_border_4.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\environnement_256x256\grass_bottom_left_border_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\environnement_256x256\grass_bottom_left_border_2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\environnement_256x256\grass_bottom_left_border_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\environnement_256x256\grass_bottom_right_border_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\environnement_256x256\grass_bottom_right_border_2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\environnement_256x256\grass_bottom_right_border_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\environnement_256x256\grass_left_border_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\environnement_256x256\grass_left_border_2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\environnement_256x256\grass_left_border_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\environnement_256x256\grass_right_border_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\environnement_256x256\grass_right_border_2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\environnement_256x256\grass_right_border_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\environnement_256x256\grass_right_border_4.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\environnement_256x256\grass_right_border_5.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\environnement_256x256\grass_right_border_6.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\environnement_256x256\grass_right_border_7.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\environnement_256x256\grass_top_border_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\environnement_256x256\grass_top_border_2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\environnement_256x256\grass_top_border_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\environnement_256x256\grass_top_left_border_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\environnement_256x256\grass_top_left_border_2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\environnement_256x256\grass_top_left_border_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\environnement_256x256\grass_top_right_border_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\environnement_256x256\grass_top_right_border_2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\environnement_256x256\grass_top_right_border_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\environnement_256x256\grass_top_right_border_4.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\environnement_256x256\grass_top_right_border_5.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\environnement_256x256\grass_top_right_border_6.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\environnement_256x256\grass_top_right_border_7.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\environnement_256x256\water_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\HUD.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\menu_background.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\rectangle_upgrade.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\rectangle_upgrade_presse.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\tableau_upgrades.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\viseur.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
+    <ItemGroup>
+        <Content Include="images\environnement_256x256\grass_1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\environnement_256x256\grass_10.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\environnement_256x256\grass_11.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\environnement_256x256\grass_12.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\environnement_256x256\grass_2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\environnement_256x256\grass_3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\environnement_256x256\grass_4.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\environnement_256x256\grass_5.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\environnement_256x256\grass_6.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\environnement_256x256\grass_7.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\environnement_256x256\grass_8.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\environnement_256x256\grass_9.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\environnement_256x256\grass_bottom_border_1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\environnement_256x256\grass_bottom_border_2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\environnement_256x256\grass_bottom_border_3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\environnement_256x256\grass_bottom_border_4.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\environnement_256x256\grass_bottom_left_border_1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\environnement_256x256\grass_bottom_left_border_2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\environnement_256x256\grass_bottom_left_border_3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\environnement_256x256\grass_bottom_right_border_1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\environnement_256x256\grass_bottom_right_border_2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\environnement_256x256\grass_bottom_right_border_3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\environnement_256x256\grass_left_border_1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\environnement_256x256\grass_left_border_2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\environnement_256x256\grass_left_border_3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\environnement_256x256\grass_right_border_1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\environnement_256x256\grass_right_border_2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\environnement_256x256\grass_right_border_3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\environnement_256x256\grass_right_border_4.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\environnement_256x256\grass_right_border_5.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\environnement_256x256\grass_right_border_6.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\environnement_256x256\grass_right_border_7.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\environnement_256x256\grass_top_border_1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\environnement_256x256\grass_top_border_2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\environnement_256x256\grass_top_border_3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\environnement_256x256\grass_top_left_border_1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\environnement_256x256\grass_top_left_border_2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\environnement_256x256\grass_top_left_border_3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\environnement_256x256\grass_top_right_border_1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\environnement_256x256\grass_top_right_border_2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\environnement_256x256\grass_top_right_border_3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\environnement_256x256\grass_top_right_border_4.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\environnement_256x256\grass_top_right_border_5.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\environnement_256x256\grass_top_right_border_6.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\environnement_256x256\grass_top_right_border_7.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\environnement_256x256\water_1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\HUD.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\menu_background.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\rectangle_upgrade.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\rectangle_upgrade_presse.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\tableau_upgrades.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="images\viseur.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="System.Drawing.Common" Version="8.0.1" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="System.Drawing.Common" Version="8.0.1"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <Resource Include="images\water_1.png" />
-  </ItemGroup>
+    <ItemGroup>
+        <Resource Include="images\water_1.png"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <None Update="audio\musiques\musique_menu.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="audio\sfx\autre_son_difficile.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="audio\sfx\son_difficile.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="audio\sfx\son_facile.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="audio\sfx\son_moyen.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="data\database.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\boss\arch_linux.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\boss\betrix\1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\boss\betrix\2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\boss\betrix\3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\boss\betrix\4.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\boss\betrix\5.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\boss\betrix\6.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_16x16\grass_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_16x16\grass_10.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_16x16\grass_11.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_16x16\grass_12.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_16x16\grass_2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_16x16\grass_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_16x16\grass_4.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_16x16\grass_5.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_16x16\grass_6.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_16x16\grass_7.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_16x16\grass_8.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_16x16\grass_9.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_16x16\grass_bottom_border_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_16x16\grass_bottom_border_2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_16x16\grass_bottom_border_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_16x16\grass_bottom_border_4.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_16x16\grass_bottom_left_border_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_16x16\grass_bottom_left_border_2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_16x16\grass_bottom_left_border_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_16x16\grass_bottom_right_border_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_16x16\grass_bottom_right_border_2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_16x16\grass_bottom_right_border_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_16x16\grass_left_border_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_16x16\grass_left_border_2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_16x16\grass_left_border_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_16x16\grass_right_border_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_16x16\grass_right_border_2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_16x16\grass_right_border_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_16x16\grass_right_border_4.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_16x16\grass_right_border_5.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_16x16\grass_right_border_6.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_16x16\grass_right_border_7.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_16x16\grass_top_border_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_16x16\grass_top_border_2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_16x16\grass_top_border_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_16x16\grass_top_left_border_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_16x16\grass_top_left_border_2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_16x16\grass_top_left_border_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_16x16\grass_top_right_border_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_16x16\grass_top_right_border_2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_16x16\grass_top_right_border_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_16x16\grass_top_right_border_4.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_16x16\grass_top_right_border_5.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_16x16\grass_top_right_border_6.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_16x16\grass_top_right_border_7.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_16x16\water_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_256x256\grass_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_256x256\grass_10.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_256x256\grass_11.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_256x256\grass_12.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_256x256\grass_2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_256x256\grass_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_256x256\grass_4.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_256x256\grass_5.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_256x256\grass_6.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_256x256\grass_7.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_256x256\grass_8.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_256x256\grass_9.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_256x256\grass_bottom_border_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_256x256\grass_bottom_border_2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_256x256\grass_bottom_border_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_256x256\grass_bottom_border_4.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_256x256\grass_bottom_left_border_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_256x256\grass_bottom_left_border_2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_256x256\grass_bottom_left_border_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_256x256\grass_bottom_right_border_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_256x256\grass_bottom_right_border_2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_256x256\grass_bottom_right_border_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_256x256\grass_left_border_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_256x256\grass_left_border_2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_256x256\grass_left_border_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_256x256\grass_right_border_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_256x256\grass_right_border_2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_256x256\grass_right_border_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_256x256\grass_right_border_4.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_256x256\grass_right_border_5.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_256x256\grass_right_border_6.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_256x256\grass_right_border_7.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_256x256\grass_top_border_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_256x256\grass_top_border_2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_256x256\grass_top_border_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_256x256\grass_top_left_border_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_256x256\grass_top_left_border_2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_256x256\grass_top_left_border_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_256x256\grass_top_right_border_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_256x256\grass_top_right_border_2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_256x256\grass_top_right_border_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_256x256\grass_top_right_border_4.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_256x256\grass_top_right_border_5.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_256x256\grass_top_right_border_6.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_256x256\grass_top_right_border_7.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_256x256\water_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_512x512\grass_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_512x512\grass_10.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_512x512\grass_11.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_512x512\grass_12.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_512x512\grass_2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_512x512\grass_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_512x512\grass_4.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_512x512\grass_5.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_512x512\grass_6.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_512x512\grass_7.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_512x512\grass_8.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_512x512\grass_9.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_512x512\grass_bottom_border_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_512x512\grass_bottom_border_2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_512x512\grass_bottom_border_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_512x512\grass_bottom_border_4.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_512x512\grass_bottom_left_border_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_512x512\grass_bottom_left_border_2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_512x512\grass_bottom_left_border_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_512x512\grass_bottom_right_border_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_512x512\grass_bottom_right_border_2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_512x512\grass_bottom_right_border_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_512x512\grass_left_border_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_512x512\grass_left_border_2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_512x512\grass_left_border_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_512x512\grass_right_border_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_512x512\grass_right_border_2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_512x512\grass_right_border_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_512x512\grass_right_border_4.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_512x512\grass_right_border_5.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_512x512\grass_right_border_6.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_512x512\grass_right_border_7.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_512x512\grass_top_border_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_512x512\grass_top_border_2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_512x512\grass_top_border_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_512x512\grass_top_left_border_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_512x512\grass_top_left_border_2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_512x512\grass_top_left_border_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_512x512\grass_top_right_border_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_512x512\grass_top_right_border_2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_512x512\grass_top_right_border_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_512x512\grass_top_right_border_4.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_512x512\grass_top_right_border_5.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_512x512\grass_top_right_border_6.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_512x512\grass_top_right_border_7.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\environnement_512x512\water_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\result.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\skull.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\carre.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\cercle.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\heptagone.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\hexagone.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\octogone.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\pentagone.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\droite\arme\arme1_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\droite\arme\arme1_2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\droite\arme\arme1_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\droite\arme\arme1_4.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\droite\arme\arme1_5.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\droite\arme\arme2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\droite\arme\arme2_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\droite\arme\arme2_2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\droite\arme\arme2_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\droite\arme\arme2_4.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\droite\arme\arme2_5.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\droite\arme\arme3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\droite\arme\arme3_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\droite\arme\arme3_2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\droite\arme\arme3_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\droite\arme\arme3_4.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\droite\arme\arme3_5.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\droite\degat\degat1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\droite\degat\degat2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\droite\idle\idle1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\droite\idle\idle2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\droite\idle\idle3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\droite\idle\idle4.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\droite\marche\marche1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\droite\marche\marche2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\droite\marche\marche3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\droite\marche\marche4.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\droite\marche\marche5.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\droite\marche\marche6.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\droite\mort\mort1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\droite\mort\mort2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\droite\mort\mort3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\droite\mort\mort4.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\droite\mort\mort5.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\droite\mort\mort6.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\gauche\arme\arme1_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\gauche\arme\arme1_2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\gauche\arme\arme1_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\gauche\arme\arme1_4.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\gauche\arme\arme1_5.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\gauche\arme\arme2_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\gauche\arme\arme2_2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\gauche\arme\arme2_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\gauche\arme\arme2_4.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\gauche\arme\arme2_5.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\gauche\arme\arme3_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\gauche\arme\arme3_2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\gauche\arme\arme3_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\gauche\arme\arme3_4.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\gauche\arme\arme3_5.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\gauche\degat\degat1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\gauche\degat\degat2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\gauche\idle\idle1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\gauche\idle\idle2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\gauche\idle\idle3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\gauche\idle\idle4.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\gauche\marche\marche1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\gauche\marche\marche2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\gauche\marche\marche3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\gauche\marche\marche4.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\gauche\marche\marche5.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\gauche\marche\marche6.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\gauche\mort\mort1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\gauche\mort\mort2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\gauche\mort\mort3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\gauche\mort\mort4.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\gauche\mort\mort5.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\personnage\gauche\mort\mort6.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\triangle.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\sprites\triangle_rectangle.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
+    <ItemGroup>
+        <None Update="audio\musiques\musique_menu.wav">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="audio\sfx\autre_son_difficile.wav">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="audio\sfx\son_difficile.wav">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="audio\sfx\son_facile.wav">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="audio\sfx\son_moyen.wav">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="data\database.json">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\boss\arch_linux.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\boss\betrix\1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\boss\betrix\2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\boss\betrix\3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\boss\betrix\4.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\boss\betrix\5.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\boss\betrix\6.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_16x16\grass_1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_16x16\grass_10.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_16x16\grass_11.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_16x16\grass_12.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_16x16\grass_2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_16x16\grass_3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_16x16\grass_4.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_16x16\grass_5.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_16x16\grass_6.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_16x16\grass_7.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_16x16\grass_8.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_16x16\grass_9.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_16x16\grass_bottom_border_1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_16x16\grass_bottom_border_2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_16x16\grass_bottom_border_3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_16x16\grass_bottom_border_4.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_16x16\grass_bottom_left_border_1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_16x16\grass_bottom_left_border_2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_16x16\grass_bottom_left_border_3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_16x16\grass_bottom_right_border_1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_16x16\grass_bottom_right_border_2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_16x16\grass_bottom_right_border_3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_16x16\grass_left_border_1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_16x16\grass_left_border_2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_16x16\grass_left_border_3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_16x16\grass_right_border_1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_16x16\grass_right_border_2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_16x16\grass_right_border_3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_16x16\grass_right_border_4.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_16x16\grass_right_border_5.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_16x16\grass_right_border_6.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_16x16\grass_right_border_7.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_16x16\grass_top_border_1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_16x16\grass_top_border_2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_16x16\grass_top_border_3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_16x16\grass_top_left_border_1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_16x16\grass_top_left_border_2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_16x16\grass_top_left_border_3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_16x16\grass_top_right_border_1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_16x16\grass_top_right_border_2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_16x16\grass_top_right_border_3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_16x16\grass_top_right_border_4.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_16x16\grass_top_right_border_5.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_16x16\grass_top_right_border_6.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_16x16\grass_top_right_border_7.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_16x16\water_1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_256x256\grass_1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_256x256\grass_10.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_256x256\grass_11.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_256x256\grass_12.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_256x256\grass_2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_256x256\grass_3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_256x256\grass_4.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_256x256\grass_5.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_256x256\grass_6.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_256x256\grass_7.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_256x256\grass_8.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_256x256\grass_9.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_256x256\grass_bottom_border_1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_256x256\grass_bottom_border_2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_256x256\grass_bottom_border_3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_256x256\grass_bottom_border_4.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_256x256\grass_bottom_left_border_1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_256x256\grass_bottom_left_border_2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_256x256\grass_bottom_left_border_3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_256x256\grass_bottom_right_border_1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_256x256\grass_bottom_right_border_2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_256x256\grass_bottom_right_border_3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_256x256\grass_left_border_1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_256x256\grass_left_border_2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_256x256\grass_left_border_3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_256x256\grass_right_border_1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_256x256\grass_right_border_2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_256x256\grass_right_border_3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_256x256\grass_right_border_4.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_256x256\grass_right_border_5.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_256x256\grass_right_border_6.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_256x256\grass_right_border_7.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_256x256\grass_top_border_1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_256x256\grass_top_border_2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_256x256\grass_top_border_3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_256x256\grass_top_left_border_1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_256x256\grass_top_left_border_2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_256x256\grass_top_left_border_3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_256x256\grass_top_right_border_1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_256x256\grass_top_right_border_2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_256x256\grass_top_right_border_3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_256x256\grass_top_right_border_4.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_256x256\grass_top_right_border_5.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_256x256\grass_top_right_border_6.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_256x256\grass_top_right_border_7.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_256x256\water_1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_512x512\grass_1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_512x512\grass_10.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_512x512\grass_11.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_512x512\grass_12.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_512x512\grass_2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_512x512\grass_3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_512x512\grass_4.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_512x512\grass_5.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_512x512\grass_6.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_512x512\grass_7.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_512x512\grass_8.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_512x512\grass_9.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_512x512\grass_bottom_border_1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_512x512\grass_bottom_border_2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_512x512\grass_bottom_border_3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_512x512\grass_bottom_border_4.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_512x512\grass_bottom_left_border_1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_512x512\grass_bottom_left_border_2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_512x512\grass_bottom_left_border_3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_512x512\grass_bottom_right_border_1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_512x512\grass_bottom_right_border_2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_512x512\grass_bottom_right_border_3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_512x512\grass_left_border_1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_512x512\grass_left_border_2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_512x512\grass_left_border_3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_512x512\grass_right_border_1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_512x512\grass_right_border_2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_512x512\grass_right_border_3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_512x512\grass_right_border_4.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_512x512\grass_right_border_5.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_512x512\grass_right_border_6.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_512x512\grass_right_border_7.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_512x512\grass_top_border_1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_512x512\grass_top_border_2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_512x512\grass_top_border_3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_512x512\grass_top_left_border_1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_512x512\grass_top_left_border_2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_512x512\grass_top_left_border_3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_512x512\grass_top_right_border_1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_512x512\grass_top_right_border_2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_512x512\grass_top_right_border_3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_512x512\grass_top_right_border_4.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_512x512\grass_top_right_border_5.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_512x512\grass_top_right_border_6.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_512x512\grass_top_right_border_7.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\environnement_512x512\water_1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\result.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\skull.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\carre.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\cercle.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\heptagone.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\hexagone.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\octogone.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\pentagone.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\droite\arme\arme1_1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\droite\arme\arme1_2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\droite\arme\arme1_3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\droite\arme\arme1_4.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\droite\arme\arme1_5.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\droite\arme\arme2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\droite\arme\arme2_1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\droite\arme\arme2_2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\droite\arme\arme2_3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\droite\arme\arme2_4.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\droite\arme\arme2_5.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\droite\arme\arme3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\droite\arme\arme3_1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\droite\arme\arme3_2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\droite\arme\arme3_3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\droite\arme\arme3_4.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\droite\arme\arme3_5.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\droite\degat\degat1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\droite\degat\degat2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\droite\idle\idle1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\droite\idle\idle2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\droite\idle\idle3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\droite\idle\idle4.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\droite\marche\marche1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\droite\marche\marche2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\droite\marche\marche3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\droite\marche\marche4.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\droite\marche\marche5.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\droite\marche\marche6.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\droite\mort\mort1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\droite\mort\mort2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\droite\mort\mort3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\droite\mort\mort4.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\droite\mort\mort5.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\droite\mort\mort6.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\gauche\arme\arme1_1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\gauche\arme\arme1_2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\gauche\arme\arme1_3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\gauche\arme\arme1_4.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\gauche\arme\arme1_5.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\gauche\arme\arme2_1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\gauche\arme\arme2_2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\gauche\arme\arme2_3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\gauche\arme\arme2_4.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\gauche\arme\arme2_5.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\gauche\arme\arme3_1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\gauche\arme\arme3_2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\gauche\arme\arme3_3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\gauche\arme\arme3_4.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\gauche\arme\arme3_5.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\gauche\degat\degat1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\gauche\degat\degat2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\gauche\idle\idle1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\gauche\idle\idle2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\gauche\idle\idle3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\gauche\idle\idle4.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\gauche\marche\marche1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\gauche\marche\marche2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\gauche\marche\marche3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\gauche\marche\marche4.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\gauche\marche\marche5.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\gauche\marche\marche6.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\gauche\mort\mort1.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\gauche\mort\mort2.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\gauche\mort\mort3.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\gauche\mort\mort4.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\gauche\mort\mort5.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\gauche\mort\mort6.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\triangle.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\triangle_rectangle.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
 
-  <ItemGroup>
-    <Page Include="App.xaml" />
-  </ItemGroup>
+    <ItemGroup>
+        <Page Include="App.xaml"/>
+    </ItemGroup>
 
 </Project>
