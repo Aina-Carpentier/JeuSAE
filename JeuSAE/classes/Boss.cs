@@ -33,6 +33,7 @@ namespace JeuSAE.classes
                     image.ImageSource = new BitmapImage(new Uri(dossierSprites + $"betrix\\{random.Next(1,6)}.png"));// dossierImage c'est un Uri donc ça vas peut-être bugger
                     break;
             }
+            Type = 9;
             PosX = posX;
             PosY = posY;
             Graphique.Fill = image;

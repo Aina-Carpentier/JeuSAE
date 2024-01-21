@@ -5,6 +5,7 @@ using System.Numerics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 
@@ -159,6 +160,19 @@ namespace JeuSAE.classes
                         };
                         Degats = Constantes.DEGATS_BALLE_DEUX;
                         break;
+                    case 3:
+                        ImageBrush image = new ImageBrush();
+                        image.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + $"images\\boss\\arch_linux.png"));
+                        Graphique = new Ellipse
+                        {
+                            Tag = "bulletBoss",
+                            Width = Taille,
+                            Height = Taille,
+                            Fill = image,
+                            Stroke = Brushes.Black
+                        };
+                        Degats = Constantes.DEGATS_BALLE_TROIS;
+                        break;
                 }
             }
         }
@@ -231,6 +245,15 @@ namespace JeuSAE.classes
                         coefSin -= 0.05f;
                         if (coefSin <= 0) { inverseSin = false; }
                     }
+                    break;
+                }
+                case 3:
+                {
+                    double newX = PosX + (vecteurNormalize.X * this.Vitesse);
+                    double newY = PosY + (vecteurNormalize.Y * this.Vitesse);
+
+                    this.PosX = newX;
+                    this.PosY = newY;
                     break;
                 }
             }

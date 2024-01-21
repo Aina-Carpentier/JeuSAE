@@ -330,6 +330,10 @@ namespace JeuSAE
                 {
                     balle = new Balle(Constantes.VITESSE_BALLE, 20, 2, this.id.ToString(), 0, PosX + (float)this.Graphique.Width / 2, PosY + (float)this.Graphique.Height / 2, -vecteurDeplace, 1);
                 }
+                else if (this.Type == 9) //Boss
+                {
+                    balle = new Balle(12, 45, 3, this.id.ToString(), 0, PosX + (float)this.Graphique.Width / 2, PosY + (float)this.Graphique.Height / 2, -vecteurDeplace, 1);
+                }
                 else
                 {
                     balle = new Balle(Constantes.VITESSE_BALLE, 20, 1, this.id.ToString(), 0, PosX + (float)this.Graphique.Width / 2, PosY + (float)this.Graphique.Height / 2, -vecteurDeplace, 1);
