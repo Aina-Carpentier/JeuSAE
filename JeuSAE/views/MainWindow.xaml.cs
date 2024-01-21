@@ -21,7 +21,7 @@ public partial class MainWindow : Window
     public static List<Ennemi> listeEnnemiAEnlever = new();
 
 
-    private static bool gauche, droite, haut, bas, tirer, numPadUn, numPadQuatre, toucheX, toucheC, toucheR;
+    private static bool gauche, droite, haut, bas, tirer, numPadUn, numPadQuatre, toucheX, toucheC, toucheR, toucheI, toucheO, toucheP;
     public static string choix, cheminSprite;
 
     private static readonly ImageBrush apparenceJoueur = new();
@@ -214,6 +214,23 @@ public partial class MainWindow : Window
             toucheR = false;
             Ennemi.SpawnUnEnnemi(this, 6);
         }
+
+        //God mode
+        if (e.Key == Key.I) { toucheI = true; }
+        if (e.Key == Key.O) { toucheO = true; }
+        if (e.Key == Key.P) { toucheP = true; }
+
+        if (toucheI && toucheO && toucheP)
+        {
+            toucheI = false;
+            toucheO = false;
+            toucheP = false;
+            Constantes.VIE_JOUEUR = double.MaxValue;
+            Constantes.DEGATS_JOUEUR = int.MaxValue;
+        }
+
+
+
     }
 
     private void CanvasKeyIsUp(object sender, KeyEventArgs e)
@@ -242,6 +259,13 @@ public partial class MainWindow : Window
 
         //Spawn cercle
         if (e.Key == Key.R) toucheR = false;
+
+
+        //God mode
+        if (e.Key == Key.I) { toucheI = false; }
+        if (e.Key == Key.O) { toucheO = false; }
+        if (e.Key == Key.P) { toucheP = false; }
+
     }
 
     private void MouvementJoueur()
@@ -407,7 +431,14 @@ public partial class MainWindow : Window
                     {
                         listeEnnemiAEnlever.Add(ennemi);
                         HUD.AjouteElimination(50);
-                        HUD.AjouteExp((int)Constantes.COEFFICIENT_EXPERIENCE);
+                        if (ennemi.Nom == "Boss")
+                        {
+                            HUD.AjouteExp(Constantes.COEFFICIENT_EXPERIENCE * 200d);
+                        }
+                        else
+                        {
+                            HUD.AjouteExp(Constantes.COEFFICIENT_EXPERIENCE);
+                        }
                     }
                 }
         }

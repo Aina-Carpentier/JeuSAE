@@ -10,59 +10,59 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Remove="images\environnement_256x256\grass_1.png"/>
-        <None Remove="images\environnement_256x256\grass_10.png"/>
-        <None Remove="images\environnement_256x256\grass_11.png"/>
-        <None Remove="images\environnement_256x256\grass_12.png"/>
-        <None Remove="images\environnement_256x256\grass_2.png"/>
-        <None Remove="images\environnement_256x256\grass_3.png"/>
-        <None Remove="images\environnement_256x256\grass_4.png"/>
-        <None Remove="images\environnement_256x256\grass_5.png"/>
-        <None Remove="images\environnement_256x256\grass_6.png"/>
-        <None Remove="images\environnement_256x256\grass_7.png"/>
-        <None Remove="images\environnement_256x256\grass_8.png"/>
-        <None Remove="images\environnement_256x256\grass_9.png"/>
-        <None Remove="images\environnement_256x256\grass_bottom_border_1.png"/>
-        <None Remove="images\environnement_256x256\grass_bottom_border_2.png"/>
-        <None Remove="images\environnement_256x256\grass_bottom_border_3.png"/>
-        <None Remove="images\environnement_256x256\grass_bottom_border_4.png"/>
-        <None Remove="images\environnement_256x256\grass_bottom_left_border_1.png"/>
-        <None Remove="images\environnement_256x256\grass_bottom_left_border_2.png"/>
-        <None Remove="images\environnement_256x256\grass_bottom_left_border_3.png"/>
-        <None Remove="images\environnement_256x256\grass_bottom_right_border_1.png"/>
-        <None Remove="images\environnement_256x256\grass_bottom_right_border_2.png"/>
-        <None Remove="images\environnement_256x256\grass_bottom_right_border_3.png"/>
-        <None Remove="images\environnement_256x256\grass_left_border_1.png"/>
-        <None Remove="images\environnement_256x256\grass_left_border_2.png"/>
-        <None Remove="images\environnement_256x256\grass_left_border_3.png"/>
-        <None Remove="images\environnement_256x256\grass_right_border_1.png"/>
-        <None Remove="images\environnement_256x256\grass_right_border_2.png"/>
-        <None Remove="images\environnement_256x256\grass_right_border_3.png"/>
-        <None Remove="images\environnement_256x256\grass_right_border_4.png"/>
-        <None Remove="images\environnement_256x256\grass_right_border_5.png"/>
-        <None Remove="images\environnement_256x256\grass_right_border_6.png"/>
-        <None Remove="images\environnement_256x256\grass_right_border_7.png"/>
-        <None Remove="images\environnement_256x256\grass_top_border_1.png"/>
-        <None Remove="images\environnement_256x256\grass_top_border_2.png"/>
-        <None Remove="images\environnement_256x256\grass_top_border_3.png"/>
-        <None Remove="images\environnement_256x256\grass_top_left_border_1.png"/>
-        <None Remove="images\environnement_256x256\grass_top_left_border_2.png"/>
-        <None Remove="images\environnement_256x256\grass_top_left_border_3.png"/>
-        <None Remove="images\environnement_256x256\grass_top_right_border_1.png"/>
-        <None Remove="images\environnement_256x256\grass_top_right_border_2.png"/>
-        <None Remove="images\environnement_256x256\grass_top_right_border_3.png"/>
-        <None Remove="images\environnement_256x256\grass_top_right_border_4.png"/>
-        <None Remove="images\environnement_256x256\grass_top_right_border_5.png"/>
-        <None Remove="images\environnement_256x256\grass_top_right_border_6.png"/>
-        <None Remove="images\environnement_256x256\grass_top_right_border_7.png"/>
-        <None Remove="images\environnement_256x256\water_1.png"/>
-        <None Remove="images\HUD.png"/>
-        <None Remove="images\menu_background.png"/>
-        <None Remove="images\rectangle_upgrade.png"/>
-        <None Remove="images\rectangle_upgrade_presse.png"/>
-        <None Remove="images\tableau_upgrades.png"/>
-        <None Remove="images\viseur.png"/>
-        <None Remove="water_1.png"/>
+        <None Remove="images\environnement_256x256\grass_1.png" />
+        <None Remove="images\environnement_256x256\grass_10.png" />
+        <None Remove="images\environnement_256x256\grass_11.png" />
+        <None Remove="images\environnement_256x256\grass_12.png" />
+        <None Remove="images\environnement_256x256\grass_2.png" />
+        <None Remove="images\environnement_256x256\grass_3.png" />
+        <None Remove="images\environnement_256x256\grass_4.png" />
+        <None Remove="images\environnement_256x256\grass_5.png" />
+        <None Remove="images\environnement_256x256\grass_6.png" />
+        <None Remove="images\environnement_256x256\grass_7.png" />
+        <None Remove="images\environnement_256x256\grass_8.png" />
+        <None Remove="images\environnement_256x256\grass_9.png" />
+        <None Remove="images\environnement_256x256\grass_bottom_border_1.png" />
+        <None Remove="images\environnement_256x256\grass_bottom_border_2.png" />
+        <None Remove="images\environnement_256x256\grass_bottom_border_3.png" />
+        <None Remove="images\environnement_256x256\grass_bottom_border_4.png" />
+        <None Remove="images\environnement_256x256\grass_bottom_left_border_1.png" />
+        <None Remove="images\environnement_256x256\grass_bottom_left_border_2.png" />
+        <None Remove="images\environnement_256x256\grass_bottom_left_border_3.png" />
+        <None Remove="images\environnement_256x256\grass_bottom_right_border_1.png" />
+        <None Remove="images\environnement_256x256\grass_bottom_right_border_2.png" />
+        <None Remove="images\environnement_256x256\grass_bottom_right_border_3.png" />
+        <None Remove="images\environnement_256x256\grass_left_border_1.png" />
+        <None Remove="images\environnement_256x256\grass_left_border_2.png" />
+        <None Remove="images\environnement_256x256\grass_left_border_3.png" />
+        <None Remove="images\environnement_256x256\grass_right_border_1.png" />
+        <None Remove="images\environnement_256x256\grass_right_border_2.png" />
+        <None Remove="images\environnement_256x256\grass_right_border_3.png" />
+        <None Remove="images\environnement_256x256\grass_right_border_4.png" />
+        <None Remove="images\environnement_256x256\grass_right_border_5.png" />
+        <None Remove="images\environnement_256x256\grass_right_border_6.png" />
+        <None Remove="images\environnement_256x256\grass_right_border_7.png" />
+        <None Remove="images\environnement_256x256\grass_top_border_1.png" />
+        <None Remove="images\environnement_256x256\grass_top_border_2.png" />
+        <None Remove="images\environnement_256x256\grass_top_border_3.png" />
+        <None Remove="images\environnement_256x256\grass_top_left_border_1.png" />
+        <None Remove="images\environnement_256x256\grass_top_left_border_2.png" />
+        <None Remove="images\environnement_256x256\grass_top_left_border_3.png" />
+        <None Remove="images\environnement_256x256\grass_top_right_border_1.png" />
+        <None Remove="images\environnement_256x256\grass_top_right_border_2.png" />
+        <None Remove="images\environnement_256x256\grass_top_right_border_3.png" />
+        <None Remove="images\environnement_256x256\grass_top_right_border_4.png" />
+        <None Remove="images\environnement_256x256\grass_top_right_border_5.png" />
+        <None Remove="images\environnement_256x256\grass_top_right_border_6.png" />
+        <None Remove="images\environnement_256x256\grass_top_right_border_7.png" />
+        <None Remove="images\environnement_256x256\water_1.png" />
+        <None Remove="images\HUD.png" />
+        <None Remove="images\menu_background.png" />
+        <None Remove="images\rectangle_upgrade.png" />
+        <None Remove="images\rectangle_upgrade_presse.png" />
+        <None Remove="images\tableau_upgrades.png" />
+        <None Remove="images\viseur.png" />
+        <None Remove="water_1.png" />
     </ItemGroup>
 
     <ItemGroup>
@@ -225,11 +225,11 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="System.Drawing.Common" Version="8.0.1"/>
+        <PackageReference Include="System.Drawing.Common" Version="8.0.1" />
     </ItemGroup>
 
     <ItemGroup>
-        <Resource Include="images\water_1.png"/>
+        <Resource Include="images\water_1.png" />
     </ItemGroup>
 
     <ItemGroup>
@@ -710,6 +710,9 @@
         <None Update="images\sprites\pentagone.png">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
+        <None Update="images\sprites\personnage\droite\arme\arme1.png">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
         <None Update="images\sprites\personnage\droite\arme\arme1_1.png">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
@@ -745,6 +748,9 @@
         </None>
         <None Update="images\sprites\personnage\droite\arme\arme3.png">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="images\sprites\personnage\droite\arme\arme3_.psd">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
         <None Update="images\sprites\personnage\droite\arme\arme3_1.png">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -923,7 +929,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Page Include="App.xaml"/>
+        <Page Include="App.xaml" />
     </ItemGroup>
 
 </Project>
