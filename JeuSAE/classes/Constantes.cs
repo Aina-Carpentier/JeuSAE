@@ -15,6 +15,7 @@ namespace JeuSAE.classes
         public static double VIE_JOUEUR = 100d;
         public const int DEGATS_BALLE_UN = 10;
         public const int DEGATS_BALLE_DEUX = 5;
+        public const int DEGATS_BALLE_TROIS = 17;
         //public const int DEGAT_BALLE_JOUEUR = 1;
         public const int DEGATS_COLLISION = 10;
         public const int NOMBRE_AMELIORATIONS = 7;
@@ -54,7 +55,7 @@ namespace JeuSAE.classes
         public const double VIE_HEXAGONE = 12;
         public const double VIE_HEPTAGONE = 14;
         public const double VIE_OCTOGONE = 20;
-        public const double VIE_BOSS = 100;
+        public const double VIE_BOSS = 45;
         public const double VIE_CERCLE = Math.PI;
 
 
@@ -66,7 +67,7 @@ namespace JeuSAE.classes
         public const double VITESSE_HEXAGONE = 3;
         public const double VITESSE_HEPTAGONE = 2;
         public const double VITESSE_OCTOGONE = 4;
-        public const double VITESSE_BOSS = 9;
+        public const double VITESSE_BOSS = 7;
         public const double VITESSE_CERCLE = Math.PI;
 
 

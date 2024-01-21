@@ -251,6 +251,9 @@
     <None Update="data\database.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="images\boss\arch_linux.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="images\boss\betrix\1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
