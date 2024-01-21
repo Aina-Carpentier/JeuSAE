@@ -13,8 +13,8 @@ namespace JeuSAE.classes
         public const int BALLE_WIDHT = 25;
         public const int BALLE_HEIGHT = 10;
         public static double VIE_JOUEUR = 100d;
-        public const int DEGATS_BALLE_UN = 10;
-        public const int DEGATS_BALLE_DEUX = 5;
+        public const int DEGATS_BALLE_UN = 25;
+        public const int DEGATS_BALLE_DEUX = 20;
         //public const int DEGAT_BALLE_JOUEUR = 1;
         public const int DEGATS_COLLISION = 10;
         public const int NOMBRE_AMELIORATIONS = 7;
@@ -33,7 +33,7 @@ namespace JeuSAE.classes
         public static int TAILLE_BALLE_JOUEUR = 50;
         public static double VITESSE_BALLE_JOUEUR = 25;
         public static int DEGATS_JOUEUR = 1;
-        public static int VITESSE_BALLE = 25;
+        public static int VITESSE_BALLE = 15;
         public static int COMPTEUR_SPAWN = 0;
         public static int TICK_REQUIS_POUR_SPAWN_ENNEMI = 150;
         public static int TICK_ANIMATION = 0;

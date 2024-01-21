@@ -9,7 +9,7 @@
     Title="PreJeu"
     Width="{x:Static SystemParameters.PrimaryScreenWidth}"
     Height="{x:Static SystemParameters.PrimaryScreenHeight}"
-    FocusManager.FocusedElement="{Binding ElementName=canvasTouche}"
+    FocusManager.FocusedElement="{Binding ElementName=canvasPreJeu}"
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
     WindowState="Maximized"
