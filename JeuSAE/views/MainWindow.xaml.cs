@@ -18,10 +18,23 @@ public partial class MainWindow : Window
 {
     public static bool ouvreMenuMaxEXP = false;
     public static List<Ennemi> listeEnnemi = new();
-    public static List<Ennemi> listeEnnemiAEnlever = new();
+    private static List<Ennemi> listeEnnemiAEnlever = new();
 
 
-    private static bool gauche, droite, haut, bas, tirer, numPadUn, numPadQuatre, toucheX, toucheC, toucheR, toucheI, toucheO, toucheP;
+    private static bool gauche,
+        droite,
+        haut,
+        bas,
+        tirer,
+        numPadUn,
+        numPadQuatre,
+        toucheX,
+        toucheC,
+        toucheR,
+        toucheI,
+        toucheO,
+        toucheP;
+
     public static string choix, cheminSprite;
 
     private static readonly ImageBrush apparenceJoueur = new();
@@ -38,13 +51,14 @@ public partial class MainWindow : Window
     private readonly BitmapImage bouttonAmeliorationPresse =
         new(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images\\rectangle_upgrade_presse.png"));
 
-    public int tickAnimation;
     private readonly DispatcherTimer dispatcherTimer = new();
     private Rect hitboxJoueur = new(940, 500, 40, 80); // Hitbox player
 
     public List<Balle> listeBalle = new();
     public List<Balle> listeBalleAEnlever = new();
     public bool mort, mortDroite = true, regardeADroite = true;
+
+    public int tickAnimation;
 
     public MainWindow()
     {
@@ -56,12 +70,12 @@ public partial class MainWindow : Window
         posJoueurY = fenetrePrincipale.Height / 2;
         nonFloue.Radius = 0;
 
-        Menu menu = new Menu();
-        Parametres parametres = new Parametres();
-        Magasin magasin = new Magasin();
-        Touche touche = new Touche(Constantes.TOUCHE_HAUT, Constantes.TOUCHE_BAS, Constantes.TOUCHE_DROITE,
+        var menu = new Menu();
+        var parametres = new Parametres();
+        var magasin = new Magasin();
+        var touche = new Touche(Constantes.TOUCHE_HAUT, Constantes.TOUCHE_BAS, Constantes.TOUCHE_DROITE,
             Constantes.TOUCHE_GAUCHE);
-        PreJeu preJeu = new PreJeu();
+        var preJeu = new PreJeu();
 
         menu.ShowDialog();
         choix = menu.choix;
@@ -139,7 +153,7 @@ public partial class MainWindow : Window
         {
             MouvementJoueur();
             TirJoueur();
-            gereLeSpawn();
+            SpawnEnnemis();
             LogiqueEnnemis();
             CollisionEnnemi();
             CollisionBalle();
@@ -216,9 +230,9 @@ public partial class MainWindow : Window
         }
 
         //God mode
-        if (e.Key == Key.I) { toucheI = true; }
-        if (e.Key == Key.O) { toucheO = true; }
-        if (e.Key == Key.P) { toucheP = true; }
+        if (e.Key == Key.I) toucheI = true;
+        if (e.Key == Key.O) toucheO = true;
+        if (e.Key == Key.P) toucheP = true;
 
         if (toucheI && toucheO && toucheP)
         {
@@ -228,9 +242,6 @@ public partial class MainWindow : Window
             Constantes.VIE_JOUEUR = double.MaxValue;
             Constantes.DEGATS_JOUEUR = int.MaxValue;
         }
-
-
-
     }
 
     private void CanvasKeyIsUp(object sender, KeyEventArgs e)
@@ -262,20 +273,19 @@ public partial class MainWindow : Window
 
 
         //God mode
-        if (e.Key == Key.I) { toucheI = false; }
-        if (e.Key == Key.O) { toucheO = false; }
-        if (e.Key == Key.P) { toucheP = false; }
-
+        if (e.Key == Key.I) toucheI = false;
+        if (e.Key == Key.O) toucheO = false;
+        if (e.Key == Key.P) toucheP = false;
     }
 
     private void MouvementJoueur()
     {
         DeplacerEnDirection(gauche, Constantes.VITESSE_JOUEUR, 0, posJoueurX - rectJoueur.Width / 2);
         DeplacerEnDirection(droite, -Constantes.VITESSE_JOUEUR, 0,
-            -carte.Width + rectJoueur.Width / 2 + posJoueurX); // non
+            -carte.Width + rectJoueur.Width / 2 + posJoueurX);
         DeplacerEnDirection(haut, 0, Constantes.VITESSE_JOUEUR, posJoueurY - rectJoueur.Height / 2);
         DeplacerEnDirection(bas, 0, -Constantes.VITESSE_JOUEUR,
-            -carte.Height + rectJoueur.Height / 2 + posJoueurY); // non
+            -carte.Height + rectJoueur.Height / 2 + posJoueurY);
     }
 
     private void DeplacerEnDirection(bool direction, double deplacementX, double deplacementY, double positionLimite)
@@ -297,7 +307,7 @@ public partial class MainWindow : Window
 
             foreach (var ennemi in
                      listeEnnemi)
-                ennemi.Tir(); // Aucune idée de pourquoi les ennemis tirent pas quand on bouge ducoup j'ai mis ça là
+                ennemi.Tir();
         }
     }
 
@@ -432,13 +442,9 @@ public partial class MainWindow : Window
                         listeEnnemiAEnlever.Add(ennemi);
                         HUD.AjouteElimination(50);
                         if (ennemi.Nom == "Boss")
-                        {
                             HUD.AjouteExp(Constantes.COEFFICIENT_EXPERIENCE * 200d);
-                        }
                         else
-                        {
                             HUD.AjouteExp(Constantes.COEFFICIENT_EXPERIENCE);
-                        }
                     }
                 }
         }
@@ -494,7 +500,6 @@ public partial class MainWindow : Window
         foreach (var ennemi in listeEnnemi)
             if (hitboxJoueur.IntersectsWith(ennemi.Rect))
                 HUD.AjouteVie(-Constantes.DEGATS_COLLISION);
-        //rajouter frames d'invicibilité + knockback
     }
 
     private bool BalleHorsLimite(Balle balle)
@@ -505,7 +510,7 @@ public partial class MainWindow : Window
                Canvas.GetTop(balle.Graphique) >= Canvas.GetTop(carte) + carte.Height + 400;
     }
 
-    private void gereLeSpawn()
+    private void SpawnEnnemis()
     {
         if (Constantes.COMPTEUR_SPAWN >= Constantes.TICK_REQUIS_POUR_SPAWN_ENNEMI)
         {
