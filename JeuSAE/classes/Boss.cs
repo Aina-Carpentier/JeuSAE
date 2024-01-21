@@ -13,6 +13,7 @@ namespace JeuSAE.classes
     {
         private ImageBrush image = new ImageBrush();
         private Uri dossierSprites = new Uri(AppDomain.CurrentDomain.BaseDirectory + "images\\boss\\");
+        Random random = new Random();
 
         public Boss(int type, double posX, double posY) : base(type, posX, posY)
         {
@@ -29,7 +30,7 @@ namespace JeuSAE.classes
                     this.Vitesse = Constantes.VITESSE_BOSS;
                     this.CadenceTir = Constantes.CADENCE_BOSS;
                     this.Nom = Constantes.NOM_BOSS;
-                    image.ImageSource = new BitmapImage(new Uri(dossierSprites + "betrix\\1.png"));// dossierImage c'est un Uri donc ça vas peut-être bugger
+                    image.ImageSource = new BitmapImage(new Uri(dossierSprites + $"betrix\\{random.Next(1,6)}.png"));// dossierImage c'est un Uri donc ça vas peut-être bugger
                     break;
             }
             PosX = posX;

@@ -42,8 +42,8 @@ namespace JeuSAE.classes
         public const int ENNEMI_RECT_LARGEUR = 75;
         public const int ENNEMI_RECT_HAUTEUR = 75;
 
-        public const int BOSS_RECT_LARGEUR = 130;
-        public const int BOSS_RECT_HAUTEUR = 130;
+        public const int BOSS_RECT_LARGEUR = 180;
+        public const int BOSS_RECT_HAUTEUR = 180;
 
 
         // VIE
