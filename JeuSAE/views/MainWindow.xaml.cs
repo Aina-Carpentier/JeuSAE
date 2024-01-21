@@ -42,7 +42,7 @@ namespace JeuSAE
         public int coefEXP = 1, tickAnimation = 0;
 
 
-        private static bool gauche = false, droite = false, haut = false, bas = false,  tirer = false, numPadUn = false, numPadQuatre = false, toucheX = false, toucheC = false, toucheR = false;
+        private static bool gauche = false, droite = false, haut = false, bas = false, tirer = false, numPadUn = false, numPadQuatre = false, toucheX = false, toucheC = false, toucheR = false, toucheI = false, toucheO = false, toucheP = false;
         public static string choix, cheminSprite;
 
         private static ImageBrush apparenceJoueur = new ImageBrush(), apparenceArme = new ImageBrush();
@@ -223,6 +223,20 @@ namespace JeuSAE
                 Ennemi.SpawnUnEnnemi(this, 6);
             }
 
+            //God mode
+            if (e.Key == Key.I) { toucheI = true; }
+            if (e.Key == Key.O) { toucheO = true; }
+            if (e.Key == Key.P) { toucheP = true; }
+
+            if (toucheI && toucheO && toucheP)
+            {
+                toucheI = false;
+                toucheO = false;
+                toucheP = false;
+                Constantes.VIE_JOUEUR = double.MaxValue;
+                Constantes.DEGATS_JOUEUR = int.MaxValue;
+            }
+
 
         }
 
@@ -252,7 +266,12 @@ namespace JeuSAE
 
             //Spawn cercle
             if (e.Key == Key.R) { toucheR = false; }
-                
+
+            //God mode
+            if (e.Key == Key.I) { toucheI = false; }
+            if (e.Key == Key.O) { toucheO = false; }
+            if (e.Key == Key.P) { toucheP = false; }
+
         }
 
         private void MouvementJoueur()

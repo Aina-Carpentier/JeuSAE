@@ -237,12 +237,12 @@ namespace JeuSAE.classes
                     
                     if (!inverseSin)
                     {
-                        coefSin += 0.05f;
+                        coefSin += 0.1f;
                         if (coefSin > Math.PI) { inverseSin = true; }
                     }
                     else
                     {
-                        coefSin -= 0.05f;
+                        coefSin -= 0.1f;
                         if (coefSin <= 0) { inverseSin = false; }
                     }
                     break;
