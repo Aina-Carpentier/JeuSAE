@@ -63,13 +63,48 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        Constantes.LECTEUR_MUSIQUE_MENU.Load();
-        Constantes.LECTEUR_MUSIQUE_MENU.PlayLooping();
+        InitialisationMenu();
+        InitialisationHUD();
+        InitialisationElementsGraphiques();
+        
+        // Moteur de jeu rafraîchit le jeu toutes les 16ms
+        dispatcherTimer.Tick += GameEngine;
+        dispatcherTimer.Interval = TimeSpan.FromMilliseconds(16);
+        dispatcherTimer.Start();
+    }
 
+    private void InitialisationElementsGraphiques()
+    {
+        nonFloue.Radius = 0;
+        
+        // Joueur
         posJoueurX = fenetrePrincipale.Width / 2;
         posJoueurY = fenetrePrincipale.Height / 2;
-        nonFloue.Radius = 0;
+        rectJoueur.Margin = new Thickness(posJoueurX - rectJoueur.Width / 2, posJoueurY - rectJoueur.Height / 2, 0, 0);
+        rectArme.Margin = new Thickness(posJoueurX - rectJoueur.Width / 2, posJoueurY - rectJoueur.Height / 2, 0, 0); 
+        
+        // Boutons de l'écran de mort
+        labQuitter.Margin = new Thickness(fenetrePrincipale.Width / 2 - labQuitter.Width / 2,
+            fenetrePrincipale.Height * 0.35, 0, 0);
+        labRetour.Margin = new Thickness(fenetrePrincipale.Width / 2 - labRetour.Width / 2,
+            fenetrePrincipale.Height * 0.2, 0, 0);
+        
+        // Map
+        MapGenerator.load(this);
+    }
 
+    private void InitialisationHUD()
+    {
+        HUDResolution1920x1080();
+        HUD.ChangeBarreEliminations(0);
+        HUD.ChangeBarreExp(0);
+    }
+
+    private void InitialisationMenu()
+    {
+        Constantes.LECTEUR_MUSIQUE_MENU.Load();
+        Constantes.LECTEUR_MUSIQUE_MENU.PlayLooping();
+        
         var menu = new Menu();
         var parametres = new Parametres();
         var magasin = new Magasin();
@@ -117,22 +152,7 @@ public partial class MainWindow : Window
                     choix = preJeu.choix;
                     break;
             }
-
-        MapGenerator.load(this);
         Constantes.LECTEUR_MUSIQUE_MENU.Stop();
-        Cursor = Cursors.None;
-        rectJoueur.Margin = new Thickness(posJoueurX - rectJoueur.Width / 2, posJoueurY - rectJoueur.Height / 2, 0, 0);
-        rectArme.Margin = new Thickness(posJoueurX - rectJoueur.Width / 2, posJoueurY - rectJoueur.Height / 2, 0, 0);
-        labQuitter.Margin = new Thickness(fenetrePrincipale.Width / 2 - labQuitter.Width / 2,
-            fenetrePrincipale.Height * 0.35, 0, 0);
-        labRetour.Margin = new Thickness(fenetrePrincipale.Width / 2 - labRetour.Width / 2,
-            fenetrePrincipale.Height * 0.2, 0, 0);
-        HUDResolution1920x1080();
-        HUD.ChangeBarreEliminations(0);
-        HUD.ChangeBarreExp(0);
-        dispatcherTimer.Tick += GameEngine;
-        dispatcherTimer.Interval = TimeSpan.FromMilliseconds(16);
-        dispatcherTimer.Start();
     }
 
     private void GameEngine(object sender, EventArgs e)
