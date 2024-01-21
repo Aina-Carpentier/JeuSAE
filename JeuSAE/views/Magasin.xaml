@@ -43,9 +43,14 @@
             FontFamily="Rubik"
             FontSize="90"
             MouseLeftButtonDown="labMenu_MouseLeftButtonDown" MouseEnter="labMenu_MouseEnter" MouseLeave="labMenu_MouseLeave" />
-        <Rectangle x:Name="rectArme1" Height="150" Stroke="Black"  Width="150"/>
-        <Rectangle x:Name="rectArme2" Height="150" Stroke="Black"  Width="150"/>
-        <Rectangle x:Name="rectArme3" Height="150" Stroke="Black"  Width="150"/>
+        <Rectangle x:Name="rectArme1" Height="100" Stroke="Black"  Width="220" MouseEnter="rectArme1_MouseEnter" MouseLeave="rectArme1_MouseLeave" MouseLeftButtonDown="rectArme1_MouseLeftButtonDown"/>
+        <Rectangle x:Name="rectArme2" Height="100" Stroke="Black"  Width="220" MouseEnter="rectArme2_MouseEnter" MouseLeave="rectArme2_MouseLeave" MouseLeftButtonDown="rectArme2_MouseLeftButtonDown"/>
+        <Rectangle x:Name="rectArme3" Height="100" Stroke="Black"  Width="220" MouseEnter="rectArme3_MouseEnter" MouseLeave="rectArme3_MouseLeave" MouseLeftButtonDown="rectArme3_MouseLeftButtonDown"/>
+        <Rectangle x:Name="rectDescription" Height="300" Stroke="Black" Width="800" Fill="#FFA9A0A0" Visibility="Hidden"/>
+        <Label x:Name="labDescription" Content=""  FontFamily="Rubik" FontSize="40"/>
+
+
+
 
     </Canvas>
 </Window>

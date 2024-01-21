@@ -38,9 +38,9 @@ namespace JeuSAE
         public static List<Ennemi> listeEnnemi = new List<Ennemi>();
         public static List<Ennemi> listeEnnemiAEnlever = new List<Ennemi>();
         public List<Balle> listeBalleAEnlever = new List<Balle>();
-        private Rect hitboxJoueur = new Rect(940, 500, 40, 80); // Hitbox player
+        
         public int coefEXP = 1, tickAnimation = 0;
-
+        private Rect hitboxJoueur = new Rect(700, 410, 40, 80); // Hitbox player
 
         private static bool gauche = false, droite = false, haut = false, bas = false,  tirer = false, numPadUn = false, numPadQuatre = false, toucheX = false, toucheC = false, toucheR = false;
         public static string choix, cheminSprite;
@@ -544,8 +544,9 @@ namespace JeuSAE
                 Canvas.SetTop(rectangleElimination, 991);
                 rectangleElimination.Height = 63;
                 rectangleElimination.Width = 405;
-
+                hitboxJoueur = new Rect(940, 500, 40, 80); // Hitbox player
             }
+
         }
 
         private void EnleverTousLesEnnemis()
