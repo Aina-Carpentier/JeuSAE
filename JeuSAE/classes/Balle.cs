@@ -25,6 +25,7 @@ namespace JeuSAE.classes
         private Ellipse graphique;
         private Vector2 vecteurSin;
         private float coefSin = 0;
+        private float coefRotation = 0;
         private bool inverseSin = false;
         private List<Guid> listeEnnemisPerces = new List<Guid>();
 
@@ -166,10 +167,10 @@ namespace JeuSAE.classes
                         Graphique = new Ellipse
                         {
                             Tag = "bulletBoss",
-                            Width = Taille,
-                            Height = Taille,
+                            Width = Taille*3,
+                            Height = Taille*3,
                             Fill = image,
-                            Stroke = Brushes.Black
+                            //Stroke = Brushes.Black
                         };
                         Degats = Constantes.DEGATS_BALLE_TROIS;
                         break;
@@ -237,20 +238,48 @@ namespace JeuSAE.classes
                     
                     if (!inverseSin)
                     {
-                        coefSin += 0.05f;
+                        coefSin += 0.1f;
                         if (coefSin > Math.PI) { inverseSin = true; }
                     }
                     else
                     {
-                        coefSin -= 0.05f;
+                        coefSin -= 0.1f;
                         if (coefSin <= 0) { inverseSin = false; }
                     }
                     break;
                 }
                 case 3:
                 {
-                    double newX = PosX + (vecteurNormalize.X * this.Vitesse);
-                    double newY = PosY + (vecteurNormalize.Y * this.Vitesse);
+
+                        double posJoueurX = mainWindow.fenetrePrincipale.Width / 2 - mainWindow.rectJoueur.Width * 0.5;
+                        double posJoueurY = mainWindow.fenetrePrincipale.Height / 2 - mainWindow.rectJoueur.Height * 0.5;
+
+
+
+                        Vector2 vecteurBalleVersJoueur = new Vector2((float)this.PosX - (float)posJoueurX, (float)this.PosY - (float)posJoueurY);
+                        Vector2 vecteurMoitie = Vector2.Normalize(new Vector2((float) posJoueurX - (float)this.PosX, (float)posJoueurY - (float) this.PosY));
+                        Vector2.Multiply(0.5f, vecteurMoitie);
+                        Vector2 nouveauVecteur = Vector2.Normalize(Vector2.Add(vecteurNormalize, vecteurMoitie));
+
+                        if (Math.Abs(this.PosX - posJoueurX) > 500 || Math.Abs(this.PosY - posJoueurY) > 500)
+                        {
+                            nouveauVecteur = vecteurNormalize;
+                        } else if (coefRotation % 360 == 0)
+                        {
+                            this.Vecteur = nouveauVecteur;
+                        }
+
+
+                    double newX = PosX + (nouveauVecteur.X * this.Vitesse);
+                    double newY = PosY + (nouveauVecteur.Y * this.Vitesse);
+
+                        coefRotation += 5;
+                        if (coefRotation >= 360)
+                        {
+                            coefRotation = 0;
+                        }
+
+                        this.Graphique.RenderTransform = new RotateTransform(coefRotation, this.Graphique.Width /2, this.Graphique.Height /2 );
 
                     this.PosX = newX;
                     this.PosY = newY;

@@ -28,7 +28,7 @@ namespace JeuSAE.classes
         }
 
 
-        public static void AjouteVie(int nombrePV)
+        public static void AjouteVie(double nombrePV)
         {
             double nouvelleLargeur = ((nombrePV) / Constantes.VIE_JOUEUR) * largeurBarVieMax;
 
