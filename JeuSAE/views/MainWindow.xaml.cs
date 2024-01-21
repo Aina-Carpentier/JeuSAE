@@ -594,8 +594,8 @@ namespace JeuSAE
 
         private void LogiqueEnnemis()
         {
-            double posJoueurX = fenetrePrincipale.Width / 2 - rectJoueur.Width*0.75;
-            double posJoueurY = fenetrePrincipale.Height / 2 - rectJoueur.Height*0.75;
+            double posJoueurX = fenetrePrincipale.Width / 2 - rectJoueur.Width*0.75 + 20;
+            double posJoueurY = fenetrePrincipale.Height / 2 - rectJoueur.Height*0.75 +40;
 
             foreach (Ennemi ennemi in listeEnnemi)
             {

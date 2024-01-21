@@ -59,7 +59,7 @@ namespace JeuSAE.classes
             mainWindow.rectangleEXP.Width = largeurBarExpMax * pourcentage;
         }
 
-        public static void AjouteExp(int nombreEXP)
+        public static void AjouteExp(double nombreEXP)
         {
 
             if (mainWindow.rectangleEXP.Width != largeurBarExpMax)

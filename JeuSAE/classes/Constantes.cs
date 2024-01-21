@@ -96,5 +96,10 @@ namespace JeuSAE.classes
         public const string NOM_BOSS = "Boss";
         public const string NOM_CERCLE = "Cercle";
 
+
+
+        public const int PRIX_ARME = 200;
+        public const int PRIX_BASE_AMELIORATION = 10;
+
     }
 }

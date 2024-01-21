@@ -10,5 +10,9 @@ namespace JeuSAE.classes
     {
         public int argent { get; set; }
         public int eliminations { get; set;}
+        public int ameliorationPDV {  get; set; }
+        public int ameliorationVitesse {  get; set; }
+        public bool arme2 { get; set;}
+        public bool arme3 { get; set;}
     }
 }
