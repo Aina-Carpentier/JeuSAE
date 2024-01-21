@@ -25,6 +25,7 @@ namespace JeuSAE.classes
         private Ellipse graphique;
         private Vector2 vecteurSin;
         private float coefSin = 0;
+        private float coefRotation = 0;
         private bool inverseSin = false;
         private List<Guid> listeEnnemisPerces = new List<Guid>();
 
@@ -166,10 +167,10 @@ namespace JeuSAE.classes
                         Graphique = new Ellipse
                         {
                             Tag = "bulletBoss",
-                            Width = Taille,
-                            Height = Taille,
+                            Width = Taille*3,
+                            Height = Taille*3,
                             Fill = image,
-                            Stroke = Brushes.Black
+                            //Stroke = Brushes.Black
                         };
                         Degats = Constantes.DEGATS_BALLE_TROIS;
                         break;
@@ -251,6 +252,14 @@ namespace JeuSAE.classes
                 {
                     double newX = PosX + (vecteurNormalize.X * this.Vitesse);
                     double newY = PosY + (vecteurNormalize.Y * this.Vitesse);
+
+                        coefRotation += 5;
+                        if (coefRotation >= 360)
+                        {
+                            coefRotation = 0;
+                        }
+
+                        this.Graphique.RenderTransform = new RotateTransform(coefRotation, this.Graphique.Width /2, this.Graphique.Height /2 );
 
                     this.PosX = newX;
                     this.PosY = newY;
