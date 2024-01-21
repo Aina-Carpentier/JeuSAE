@@ -99,7 +99,8 @@ namespace JeuSAE.classes
                 double nouvelleLargeur = ((nombreEliminations) / 100d) * largeurBarEliminationsMax;
                 if (nouvelleLargeur + mainWindow.rectangleElimination.Width >= largeurBarEliminationsMax)
                 {
-                    mainWindow.rectangleElimination.Width = largeurBarEliminationsMax;
+                    mainWindow.rectangleElimination.Width = 0;
+                    Boss.SpawnUnBoss(mainWindow);
                 }
                 else
                 {

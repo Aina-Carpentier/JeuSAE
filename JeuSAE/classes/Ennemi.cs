@@ -184,7 +184,7 @@ namespace JeuSAE
                 y = y * (-1);
             }
 
-            Boss ennemi = new Boss(random.Next(0, 7), x, y);
+            Boss ennemi = new Boss(0, x, y);
             Canvas.SetLeft(ennemi.Graphique, posJoueurX + x);
             Canvas.SetTop(ennemi.Graphique, posJoueurY + y);
 

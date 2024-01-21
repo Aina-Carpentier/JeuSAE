@@ -41,6 +41,7 @@ namespace JeuSAE
         private Rect hitboxJoueur = new Rect(940, 500, 40, 80); // Hitbox player
         public int coefEXP = 1, tickAnimation = 0;
 
+
         private static bool gauche = false, droite = false, haut = false, bas = false,  tirer = false, numPadUn = false, numPadQuatre = false, toucheX = false, toucheC = false, toucheR = false;
         public static string choix, cheminSprite;
 
@@ -52,7 +53,6 @@ namespace JeuSAE
         private static BlurBitmapEffect nonFloue = new BlurBitmapEffect();
         private BitmapImage bouttonAmelioration = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images\\rectangle_upgrade.png"));
         private BitmapImage bouttonAmeliorationPresse = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images\\rectangle_upgrade_presse.png"));
-
 
         public MainWindow()
         {
@@ -411,7 +411,8 @@ namespace JeuSAE
 
 
                 }
-                foreach(Ennemi ennemi in listeEnnemi)
+                List<Ennemi> listeEnnemiTemporaire = new List<Ennemi>(listeEnnemi);
+                foreach(Ennemi ennemi in listeEnnemiTemporaire)
                 {
                     if (balle.Rect.IntersectsWith(ennemi.Rect) && balle.Tireur == "joueur")
                     {
@@ -431,7 +432,7 @@ namespace JeuSAE
                         if (ennemi.Vie <= 0)
                         {
                             listeEnnemiAEnlever.Add(ennemi);
-                            HUD.AjouteElimination(1);
+                            HUD.AjouteElimination(50);
                             HUD.AjouteExp((int) Constantes.COEFFICIENT_EXPERIENCE);
                         }
                     }
