@@ -43,6 +43,9 @@
             FontFamily="Rubik"
             FontSize="90"
             MouseLeftButtonDown="labMenu_MouseLeftButtonDown" MouseEnter="labMenu_MouseEnter" MouseLeave="labMenu_MouseLeave" />
+        <Rectangle x:Name="rectArme1" Height="150" Stroke="Black"  Width="150"/>
+        <Rectangle x:Name="rectArme2" Height="150" Stroke="Black"  Width="150"/>
+        <Rectangle x:Name="rectArme3" Height="150" Stroke="Black"  Width="150"/>
 
     </Canvas>
 </Window>
