@@ -125,7 +125,7 @@ namespace JeuSAE.classes
             mainWindow.labBonus.Visibility = System.Windows.Visibility.Visible;
             mainWindow.Cursor = Cursors.Arrow;
 
-            MainWindow.ouvreMenuMaxEXP = true;
+            MainWindow.OuvreMenuMaxExp = true;
 
 
         }
@@ -147,7 +147,7 @@ namespace JeuSAE.classes
             mainWindow.labBonus.Visibility = System.Windows.Visibility.Hidden;
             mainWindow.Cursor = Cursors.None;
 
-            MainWindow.ouvreMenuMaxEXP = false;
+            MainWindow.OuvreMenuMaxExp = false;
             Constantes.COEFFICIENT_EXPERIENCE *= 0.9;
 
 

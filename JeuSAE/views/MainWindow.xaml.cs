@@ -16,50 +16,47 @@ namespace JeuSAE;
 
 public partial class MainWindow : Window
 {
-    public static bool ouvreMenuMaxEXP = false;
-    public static List<Ennemi> listeEnnemi = new();
-    private static List<Ennemi> listeEnnemiAEnlever = new();
+    public static bool OuvreMenuMaxExp = false;
+    
+    // État du joueur
+    private static bool Gauche, Droite, Haut, Bas, Tirer;
+    private static bool NumPadUn, NumPadQuatre;
+    private static bool ToucheX, ToucheC, ToucheR, ToucheI, ToucheO, ToucheP;
+    
+    // Chemin et apparence
+    public static string? CheminSprite;
+    private static readonly ImageBrush ApparenceJoueur = new();
+    private static readonly ImageBrush ApparenceArme = new();
+    
+    // Position du joueur
+    private static double PosJoueurX, PosJoueurY;
+    
+    // Base de données et effets visuels
+    private static readonly BaseDeDonnee BaseDeDonnee = JsonUtilitaire.LireFichier(Constantes.CHEMIN_BDD);
+    private static readonly BlurBitmapEffect EffetFlou = new();
+    private static readonly BlurBitmapEffect NonFloue = new();
+    
+    // Images
+    private readonly BitmapImage ImgBtnAmelioration = new(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images\\rectangle_upgrade.png"));
+    private readonly BitmapImage ImgBtnPresse = new(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images\\rectangle_upgrade_presse.png"));
+    
+    // Timer et Hitbox
+    private readonly DispatcherTimer Timer = new();
+    private Rect HitboxJoueur = new(940, 500, 40, 80); // Hitbox player
+    
+    // Balles
+    public static readonly List<Balle> Balles = new();
+    public static readonly List<Balle> BallesMortes = new();
+    public static List<Ennemi> Ennemis = new();
+    public static List<Ennemi> EnnemisMorts = new();
+    
+    // État du joueur (mort, direction)
+    public bool Mort, MortDroite = true, RegardeADroite = true;
+    
+    // Animation
+    public int TickAnimation;
 
-
-    private static bool gauche,
-        droite,
-        haut,
-        bas,
-        tirer,
-        numPadUn,
-        numPadQuatre,
-        toucheX,
-        toucheC,
-        toucheR,
-        toucheI,
-        toucheO,
-        toucheP;
-
-    public static string choix, cheminSprite;
-
-    private static readonly ImageBrush apparenceJoueur = new();
-    private static readonly ImageBrush apparenceArme = new();
-    private static double posJoueurX, posJoueurY;
-
-    private static readonly BaseDeDonnee baseDeDonnee = JsonUtilitaire.LireFichier(Constantes.CHEMIN_BDD);
-    private static readonly BlurBitmapEffect myBlurEffect = new();
-    private static readonly BlurBitmapEffect nonFloue = new();
-
-    private readonly BitmapImage bouttonAmelioration =
-        new(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images\\rectangle_upgrade.png"));
-
-    private readonly BitmapImage bouttonAmeliorationPresse =
-        new(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images\\rectangle_upgrade_presse.png"));
-
-    private readonly DispatcherTimer dispatcherTimer = new();
-    private Rect hitboxJoueur = new(940, 500, 40, 80); // Hitbox player
-
-    public List<Balle> listeBalle = new();
-    public List<Balle> listeBalleAEnlever = new();
-    public bool mort, mortDroite = true, regardeADroite = true;
-
-    public int tickAnimation;
-
+    
     public MainWindow()
     {
         InitializeComponent();
@@ -68,20 +65,20 @@ public partial class MainWindow : Window
         InitialisationElementsGraphiques();
         
         // Moteur de jeu rafraîchit le jeu toutes les 16ms
-        dispatcherTimer.Tick += GameEngine;
-        dispatcherTimer.Interval = TimeSpan.FromMilliseconds(16);
-        dispatcherTimer.Start();
+        Timer.Tick += GameEngine;
+        Timer.Interval = TimeSpan.FromMilliseconds(16);
+        Timer.Start();
     }
 
     private void InitialisationElementsGraphiques()
     {
-        nonFloue.Radius = 0;
+        NonFloue.Radius = 0;
         
         // Joueur
-        posJoueurX = fenetrePrincipale.Width / 2;
-        posJoueurY = fenetrePrincipale.Height / 2;
-        rectJoueur.Margin = new Thickness(posJoueurX - rectJoueur.Width / 2, posJoueurY - rectJoueur.Height / 2, 0, 0);
-        rectArme.Margin = new Thickness(posJoueurX - rectJoueur.Width / 2, posJoueurY - rectJoueur.Height / 2, 0, 0); 
+        PosJoueurX = fenetrePrincipale.Width / 2;
+        PosJoueurY = fenetrePrincipale.Height / 2;
+        rectJoueur.Margin = new Thickness(PosJoueurX - rectJoueur.Width / 2, PosJoueurY - rectJoueur.Height / 2, 0, 0);
+        rectArme.Margin = new Thickness(PosJoueurX - rectJoueur.Width / 2, PosJoueurY - rectJoueur.Height / 2, 0, 0); 
         
         // Boutons de l'écran de mort
         labQuitter.Margin = new Thickness(fenetrePrincipale.Width / 2 - labQuitter.Width / 2,
@@ -113,7 +110,7 @@ public partial class MainWindow : Window
         var preJeu = new PreJeu();
 
         menu.ShowDialog();
-        choix = menu.choix;
+        string choix = menu.choix;
 
 
         while (choix != "jouer")
@@ -162,11 +159,11 @@ public partial class MainWindow : Window
         Console.WriteLine(Canvas.GetTop(carte));
 #endif
 
-        if (mort)
+        if (Mort)
         {
             AnimationMort();
         }
-        else if (ouvreMenuMaxEXP)
+        else if (OuvreMenuMaxExp)
         {
         }
         else
@@ -189,50 +186,50 @@ public partial class MainWindow : Window
         Canvas.SetTop(curseurPerso, curseur.Y - curseurPerso.Height / 2);
         Canvas.SetLeft(curseurPerso, curseur.X - curseurPerso.Width / 2);
         if (curseur.X > fenetrePrincipale.Width / 2)
-            regardeADroite = true;
+            RegardeADroite = true;
         else
-            regardeADroite = false;
+            RegardeADroite = false;
     }
 
     private void monCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
-        tirer = true;
+        Tirer = true;
     }
 
     private void monCanvas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
     {
-        tirer = false;
+        Tirer = false;
     }
 
     private void CanvasKeyIsDown(object sender, KeyEventArgs e)
     {
         if (e.Key == Constantes.TOUCHE_GAUCHE)
-            gauche = true;
+            Gauche = true;
         if (e.Key == Constantes.TOUCHE_DROITE)
-            droite = true;
+            Droite = true;
         if (e.Key == Constantes.TOUCHE_HAUT)
-            haut = true;
+            Haut = true;
         if (e.Key == Constantes.TOUCHE_BAS)
-            bas = true;
+            Bas = true;
 
         //------------------------------------------- CODES DE TRICHE -------------------------------------------
 
         //Super vitesse
         if (e.Key == Key.NumPad1)
-            numPadUn = true;
+            NumPadUn = true;
         if (e.Key == Key.NumPad4)
-            numPadQuatre = true;
-        if (numPadUn && numPadQuatre) Constantes.VITESSE_JOUEUR = 200;
+            NumPadQuatre = true;
+        if (NumPadUn && NumPadQuatre) Constantes.VITESSE_JOUEUR = 200;
 
         //Clear ennemis
-        if (e.Key == Key.X) toucheX = true;
+        if (e.Key == Key.X) ToucheX = true;
 
-        if (e.Key == Key.C) toucheC = true;
+        if (e.Key == Key.C) ToucheC = true;
 
-        if (toucheC && toucheX)
+        if (ToucheC && ToucheX)
         {
-            toucheX = false;
-            toucheC = false;
+            ToucheX = false;
+            ToucheC = false;
             EnleverTousLesEnnemis();
             Ennemi.SpawnUnEnnemi(this);
         }
@@ -240,25 +237,25 @@ public partial class MainWindow : Window
 
         //Spawn cercle
 
-        if (e.Key == Key.R) toucheR = true;
+        if (e.Key == Key.R) ToucheR = true;
 
-        if (toucheC && toucheR)
+        if (ToucheC && ToucheR)
         {
-            toucheC = false;
-            toucheR = false;
+            ToucheC = false;
+            ToucheR = false;
             Ennemi.SpawnUnEnnemi(this, 6);
         }
 
         //God mode
-        if (e.Key == Key.I) toucheI = true;
-        if (e.Key == Key.O) toucheO = true;
-        if (e.Key == Key.P) toucheP = true;
+        if (e.Key == Key.I) ToucheI = true;
+        if (e.Key == Key.O) ToucheO = true;
+        if (e.Key == Key.P) ToucheP = true;
 
-        if (toucheI && toucheO && toucheP)
+        if (ToucheI && ToucheO && ToucheP)
         {
-            toucheI = false;
-            toucheO = false;
-            toucheP = false;
+            ToucheI = false;
+            ToucheO = false;
+            ToucheP = false;
             Constantes.VIE_JOUEUR = double.MaxValue;
             Constantes.DEGATS_JOUEUR = int.MaxValue;
         }
@@ -267,45 +264,45 @@ public partial class MainWindow : Window
     private void CanvasKeyIsUp(object sender, KeyEventArgs e)
     {
         if (e.Key == Constantes.TOUCHE_GAUCHE)
-            gauche = false;
+            Gauche = false;
         if (e.Key == Constantes.TOUCHE_DROITE)
-            droite = false;
+            Droite = false;
         if (e.Key == Constantes.TOUCHE_HAUT)
-            haut = false;
+            Haut = false;
         if (e.Key == Constantes.TOUCHE_BAS)
-            bas = false;
+            Bas = false;
 
         //------------------------------------------- CODES DE TRICHE -------------------------------------------
 
         //Super vitesse
         if (e.Key == Key.NumPad1)
-            numPadUn = false;
+            NumPadUn = false;
         if (e.Key == Key.NumPad4)
-            numPadQuatre = false;
+            NumPadQuatre = false;
 
         //Clear ennemis
-        if (e.Key == Key.X) toucheX = false;
+        if (e.Key == Key.X) ToucheX = false;
 
-        if (e.Key == Key.C) toucheC = false;
+        if (e.Key == Key.C) ToucheC = false;
 
         //Spawn cercle
-        if (e.Key == Key.R) toucheR = false;
+        if (e.Key == Key.R) ToucheR = false;
 
 
         //God mode
-        if (e.Key == Key.I) toucheI = false;
-        if (e.Key == Key.O) toucheO = false;
-        if (e.Key == Key.P) toucheP = false;
+        if (e.Key == Key.I) ToucheI = false;
+        if (e.Key == Key.O) ToucheO = false;
+        if (e.Key == Key.P) ToucheP = false;
     }
 
     private void MouvementJoueur()
     {
-        DeplacerEnDirection(gauche, Constantes.VITESSE_JOUEUR, 0, posJoueurX - rectJoueur.Width / 2);
-        DeplacerEnDirection(droite, -Constantes.VITESSE_JOUEUR, 0,
-            -carte.Width + rectJoueur.Width / 2 + posJoueurX);
-        DeplacerEnDirection(haut, 0, Constantes.VITESSE_JOUEUR, posJoueurY - rectJoueur.Height / 2);
-        DeplacerEnDirection(bas, 0, -Constantes.VITESSE_JOUEUR,
-            -carte.Height + rectJoueur.Height / 2 + posJoueurY);
+        DeplacerEnDirection(Gauche, Constantes.VITESSE_JOUEUR, 0, PosJoueurX - rectJoueur.Width / 2);
+        DeplacerEnDirection(Droite, -Constantes.VITESSE_JOUEUR, 0,
+            -carte.Width + rectJoueur.Width / 2 + PosJoueurX);
+        DeplacerEnDirection(Haut, 0, Constantes.VITESSE_JOUEUR, PosJoueurY - rectJoueur.Height / 2);
+        DeplacerEnDirection(Bas, 0, -Constantes.VITESSE_JOUEUR,
+            -carte.Height + rectJoueur.Height / 2 + PosJoueurY);
     }
 
     private void DeplacerEnDirection(bool direction, double deplacementX, double deplacementY, double positionLimite)
@@ -316,8 +313,8 @@ public partial class MainWindow : Window
             {
                 if (deplacementX != 0) Canvas.SetLeft(carte, Canvas.GetLeft(carte) + deplacementX);
                 else Canvas.SetTop(carte, Canvas.GetTop(carte) + deplacementY);
-                DeplacerObjets(listeBalle, deplacementX, deplacementY);
-                DeplacerObjets(listeEnnemi, deplacementX, deplacementY);
+                DeplacerObjets(Balles, deplacementX, deplacementY);
+                DeplacerObjets(Ennemis, deplacementX, deplacementY);
             }
             else
             {
@@ -326,7 +323,7 @@ public partial class MainWindow : Window
             }
 
             foreach (var ennemi in
-                     listeEnnemi)
+                     Ennemis)
                 ennemi.Tir();
         }
     }
@@ -373,7 +370,7 @@ public partial class MainWindow : Window
     {
         GestionTempsRecharge();
 
-        if (tirer && Constantes.TEMPS_RECHARGE_ACTUEL <= 0) CreerBalleJoueur();
+        if (Tirer && Constantes.TEMPS_RECHARGE_ACTUEL <= 0) CreerBalleJoueur();
 
         GestionDeplacementBalles();
     }
@@ -395,14 +392,14 @@ public partial class MainWindow : Window
         Console.WriteLine(posCarte.X + "  " + posCarte.Y);
 #endif
 
-        var vecteurTir = new Vector2((float)posEcran.X - (float)posJoueurX, (float)posEcran.Y - (float)posJoueurY);
+        var vecteurTir = new Vector2((float)posEcran.X - (float)PosJoueurX, (float)posEcran.Y - (float)PosJoueurY);
 
         var balleJoueur = new Balle(Constantes.VITESSE_BALLE_JOUEUR, Constantes.TAILLE_BALLE_JOUEUR, 0, "joueur", 0,
-            posJoueurX, posJoueurY, vecteurTir, Constantes.DEGATS_JOUEUR);
+            PosJoueurX, PosJoueurY, vecteurTir, Constantes.DEGATS_JOUEUR);
         PositionnerBalle(balleJoueur);
 
         monCanvas.Children.Add(balleJoueur.Graphique);
-        listeBalle.Add(balleJoueur);
+        Balles.Add(balleJoueur);
     }
 
     private void PositionnerBalle(Balle balle)
@@ -413,39 +410,39 @@ public partial class MainWindow : Window
 
     private void GestionDeplacementBalles()
     {
-        if (listeBalle != null)
+        if (Balles != null)
         {
-            foreach (var balle in listeBalle)
+            foreach (var balle in Balles)
             {
                 balle.Deplacement();
 
-                if (BalleHorsLimite(balle)) listeBalleAEnlever.Add(balle);
+                if (BalleHorsLimite(balle)) BallesMortes.Add(balle);
 
                 PositionnerBalle(balle);
             }
 
-            foreach (var balle in listeBalleAEnlever)
+            foreach (var balle in BallesMortes)
             {
-                listeBalle.Remove(balle);
+                Balles.Remove(balle);
                 monCanvas.Children.Remove(balle.Graphique);
             }
 
-            listeBalleAEnlever.Clear();
+            BallesMortes.Clear();
         }
     }
 
     private void CollisionBalle()
     {
-        foreach (var balle in listeBalle)
+        foreach (var balle in Balles)
         {
-            if (balle.Rect.IntersectsWith(hitboxJoueur) && balle.Tireur != "joueur")
+            if (balle.Rect.IntersectsWith(HitboxJoueur) && balle.Tireur != "joueur")
             {
                 //Application.Current.Shutdown();
-                listeBalleAEnlever.Add(balle);
+                BallesMortes.Add(balle);
                 HUD.AjouteVie((int)-balle.Degats);
             }
 
-            var listeEnnemiTemporaire = new List<Ennemi>(listeEnnemi);
+            var listeEnnemiTemporaire = new List<Ennemi>(Ennemis);
             foreach (var ennemi in listeEnnemiTemporaire)
                 if (balle.Rect.IntersectsWith(ennemi.Rect) && balle.Tireur == "joueur")
                 {
@@ -455,11 +452,11 @@ public partial class MainWindow : Window
                         balle.ListeEnnemisPerces.Add(ennemi.Id);
                     }
 
-                    if (balle.ListeEnnemisPerces.Count >= balle.NombrePerce) listeBalleAEnlever.Add(balle);
+                    if (balle.ListeEnnemisPerces.Count >= balle.NombrePerce) BallesMortes.Add(balle);
 
                     if (ennemi.Vie <= 0)
                     {
-                        listeEnnemiAEnlever.Add(ennemi);
+                        EnnemisMorts.Add(ennemi);
                         HUD.AjouteElimination(50);
                         if (ennemi.Nom == "Boss")
                             HUD.AjouteExp(Constantes.COEFFICIENT_EXPERIENCE * 200d);
@@ -472,32 +469,32 @@ public partial class MainWindow : Window
 
     private void bouttonUpgrade1_MouseEnter(object sender, MouseEventArgs e)
     {
-        bouttonUpgrade1.Source = bouttonAmeliorationPresse;
+        bouttonUpgrade1.Source = ImgBtnPresse;
     }
 
     private void bouttonUpgrade1_MouseLeave(object sender, MouseEventArgs e)
     {
-        bouttonUpgrade1.Source = bouttonAmelioration;
+        bouttonUpgrade1.Source = ImgBtnAmelioration;
     }
 
     private void bouttonUpgrade2_MouseEnter(object sender, MouseEventArgs e)
     {
-        bouttonUpgrade2.Source = bouttonAmeliorationPresse;
+        bouttonUpgrade2.Source = ImgBtnPresse;
     }
 
     private void bouttonUpgrade2_MouseLeave(object sender, MouseEventArgs e)
     {
-        bouttonUpgrade2.Source = bouttonAmelioration;
+        bouttonUpgrade2.Source = ImgBtnAmelioration;
     }
 
     private void bouttonUpgrade3_MouseEnter(object sender, MouseEventArgs e)
     {
-        bouttonUpgrade3.Source = bouttonAmeliorationPresse;
+        bouttonUpgrade3.Source = ImgBtnPresse;
     }
 
     private void bouttonUpgrade3_MouseLeave(object sender, MouseEventArgs e)
     {
-        bouttonUpgrade3.Source = bouttonAmelioration;
+        bouttonUpgrade3.Source = ImgBtnAmelioration;
     }
 
     private void bouttonUpgrade1_MouseDown(object sender, MouseButtonEventArgs e)
@@ -517,8 +514,8 @@ public partial class MainWindow : Window
 
     private void CollisionEnnemi()
     {
-        foreach (var ennemi in listeEnnemi)
-            if (hitboxJoueur.IntersectsWith(ennemi.Rect))
+        foreach (var ennemi in Ennemis)
+            if (HitboxJoueur.IntersectsWith(ennemi.Rect))
                 HUD.AjouteVie(-Constantes.DEGATS_COLLISION);
     }
 
@@ -574,23 +571,23 @@ public partial class MainWindow : Window
 
     private void EnleverTousLesEnnemis()
     {
-        foreach (var ennemi in listeEnnemi) listeEnnemiAEnlever.Add(ennemi);
+        foreach (var ennemi in Ennemis) EnnemisMorts.Add(ennemi);
 
-        foreach (var ennemi in listeEnnemiAEnlever)
+        foreach (var ennemi in EnnemisMorts)
         {
-            listeEnnemi.Remove(ennemi);
+            Ennemis.Remove(ennemi);
             monCanvas.Children.Remove(ennemi.Graphique);
         }
 
-        listeEnnemiAEnlever.Clear();
+        EnnemisMorts.Clear();
     }
 
         private void LogiqueEnnemis()
         {
-            double posJoueurX = hitboxJoueur.Left + hitboxJoueur.Width /2;
-            double posJoueurY = hitboxJoueur.Top + hitboxJoueur.Height/2;
+            double posJoueurX = HitboxJoueur.Left + HitboxJoueur.Width /2;
+            double posJoueurY = HitboxJoueur.Top + HitboxJoueur.Height/2;
 
-        foreach (var ennemi in listeEnnemi)
+        foreach (var ennemi in Ennemis)
         {
             ennemi.PosX = Canvas.GetLeft(ennemi.Graphique);
             ennemi.PosY = Canvas.GetTop(ennemi.Graphique);
@@ -613,103 +610,103 @@ public partial class MainWindow : Window
     private void AnimationJoueur()
     {
         var posEcran = Mouse.GetPosition(Application.Current.MainWindow);
-        var vecteurTir = new Vector2((float)posEcran.X - (float)posJoueurX, (float)posEcran.Y - (float)posJoueurY);
+        var vecteurTir = new Vector2((float)posEcran.X - (float)PosJoueurX, (float)posEcran.Y - (float)PosJoueurY);
         float normalVecteurX = Vector2.Normalize(vecteurTir).X, normalVecteurY = Vector2.Normalize(vecteurTir).Y;
 #if DEBUG
         Console.WriteLine("vecteur x " + normalVecteurX);
         Console.WriteLine("vecteur y " + normalVecteurY);
 #endif
 
-        cheminSprite = AppDomain.CurrentDomain.BaseDirectory + "images\\sprites\\personnage\\";
+        CheminSprite = AppDomain.CurrentDomain.BaseDirectory + "images\\sprites\\personnage\\";
         Constantes.TICK_ANIMATION++;
-        rectJoueur.Fill = apparenceJoueur;
-        rectArme.Fill = apparenceArme;
+        rectJoueur.Fill = ApparenceJoueur;
+        rectArme.Fill = ApparenceArme;
         Console.WriteLine(Constantes.TICK_ANIMATION);
-        if (regardeADroite)
-            cheminSprite += "droite\\";
+        if (RegardeADroite)
+            CheminSprite += "droite\\";
         else
-            cheminSprite += "gauche\\";
+            CheminSprite += "gauche\\";
 
 
         //marche
-        if (bas || haut || droite || gauche)
+        if (Bas || Haut || Droite || Gauche)
         {
             if (Constantes.TICK_ANIMATION >= 30)
                 Constantes.TICK_ANIMATION = 0;
-            apparenceJoueur.ImageSource =
-                new BitmapImage(new Uri(cheminSprite + $"\\marche\\marche{Constantes.TICK_ANIMATION / 5 + 1}.png"));
+            ApparenceJoueur.ImageSource =
+                new BitmapImage(new Uri(CheminSprite + $"\\marche\\marche{Constantes.TICK_ANIMATION / 5 + 1}.png"));
         }
         //idle
         else
         {
             if (Constantes.TICK_ANIMATION >= 20)
                 Constantes.TICK_ANIMATION = 0;
-            apparenceJoueur.ImageSource =
-                new BitmapImage(new Uri(cheminSprite + $"\\idle\\idle{Constantes.TICK_ANIMATION / 5 + 1}.png"));
+            ApparenceJoueur.ImageSource =
+                new BitmapImage(new Uri(CheminSprite + $"\\idle\\idle{Constantes.TICK_ANIMATION / 5 + 1}.png"));
         }
 
         //faire varier en fonction de la position du curseur
         if (Math.Abs(normalVecteurX) < 0.2 && normalVecteurY > 0.8)
-            apparenceArme.ImageSource = new BitmapImage(new Uri(cheminSprite + "\\arme\\arme1_5.png"));
+            ApparenceArme.ImageSource = new BitmapImage(new Uri(CheminSprite + "\\arme\\arme1_5.png"));
         else if (Math.Abs(normalVecteurX) < 0.2 && normalVecteurY < -0.8)
-            apparenceArme.ImageSource = new BitmapImage(new Uri(cheminSprite + "\\arme\\arme1_1.png"));
+            ApparenceArme.ImageSource = new BitmapImage(new Uri(CheminSprite + "\\arme\\arme1_1.png"));
         else if (Math.Abs(normalVecteurX) < 0.96 && normalVecteurY > 0.25)
-            apparenceArme.ImageSource = new BitmapImage(new Uri(cheminSprite + "\\arme\\arme1_4.png"));
+            ApparenceArme.ImageSource = new BitmapImage(new Uri(CheminSprite + "\\arme\\arme1_4.png"));
         else if (Math.Abs(normalVecteurX) < 0.96 && normalVecteurY < -0.25)
-            apparenceArme.ImageSource = new BitmapImage(new Uri(cheminSprite + "\\arme\\arme1_2.png"));
+            ApparenceArme.ImageSource = new BitmapImage(new Uri(CheminSprite + "\\arme\\arme1_2.png"));
         else
-            apparenceArme.ImageSource = new BitmapImage(new Uri(cheminSprite + "\\arme\\arme1_3.png"));
+            ApparenceArme.ImageSource = new BitmapImage(new Uri(CheminSprite + "\\arme\\arme1_3.png"));
     }
 
     private void SupprimerEnnemis()
     {
-        foreach (var ennemi in listeEnnemiAEnlever)
+        foreach (var ennemi in EnnemisMorts)
         {
             NouvelleElimination();
-            listeEnnemi.Remove(ennemi);
+            Ennemis.Remove(ennemi);
             monCanvas.Children.Remove(ennemi.Graphique);
         }
 
-        listeEnnemiAEnlever.Clear();
+        EnnemisMorts.Clear();
     }
 
     private void NouvelleElimination()
     {
-        baseDeDonnee.eliminations += 1;
+        BaseDeDonnee.eliminations += 1;
         MettreAJourBdd();
     }
 
     private void MettreAJourBdd()
     {
-        JsonUtilitaire.Ecriture(baseDeDonnee, Constantes.CHEMIN_BDD);
-        labDiamant.Content = baseDeDonnee.argent;
-        labEliminations.Content = baseDeDonnee.eliminations;
+        JsonUtilitaire.Ecriture(BaseDeDonnee, Constantes.CHEMIN_BDD);
+        labDiamant.Content = BaseDeDonnee.argent;
+        labEliminations.Content = BaseDeDonnee.eliminations;
     }
 
     private void AnimationMort()
     {
-        myBlurEffect.Radius = 10;
+        EffetFlou.Radius = 10;
 
-        foreach (UIElement children in monCanvas.Children) children.BitmapEffect = myBlurEffect;
+        foreach (UIElement children in monCanvas.Children) children.BitmapEffect = EffetFlou;
 
-        labQuitter.BitmapEffect = nonFloue;
-        labRetour.BitmapEffect = nonFloue;
-        rectJoueur.BitmapEffect = nonFloue;
+        labQuitter.BitmapEffect = NonFloue;
+        labRetour.BitmapEffect = NonFloue;
+        rectJoueur.BitmapEffect = NonFloue;
 
-        //carte.BitmapEffect = myBlurEffect;
+        //carte.BitmapEffect = EffetFlou;
 
-        cheminSprite = AppDomain.CurrentDomain.BaseDirectory + "images\\sprites\\personnage\\";
-        if (tickAnimation < 40)
-            tickAnimation++;
+        CheminSprite = AppDomain.CurrentDomain.BaseDirectory + "images\\sprites\\personnage\\";
+        if (TickAnimation < 40)
+            TickAnimation++;
         rectArme.Visibility = Visibility.Hidden;
-        Console.WriteLine(tickAnimation);
-        if (mortDroite)
-            cheminSprite += "droite\\";
+        Console.WriteLine(TickAnimation);
+        if (MortDroite)
+            CheminSprite += "droite\\";
         else
-            cheminSprite += "gauche\\";
+            CheminSprite += "gauche\\";
 
-        apparenceJoueur.ImageSource =
-            new BitmapImage(new Uri(cheminSprite + $"\\mort\\mort{tickAnimation / 10 + 1}.png"));
+        ApparenceJoueur.ImageSource =
+            new BitmapImage(new Uri(CheminSprite + $"\\mort\\mort{TickAnimation / 10 + 1}.png"));
     }
 
 
@@ -746,23 +743,23 @@ public partial class MainWindow : Window
 
     private void RemetValeursAZero()
     {
-        mort = false;
-        mortDroite = true;
-        regardeADroite = true;
-        listeBalle.Clear();
-        listeEnnemi.Clear();
-        listeEnnemiAEnlever.Clear();
-        listeBalleAEnlever.Clear();
-        tickAnimation = 0;
-        gauche = false;
-        droite = false;
-        haut = false;
-        bas = false;
-        tirer = false;
-        numPadUn = false;
-        numPadQuatre = false;
-        toucheX = false;
-        toucheC = false;
-        toucheR = false;
+        Mort = false;
+        MortDroite = true;
+        RegardeADroite = true;
+        Balles.Clear();
+        Ennemis.Clear();
+        EnnemisMorts.Clear();
+        BallesMortes.Clear();
+        TickAnimation = 0;
+        Gauche = false;
+        Droite = false;
+        Haut = false;
+        Bas = false;
+        Tirer = false;
+        NumPadUn = false;
+        NumPadQuatre = false;
+        ToucheX = false;
+        ToucheC = false;
+        ToucheR = false;
     }
 }

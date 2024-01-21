@@ -200,7 +200,7 @@ namespace JeuSAE
             ennemi.PosY = Canvas.GetTop(ennemi.Graphique);
 
             mainWindow.monCanvas.Children.Add(ennemi.Graphique);
-            MainWindow.listeEnnemi.Add(ennemi);
+            MainWindow.Ennemis.Add(ennemi);
         }
 
         public static void SpawnUnEnnemi(MainWindow mainWindow)
@@ -256,7 +256,7 @@ namespace JeuSAE
 
 
             mainWindow.monCanvas.Children.Add(ennemi.Graphique);
-            MainWindow.listeEnnemi.Add(ennemi);
+            MainWindow.Ennemis.Add(ennemi);
 
 
         }
@@ -307,7 +307,7 @@ namespace JeuSAE
 
 
             mainWindow.monCanvas.Children.Add(ennemi.Graphique);
-            MainWindow.listeEnnemi.Add(ennemi);
+            MainWindow.Ennemis.Add(ennemi);
 
 
         }
@@ -340,7 +340,7 @@ namespace JeuSAE
                 }
 
                 mainWindow.monCanvas.Children.Add(balle.Graphique);
-                mainWindow.listeBalle.Add(balle);
+                MainWindow.Balles.Add(balle);
 
                 this.CooldownTir = this.CadenceTir;
             }
