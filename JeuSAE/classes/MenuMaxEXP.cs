@@ -90,9 +90,14 @@ namespace JeuSAE.classes
                         numSwitch = 5;
                         break;
                     case 6:
-                        ameliorationString = "Perçage +1";
+                        ameliorationString = "Perçage + 1";
                         valeurActuelle = Constantes.BALLE_NOMBRE_PERCE;
                         numSwitch = 6;
+                        break;
+                        case 7:
+                        ameliorationString = "Vol de vie + 1 %";
+                        valeurActuelle = Constantes.POURCENTAGE_NOMBRE_DE_VIE;
+                        numSwitch = 7;
                         break;
                 }
 
@@ -222,6 +227,9 @@ namespace JeuSAE.classes
                     break;
                 case 6:
                     Constantes.BALLE_NOMBRE_PERCE += 1;
+                    break;
+                    case 7:
+                    Constantes.POURCENTAGE_NOMBRE_DE_VIE += 1;
                     break;
             }
 

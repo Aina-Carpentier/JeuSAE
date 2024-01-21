@@ -250,8 +250,28 @@ namespace JeuSAE.classes
                 }
                 case 3:
                 {
-                    double newX = PosX + (vecteurNormalize.X * this.Vitesse);
-                    double newY = PosY + (vecteurNormalize.Y * this.Vitesse);
+
+                        double posJoueurX = mainWindow.fenetrePrincipale.Width / 2 - mainWindow.rectJoueur.Width * 0.5;
+                        double posJoueurY = mainWindow.fenetrePrincipale.Height / 2 - mainWindow.rectJoueur.Height * 0.5;
+
+
+
+                        Vector2 vecteurBalleVersJoueur = new Vector2((float)this.PosX - (float)posJoueurX, (float)this.PosY - (float)posJoueurY);
+                        Vector2 vecteurMoitie = Vector2.Normalize(new Vector2((float) posJoueurX - (float)this.PosX, (float)posJoueurY - (float) this.PosY));
+                        Vector2.Multiply(0.5f, vecteurMoitie);
+                        Vector2 nouveauVecteur = Vector2.Normalize(Vector2.Add(vecteurNormalize, vecteurMoitie));
+
+                        if (Math.Abs(this.PosX - posJoueurX) > 500 || Math.Abs(this.PosY - posJoueurY) > 500)
+                        {
+                            nouveauVecteur = vecteurNormalize;
+                        } else if (coefRotation % 360 == 0)
+                        {
+                            this.Vecteur = nouveauVecteur;
+                        }
+
+
+                    double newX = PosX + (nouveauVecteur.X * this.Vitesse);
+                    double newY = PosY + (nouveauVecteur.Y * this.Vitesse);
 
                         coefRotation += 5;
                         if (coefRotation >= 360)

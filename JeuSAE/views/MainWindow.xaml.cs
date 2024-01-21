@@ -23,6 +23,7 @@ using System.Windows.Media.Effects;
 using System.Windows.Forms;
 using System.Reflection;
 using System.Diagnostics;
+using System.Xml.Linq;
 
 
 namespace JeuSAE
@@ -404,7 +405,7 @@ namespace JeuSAE
                         listeBalleAEnlever.Add(balle);
                     }
 
-                    PositionnerBalle(balle);
+                        PositionnerBalle(balle);
 
                 }
 
@@ -441,12 +442,20 @@ namespace JeuSAE
                         {
                             ennemi.Vie -= balle.Degats;
                             balle.ListeEnnemisPerces.Add(ennemi.Id);
+                            if (Constantes.POURCENTAGE_NOMBRE_DE_VIE > 0)
+                            {
+
+                                HUD.AjouteVie(((double)Constantes.POURCENTAGE_NOMBRE_DE_VIE / 100d) * (double) balle.Degats);
+
+                            }
                         }
 
                         if (balle.ListeEnnemisPerces.Count >= balle.NombrePerce)
                         {
                             listeBalleAEnlever.Add(balle);
                         }
+
+
 
                         if (ennemi.Vie <= 0)
                         {

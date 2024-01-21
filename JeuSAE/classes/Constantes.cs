@@ -19,7 +19,7 @@ namespace JeuSAE.classes
 
         //public const int DEGAT_BALLE_JOUEUR = 1;
         public const int DEGATS_COLLISION = 10;
-        public const int NOMBRE_AMELIORATIONS = 7;
+        public const int NOMBRE_AMELIORATIONS = 8;
 
         public static readonly SoundPlayer LECTEUR_MUSIQUE_MENU = new SoundPlayer(AppDomain.CurrentDomain.BaseDirectory + "audio\\musiques\\musique_menu.wav");
 
@@ -28,6 +28,7 @@ namespace JeuSAE.classes
         public static double COEFFICIENT_EXPERIENCE = 20;
         public static Key TOUCHE_HAUT = Key.Z, TOUCHE_BAS = Key.S, TOUCHE_DROITE = Key.D, TOUCHE_GAUCHE = Key.Q;
         public static int BALLE_NOMBRE_PERCE = 1;
+        public static int POURCENTAGE_NOMBRE_DE_VIE = 0;
 
         public static double VITESSE_JOUEUR = 10;
         public static double TEMPS_RECHARGE_ARME = 15;
