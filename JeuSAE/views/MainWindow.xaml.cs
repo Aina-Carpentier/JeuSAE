@@ -565,10 +565,10 @@ public partial class MainWindow : Window
         listeEnnemiAEnlever.Clear();
     }
 
-    private void LogiqueEnnemis()
-    {
-        var posJoueurX = fenetrePrincipale.Width / 2 - rectJoueur.Width * 0.75;
-        var posJoueurY = fenetrePrincipale.Height / 2 - rectJoueur.Height * 0.75;
+        private void LogiqueEnnemis()
+        {
+            double posJoueurX = hitboxJoueur.Left + hitboxJoueur.Width /2;
+            double posJoueurY = hitboxJoueur.Top + hitboxJoueur.Height/2;
 
         foreach (var ennemi in listeEnnemi)
         {

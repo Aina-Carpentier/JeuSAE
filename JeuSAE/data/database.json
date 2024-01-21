@@ -1,4 +1,8 @@
 {
-  "argent": 0,
-  "eliminations": 0
+  "argent": 1000,
+  "eliminations": 0,
+  "ameliorationPDV": 0,
+  "ameliorationVitesse": 0,
+  "arme2": false,
+  "arme3": false
 }

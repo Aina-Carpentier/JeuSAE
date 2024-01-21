@@ -46,8 +46,25 @@
         <Rectangle x:Name="rectArme1" Height="100" Stroke="Black"  Width="220" MouseEnter="rectArme1_MouseEnter" MouseLeave="rectArme1_MouseLeave" MouseLeftButtonDown="rectArme1_MouseLeftButtonDown"/>
         <Rectangle x:Name="rectArme2" Height="100" Stroke="Black"  Width="220" MouseEnter="rectArme2_MouseEnter" MouseLeave="rectArme2_MouseLeave" MouseLeftButtonDown="rectArme2_MouseLeftButtonDown"/>
         <Rectangle x:Name="rectArme3" Height="100" Stroke="Black"  Width="220" MouseEnter="rectArme3_MouseEnter" MouseLeave="rectArme3_MouseLeave" MouseLeftButtonDown="rectArme3_MouseLeftButtonDown"/>
-        <Rectangle x:Name="rectDescription" Height="300" Stroke="Black" Width="800" Fill="#FFA9A0A0" Visibility="Hidden"/>
-        <Label x:Name="labDescription" Content=""  FontFamily="Rubik" FontSize="40"/>
+
+        <Rectangle x:Name="rectDescription" Height="250" Stroke="Black" Width="800" Fill="#FFA9A0A0" Visibility="Hidden" Panel.ZIndex="10"/>
+        <Label x:Name="labDescription" Content=""  FontFamily="Rubik" FontSize="40" Panel.ZIndex="10"/>
+
+        <Rectangle x:Name="rectPDV" Height="100" Stroke="Black" Width="800" HorizontalAlignment="Center" VerticalAlignment="Top" Fill="#FF825D5D"/>
+        <Rectangle x:Name="rectVitesse" Height="100" Stroke="Black" Width="800" HorizontalAlignment="Center" VerticalAlignment="Top" Fill="#FF825D5D"/>
+        <Rectangle x:Name="rectPDVRempli" Height="100" Width="0" HorizontalAlignment="Center" VerticalAlignment="Top" Fill="Red"/>
+        <Rectangle x:Name="rectVitesseRempli" Height="100" Width="0" HorizontalAlignment="Center" VerticalAlignment="Top" Fill="#FF9400FF"/>
+
+        <Label x:Name="labVitesse" Content="Vitesse" FontSize="72" Height="106" Width="233"/>
+        <Label x:Name="labPDV" Content="PdV" FontSize="72" HorizontalAlignment="Center" VerticalAlignment="Top" Width="135" Height="106"/>
+        <Button x:Name="butPDV" Content="" Width="200" Height="100" Click="butPDV_Click" FontSize="30"/>
+        <Button x:Name="butVitesse" Content="" Width="200" Height="100" Click="butVitesse_Click" FontSize="30"/>
+        <Rectangle x:Name="rectDiamant" Height="80" Canvas.Left="20" Canvas.Top="20" Width="80"/>
+        <Label x:Name="labDiamant" Canvas.Left="110" Canvas.Top="10" Content="x 2048" FontSize="72"/>
+
+
+
+
 
 
 

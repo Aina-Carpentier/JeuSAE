@@ -1,4 +1,5 @@
 ﻿using JeuSAE.classes;
+using JeuSAE.data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,25 +21,54 @@ namespace JeuSAE
     /// </summary>
     public partial class Magasin : Window
     {
+        private static BaseDeDonnee baseDeDonnee = JsonUtilitaire.LireFichier(Constantes.CHEMIN_BDD);
         public String choix;
-        private static ImageBrush arme1 = new ImageBrush(), arme2 = new ImageBrush(), arme3 = new ImageBrush();
+        private static ImageBrush arme1 = new ImageBrush(), arme2 = new ImageBrush(), arme3 = new ImageBrush(), diamant = new ImageBrush();
         public Magasin()
         {
             InitializeComponent();
             labMagasin.Margin = new Thickness(fenetreMagasin.Width / 2 - labMagasin.Width / 2, fenetreMagasin.Height * 0.05, 0, 0);
             labMenu.Margin = new Thickness(labMenu.Width * 0.1, fenetreMagasin.Height - labMenu.Height, 0, 0);
+
             rectArme1.Margin = new Thickness(fenetreMagasin.Width * 0.25 - rectArme1.Width / 2, fenetreMagasin.Height * 0.3, 0, 0);
             rectArme2.Margin = new Thickness(fenetreMagasin.Width * 0.50 - rectArme2.Width / 2, fenetreMagasin.Height * 0.3, 0, 0);
             rectArme3.Margin = new Thickness(fenetreMagasin.Width * 0.75 - rectArme3.Width / 2, fenetreMagasin.Height * 0.3, 0, 0);
+
             rectDescription.Margin = new Thickness(fenetreMagasin.Width * 0.5 - rectDescription.Width / 2, fenetreMagasin.Height * 0.55, 0, 0);
+            rectPDV.Margin = new Thickness(fenetreMagasin.Width * 0.5 - rectPDV.Width / 2, fenetreMagasin.Height * 0.6, 0, 0);
+            rectVitesse.Margin = new Thickness(fenetreMagasin.Width * 0.5 - rectVitesse.Width / 2, fenetreMagasin.Height * 0.75, 0, 0);
+            labPDV.Margin = new Thickness(fenetreMagasin.Width * 0.2 - labPDV.Width /2, fenetreMagasin.Height *0.6, 0, 0);
+            labVitesse.Margin = new Thickness(fenetreMagasin.Width * 0.2 - labVitesse.Width / 2, fenetreMagasin.Height * 0.75, 0, 0);
+            
+            butPDV.Margin = new Thickness(fenetreMagasin.Width * 0.8 - butPDV.Width / 2, fenetreMagasin.Height * 0.6, 0, 0);
+            butVitesse.Margin = new Thickness(fenetreMagasin.Width * 0.8 - butVitesse.Width / 2, fenetreMagasin.Height * 0.75, 0, 0);
+            rectVitesseRempli.Margin = rectVitesse.Margin; rectPDVRempli.Margin = rectPDV.Margin;
+
+            butPDV.Content = $"Cout : {prixPDV()}";
+            butVitesse.Content = $"Cout : {prixVitesse()}";
+            labDiamant.Content = $"x {baseDeDonnee.argent}";
+
             labDescription.Width = rectDescription.Width; labDescription.Height = rectDescription.Height; labDescription.Margin = rectDescription.Margin;
             arme1.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images\\sprites\\personnage\\droite\\arme\\arme1.png"));
-            arme2.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images\\sprites\\personnage\\droite\\arme\\arme2.png"));
-            arme3.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images\\sprites\\personnage\\droite\\arme\\arme3.png"));
-            rectArme1.Fill = arme1;
-            rectArme2.Fill = arme2;
-            rectArme3.Fill = arme3;
-            
+
+            //arme 2 débloquée ?
+            if (baseDeDonnee.arme2)
+                arme2.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images\\sprites\\personnage\\droite\\arme\\arme2.png"));
+            else
+                arme2.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images\\sprites\\personnage\\droite\\arme\\arme2V.png"));
+            //arme 3 débloquée ?
+            if (baseDeDonnee.arme3)
+                arme3.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images\\sprites\\personnage\\droite\\arme\\arme3.png"));
+            else
+                arme3.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images\\sprites\\personnage\\droite\\arme\\arme3V.png"));
+
+            diamant.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images\\diamant.png"));
+
+            rectVitesseRempli.Width = 100 * baseDeDonnee.ameliorationVitesse;
+            rectPDVRempli.Width = 100 * baseDeDonnee.ameliorationPDV;
+            rectArme1.Fill = arme1; rectArme2.Fill = arme2; rectArme3.Fill = arme3;
+            rectDiamant.Fill = diamant;
+
         }
 
 
@@ -56,6 +86,8 @@ namespace JeuSAE
         private void labMenu_MouseLeave(object sender, MouseEventArgs e)
         {
             labMenu.Foreground = Brushes.Black;
+            //Ca modifie pas le .json bizarre ?
+            JsonUtilitaire.Ecriture(baseDeDonnee, Constantes.CHEMIN_BDD);
         }
 
         private void rectArme1_MouseEnter(object sender, MouseEventArgs e)
@@ -97,6 +129,8 @@ namespace JeuSAE
             labDescription.Content = "Une arme avec une cadence de tir élevé\nmais des dégats faibles.\nUne arme idéale pour ceux qui souhaitent\nsubmerger leurs adversaires de balles \n(ou ceux qui ne savent pas viser).";
         }
 
+
+
         private void rectArme3_MouseLeave(object sender, MouseEventArgs e)
         {
             rectDescription.Visibility = Visibility.Hidden;
@@ -108,5 +142,40 @@ namespace JeuSAE
 
         }
 
+        private void butPDV_Click(object sender, RoutedEventArgs e)
+        {
+            if (baseDeDonnee.argent >= prixPDV())
+            {
+                baseDeDonnee.argent -= prixPDV();
+                baseDeDonnee.ameliorationPDV += 1;
+                rectPDVRempli.Width += 100;
+                butPDV.Content = $"Cout : {prixPDV()}";
+                labDiamant.Content = $"x {baseDeDonnee.argent}";
+
+            }
+        }
+
+        private void butVitesse_Click(object sender, RoutedEventArgs e)
+        {
+            if (baseDeDonnee.argent >= prixVitesse())
+            {
+                baseDeDonnee.argent -= prixVitesse();
+                baseDeDonnee.ameliorationVitesse += 1;
+                rectVitesseRempli.Width += 100;
+                butVitesse.Content = $"Cout : {prixVitesse()}";
+                labDiamant.Content = $"x {baseDeDonnee.argent}";
+
+            }
+        }
+        private int prixPDV()
+        {
+            return (int)(Constantes.PRIX_BASE_AMELIORATION * Math.Pow(2, baseDeDonnee.ameliorationPDV));
+        }
+
+        private int prixVitesse()
+        {
+            return (int)(Constantes.PRIX_BASE_AMELIORATION * Math.Pow(2, baseDeDonnee.ameliorationVitesse));
+
+        }
     }
 }
