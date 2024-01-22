@@ -469,7 +469,7 @@ public partial class MainWindow : Window
                     if (Ennemi.Vie <= 0)
                     {
                         EnnemisMorts.Add(Ennemi);
-                        Hud.AjouteElimination(50);
+                        Hud.AjouteElimination(1);
                         if (Ennemi.Nom == "Boss")
                             Hud.AjouteExp(Constantes.COEFFICIENT_EXPERIENCE * 200d);
                         else

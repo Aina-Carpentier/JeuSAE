@@ -89,7 +89,7 @@ public class MenuMaxExp
                     NumSwitch = 6;
                     break;
                 case 7:
-                    AmeliorationString = "Vol de vie + 1 %";
+                    AmeliorationString = "Vol de vie + 5 %";
                     ValeurActuelle = Constantes.POURCENTAGE_NOMBRE_DE_VIE;
                     NumSwitch = 7;
                     break;
@@ -203,7 +203,7 @@ public class MenuMaxExp
                 Constantes.BALLE_NOMBRE_PERCE += 1;
                 break;
             case 7:
-                Constantes.POURCENTAGE_NOMBRE_DE_VIE += 1;
+                Constantes.POURCENTAGE_NOMBRE_DE_VIE += 5;
                 break;
         }
 
