@@ -33,7 +33,7 @@ public partial class MainWindow : Window
     private static double PosJoueurX, PosJoueurY;
     
     // Base de données et effets visuels
-    private static readonly BaseDeDonnee BaseDeDonnee = JsonUtilitaire.LireFichier(Constantes.CHEMIN_BDD);
+    public static BaseDeDonnee BaseDeDonnee = JsonUtilitaire.LireFichier(Constantes.CHEMIN_BDD);
     private static readonly BlurBitmapEffect EffetFlou = new();
     private static readonly BlurBitmapEffect NonFloue = new();
     
@@ -108,7 +108,7 @@ public partial class MainWindow : Window
         
         var Menu = new Menu();
         var Parametres = new Parametres();
-        var Magasin = new Magasin();
+        var Magasin = new Magasin(this);
         var Touche = new Touche(Constantes.TOUCHE_HAUT, Constantes.TOUCHE_BAS, Constantes.TOUCHE_DROITE,
             Constantes.TOUCHE_GAUCHE);
         var PreJeu = new PreJeu();
@@ -692,7 +692,7 @@ public partial class MainWindow : Window
         MettreAJourBdd();
     }
 
-    private void MettreAJourBdd()
+     public void MettreAJourBdd()
     {
         JsonUtilitaire.Ecriture(BaseDeDonnee, Constantes.CHEMIN_BDD);
         labDiamant.Content = BaseDeDonnee.Argent;

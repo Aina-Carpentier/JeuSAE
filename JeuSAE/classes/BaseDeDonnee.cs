@@ -1,6 +1,6 @@
 ﻿namespace JeuSAE.classes;
 
-internal class BaseDeDonnee
+public class BaseDeDonnee
 {
     public int Argent { get; set; }
     public int Eliminations { get; set; }
