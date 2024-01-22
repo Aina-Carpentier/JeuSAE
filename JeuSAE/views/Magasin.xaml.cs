@@ -80,6 +80,8 @@ namespace JeuSAE
         {
             this.Choix = "menu";
             this.Hide();
+            //Ca modifie pas le .json bizarre ?
+            JsonUtilitaire.Ecriture(BaseDeDonnee, Constantes.CHEMIN_BDD);
         }
 
         private void labMenu_MouseEnter(object sender, MouseEventArgs e)
@@ -90,8 +92,6 @@ namespace JeuSAE
         private void labMenu_MouseLeave(object sender, MouseEventArgs e)
         {
             labMenu.Foreground = Brushes.Black;
-            //Ca modifie pas le .json bizarre ?
-            JsonUtilitaire.Ecriture(BaseDeDonnee, Constantes.CHEMIN_BDD);
         }
 
         private void rectArme1_MouseEnter(object sender, MouseEventArgs e)
@@ -106,10 +106,6 @@ namespace JeuSAE
             labDescription.Content = "";
         }
 
-        private void rectArme1_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-
-        }
 
         private void rectArme2_MouseEnter(object sender, MouseEventArgs e)
         {
@@ -125,7 +121,14 @@ namespace JeuSAE
 
         private void rectArme2_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-
+            if (!BaseDeDonnee.Arme2 && BaseDeDonnee.Argent > Constantes.PRIX_ARME)
+            {
+                BaseDeDonnee.Argent -= Constantes.PRIX_ARME;
+                BaseDeDonnee.Arme2 = true;
+                Arme2.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images\\sprites\\personnage\\droite\\arme\\Arme2.png"));
+                labPrix1.Visibility = Visibility.Hidden;
+                labDiamant.Content = $"x {BaseDeDonnee.Argent}";
+            }
         }
         private void rectArme3_MouseEnter(object sender, MouseEventArgs e)
         {
@@ -143,7 +146,14 @@ namespace JeuSAE
 
         private void rectArme3_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-
+            if (!BaseDeDonnee.Arme3 && BaseDeDonnee.Argent > Constantes.PRIX_ARME)
+            {
+                BaseDeDonnee.Argent -= Constantes.PRIX_ARME;
+                BaseDeDonnee.Arme3 = true;
+                Arme3.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images\\sprites\\personnage\\droite\\arme\\Arme3.png"));
+                labPrix2.Visibility = Visibility.Hidden;
+                labDiamant.Content = $"x {BaseDeDonnee.Argent}";
+            }
         }
 
         private void butPDV_Click(object sender, RoutedEventArgs e)

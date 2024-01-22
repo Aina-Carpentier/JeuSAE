@@ -43,7 +43,7 @@
             FontFamily="Rubik"
             FontSize="90"
             MouseLeftButtonDown="labMenu_MouseLeftButtonDown" MouseEnter="labMenu_MouseEnter" MouseLeave="labMenu_MouseLeave" />
-        <Rectangle x:Name="rectArme1" Height="100" Stroke="Black"  Width="220" MouseEnter="rectArme1_MouseEnter" MouseLeave="rectArme1_MouseLeave" MouseLeftButtonDown="rectArme1_MouseLeftButtonDown"/>
+        <Rectangle x:Name="rectArme1" Height="100" Stroke="Black"  Width="220" MouseEnter="rectArme1_MouseEnter" MouseLeave="rectArme1_MouseLeave"/>
         <Rectangle x:Name="rectArme2" Height="100" Stroke="Black"  Width="220" MouseEnter="rectArme2_MouseEnter" MouseLeave="rectArme2_MouseLeave" MouseLeftButtonDown="rectArme2_MouseLeftButtonDown"/>
         <Rectangle x:Name="rectArme3" Height="100" Stroke="Black"  Width="220" MouseEnter="rectArme3_MouseEnter" MouseLeave="rectArme3_MouseLeave" MouseLeftButtonDown="rectArme3_MouseLeftButtonDown"/>
         <Label x:Name="labPrix1" Content="" FontSize="40" Width="192" Height="64"/>
