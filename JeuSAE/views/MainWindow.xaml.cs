@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Numerics;
+using System.Runtime.Intrinsics.Arm;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -17,6 +18,7 @@ namespace JeuSAE;
 
 public partial class MainWindow : Window
 {
+    private static Random random = new Random();
     public static bool OuvreMenuMaxExp = false;
     
     // État du joueur
@@ -751,6 +753,7 @@ public partial class MainWindow : Window
 
     private void NouvelleElimination()
     {
+        BaseDeDonnee.Argent += random.Next(0, 2); 
         BaseDeDonnee.Eliminations += 1;
         MettreAJourBdd();
     }
