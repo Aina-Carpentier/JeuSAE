@@ -31,7 +31,7 @@ public partial class Parametres : Window
 
     private void labSon_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
-        Choix = "son";
+        Choix = "audio";
         Hide();
     }
 

@@ -1,0 +1,78 @@
+﻿<Window
+    x:Class="JeuSAE.views.Audio"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:JeuSAE"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="fenetreAudio"
+    Title="Audio"
+    Width="{x:Static SystemParameters.PrimaryScreenWidth}"
+    Height="{x:Static SystemParameters.PrimaryScreenHeight}"
+    FocusManager.FocusedElement="{Binding ElementName=canvasAudio}"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    WindowState="Maximized"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Canvas x:Name="canvasAudio">
+        <Canvas.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF2083B7" Offset="1"/>
+                <GradientStop Color="#FFB91B1B" Offset="0"/>
+            </LinearGradientBrush>
+        </Canvas.Background>
+
+
+        <Label
+            x:Name="labAudio"
+            Height="117"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Audio"
+            FontFamily="Rubik"
+            FontSize="90" Width="246" />
+
+        <Label
+            x:Name="labRetour"
+            Width="294"
+            Height="120"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Retour"
+            FontFamily="Rubik"
+            FontSize="90"
+            MouseEnter="labRetour_MouseEnter"
+            MouseLeave="labRetour_MouseLeave"
+            MouseLeftButtonDown="labRetour_MouseLeftButtonDown" />
+
+        <Label
+            x:Name="labSFX"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="SFX"
+            FontFamily="Rubik"
+            FontSize="90" Width="155" Height="120"/>
+        <Label
+            x:Name="labMusique"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Musique"
+            FontFamily="Rubik"
+            FontSize="90" Width="357" Height="117"/>
+        <Slider x:Name="sliderSFX" Width="120" Height="20"  Maximum="100" HorizontalAlignment="Left" VerticalAlignment="Top" SmallChange="1" ValueChanged="sliderSFX_ValueChanged">
+            <Slider.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="7" ScaleX="7"/>
+                </TransformGroup>
+            </Slider.RenderTransform>
+        </Slider>
+        <Slider x:Name="sliderMusique" Width="120" Height="20"  Maximum="100" HorizontalAlignment="Left" VerticalAlignment="Top" SmallChange="1" ValueChanged="sliderMusique_ValueChanged">
+            <Slider.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="7" ScaleX="7"/>
+                </TransformGroup>
+            </Slider.RenderTransform>
+        </Slider>
+    </Canvas>
+</Window>

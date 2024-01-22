@@ -80,7 +80,7 @@ public partial class PreJeu : Window
     private void labDifficile_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
         Choix = "jouer";
-        Difficulte = "difficile";
+        Difficulte = "difficile";   
         Hide();
     }
 

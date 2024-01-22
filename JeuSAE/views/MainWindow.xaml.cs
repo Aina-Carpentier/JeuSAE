@@ -11,6 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using JeuSAE.classes;
 using JeuSAE.data;
+using JeuSAE.views;
 
 namespace JeuSAE;
 
@@ -59,6 +60,9 @@ public partial class MainWindow : Window
 
     // Difficulté
     public string Difficulte;
+
+    // Audio
+    public int AudioSFX = 100, AudioMusique = 100;
     
     public MainWindow()
     {
@@ -114,7 +118,7 @@ public partial class MainWindow : Window
         var Touche = new Touche(Constantes.TOUCHE_HAUT, Constantes.TOUCHE_BAS, Constantes.TOUCHE_DROITE,
             Constantes.TOUCHE_GAUCHE);
         var PreJeu = new PreJeu();
-        
+        var Audio = new Audio(AudioSFX, AudioMusique);
 
         Menu.ShowDialog();
         string Choix = Menu.Choix;
@@ -155,6 +159,14 @@ public partial class MainWindow : Window
                     PreJeu.ShowDialog();
                     Choix = PreJeu.Choix;
                     Difficulte = PreJeu.Difficulte;
+                    break;
+
+                case "audio":
+                    Audio.ShowDialog();
+                    Choix = Audio.Choix;
+                    AudioSFX = Audio.sonSFX;
+                    AudioMusique = Audio.sonMusique;
+                    
                     break;
             }
         Constantes.LECTEUR_MUSIQUE_MENU.Stop();
