@@ -152,6 +152,8 @@ public partial class MainWindow : Window
                     break;
             }
         Constantes.LECTEUR_MUSIQUE_MENU.Stop();
+        Constantes.LECTEUR_MUSIQUE_JEU.Load();
+        Constantes.LECTEUR_MUSIQUE_JEU.PlayLooping();
     }
 
     private void GameEngine(object sender, EventArgs e)

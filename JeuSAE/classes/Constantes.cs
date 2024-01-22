@@ -72,6 +72,8 @@ internal class Constantes
     // Lecteur de musique
     public static readonly SoundPlayer LECTEUR_MUSIQUE_MENU =
         new(AppDomain.CurrentDomain.BaseDirectory + "audio\\musiques\\musique_menu.wav");
+    public static readonly SoundPlayer LECTEUR_MUSIQUE_JEU =
+    new(AppDomain.CurrentDomain.BaseDirectory + "audio\\musiques\\musique_jeu.wav");
 
     // Chemins et touches
     public static string CHEMIN_BDD = AppDomain.CurrentDomain.BaseDirectory + "data\\database.json";

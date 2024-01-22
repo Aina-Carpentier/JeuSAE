@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using JeuSAE.classes;
+using System.Reflection.Metadata;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 

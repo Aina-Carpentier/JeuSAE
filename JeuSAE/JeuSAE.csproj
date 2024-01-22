@@ -233,6 +233,12 @@
     </ItemGroup>
 
   <ItemGroup>
+    <None Update="audio\musiques\musique_jeu.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="audio\musiques\musique_magasin.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="audio\musiques\musique_menu.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
