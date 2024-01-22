@@ -19,9 +19,9 @@ public partial class MainWindow : Window
     public static bool OuvreMenuMaxExp = false;
     
     // État du joueur
-    private static bool Gauche, Droite, Haut, Bas, Tirer;
-    private static bool NumPadUn, NumPadQuatre;
-    private static bool ToucheX, ToucheC, ToucheR, ToucheI, ToucheO, ToucheP;
+    private static bool Gauche_Presse, Droite_Presse, Haut_Presse, Bas_Presse, Tirer;
+    private static bool NumPadUn_Presse, NumPadQuatre_Presse;
+    private static bool ToucheX_Presse, ToucheC_Presse, ToucheR_Presse, ToucheI_Presse, ToucheO_Presse, ToucheP_Presse;
     
     // Chemin et apparence
     public static string? CheminSprite;
@@ -185,10 +185,7 @@ public partial class MainWindow : Window
         var Curseur = e.GetPosition(monCanvas);
         Canvas.SetTop(curseurPerso, Curseur.Y - curseurPerso.Height / 2);
         Canvas.SetLeft(curseurPerso, Curseur.X - curseurPerso.Width / 2);
-        if (Curseur.X > fenetrePrincipale.Width / 2)
-            RegardeADroite = true;
-        else
-            RegardeADroite = false;
+        RegardeADroite = Curseur.X > fenetrePrincipale.Width / 2;
     }
 
     private void monCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -203,59 +200,47 @@ public partial class MainWindow : Window
 
     private void CanvasKeyIsDown(object sender, KeyEventArgs e)
     {
-        if (e.Key == Constantes.TOUCHE_GAUCHE)
-            Gauche = true;
-        if (e.Key == Constantes.TOUCHE_DROITE)
-            Droite = true;
-        if (e.Key == Constantes.TOUCHE_HAUT)
-            Haut = true;
-        if (e.Key == Constantes.TOUCHE_BAS)
-            Bas = true;
-
+        Gauche_Presse = e.Key == Constantes.TOUCHE_GAUCHE;
+        Droite_Presse = e.Key == Constantes.TOUCHE_DROITE;
+        Haut_Presse = e.Key == Constantes.TOUCHE_HAUT;
+        Bas_Presse = e.Key == Constantes.TOUCHE_BAS;
+        ToucheX_Presse = e.Key == Key.X;
+        ToucheC_Presse = e.Key == Key.C;
+        ToucheR_Presse = e.Key == Key.R;
+        ToucheI_Presse = e.Key == Key.I;
+        ToucheO_Presse = e.Key == Key.O;
+        ToucheP_Presse = e.Key == Key.P;
+        NumPadUn_Presse = e.Key == Key.NumPad1;
+        NumPadQuatre_Presse = e.Key == Key.NumPad4;
+        
         //------------------------------------------- CODES DE TRICHE -------------------------------------------
-
-        //Super vitesse
-        if (e.Key == Key.NumPad1)
-            NumPadUn = true;
-        if (e.Key == Key.NumPad4)
-            NumPadQuatre = true;
-        if (NumPadUn && NumPadQuatre) Constantes.VITESSE_JOUEUR = 200;
-
-        //Clear ennemis
-        if (e.Key == Key.X) ToucheX = true;
-
-        if (e.Key == Key.C) ToucheC = true;
-
-        if (ToucheC && ToucheX)
+        
+        // Super vitesse
+        if (NumPadUn_Presse && NumPadQuatre_Presse) Constantes.VITESSE_JOUEUR = 200;
+        
+        // Clear ennemis
+        if (ToucheC_Presse && ToucheX_Presse)
         {
-            ToucheX = false;
-            ToucheC = false;
+            ToucheX_Presse = false;
+            ToucheC_Presse = false;
             EnleverTousLesEnnemis();
             Ennemi.SpawnUnEnnemi(this);
         }
-
-
-        //Spawn cercle
-
-        if (e.Key == Key.R) ToucheR = true;
-
-        if (ToucheC && ToucheR)
+        
+        // Spawn cercle
+        if (ToucheC_Presse && ToucheR_Presse)
         {
-            ToucheC = false;
-            ToucheR = false;
+            ToucheC_Presse = false;
+            ToucheR_Presse = false;
             Ennemi.SpawnUnEnnemi(this, 6);
         }
-
-        //God mode
-        if (e.Key == Key.I) ToucheI = true;
-        if (e.Key == Key.O) ToucheO = true;
-        if (e.Key == Key.P) ToucheP = true;
-
-        if (ToucheI && ToucheO && ToucheP)
+        
+        // God mode
+        if (ToucheI_Presse && ToucheO_Presse && ToucheP_Presse)
         {
-            ToucheI = false;
-            ToucheO = false;
-            ToucheP = false;
+            ToucheI_Presse = false;
+            ToucheO_Presse = false;
+            ToucheP_Presse = false;
             Constantes.VIE_JOUEUR = double.MaxValue;
             Constantes.DEGATS_JOUEUR = int.MaxValue;
         }
@@ -263,46 +248,55 @@ public partial class MainWindow : Window
 
     private void CanvasKeyIsUp(object sender, KeyEventArgs e)
     {
-        if (e.Key == Constantes.TOUCHE_GAUCHE)
-            Gauche = false;
-        if (e.Key == Constantes.TOUCHE_DROITE)
-            Droite = false;
-        if (e.Key == Constantes.TOUCHE_HAUT)
-            Haut = false;
-        if (e.Key == Constantes.TOUCHE_BAS)
-            Bas = false;
+        switch (e.Key)
+        {
+            case var Valeur when Valeur == Constantes.TOUCHE_GAUCHE:
+                Gauche_Presse = false;
+                break;
+            case var Valeur when Valeur == Constantes.TOUCHE_DROITE:
+                Droite_Presse = false;
+                break;
+            case var Valeur when Valeur == Constantes.TOUCHE_HAUT:
+                Haut_Presse = false;
+                break;
+            case var Valeur when Valeur == Constantes.TOUCHE_BAS:
+                Bas_Presse = false;
+                break;
 
-        //------------------------------------------- CODES DE TRICHE -------------------------------------------
-
-        //Super vitesse
-        if (e.Key == Key.NumPad1)
-            NumPadUn = false;
-        if (e.Key == Key.NumPad4)
-            NumPadQuatre = false;
-
-        //Clear ennemis
-        if (e.Key == Key.X) ToucheX = false;
-
-        if (e.Key == Key.C) ToucheC = false;
-
-        //Spawn cercle
-        if (e.Key == Key.R) ToucheR = false;
-
-
-        //God mode
-        if (e.Key == Key.I) ToucheI = false;
-        if (e.Key == Key.O) ToucheO = false;
-        if (e.Key == Key.P) ToucheP = false;
+            // Codes de triche
+            case Key.NumPad1:
+                NumPadUn_Presse = false;
+                break;
+            case Key.NumPad4:
+                NumPadQuatre_Presse = false;
+                break;
+            case Key.X:
+                ToucheX_Presse = false;
+                break;
+            case Key.C:
+                ToucheC_Presse = false;
+                break;
+            case Key.R:
+                ToucheR_Presse = false;
+                break;
+            case Key.I:
+                ToucheI_Presse = false;
+                break;
+            case Key.O:
+                ToucheO_Presse = false;
+                break;
+            case Key.P:
+                ToucheP_Presse = false;
+                break;
+        }
     }
 
     private void MouvementJoueur()
     {
-        DeplacerEnDirection(Gauche, Constantes.VITESSE_JOUEUR, 0, PosJoueurX - rectJoueur.Width / 2);
-        DeplacerEnDirection(Droite, -Constantes.VITESSE_JOUEUR, 0,
-            -carte.Width + rectJoueur.Width / 2 + PosJoueurX);
-        DeplacerEnDirection(Haut, 0, Constantes.VITESSE_JOUEUR, PosJoueurY - rectJoueur.Height / 2);
-        DeplacerEnDirection(Bas, 0, -Constantes.VITESSE_JOUEUR,
-            -carte.Height + rectJoueur.Height / 2 + PosJoueurY);
+        DeplacerEnDirection(Gauche_Presse, Constantes.VITESSE_JOUEUR, 0, PosJoueurX - rectJoueur.Width / 2);
+        DeplacerEnDirection(Droite_Presse, -Constantes.VITESSE_JOUEUR, 0, -carte.Width + rectJoueur.Width / 2 + PosJoueurX);
+        DeplacerEnDirection(Haut_Presse, 0, Constantes.VITESSE_JOUEUR, PosJoueurY - rectJoueur.Height / 2);
+        DeplacerEnDirection(Bas_Presse, 0, -Constantes.VITESSE_JOUEUR, -carte.Height + rectJoueur.Height / 2 + PosJoueurY);
     }
 
     private void DeplacerEnDirection(bool direction, double deplacementX, double deplacementY, double positionLimite)
@@ -369,9 +363,7 @@ public partial class MainWindow : Window
     private void TirJoueur()
     {
         GestionTempsRecharge();
-
         if (Tirer && Constantes.TEMPS_RECHARGE_ACTUEL <= 0) CreerBalleJoueur();
-
         GestionDeplacementBalles();
     }
 
@@ -385,16 +377,16 @@ public partial class MainWindow : Window
     {
         Constantes.TEMPS_RECHARGE_ACTUEL = (int)Constantes.TEMPS_RECHARGE_ARME;
 
-        var PosEcran = Mouse.GetPosition(Application.Current.MainWindow);
-        var PosCarte = Mouse.GetPosition(carte);
+        Point PosEcran = Mouse.GetPosition(Application.Current.MainWindow);
+        Point PosCarte = Mouse.GetPosition(carte);
 
 #if DEBUG
         Console.WriteLine(PosCarte.X + "  " + PosCarte.Y);
 #endif
 
-        var VecteurTir = new Vector2((float)PosEcran.X - (float)PosJoueurX, (float)PosEcran.Y - (float)PosJoueurY);
+        Vector2 VecteurTir = new Vector2((float)PosEcran.X - (float)PosJoueurX, (float)PosEcran.Y - (float)PosJoueurY);
 
-        var BalleJoueur = new Balle(Constantes.VITESSE_BALLE_JOUEUR, Constantes.TAILLE_BALLE_JOUEUR, 0, "joueur", 0,
+        Balle BalleJoueur = new Balle(Constantes.VITESSE_BALLE_JOUEUR, Constantes.TAILLE_BALLE_JOUEUR, 0, "joueur", 0,
             PosJoueurX, PosJoueurY, VecteurTir, Constantes.DEGATS_JOUEUR);
         PositionnerBalle(BalleJoueur);
 
@@ -410,25 +402,22 @@ public partial class MainWindow : Window
 
     private void GestionDeplacementBalles()
     {
-        if (Balles != null)
+        foreach (var Balle in Balles)
         {
-            foreach (var Balle in Balles)
-            {
-                Balle.Deplacement();
+            Balle.Deplacement();
 
-                if (BalleHorsLimite(Balle)) BallesMortes.Add(Balle);
+            if (BalleHorsLimite(Balle)) BallesMortes.Add(Balle);
 
-                PositionnerBalle(Balle);
-            }
-
-            foreach (var Balle in BallesMortes)
-            {
-                Balles.Remove(Balle);
-                monCanvas.Children.Remove(Balle.Graphique);
-            }
-
-            BallesMortes.Clear();
+            PositionnerBalle(Balle);
         }
+
+        foreach (var Balle in BallesMortes)
+        {
+            Balles.Remove(Balle);
+            monCanvas.Children.Remove(Balle.Graphique);
+        }
+
+        BallesMortes.Clear();
     }
 
     private void CollisionBalle()
@@ -437,7 +426,6 @@ public partial class MainWindow : Window
         {
             if (Balle.Rect.IntersectsWith(HitboxJoueur) && Balle.Tireur != "joueur")
             {
-                //Application.Current.Shutdown();
                 BallesMortes.Add(Balle);
                 Hud.AjouteVie((int)-Balle.Degats);
             }
@@ -591,12 +579,12 @@ public partial class MainWindow : Window
         {
             Ennemi.PosX = Canvas.GetLeft(Ennemi.Graphique);
             Ennemi.PosY = Canvas.GetTop(Ennemi.Graphique);
-            var VecteurDeplace = new Vector2((float)Ennemi.PosX - (float)PosJoueurX,
+            Vector2 VecteurDeplace = new Vector2((float)Ennemi.PosX - (float)PosJoueurX,
                 (float)Ennemi.PosY - (float)PosJoueurY);
-            var VecteurDeplaceNormalise = Vector2.Normalize(VecteurDeplace);
+            Vector2 VecteurDeplaceNormalise = Vector2.Normalize(VecteurDeplace);
 
-            var NewPosEnnemiX = Ennemi.PosX - VecteurDeplaceNormalise.X * Ennemi.Vitesse;
-            var NewPosEnnemiY = Ennemi.PosY - VecteurDeplaceNormalise.Y * Ennemi.Vitesse;
+            double NewPosEnnemiX = Ennemi.PosX - VecteurDeplaceNormalise.X * Ennemi.Vitesse;
+            double NewPosEnnemiY = Ennemi.PosY - VecteurDeplaceNormalise.Y * Ennemi.Vitesse;
 
             Ennemi.PosX = NewPosEnnemiX;
             Ennemi.PosY = NewPosEnnemiY;
@@ -609,9 +597,10 @@ public partial class MainWindow : Window
 
     private void AnimationJoueur()
     {
-        var PosEcran = Mouse.GetPosition(Application.Current.MainWindow);
-        var VecteurTir = new Vector2((float)PosEcran.X - (float)PosJoueurX, (float)PosEcran.Y - (float)PosJoueurY);
+        Point PosEcran = Mouse.GetPosition(Application.Current.MainWindow);
+        Vector2 VecteurTir = new Vector2((float)PosEcran.X - (float)PosJoueurX, (float)PosEcran.Y - (float)PosJoueurY);
         float NormalVecteurX = Vector2.Normalize(VecteurTir).X, NormalVecteurY = Vector2.Normalize(VecteurTir).Y;
+        
 #if DEBUG
         Console.WriteLine("vecteur x " + NormalVecteurX);
         Console.WriteLine("vecteur y " + NormalVecteurY);
@@ -621,15 +610,11 @@ public partial class MainWindow : Window
         Constantes.TICK_ANIMATION++;
         rectJoueur.Fill = ApparenceJoueur;
         rectArme.Fill = ApparenceArme;
-        Console.WriteLine(Constantes.TICK_ANIMATION);
-        if (RegardeADroite)
-            CheminSprite += "droite\\";
-        else
-            CheminSprite += "gauche\\";
+        CheminSprite += RegardeADroite ? "droite\\" : "gauche\\";
 
 
         //marche
-        if (Bas || Haut || Droite || Gauche)
+        if (Bas_Presse || Haut_Presse || Droite_Presse || Gauche_Presse)
         {
             if (Constantes.TICK_ANIMATION >= 30)
                 Constantes.TICK_ANIMATION = 0;
@@ -696,14 +681,9 @@ public partial class MainWindow : Window
         //carte.BitmapEffect = EffetFlou;
 
         CheminSprite = AppDomain.CurrentDomain.BaseDirectory + "images\\sprites\\personnage\\";
-        if (TickAnimation < 40)
-            TickAnimation++;
+        if (TickAnimation < 40) TickAnimation++;
         rectArme.Visibility = Visibility.Hidden;
-        Console.WriteLine(TickAnimation);
-        if (MortDroite)
-            CheminSprite += "droite\\";
-        else
-            CheminSprite += "gauche\\";
+        CheminSprite += MortDroite ? "droite\\" : "gauche\\";
 
         ApparenceJoueur.ImageSource =
             new BitmapImage(new Uri(CheminSprite + $"\\mort\\mort{TickAnimation / 10 + 1}.png"));
@@ -751,15 +731,15 @@ public partial class MainWindow : Window
         EnnemisMorts.Clear();
         BallesMortes.Clear();
         TickAnimation = 0;
-        Gauche = false;
-        Droite = false;
-        Haut = false;
-        Bas = false;
+        Gauche_Presse = false;
+        Droite_Presse = false;
+        Haut_Presse = false;
+        Bas_Presse = false;
         Tirer = false;
-        NumPadUn = false;
-        NumPadQuatre = false;
-        ToucheX = false;
-        ToucheC = false;
-        ToucheR = false;
+        NumPadUn_Presse = false;
+        NumPadQuatre_Presse = false;
+        ToucheX_Presse = false;
+        ToucheC_Presse = false;
+        ToucheR_Presse = false;
     }
 }
