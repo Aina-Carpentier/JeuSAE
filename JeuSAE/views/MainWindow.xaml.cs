@@ -61,6 +61,13 @@ public partial class MainWindow : Window
     // Difficulté
     public string Difficulte;
 
+    // Choix arme
+    public int Arme = 3;
+
+    // Stat arme
+    public int Degat_Joueur, Taille_Balle_Joueur, Balle_Nombre_Perce;
+    public double Temps_Recharge_Arme;
+
     // Audio
     public int AudioSFX = 100, AudioMusique = 100;
     
@@ -69,6 +76,8 @@ public partial class MainWindow : Window
         InitializeComponent();
         InitialisationMenu();
         InitialisationHud();
+        InitialisationDifficulte();
+        InitialisationArme();
         InitialisationElementsGraphiques();
         
         // Moteur de jeu rafraîchit le jeu toutes les 16ms
@@ -77,6 +86,39 @@ public partial class MainWindow : Window
         Timer.Start();
     }
 
+    private void InitialisationArme()
+    {
+        if (Arme == 1)
+        {
+            Degat_Joueur = Constantes.DEGATS_JOUEUR_1;
+            Taille_Balle_Joueur = Constantes.TAILLE_BALLE_JOUEUR_1;
+            Balle_Nombre_Perce = Constantes.BALLE_NOMBRE_PERCE_1;
+            Temps_Recharge_Arme = Constantes.TEMPS_RECHARGE_ARME_1;
+        }
+
+        else if (Arme == 2)
+        {
+            Degat_Joueur = Constantes.DEGATS_JOUEUR_2;
+            Taille_Balle_Joueur = Constantes.TAILLE_BALLE_JOUEUR_2;
+            Balle_Nombre_Perce = Constantes.BALLE_NOMBRE_PERCE_2;
+            Temps_Recharge_Arme = Constantes.TEMPS_RECHARGE_ARME_2;
+        }
+
+        else if (Arme == 3)
+        {
+            Degat_Joueur = Constantes.DEGATS_JOUEUR_3;
+            Taille_Balle_Joueur = Constantes.TAILLE_BALLE_JOUEUR_3;
+            Balle_Nombre_Perce = Constantes.BALLE_NOMBRE_PERCE_3;
+            Temps_Recharge_Arme = Constantes.TEMPS_RECHARGE_ARME_3;
+        }
+    }
+    private void InitialisationDifficulte()
+    {
+        if (Difficulte == "moyen")
+            Constantes.TICK_REQUIS_POUR_SPAWN_ENNEMI -= 40;
+        else if (Difficulte == "difficile")
+            Constantes.TICK_REQUIS_POUR_SPAWN_ENNEMI -= 80;
+    }
     private void InitialisationElementsGraphiques()
     {
         var Chargement = new Chargement(this);
@@ -119,6 +161,7 @@ public partial class MainWindow : Window
             Constantes.TOUCHE_GAUCHE);
         var PreJeu = new PreJeu();
         var Audio = new Audio(AudioSFX, AudioMusique);
+        var ChoixArme = new ChoixArme();
 
         Menu.ShowDialog();
         string Choix = Menu.Choix;
@@ -166,7 +209,12 @@ public partial class MainWindow : Window
                     Choix = Audio.Choix;
                     AudioSFX = Audio.sonSFX;
                     AudioMusique = Audio.sonMusique;
-                    
+                    break;
+
+                case "arme":
+                    ChoixArme.ShowDialog();
+                    Arme = ChoixArme.Arme;
+                    Choix = ChoixArme.Choix;
                     break;
             }
         Constantes.LECTEUR_MUSIQUE_MENU.Stop();
@@ -278,7 +326,7 @@ public partial class MainWindow : Window
             ToucheO_Presse = false;
             ToucheP_Presse = false;
             Constantes.VIE_JOUEUR = double.MaxValue;
-            Constantes.DEGATS_JOUEUR = int.MaxValue;
+            Degat_Joueur= int.MaxValue;
         }
     }
 
@@ -414,7 +462,7 @@ public partial class MainWindow : Window
 
     private void CreerBalleJoueur()
     {
-        Constantes.TEMPS_RECHARGE_ACTUEL = (int)Constantes.TEMPS_RECHARGE_ARME;
+        Constantes.TEMPS_RECHARGE_ACTUEL = (int)Temps_Recharge_Arme;
 
         Point PosEcran = Mouse.GetPosition(Application.Current.MainWindow);
         Point PosCarte = Mouse.GetPosition(carte);
@@ -425,8 +473,8 @@ public partial class MainWindow : Window
 
         Vector2 VecteurTir = new Vector2((float)PosEcran.X - (float)PosJoueurX, (float)PosEcran.Y - (float)PosJoueurY);
 
-        Balle BalleJoueur = new Balle(Constantes.VITESSE_BALLE_JOUEUR, Constantes.TAILLE_BALLE_JOUEUR, 0, "joueur", 0,
-            PosJoueurX, PosJoueurY, VecteurTir, Constantes.DEGATS_JOUEUR);
+        Balle BalleJoueur = new Balle(Constantes.VITESSE_BALLE_JOUEUR, Taille_Balle_Joueur, 0, "joueur", 0,
+            PosJoueurX, PosJoueurY, VecteurTir, Degat_Joueur);
         PositionnerBalle(BalleJoueur);
 
         monCanvas.Children.Add(BalleJoueur.Graphique);
@@ -678,15 +726,15 @@ public partial class MainWindow : Window
 
         //faire varier en fonction de la position du curseur
         if (Math.Abs(NormalVecteurX) < 0.2 && NormalVecteurY > 0.8)
-            ApparenceArme.ImageSource = new BitmapImage(new Uri(CheminSprite + "\\arme\\arme1_5.png"));
+            ApparenceArme.ImageSource = new BitmapImage(new Uri(CheminSprite + $"\\arme\\arme{Arme}_5.png"));
         else if (Math.Abs(NormalVecteurX) < 0.2 && NormalVecteurY < -0.8)
-            ApparenceArme.ImageSource = new BitmapImage(new Uri(CheminSprite + "\\arme\\arme1_1.png"));
+            ApparenceArme.ImageSource = new BitmapImage(new Uri(CheminSprite + $"\\arme\\arme{Arme}_1.png"));
         else if (Math.Abs(NormalVecteurX) < 0.96 && NormalVecteurY > 0.25)
-            ApparenceArme.ImageSource = new BitmapImage(new Uri(CheminSprite + "\\arme\\arme1_4.png"));
+            ApparenceArme.ImageSource = new BitmapImage(new Uri(CheminSprite + $"\\arme\\arme{Arme}_4.png"));
         else if (Math.Abs(NormalVecteurX) < 0.96 && NormalVecteurY < -0.25)
-            ApparenceArme.ImageSource = new BitmapImage(new Uri(CheminSprite + "\\arme\\arme1_2.png"));
+            ApparenceArme.ImageSource = new BitmapImage(new Uri(CheminSprite + $"\\arme\\arme{Arme}_2.png"));
         else
-            ApparenceArme.ImageSource = new BitmapImage(new Uri(CheminSprite + "\\arme\\arme1_3.png"));
+            ApparenceArme.ImageSource = new BitmapImage(new Uri(CheminSprite + $"\\arme\\arme{Arme}_3.png"));
     }
 
     private void SupprimerEnnemis()

@@ -55,7 +55,7 @@ public class MenuMaxExp
             {
                 case 0:
                     AmeliorationString = "Dégats + 1";
-                    ValeurActuelle = Constantes.DEGATS_JOUEUR;
+                    ValeurActuelle = MainWindow.Degat_Joueur;
                     NumSwitch = 0;
                     break;
                 case 1:
@@ -70,7 +70,7 @@ public class MenuMaxExp
                     break;
                 case 3:
                     AmeliorationString = "Taille des Balles + 10";
-                    ValeurActuelle = Constantes.TAILLE_BALLE_JOUEUR;
+                    ValeurActuelle = MainWindow.Taille_Balle_Joueur;
                     NumSwitch = 3;
                     break;
                 case 4:
@@ -80,12 +80,12 @@ public class MenuMaxExp
                     break;
                 case 5:
                     AmeliorationString = "Cadence de tir + 20 %";
-                    ValeurActuelle = Math.Round(60 / Constantes.TEMPS_RECHARGE_ARME, 1);
+                    ValeurActuelle = Math.Round(60 / MainWindow.Temps_Recharge_Arme, 1);
                     NumSwitch = 5;
                     break;
                 case 6:
                     AmeliorationString = "Perçage + 1";
-                    ValeurActuelle = Constantes.BALLE_NOMBRE_PERCE;
+                    ValeurActuelle = MainWindow.Balle_Nombre_Perce;
                     NumSwitch = 6;
                     break;
                 case 7:
@@ -182,7 +182,7 @@ public class MenuMaxExp
         switch (ValeurUtilise)
         {
             case 0:
-                Constantes.DEGATS_JOUEUR += 1;
+                MainWindow.Degat_Joueur += 1;
                 break;
             case 1:
                 Constantes.VITESSE_BALLE_JOUEUR *= 1.2;
@@ -191,16 +191,17 @@ public class MenuMaxExp
                 Constantes.VITESSE_JOUEUR *= 1.2;
                 break;
             case 3:
-                Constantes.TAILLE_BALLE_JOUEUR += 10;
+                MainWindow.Taille_Balle_Joueur += 10;
                 break;
             case 4:
                 Constantes.VIE_JOUEUR += 20;
+                Hud.AjouteVie(20);
                 break;
             case 5:
-                Constantes.TEMPS_RECHARGE_ARME *= 0.8;
+                MainWindow.Temps_Recharge_Arme*= 0.8;
                 break;
             case 6:
-                Constantes.BALLE_NOMBRE_PERCE += 1;
+                MainWindow.Balle_Nombre_Perce+= 1;
                 break;
             case 7:
                 Constantes.POURCENTAGE_NOMBRE_DE_VIE += 5;

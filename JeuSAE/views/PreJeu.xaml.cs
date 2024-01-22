@@ -45,7 +45,7 @@ public partial class PreJeu : Window
 
     private void labFacile_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
-        Choix = "jouer";
+        Choix = "arme";
         Difficulte = "facile";
         Hide();
     }
@@ -62,7 +62,7 @@ public partial class PreJeu : Window
 
     private void labMoyen_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
-        Choix = "jouer";
+        Choix = "arme";
         Difficulte = "moyen";
         Hide();
     }
@@ -79,7 +79,7 @@ public partial class PreJeu : Window
 
     private void labDifficile_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
-        Choix = "jouer";
+        Choix = "arme";
         Difficulte = "difficile";   
         Hide();
     }

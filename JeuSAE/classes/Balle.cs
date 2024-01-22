@@ -10,6 +10,7 @@ namespace JeuSAE.classes;
 
 public class Balle
 {
+    private static readonly MainWindow MainWindow = (MainWindow)Application.Current.MainWindow;
     private readonly double Acceleration;
     private readonly double Taille;
     private readonly int Type;
@@ -93,11 +94,11 @@ public class Balle
 
     public int NombrePerce
     {
-        get => Constantes.BALLE_NOMBRE_PERCE;
+        get => MainWindow.Balle_Nombre_Perce;
         set
         {
             if (value < 0) throw new ArgumentException("Le nombre d'ennemis à percer ne peut pas être négatif.");
-            Constantes.BALLE_NOMBRE_PERCE = value;
+            MainWindow.Balle_Nombre_Perce = value;
         }
     }
 

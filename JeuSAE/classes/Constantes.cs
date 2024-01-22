@@ -81,16 +81,27 @@ internal class Constantes
     public static Key TOUCHE_HAUT = Key.Z, TOUCHE_BAS = Key.S, TOUCHE_DROITE = Key.D, TOUCHE_GAUCHE = Key.Q;
 
     // Caractéristiques des balles du joueur
-    public static int BALLE_NOMBRE_PERCE = 1;
+    public static int BALLE_NOMBRE_PERCE_1 = 1;
+    public static int BALLE_NOMBRE_PERCE_2 = 3;
+    public static int BALLE_NOMBRE_PERCE_3 = 1;
     public static int POURCENTAGE_NOMBRE_DE_VIE = 0;
-
     // Caractéristiques du joueur
-    public static double VITESSE_JOUEUR = 10;
-    public static double TEMPS_RECHARGE_ARME = 15;
     public static int TEMPS_RECHARGE_ACTUEL = 0;
-    public static int TAILLE_BALLE_JOUEUR = 50;
+    public static double VITESSE_JOUEUR = 10;
+
+    public static double TEMPS_RECHARGE_ARME_1 = 25;
+    public static double TEMPS_RECHARGE_ARME_2 = 50;
+    public static double TEMPS_RECHARGE_ARME_3 = 10;
+    
+    public static int TAILLE_BALLE_JOUEUR_1 = 30;
+    public static int TAILLE_BALLE_JOUEUR_2 = 60;
+    public static int TAILLE_BALLE_JOUEUR_3 = 15;
+    
+    public static int DEGATS_JOUEUR_1 = 2;
+    public static int DEGATS_JOUEUR_2 = 5;
+    public static int DEGATS_JOUEUR_3 = 1;
+
     public static double VITESSE_BALLE_JOUEUR = 25;
-    public static int DEGATS_JOUEUR = 1;
     public static int VITESSE_BALLE = 15;
     public static int COMPTEUR_SPAWN = 0;
     public static int TICK_REQUIS_POUR_SPAWN_ENNEMI = 150;
