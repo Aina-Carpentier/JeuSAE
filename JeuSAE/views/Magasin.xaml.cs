@@ -81,7 +81,6 @@ namespace JeuSAE
         {
             this.Choix = "menu";
             this.Hide();
-            //Ca modifie pas le .json bizarre ?
             fenetrePrincipale.MettreAJourBdd();
         }
 

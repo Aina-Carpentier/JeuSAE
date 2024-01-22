@@ -57,6 +57,8 @@ public partial class MainWindow : Window
     // Animation
     public int TickAnimation;
 
+    // Difficulté
+    public string Difficulte;
     
     public MainWindow()
     {
@@ -152,6 +154,7 @@ public partial class MainWindow : Window
                 case "difficulte":
                     PreJeu.ShowDialog();
                     Choix = PreJeu.Choix;
+                    Difficulte = PreJeu.Difficulte;
                     break;
             }
         Constantes.LECTEUR_MUSIQUE_MENU.Stop();
