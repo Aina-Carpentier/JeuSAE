@@ -21,7 +21,8 @@ public partial class MainWindow : Window
     // État du joueur
     private static bool Gauche_Presse, Droite_Presse, Haut_Presse, Bas_Presse, Tirer;
     private static bool NumPadUn_Presse, NumPadQuatre_Presse;
-    private static bool ToucheX_Presse, ToucheC_Presse, ToucheR_Presse, ToucheI_Presse, ToucheO_Presse, ToucheP_Presse;
+    private static bool ToucheX_Presse, ToucheC_Presse, ToucheR_Presse, ToucheI_Presse, ToucheO_Presse, ToucheP_Presse, ToucheEsc_Presse;
+    private static bool MenuPauseOuvert = false;
     
     // Chemin et apparence
     public static string? CheminSprite;
@@ -85,6 +86,7 @@ public partial class MainWindow : Window
             fenetrePrincipale.Height * 0.35, 0, 0);
         labRetour.Margin = new Thickness(fenetrePrincipale.Width / 2 - labRetour.Width / 2,
             fenetrePrincipale.Height * 0.2, 0, 0);
+        labContinuer.Margin = new Thickness(fenetrePrincipale.Width / 2 - labContinuer.Width /2, fenetrePrincipale.Height * 0.5 , 0, 0);
         
         // Map
         MapGenerator.load(this);
@@ -165,6 +167,9 @@ public partial class MainWindow : Window
         }
         else if (OuvreMenuMaxExp)
         {
+        } else if (MenuPauseOuvert)
+        {
+
         }
         else
         {
@@ -200,6 +205,7 @@ public partial class MainWindow : Window
 
     private void CanvasKeyIsDown(object sender, KeyEventArgs e)
     {
+
         Gauche_Presse = Gauche_Presse || e.Key == Constantes.TOUCHE_GAUCHE;
         Droite_Presse = Droite_Presse || e.Key == Constantes.TOUCHE_DROITE;
         Haut_Presse = Haut_Presse || e.Key == Constantes.TOUCHE_HAUT;
@@ -212,9 +218,19 @@ public partial class MainWindow : Window
         ToucheP_Presse = ToucheP_Presse || e.Key == Key.P;
         NumPadUn_Presse = NumPadUn_Presse || e.Key == Key.NumPad1;
         NumPadQuatre_Presse = NumPadQuatre_Presse || e.Key == Key.NumPad4;
-        
+        ToucheEsc_Presse = ToucheEsc_Presse || e.Key == Key.Escape;
+
+
+        // Menu pause
+
+        if (ToucheEsc_Presse)
+        {
+            MenuPause();
+        }
+
+
         //------------------------------------------- CODES DE TRICHE -------------------------------------------
-        
+
         // Super vitesse
         if (NumPadUn_Presse && NumPadQuatre_Presse) Constantes.VITESSE_JOUEUR = 200;
         
@@ -287,6 +303,9 @@ public partial class MainWindow : Window
                 break;
             case Key.P:
                 ToucheP_Presse = false;
+                break;
+            case Key.Escape:
+                ToucheEsc_Presse = false;
                 break;
         }
     }
@@ -570,7 +589,9 @@ public partial class MainWindow : Window
         EnnemisMorts.Clear();
     }
 
-        private void LogiqueEnnemis()
+
+
+    private void LogiqueEnnemis()
         {
             double PosJoueurX = HitboxJoueur.Left + HitboxJoueur.Width /2;
             double PosJoueurY = HitboxJoueur.Top + HitboxJoueur.Height/2;
@@ -593,6 +614,11 @@ public partial class MainWindow : Window
             Canvas.SetTop(Ennemi.Graphique, NewPosEnnemiY);
             Ennemi.Tir();
         }
+    }
+
+    private void labContinuer_MouseDown(object sender, MouseButtonEventArgs e)
+    {
+        MenuPause();
     }
 
     private void AnimationJoueur()
@@ -676,6 +702,7 @@ public partial class MainWindow : Window
 
         labQuitter.BitmapEffect = NonFloue;
         labRetour.BitmapEffect = NonFloue;
+        labContinuer.BitmapEffect = NonFloue;
         rectJoueur.BitmapEffect = NonFloue;
 
         //carte.BitmapEffect = EffetFlou;
@@ -719,6 +746,38 @@ public partial class MainWindow : Window
     private void labQuitter_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
         Environment.Exit(0);
+    }
+
+    private void labContinuer_MouseEnter(object sender, MouseEventArgs e)
+    {
+        labContinuer.Foreground = Brushes.LightSlateGray;
+    }
+
+    private void labContinuer_MouseLeave(object sender, MouseEventArgs e)
+    {
+        labContinuer.Foreground = Brushes.Black;
+    }
+
+    private void MenuPause()
+    {
+        if (!MenuPauseOuvert)
+        {
+            labRetour.Visibility = Visibility.Visible;
+            labQuitter.Visibility = Visibility.Visible;
+            labContinuer.Visibility = Visibility.Visible;
+            MenuPauseOuvert = true;
+            Cursor = Cursors.Arrow;
+
+        }
+        else
+        {
+            labRetour.Visibility = Visibility.Hidden;
+            labQuitter.Visibility = Visibility.Hidden;
+            labContinuer.Visibility = Visibility.Hidden;
+            MenuPauseOuvert = false;
+            Cursor = Cursors.None;
+
+        }
     }
 
     private void RemetValeursAZero()

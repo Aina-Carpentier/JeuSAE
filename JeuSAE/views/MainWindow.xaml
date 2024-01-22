@@ -33,7 +33,8 @@
             Width="52"
             Height="52"
             Panel.ZIndex="1001"
-            Source="../images/viseur.png" />
+            Source="../images/viseur.png" 
+            IsHitTestVisible="False"/>
 
 
         <Rectangle
@@ -159,6 +160,15 @@
         <Label x:Name="labAmelioration3" Content="Amélioration 3" Canvas.Left="1253" Canvas.Top="364" Foreground="White" FontSize="36" Height="72" Width="426" VerticalAlignment="Top" FontFamily="Rubik" FontWeight="Bold" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Panel.ZIndex="1004" Visibility="Hidden" IsHitTestVisible="False"/>
         <Label x:Name="labActuelle3" Content="Actuelle :" Canvas.Left="1253" Canvas.Top="430" Foreground="White" FontSize="36" Height="114" Width="426" VerticalAlignment="Top" FontFamily="Rubik" FontWeight="Bold" HorizontalAlignment="Center" HorizontalContentAlignment="Center"  Panel.ZIndex="1004" Visibility="Hidden" IsHitTestVisible="False"/>
         <Label x:Name="labBonus" Content="BONUS !" Canvas.Left="749" Canvas.Top="132" Foreground="White" FontSize="100" Height="106" Width="422" VerticalAlignment="Center" FontFamily="Rubik" FontWeight="Bold" HorizontalAlignment="Left"  Panel.ZIndex="1004" HorizontalContentAlignment="Center" Visibility="Hidden"/>
+        <Label x:Name="labContinuer" Content="Continuer"             
+               Width="369"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Panel.ZIndex="900"
+            FontFamily="Rubik"
+            FontSize="72"
+               Visibility="Hidden" MouseEnter="labContinuer_MouseEnter" MouseLeave="labContinuer_MouseLeave" MouseDown="labContinuer_MouseDown"
+               />
 
     </Canvas>
 </Window>
