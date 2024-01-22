@@ -46,6 +46,9 @@
         <Rectangle x:Name="rectArme1" Height="100" Stroke="Black"  Width="220" MouseEnter="rectArme1_MouseEnter" MouseLeave="rectArme1_MouseLeave" MouseLeftButtonDown="rectArme1_MouseLeftButtonDown"/>
         <Rectangle x:Name="rectArme2" Height="100" Stroke="Black"  Width="220" MouseEnter="rectArme2_MouseEnter" MouseLeave="rectArme2_MouseLeave" MouseLeftButtonDown="rectArme2_MouseLeftButtonDown"/>
         <Rectangle x:Name="rectArme3" Height="100" Stroke="Black"  Width="220" MouseEnter="rectArme3_MouseEnter" MouseLeave="rectArme3_MouseLeave" MouseLeftButtonDown="rectArme3_MouseLeftButtonDown"/>
+        <Label x:Name="labPrix1" Content="" FontSize="40" Width="192" Height="64"/>
+        <Label x:Name="labPrix2" Content="" FontSize="40" Height="64" Width="192"/>
+
 
         <Rectangle x:Name="rectDescription" Height="250" Stroke="Black" Width="800" Fill="#FFA9A0A0" Visibility="Hidden" Panel.ZIndex="10"/>
         <Label x:Name="labDescription" Content=""  FontFamily="Rubik" FontSize="40" Panel.ZIndex="10"/>

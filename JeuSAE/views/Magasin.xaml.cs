@@ -25,33 +25,44 @@ namespace JeuSAE
 
             rectArme1.Margin = new Thickness(fenetreMagasin.Width * 0.25 - rectArme1.Width / 2, fenetreMagasin.Height * 0.3, 0, 0);
             rectArme2.Margin = new Thickness(fenetreMagasin.Width * 0.50 - rectArme2.Width / 2, fenetreMagasin.Height * 0.3, 0, 0);
+            labPrix1.Margin = new Thickness(fenetreMagasin.Width * 0.50 - labPrix1.Width / 2, fenetreMagasin.Height * 0.4, 0, 0);
             rectArme3.Margin = new Thickness(fenetreMagasin.Width * 0.75 - rectArme3.Width / 2, fenetreMagasin.Height * 0.3, 0, 0);
+            labPrix2.Margin = new Thickness(fenetreMagasin.Width * 0.75 - labPrix2.Width / 2, fenetreMagasin.Height * 0.4, 0, 0);
 
             rectDescription.Margin = new Thickness(fenetreMagasin.Width * 0.5 - rectDescription.Width / 2, fenetreMagasin.Height * 0.55, 0, 0);
             rectPDV.Margin = new Thickness(fenetreMagasin.Width * 0.5 - rectPDV.Width / 2, fenetreMagasin.Height * 0.6, 0, 0);
             rectVitesse.Margin = new Thickness(fenetreMagasin.Width * 0.5 - rectVitesse.Width / 2, fenetreMagasin.Height * 0.75, 0, 0);
-            labPDV.Margin = new Thickness(fenetreMagasin.Width * 0.2 - labPDV.Width /2, fenetreMagasin.Height *0.6, 0, 0);
-            labVitesse.Margin = new Thickness(fenetreMagasin.Width * 0.2 - labVitesse.Width / 2, fenetreMagasin.Height * 0.75, 0, 0);
+            labPDV.Margin = new Thickness(fenetreMagasin.Width * 0.15 - labPDV.Width /2, fenetreMagasin.Height *0.6, 0, 0);
+            labVitesse.Margin = new Thickness(fenetreMagasin.Width * 0.15 - labVitesse.Width / 2, fenetreMagasin.Height * 0.75, 0, 0);
             
-            butPDV.Margin = new Thickness(fenetreMagasin.Width * 0.8 - butPDV.Width / 2, fenetreMagasin.Height * 0.6, 0, 0);
-            butVitesse.Margin = new Thickness(fenetreMagasin.Width * 0.8 - butVitesse.Width / 2, fenetreMagasin.Height * 0.75, 0, 0);
+            butPDV.Margin = new Thickness(fenetreMagasin.Width * 0.85 - butPDV.Width / 2, fenetreMagasin.Height * 0.6, 0, 0);
+            butVitesse.Margin = new Thickness(fenetreMagasin.Width * 0.85 - butVitesse.Width / 2, fenetreMagasin.Height * 0.75, 0, 0);
             rectVitesseRempli.Margin = rectVitesse.Margin; rectPDVRempli.Margin = rectPDV.Margin;
 
             butPDV.Content = $"Cout : {prixPDV()}";
             butVitesse.Content = $"Cout : {prixVitesse()}";
             labDiamant.Content = $"x {BaseDeDonnee.Argent}";
+            labPrix1.Content = $"Prix : {Constantes.PRIX_ARME}";
+            labPrix2.Content = $"Prix : {Constantes.PRIX_ARME}";
 
             labDescription.Width = rectDescription.Width; labDescription.Height = rectDescription.Height; labDescription.Margin = rectDescription.Margin;
             Arme1.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images\\sprites\\personnage\\droite\\arme\\arme1.png"));
 
             //arme 2 débloquée ?
-            if (BaseDeDonnee.Arme2)
+            if (BaseDeDonnee.Arme2) 
+            {
                 Arme2.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images\\sprites\\personnage\\droite\\arme\\Arme2.png"));
+                labPrix1.Visibility = Visibility.Hidden;
+            }
             else
                 Arme2.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images\\sprites\\personnage\\droite\\arme\\Arme2V.png"));
+
             //arme 3 débloquée ?
             if (BaseDeDonnee.Arme3)
+            {
                 Arme3.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images\\sprites\\personnage\\droite\\arme\\Arme3.png"));
+                labPrix2.Visibility = Visibility.Hidden;
+            }
             else
                 Arme3.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images\\sprites\\personnage\\droite\\arme\\Arme3V.png"));
 
