@@ -200,18 +200,18 @@ public partial class MainWindow : Window
 
     private void CanvasKeyIsDown(object sender, KeyEventArgs e)
     {
-        Gauche_Presse = e.Key == Constantes.TOUCHE_GAUCHE;
-        Droite_Presse = e.Key == Constantes.TOUCHE_DROITE;
-        Haut_Presse = e.Key == Constantes.TOUCHE_HAUT;
-        Bas_Presse = e.Key == Constantes.TOUCHE_BAS;
-        ToucheX_Presse = e.Key == Key.X;
-        ToucheC_Presse = e.Key == Key.C;
-        ToucheR_Presse = e.Key == Key.R;
-        ToucheI_Presse = e.Key == Key.I;
-        ToucheO_Presse = e.Key == Key.O;
-        ToucheP_Presse = e.Key == Key.P;
-        NumPadUn_Presse = e.Key == Key.NumPad1;
-        NumPadQuatre_Presse = e.Key == Key.NumPad4;
+        Gauche_Presse = Gauche_Presse || e.Key == Constantes.TOUCHE_GAUCHE;
+        Droite_Presse = Droite_Presse || e.Key == Constantes.TOUCHE_DROITE;
+        Haut_Presse = Haut_Presse || e.Key == Constantes.TOUCHE_HAUT;
+        Bas_Presse = Bas_Presse || e.Key == Constantes.TOUCHE_BAS;
+        ToucheX_Presse = ToucheX_Presse || e.Key == Key.X;
+        ToucheC_Presse = ToucheC_Presse || e.Key == Key.C;
+        ToucheR_Presse = ToucheR_Presse || e.Key == Key.R;
+        ToucheI_Presse = ToucheI_Presse || e.Key == Key.I;
+        ToucheO_Presse = ToucheO_Presse || e.Key == Key.O;
+        ToucheP_Presse = ToucheP_Presse || e.Key == Key.P;
+        NumPadUn_Presse = NumPadUn_Presse || e.Key == Key.NumPad1;
+        NumPadQuatre_Presse = NumPadQuatre_Presse || e.Key == Key.NumPad4;
         
         //------------------------------------------- CODES DE TRICHE -------------------------------------------
         
