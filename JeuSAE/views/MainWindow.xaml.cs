@@ -113,6 +113,8 @@ public partial class MainWindow : Window
             Balle_Nombre_Perce = Constantes.BALLE_NOMBRE_PERCE_3;
             Temps_Recharge_Arme = Constantes.TEMPS_RECHARGE_ARME_3;
         }
+        Constantes.VIE_JOUEUR *= 1 + 0.1 * BaseDeDonnee.AmeliorationPdv;
+        Constantes.VITESSE_JOUEUR *= 1 + 0.1 * BaseDeDonnee.AmeliorationVitesse;
     }
     private void InitialisationDifficulte()
     {
