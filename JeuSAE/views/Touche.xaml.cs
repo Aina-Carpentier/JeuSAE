@@ -9,8 +9,8 @@ namespace JeuSAE;
 /// </summary>
 public partial class Touche : Window
 {
-    public string choix, ecoute;
-    public Key tHaut, tBas, tDroite, tGauche;
+    public string Choix, Ecoute;
+    public Key Haut, Bas, Droite, Gauche;
 
     public Touche(Key toucheHaut, Key toucheBas, Key toucheDroite, Key toucheGauche)
     {
@@ -23,12 +23,12 @@ public partial class Touche : Window
         labConfig.Margin = new Thickness(fenetreTouche.Width / 2 - labConfig.Width / 2,
             fenetreTouche.Height / 2 - labConfig.Height / 2, 0, 0);
 
-        tHaut = toucheHaut;
-        tBas = toucheBas;
-        tDroite = toucheDroite;
-        tGauche = toucheGauche;
+        Haut = toucheHaut;
+        Bas = toucheBas;
+        Droite = toucheDroite;
+        Gauche = toucheGauche;
 
-        tbHaut.Text = tHaut.ToString();
+        tbHaut.Text = Haut.ToString();
         tbBas.Text = toucheBas.ToString();
         tbDroite.Text = toucheDroite.ToString();
         tbGauche.Text = toucheGauche.ToString();
@@ -61,7 +61,7 @@ public partial class Touche : Window
 
     private void labRetour_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
-        choix = "parametre";
+        Choix = "parametre";
         Hide();
     }
 
@@ -79,57 +79,57 @@ public partial class Touche : Window
     {
         rectConfig.Visibility = Visibility.Visible;
         labConfig.Visibility = Visibility.Visible;
-        ecoute = "haut";
+        Ecoute = "haut";
     }
 
     private void butBas_Click(object sender, RoutedEventArgs e)
     {
         rectConfig.Visibility = Visibility.Visible;
         labConfig.Visibility = Visibility.Visible;
-        ecoute = "bas";
+        Ecoute = "bas";
     }
 
     private void butGauche_Click(object sender, RoutedEventArgs e)
     {
         rectConfig.Visibility = Visibility.Visible;
         labConfig.Visibility = Visibility.Visible;
-        ecoute = "gauche";
+        Ecoute = "gauche";
     }
 
     private void butDroite_Click(object sender, RoutedEventArgs e)
     {
         rectConfig.Visibility = Visibility.Visible;
         labConfig.Visibility = Visibility.Visible;
-        ecoute = "droite";
+        Ecoute = "droite";
     }
 
     private void canvasTouche_KeyDown(object sender, KeyEventArgs e)
     {
-        if (ecoute == "haut")
+        if (Ecoute == "haut")
         {
             tbHaut.Text = e.Key.ToString();
-            tHaut = e.Key;
+            Haut = e.Key;
         }
-        else if (ecoute == "bas")
+        else if (Ecoute == "bas")
         {
             tbBas.Text = e.Key.ToString();
-            tBas = e.Key;
+            Bas = e.Key;
         }
 
-        else if (ecoute == "gauche")
+        else if (Ecoute == "gauche")
         {
             tbGauche.Text = e.Key.ToString();
-            tGauche = e.Key;
+            Gauche = e.Key;
         }
 
-        else if (ecoute == "droite")
+        else if (Ecoute == "droite")
         {
             tbDroite.Text = e.Key.ToString();
-            tDroite = e.Key;
+            Droite = e.Key;
         }
 
 
-        ecoute = "";
+        Ecoute = "";
         rectConfig.Visibility = Visibility.Hidden;
         labConfig.Visibility = Visibility.Hidden;
     }

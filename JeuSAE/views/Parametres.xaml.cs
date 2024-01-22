@@ -9,7 +9,7 @@ namespace JeuSAE;
 /// </summary>
 public partial class Parametres : Window
 {
-    public string choix;
+    public string Choix;
 
     public Parametres()
     {
@@ -25,19 +25,19 @@ public partial class Parametres : Window
 
     private void labRetour_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
-        choix = "menu";
+        Choix = "menu";
         Hide();
     }
 
     private void labSon_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
-        choix = "son";
+        Choix = "son";
         Hide();
     }
 
     private void labTouche_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
-        choix = "touche";
+        Choix = "touche";
         Hide();
     }
 

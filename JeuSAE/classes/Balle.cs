@@ -13,81 +13,22 @@ namespace JeuSAE.classes
 {
     public class Balle
     {
-        private double vitesse;
-        private double taille;
-        private int type;
-        private string tireur;
-        private double acceleration;
-        private double posX;
-        private double posY;
-        private double degats;
-        private Vector2 vecteur;
-        private Ellipse graphique;
-        private Vector2 vecteurSin;
-        private float coefSin = 0;
-        private float coefRotation = 0;
-        private bool inverseSin = false;
-        private List<Guid> listeEnnemisPerces = new List<Guid>();
-
-        public double Vitesse
-        {
-            get { return vitesse; }
-            set { vitesse = value; }
-        }
-
-        public double Taille
-        {
-            get { return taille; }
-            set
-            {
-                if (value <= 0) { throw new ArgumentException("La taille ne peut pas être inférieure ou égale à 0. "); }
-                taille = value;
-            }
-        }
-
-        public int Type
-        {
-            get { return type; }
-            set { type = value; }
-        }
-
-        public string Tireur
-        {
-            get { return tireur; }
-            set { tireur = value; }
-        }
-
-        public double Acceleration
-        {
-            get { return acceleration; }
-            set { acceleration = value; }
-        }
-
-        public double PosX
-        {
-            get { return posX; }
-            set { posX = value; }
-        }
-
-        public double PosY
-        {
-            get { return posY; }
-            set { posY = value; }
-        }
-
-        public double Degats
-        {
-            get { return degats; }
-            set { degats = value; }
-        }
-
-
-        public Vector2 Vecteur
-        {
-            get { return vecteur; }
-            set { vecteur = value; }
-        }
-
+        private double Vitesse;
+        private double Taille;
+        private int Type;
+        public string Tireur;
+        private double Acceleration;
+        public double PosX;
+        public double PosY;
+        public double Degats;
+        private Vector2 Vecteur;
+        public Ellipse Graphique;
+        private Vector2 VecteurSin;
+        private float CoefSin = 0;
+        private float CoefRotation = 0;
+        private bool InverseSin;
+        public List<Guid> ListeEnnemisPerces = new();
+        
         public int NombrePerce
         {
             get { return Constantes.BALLE_NOMBRE_PERCE; }
@@ -95,22 +36,8 @@ namespace JeuSAE.classes
                 if (value < 0) { throw new ArgumentException("Le nombre d'ennemis à percer ne peut pas être négatif."); }
                 Constantes.BALLE_NOMBRE_PERCE = value; }
         }
-
-        public List<Guid> ListeEnnemisPerces
-        {
-            get { return listeEnnemisPerces; }
-            set { listeEnnemisPerces = value; }
-        }
-
-
-
-        public Rect Rect { get => new Rect(PosX, PosY, Taille, Taille); }
-
-        public Ellipse Graphique
-        {
-            get { return graphique; }
-            set { graphique = value; }
-        }
+        
+        public Rect Rect { get => new(PosX, PosY, Taille, Taille); }
 
         public Balle(double vitesse, double taille, int type, string tireur, double acceleration, double posX, double posY, Vector2 vecteur, double degats)
         {
@@ -162,14 +89,14 @@ namespace JeuSAE.classes
                         Degats = Constantes.DEGATS_BALLE_DEUX;
                         break;
                     case 3:
-                        ImageBrush image = new ImageBrush();
-                        image.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + $"images\\boss\\arch_linux.png"));
+                        ImageBrush Image = new ImageBrush();
+                        Image.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + $"images\\boss\\arch_linux.png"));
                         Graphique = new Ellipse
                         {
                             Tag = "bulletBoss",
                             Width = Taille*3,
                             Height = Taille*3,
-                            Fill = image,
+                            Fill = Image,
                             //Stroke = Brushes.Black
                         };
                         Degats = Constantes.DEGATS_BALLE_TROIS;
@@ -181,15 +108,15 @@ namespace JeuSAE.classes
 
         public override bool Equals(object? obj)
         {
-            return obj is Balle balle &&
-                   Vitesse == balle.Vitesse &&
-                   Taille == balle.Taille &&
-                   Type == balle.Type &&
-                   Tireur == balle.Tireur &&
-                   Acceleration == balle.Acceleration &&
-                   PosX == balle.PosX &&
-                   PosY == balle.PosY &&
-                   Vecteur.Equals(balle.Vecteur);
+            return obj is Balle Balle &&
+                   Vitesse == Balle.Vitesse &&
+                   Taille == Balle.Taille &&
+                   Type == Balle.Type &&
+                   Tireur == Balle.Tireur &&
+                   Acceleration == Balle.Acceleration &&
+                   PosX == Balle.PosX &&
+                   PosY == Balle.PosY &&
+                   Vecteur.Equals(Balle.Vecteur);
         }
 
         public override int GetHashCode()
@@ -199,90 +126,90 @@ namespace JeuSAE.classes
 
         public void Deplacement()
         {
-            MainWindow mainWindow = (MainWindow)App.Current.MainWindow;
-            Vector2 vecteurNormalize = Vector2.Normalize(this.Vecteur);
+            MainWindow MainWindow = (MainWindow)App.Current.MainWindow;
+            Vector2 VecteurNormalize = Vector2.Normalize(this.Vecteur);
 
-            switch (this.Type)
+            switch (Type)
             {
                 case 0:
                 {
-                    double newX = PosX + (vecteurNormalize.X * this.Vitesse);
-                    double newY = PosY + (vecteurNormalize.Y * this.Vitesse);
+                    double NewX = PosX + (VecteurNormalize.X * this.Vitesse);
+                    double NewY = PosY + (VecteurNormalize.Y * this.Vitesse);
 
-                    this.PosX = newX;
-                    this.PosY = newY;
+                    PosX = NewX;
+                    PosY = NewY;
                     break;
                 }
                 case 1:
                 {
-                    double newX = PosX + (vecteurNormalize.X * this.Vitesse);
-                    double newY = PosY + (vecteurNormalize.Y * this.Vitesse);
+                    double NewX = PosX + (VecteurNormalize.X * this.Vitesse);
+                    double NewY = PosY + (VecteurNormalize.Y * this.Vitesse);
 
-                    this.PosX = newX;
-                    this.PosY = newY;
+                    PosX = NewX;
+                    PosY = NewY;
                     break;
                 }
                 case 2:
                 {
-                    double sinus = Math.Sin(coefSin) * 2;
-                    double cosinus = Math.Cos(coefSin) *2;
+                    double Sinus = Math.Sin(CoefSin) * 2;
+                    double Cosinus = Math.Cos(CoefSin) *2;
 
-                    Vector2 vecteurNormal = new Vector2(vecteurNormalize.Y, -vecteurNormalize.X);
+                    Vector2 VecteurNormal = new Vector2(VecteurNormalize.Y, -VecteurNormalize.X);
 
-                    double nouveauX = PosX + (vecteurNormal.X * cosinus - vecteurNormal.Y * sinus) * this.Vitesse;
-                    double nouveauY = PosY + (vecteurNormal.X * sinus + vecteurNormal.Y * cosinus) * this.Vitesse;
+                    double NouveauX = PosX + (VecteurNormal.X * Cosinus - VecteurNormal.Y * Sinus) * this.Vitesse;
+                    double NouveauY = PosY + (VecteurNormal.X * Sinus + VecteurNormal.Y * Cosinus) * this.Vitesse;
 
-                    this.PosX = nouveauX;
-                    this.PosY = nouveauY;
+                    PosX = NouveauX;
+                    PosY = NouveauY;
 
                     
-                    if (!inverseSin)
+                    if (!InverseSin)
                     {
-                        coefSin += 0.1f;
-                        if (coefSin > Math.PI) { inverseSin = true; }
+                        CoefSin += 0.1f;
+                        if (CoefSin > Math.PI) { InverseSin = true; }
                     }
                     else
                     {
-                        coefSin -= 0.1f;
-                        if (coefSin <= 0) { inverseSin = false; }
+                        CoefSin -= 0.1f;
+                        if (CoefSin <= 0) { InverseSin = false; }
                     }
                     break;
                 }
                 case 3:
                 {
 
-                        double posJoueurX = mainWindow.fenetrePrincipale.Width / 2 - mainWindow.rectJoueur.Width * 0.5;
-                        double posJoueurY = mainWindow.fenetrePrincipale.Height / 2 - mainWindow.rectJoueur.Height * 0.5;
+                        double PosJoueurX = MainWindow.fenetrePrincipale.Width / 2 - MainWindow.rectJoueur.Width * 0.5;
+                        double PosJoueurY = MainWindow.fenetrePrincipale.Height / 2 - MainWindow.rectJoueur.Height * 0.5;
 
 
 
-                        Vector2 vecteurBalleVersJoueur = new Vector2((float)this.PosX - (float)posJoueurX, (float)this.PosY - (float)posJoueurY);
-                        Vector2 vecteurMoitie = Vector2.Normalize(new Vector2((float) posJoueurX - (float)this.PosX, (float)posJoueurY - (float) this.PosY));
-                        Vector2.Multiply(0.5f, vecteurMoitie);
-                        Vector2 nouveauVecteur = Vector2.Normalize(Vector2.Add(vecteurNormalize, vecteurMoitie));
+                        Vector2 VecteurBalleVersJoueur = new Vector2((float)this.PosX - (float)PosJoueurX, (float)this.PosY - (float)PosJoueurY);
+                        Vector2 VecteurMoitie = Vector2.Normalize(new Vector2((float) PosJoueurX - (float)this.PosX, (float)PosJoueurY - (float) this.PosY));
+                        Vector2.Multiply(0.5f, VecteurMoitie);
+                        Vector2 NouveauVecteur = Vector2.Normalize(Vector2.Add(VecteurNormalize, VecteurMoitie));
 
-                        if (Math.Abs(this.PosX - posJoueurX) > 500 || Math.Abs(this.PosY - posJoueurY) > 500)
+                        if (Math.Abs(this.PosX - PosJoueurX) > 500 || Math.Abs(this.PosY - PosJoueurY) > 500)
                         {
-                            nouveauVecteur = vecteurNormalize;
-                        } else if (coefRotation % 360 == 0)
+                            NouveauVecteur = VecteurNormalize;
+                        } else if (CoefRotation % 360 == 0)
                         {
-                            this.Vecteur = nouveauVecteur;
+                            this.Vecteur = NouveauVecteur;
                         }
 
 
-                    double newX = PosX + (nouveauVecteur.X * this.Vitesse);
-                    double newY = PosY + (nouveauVecteur.Y * this.Vitesse);
+                    double NewX = PosX + (NouveauVecteur.X * this.Vitesse);
+                    double NewY = PosY + (NouveauVecteur.Y * this.Vitesse);
 
-                        coefRotation += 5;
-                        if (coefRotation >= 360)
+                        CoefRotation += 5;
+                        if (CoefRotation >= 360)
                         {
-                            coefRotation = 0;
+                            CoefRotation = 0;
                         }
 
-                        this.Graphique.RenderTransform = new RotateTransform(coefRotation, this.Graphique.Width /2, this.Graphique.Height /2 );
+                        this.Graphique.RenderTransform = new RotateTransform(CoefRotation, this.Graphique.Width /2, this.Graphique.Height /2 );
 
-                    this.PosX = newX;
-                    this.PosY = newY;
+                    this.PosX = NewX;
+                    this.PosY = NewY;
                     break;
                 }
             }

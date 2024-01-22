@@ -1,18 +1,10 @@
 ﻿using JeuSAE.classes;
 using JeuSAE.data;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace JeuSAE
 {
@@ -21,9 +13,10 @@ namespace JeuSAE
     /// </summary>
     public partial class Magasin : Window
     {
-        private static BaseDeDonnee baseDeDonnee = JsonUtilitaire.LireFichier(Constantes.CHEMIN_BDD);
-        public String choix;
-        private static ImageBrush arme1 = new ImageBrush(), arme2 = new ImageBrush(), arme3 = new ImageBrush(), diamant = new ImageBrush();
+        private static readonly BaseDeDonnee BaseDeDonnee = JsonUtilitaire.LireFichier(Constantes.CHEMIN_BDD);
+        public String? Choix;
+        private static ImageBrush Arme1 = new ImageBrush(), Arme2 = new(), Arme3 = new(), Diamant = new();
+
         public Magasin()
         {
             InitializeComponent();
@@ -46,35 +39,35 @@ namespace JeuSAE
 
             butPDV.Content = $"Cout : {prixPDV()}";
             butVitesse.Content = $"Cout : {prixVitesse()}";
-            labDiamant.Content = $"x {baseDeDonnee.argent}";
+            labDiamant.Content = $"x {BaseDeDonnee.Argent}";
 
             labDescription.Width = rectDescription.Width; labDescription.Height = rectDescription.Height; labDescription.Margin = rectDescription.Margin;
-            arme1.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images\\sprites\\personnage\\droite\\arme\\arme1.png"));
+            Arme1.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images\\sprites\\personnage\\droite\\arme\\arme1.png"));
 
             //arme 2 débloquée ?
-            if (baseDeDonnee.arme2)
-                arme2.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images\\sprites\\personnage\\droite\\arme\\arme2.png"));
+            if (BaseDeDonnee.Arme2)
+                Arme2.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images\\sprites\\personnage\\droite\\arme\\Arme2.png"));
             else
-                arme2.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images\\sprites\\personnage\\droite\\arme\\arme2V.png"));
+                Arme2.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images\\sprites\\personnage\\droite\\arme\\Arme2V.png"));
             //arme 3 débloquée ?
-            if (baseDeDonnee.arme3)
-                arme3.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images\\sprites\\personnage\\droite\\arme\\arme3.png"));
+            if (BaseDeDonnee.Arme3)
+                Arme3.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images\\sprites\\personnage\\droite\\arme\\Arme3.png"));
             else
-                arme3.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images\\sprites\\personnage\\droite\\arme\\arme3V.png"));
+                Arme3.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images\\sprites\\personnage\\droite\\arme\\Arme3V.png"));
 
-            diamant.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images\\diamant.png"));
+            Diamant.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images\\diamant.png"));
 
-            rectVitesseRempli.Width = 100 * baseDeDonnee.ameliorationVitesse;
-            rectPDVRempli.Width = 100 * baseDeDonnee.ameliorationPDV;
-            rectArme1.Fill = arme1; rectArme2.Fill = arme2; rectArme3.Fill = arme3;
-            rectDiamant.Fill = diamant;
+            rectVitesseRempli.Width = 100 * BaseDeDonnee.AmeliorationVitesse;
+            rectPDVRempli.Width = 100 * BaseDeDonnee.AmeliorationPdv;
+            rectArme1.Fill = Arme1; rectArme2.Fill = Arme2; rectArme3.Fill = Arme3;
+            rectDiamant.Fill = Diamant;
 
         }
 
 
         private void labMenu_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            this.choix = "menu";
+            this.Choix = "menu";
             this.Hide();
         }
 
@@ -87,7 +80,7 @@ namespace JeuSAE
         {
             labMenu.Foreground = Brushes.Black;
             //Ca modifie pas le .json bizarre ?
-            JsonUtilitaire.Ecriture(baseDeDonnee, Constantes.CHEMIN_BDD);
+            JsonUtilitaire.Ecriture(BaseDeDonnee, Constantes.CHEMIN_BDD);
         }
 
         private void rectArme1_MouseEnter(object sender, MouseEventArgs e)
@@ -144,37 +137,37 @@ namespace JeuSAE
 
         private void butPDV_Click(object sender, RoutedEventArgs e)
         {
-            if (baseDeDonnee.argent >= prixPDV())
+            if (BaseDeDonnee.Argent >= prixPDV())
             {
-                baseDeDonnee.argent -= prixPDV();
-                baseDeDonnee.ameliorationPDV += 1;
+                BaseDeDonnee.Argent -= prixPDV();
+                BaseDeDonnee.AmeliorationPdv += 1;
                 rectPDVRempli.Width += 100;
                 butPDV.Content = $"Cout : {prixPDV()}";
-                labDiamant.Content = $"x {baseDeDonnee.argent}";
+                labDiamant.Content = $"x {BaseDeDonnee.Argent}";
 
             }
         }
 
         private void butVitesse_Click(object sender, RoutedEventArgs e)
         {
-            if (baseDeDonnee.argent >= prixVitesse())
+            if (BaseDeDonnee.Argent >= prixVitesse())
             {
-                baseDeDonnee.argent -= prixVitesse();
-                baseDeDonnee.ameliorationVitesse += 1;
+                BaseDeDonnee.Argent -= prixVitesse();
+                BaseDeDonnee.AmeliorationVitesse += 1;
                 rectVitesseRempli.Width += 100;
                 butVitesse.Content = $"Cout : {prixVitesse()}";
-                labDiamant.Content = $"x {baseDeDonnee.argent}";
+                labDiamant.Content = $"x {BaseDeDonnee.Argent}";
 
             }
         }
         private int prixPDV()
         {
-            return (int)(Constantes.PRIX_BASE_AMELIORATION * Math.Pow(2, baseDeDonnee.ameliorationPDV));
+            return (int)(Constantes.PRIX_BASE_AMELIORATION * Math.Pow(2, BaseDeDonnee.AmeliorationPdv));
         }
 
         private int prixVitesse()
         {
-            return (int)(Constantes.PRIX_BASE_AMELIORATION * Math.Pow(2, baseDeDonnee.ameliorationVitesse));
+            return (int)(Constantes.PRIX_BASE_AMELIORATION * Math.Pow(2, BaseDeDonnee.AmeliorationVitesse));
 
         }
     }

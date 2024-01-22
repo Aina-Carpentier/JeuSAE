@@ -10,80 +10,21 @@ namespace JeuSAE
 {
     public class Ennemi
     {
-        private double vie;
-        private double vitesse; // En pixel/tick
-        private double cadenceTir; // En tick/tir donc si = 3 alors l'ennemi tir une fois tous les 3 tick, donc pour 3 fois par seconde c'est approx 20
-        private double cooldownTir = 180; // La valeur utiliser pour calculer quand l'ennemi tire en fonction de la cadence
-        private int type;
-        private string nom;
-        private double posX;
-        private double posY;
-        private Guid id = Guid.NewGuid();
-        private System.Windows.Shapes.Rectangle graphique;
-        private ImageBrush ennemiImage = new ImageBrush();
-        private Uri dossierSprites = new Uri(AppDomain.CurrentDomain.BaseDirectory + "images\\sprites\\");
-        private static Random random = new Random();
+        public double Vie;
+        public double Vitesse; // En pixel/tick
+        public double CadenceTir; // En tick/tir donc si = 3 alors l'ennemi tir une fois tous les 3 tick, donc pour 3 fois par seconde c'est approx 20
+        private double CooldownTir = 180; // La valeur utiliser pour calculer quand l'ennemi tire en fonction de la cadence
+        public int Type;
+        public string Nom;
+        public double PosX;
+        public double PosY;
+        public Guid Id = Guid.NewGuid();
+        public System.Windows.Shapes.Rectangle Graphique;
+        private ImageBrush EnnemiImage = new();
+        private Uri DossierSprites = new Uri(AppDomain.CurrentDomain.BaseDirectory + "images\\sprites\\");
+        private static Random Random = new();
 
-
-        public double Vie
-        {
-            get { return vie; }
-            set { vie = value; }
-        }
-
-
-        public double Vitesse
-        {
-            get { return vitesse; }
-            set { vitesse = value; }
-        }
-
-        public double CadenceTir
-        {
-            get { return cadenceTir; }
-            set { cadenceTir = value; }
-        }
-
-        public double CooldownTir
-        {
-            get { return cooldownTir; }
-            set { cooldownTir = value; }
-        }
-
-
-        public int Type
-        {
-            get { return type; }
-            set { type = value; }
-        }
-
-
-        public String Nom
-        {
-            get { return nom; }
-            set { nom = value; }
-        }
-
-        public double PosX
-        {
-            get { return Canvas.GetLeft(this.graphique); }
-            set { posX = value; }
-        }
-
-        public double PosY
-        {
-            get { return Canvas.GetTop(this.graphique); }
-            set { posY = value; }
-        }
-
-        public Guid Id
-        {
-            get { return id; }
-        }
-
-        public Rect Rect { get => new Rect(PosX, PosY, Constantes.ENNEMI_RECT_LARGEUR, Constantes.ENNEMI_RECT_HAUTEUR); }
-
-        public System.Windows.Shapes.Rectangle Graphique { get => graphique; set => graphique = value; }
+        public Rect Rect { get => new (PosX, PosY, Constantes.ENNEMI_RECT_LARGEUR, Constantes.ENNEMI_RECT_HAUTEUR); }
 
         public Ennemi(int type, double posX, double posY)
         {
@@ -100,60 +41,60 @@ namespace JeuSAE
                     this.Vitesse = Constantes.VITESSE_TRIANGLE_EQ;
                     this.CadenceTir = Constantes.CADENCE_TRIANGLE_EQ;
                     this.Nom = Constantes.NOM_TRIANGLE_EQ;
-                    ennemiImage.ImageSource = new BitmapImage(new Uri(dossierSprites + "triangle.png"));// dossierImage c'est un Uri donc ça vas peut-être bugger
+                    EnnemiImage.ImageSource = new BitmapImage(new Uri(DossierSprites + "triangle.png"));// dossierImage c'est un Uri donc ça vas peut-être bugger
                     break;
                 case 1: // Carré
                     this.Vie = Constantes.VIE_CARRE;
                     this.Vitesse = Constantes.VITESSE_CARRE;
                     this.CadenceTir = Constantes.CADENCE_CARRE;
                     this.Nom = Constantes.NOM_CARRE;
-                    ennemiImage.ImageSource = new BitmapImage(new Uri(dossierSprites + "carre.png"));
+                    EnnemiImage.ImageSource = new BitmapImage(new Uri(DossierSprites + "carre.png"));
                     break;
                 case 2: // Pentagone
                     this.Vie = Constantes.VIE_PENTAGONE;
                     this.Vitesse = Constantes.VITESSE_PENTAGONE;
                     this.CadenceTir = Constantes.CADENCE_PENTAGONE;
                     this.Nom = Constantes.NOM_PENTAGONE;
-                    ennemiImage.ImageSource = new BitmapImage(new Uri(dossierSprites + "pentagone.png"));
+                    EnnemiImage.ImageSource = new BitmapImage(new Uri(DossierSprites + "pentagone.png"));
                     break;
                 case 3: // Hexagone
                     this.Vie = Constantes.VIE_HEXAGONE;
                     this.Vitesse = Constantes.VITESSE_HEXAGONE;
                     this.CadenceTir = Constantes.CADENCE_HEXAGONE;
                     this.Nom = Constantes.NOM_HEXAGONE;
-                    ennemiImage.ImageSource = new BitmapImage(new Uri(dossierSprites + "hexagone.png"));
+                    EnnemiImage.ImageSource = new BitmapImage(new Uri(DossierSprites + "hexagone.png"));
                     break;
                 case 4: // Heptagone
                     this.Vie = Constantes.VIE_HEPTAGONE;
                     this.Vitesse = Constantes.VITESSE_HEPTAGONE;
                     this.CadenceTir = Constantes.CADENCE_HEPTAGONE;
                     this.Nom = Constantes.NOM_HEPTAGONE;
-                    ennemiImage.ImageSource = new BitmapImage(new Uri(dossierSprites + "heptagone.png"));
+                    EnnemiImage.ImageSource = new BitmapImage(new Uri(DossierSprites + "heptagone.png"));
                     break;
                 case 5: // Octogone
                     this.Vie = Constantes.VIE_OCTOGONE;
                     this.Vitesse = Constantes.VITESSE_OCTOGONE;
                     this.CadenceTir = Constantes.CADENCE_OCTOGONE;
                     this.Nom = Constantes.NOM_OCTOGONE;
-                    ennemiImage.ImageSource = new BitmapImage(new Uri(dossierSprites + "octogone.png"));
+                    EnnemiImage.ImageSource = new BitmapImage(new Uri(DossierSprites + "octogone.png"));
                     break;
                 case 6: // Cercle
                     this.Vie = Constantes.VIE_CERCLE;
                     this.Vitesse = Constantes.VITESSE_CERCLE;
                     this.CadenceTir = Constantes.CADENCE_CERCLE;
                     this.Nom = Constantes.NOM_CERCLE;
-                    ennemiImage.ImageSource = new BitmapImage(new Uri(dossierSprites + "cercle.png"));
+                    EnnemiImage.ImageSource = new BitmapImage(new Uri(DossierSprites + "cercle.png"));
                     break; //TODO ajouter plus d'ennemis si on a des idées
             }
             PosX = posX;
             PosY = posY;
-            Graphique.Fill = ennemiImage;
+            Graphique.Fill = EnnemiImage;
         }
 
         public override bool Equals(object? obj)
         {
-            return obj is Ennemi ennemi &&
-                   Id.Equals(ennemi.Id);
+            return obj is Ennemi Ennemi &&
+                   Id.Equals(Ennemi.Id);
         }
 
         public override int GetHashCode()
@@ -168,61 +109,61 @@ namespace JeuSAE
 
         public static void SpawnUnBoss(MainWindow mainWindow)
         {
-            System.Windows.Shapes.Rectangle carte = mainWindow.carte;
-            double posJoueurX = mainWindow.fenetrePrincipale.Width / 2;
-            double posJoueurY = mainWindow.fenetrePrincipale.Height / 2;
+            System.Windows.Shapes.Rectangle Carte = mainWindow.carte;
+            double PosJoueurX = mainWindow.fenetrePrincipale.Width / 2;
+            double PosJoueurY = mainWindow.fenetrePrincipale.Height / 2;
 
-            int y = random.Next(0, 2000);
-            int x = random.Next(500, 2000) - y;
+            int Y = Random.Next(0, 2000);
+            int X = Random.Next(500, 2000) - Y;
 
-            if (random.Next(0, 2) == 0)
+            if (Random.Next(0, 2) == 0)
             {
-                x = x * (-1);
+                X = X * (-1);
             }
-            if (random.Next(0, 2) == 0)
+            if (Random.Next(0, 2) == 0)
             {
-                y = y * (-1);
+                Y = Y * (-1);
             }
 
-            Boss ennemi = new Boss(0, x, y);
-            Canvas.SetLeft(ennemi.Graphique, posJoueurX + x);
-            Canvas.SetTop(ennemi.Graphique, posJoueurY + y);
+            Boss Ennemi = new Boss(0, X, Y);
+            Canvas.SetLeft(Ennemi.Graphique, PosJoueurX + X);
+            Canvas.SetTop(Ennemi.Graphique, PosJoueurY + Y);
 
-            if (Canvas.GetLeft(ennemi.Graphique) + x < Canvas.GetLeft(carte) || Canvas.GetLeft(ennemi.Graphique) > carte.Width + Canvas.GetLeft(carte))
+            if (Canvas.GetLeft(Ennemi.Graphique) + X < Canvas.GetLeft(Carte) || Canvas.GetLeft(Ennemi.Graphique) > Carte.Width + Canvas.GetLeft(Carte))
             {
-                Canvas.SetLeft(ennemi.Graphique, (posJoueurX - x));
+                Canvas.SetLeft(Ennemi.Graphique, (PosJoueurX - X));
             }
-            if (Canvas.GetTop(ennemi.Graphique) + y < Canvas.GetTop(carte) || Canvas.GetTop(ennemi.Graphique) > carte.Height + Canvas.GetTop(carte))
+            if (Canvas.GetTop(Ennemi.Graphique) + Y < Canvas.GetTop(Carte) || Canvas.GetTop(Ennemi.Graphique) > Carte.Height + Canvas.GetTop(Carte))
             {
-                Canvas.SetTop(ennemi.Graphique, (posJoueurY - y));
+                Canvas.SetTop(Ennemi.Graphique, (PosJoueurY - Y));
             }
-            ennemi.PosX = Canvas.GetLeft(ennemi.Graphique);
-            ennemi.PosY = Canvas.GetTop(ennemi.Graphique);
+            Ennemi.PosX = Canvas.GetLeft(Ennemi.Graphique);
+            Ennemi.PosY = Canvas.GetTop(Ennemi.Graphique);
 
-            mainWindow.monCanvas.Children.Add(ennemi.Graphique);
-            MainWindow.Ennemis.Add(ennemi);
+            mainWindow.monCanvas.Children.Add(Ennemi.Graphique);
+            MainWindow.Ennemis.Add(Ennemi);
         }
 
         public static void SpawnUnEnnemi(MainWindow mainWindow)
         {
-            System.Windows.Shapes.Rectangle carte = mainWindow.carte;
-            double posJoueurX = mainWindow.fenetrePrincipale.Width / 2;
-            double posJoueurY = mainWindow.fenetrePrincipale.Height / 2;
+            System.Windows.Shapes.Rectangle Carte = mainWindow.carte;
+            double PosJoueurX = mainWindow.fenetrePrincipale.Width / 2;
+            double PosJoueurY = mainWindow.fenetrePrincipale.Height / 2;
 
 
 
-            int y = random.Next(0, 2000);
-            int x = random.Next(500, 2000) - y;
+            int Y = Random.Next(0, 2000);
+            int X = Random.Next(500, 2000) - Y;
 
 
 
-            if (random.Next(0, 2) == 0)
+            if (Random.Next(0, 2) == 0)
             {
-                x = x * (-1);
+                X = X * (-1);
             }
-            if (random.Next(0, 2) == 0)
+            if (Random.Next(0, 2) == 0)
             {
-                y = y * (-1);
+                Y = Y * (-1);
             }
 
 #if DEBUG
@@ -233,30 +174,30 @@ namespace JeuSAE
 
 #endif
 
-            Ennemi ennemi = new Ennemi(random.Next(0, 7), x, y);
-            Canvas.SetLeft(ennemi.Graphique, posJoueurX + x);
-            Canvas.SetTop(ennemi.Graphique, posJoueurY + y);
+            Ennemi Ennemi = new Ennemi(Random.Next(0, 7), X, Y);
+            Canvas.SetLeft(Ennemi.Graphique, PosJoueurX + X);
+            Canvas.SetTop(Ennemi.Graphique, PosJoueurY + Y);
 
 
 
-            Canvas.SetZIndex(ennemi.Graphique, 1);
-            Console.WriteLine("width : " + Canvas.GetLeft(ennemi.Graphique) + " et " + Canvas.GetLeft(carte));
+            Canvas.SetZIndex(Ennemi.Graphique, 1);
+            Console.WriteLine("width : " + Canvas.GetLeft(Ennemi.Graphique) + " et " + Canvas.GetLeft(Carte));
 
-            if (Canvas.GetLeft(ennemi.Graphique) + x < Canvas.GetLeft(carte) || Canvas.GetLeft(ennemi.Graphique) > carte.Width + Canvas.GetLeft(carte))
+            if (Canvas.GetLeft(Ennemi.Graphique) + X < Canvas.GetLeft(Carte) || Canvas.GetLeft(Ennemi.Graphique) > Carte.Width + Canvas.GetLeft(Carte))
             {
-                Canvas.SetLeft(ennemi.Graphique, (posJoueurX - x));
+                Canvas.SetLeft(Ennemi.Graphique, (PosJoueurX - X));
             }
-            if (Canvas.GetTop(ennemi.Graphique) + y < Canvas.GetTop(carte) || Canvas.GetTop(ennemi.Graphique) > carte.Height + Canvas.GetTop(carte))
+            if (Canvas.GetTop(Ennemi.Graphique) + Y < Canvas.GetTop(Carte) || Canvas.GetTop(Ennemi.Graphique) > Carte.Height + Canvas.GetTop(Carte))
             {
-                Canvas.SetTop(ennemi.Graphique, (posJoueurY - y));
+                Canvas.SetTop(Ennemi.Graphique, (PosJoueurY - Y));
             }
-            ennemi.PosX = Canvas.GetLeft(ennemi.Graphique);
-            ennemi.PosY = Canvas.GetTop(ennemi.Graphique);
+            Ennemi.PosX = Canvas.GetLeft(Ennemi.Graphique);
+            Ennemi.PosY = Canvas.GetTop(Ennemi.Graphique);
 
 
 
-            mainWindow.monCanvas.Children.Add(ennemi.Graphique);
-            MainWindow.Ennemis.Add(ennemi);
+            mainWindow.monCanvas.Children.Add(Ennemi.Graphique);
+            MainWindow.Ennemis.Add(Ennemi);
 
 
         }
@@ -264,50 +205,50 @@ namespace JeuSAE
 
         public static void SpawnUnEnnemi(MainWindow mainWindow, int type)
         {
-            System.Windows.Shapes.Rectangle carte = mainWindow.carte;
-            double posJoueurX = mainWindow.fenetrePrincipale.Width / 2;
-            double posJoueurY = mainWindow.fenetrePrincipale.Height / 2;
+            System.Windows.Shapes.Rectangle Carte = mainWindow.carte;
+            double PosJoueurX = mainWindow.fenetrePrincipale.Width / 2;
+            double PosJoueurY = mainWindow.fenetrePrincipale.Height / 2;
 
 
 
-            int y = random.Next(0, 2000);
-            int x = random.Next(500, 2000) - y;
+            int Y = Random.Next(0, 2000);
+            int X = Random.Next(500, 2000) - Y;
 
 
 
-            if (random.Next(0, 2) == 0)
+            if (Random.Next(0, 2) == 0)
             {
-                x = x * (-1);
+                X = X * (-1);
             }
-            if (random.Next(0, 2) == 0)
+            if (Random.Next(0, 2) == 0)
             {
-                y = y * (-1);
+                Y = Y * (-1);
             }
 
-            Ennemi ennemi = new Ennemi(type, x, y);
-            Canvas.SetLeft(ennemi.Graphique, posJoueurX + x);
-            Canvas.SetTop(ennemi.Graphique, posJoueurY + y);
+            Ennemi Ennemi = new Ennemi(type, X, Y);
+            Canvas.SetLeft(Ennemi.Graphique, PosJoueurX + X);
+            Canvas.SetTop(Ennemi.Graphique, PosJoueurY + Y);
 
 
 
-            Canvas.SetZIndex(ennemi.Graphique, 1);
-            Console.WriteLine("width : " + Canvas.GetLeft(ennemi.Graphique) + " et " + Canvas.GetLeft(carte));
+            Canvas.SetZIndex(Ennemi.Graphique, 1);
+            Console.WriteLine("width : " + Canvas.GetLeft(Ennemi.Graphique) + " et " + Canvas.GetLeft(Carte));
 
-            if (Canvas.GetLeft(ennemi.Graphique) + x < Canvas.GetLeft(carte) || Canvas.GetLeft(ennemi.Graphique) > carte.Width + Canvas.GetLeft(carte))
+            if (Canvas.GetLeft(Ennemi.Graphique) + X < Canvas.GetLeft(Carte) || Canvas.GetLeft(Ennemi.Graphique) > Carte.Width + Canvas.GetLeft(Carte))
             {
-                Canvas.SetLeft(ennemi.Graphique, (posJoueurX - x));
+                Canvas.SetLeft(Ennemi.Graphique, (PosJoueurX - X));
             }
-            if (Canvas.GetTop(ennemi.Graphique) + y < Canvas.GetTop(carte) || Canvas.GetTop(ennemi.Graphique) > carte.Height + Canvas.GetTop(carte))
+            if (Canvas.GetTop(Ennemi.Graphique) + Y < Canvas.GetTop(Carte) || Canvas.GetTop(Ennemi.Graphique) > Carte.Height + Canvas.GetTop(Carte))
             {
-                Canvas.SetTop(ennemi.Graphique, (posJoueurY - y));
+                Canvas.SetTop(Ennemi.Graphique, (PosJoueurY - Y));
             }
-            ennemi.PosX = Canvas.GetLeft(ennemi.Graphique);
-            ennemi.PosY = Canvas.GetTop(ennemi.Graphique);
+            Ennemi.PosX = Canvas.GetLeft(Ennemi.Graphique);
+            Ennemi.PosY = Canvas.GetTop(Ennemi.Graphique);
 
 
 
-            mainWindow.monCanvas.Children.Add(ennemi.Graphique);
-            MainWindow.Ennemis.Add(ennemi);
+            mainWindow.monCanvas.Children.Add(Ennemi.Graphique);
+            MainWindow.Ennemis.Add(Ennemi);
 
 
         }
@@ -318,29 +259,29 @@ namespace JeuSAE
         {
             if (this.CooldownTir <= 0)
             {
-                MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+                MainWindow MainWindow = (MainWindow)Application.Current.MainWindow;
 
-                double posJoueurX = mainWindow.fenetrePrincipale.Width / 2 - mainWindow.rectJoueur.Width * 0.75;
-                double posJoueurY = mainWindow.fenetrePrincipale.Height / 2 - mainWindow.rectJoueur.Height * 0.75;
+                double PosJoueurX = MainWindow.fenetrePrincipale.Width / 2 - MainWindow.rectJoueur.Width * 0.75;
+                double PosJoueurY = MainWindow.fenetrePrincipale.Height / 2 - MainWindow.rectJoueur.Height * 0.75;
 
-                Vector2 vecteurDeplace = new Vector2((float)this.PosX - (float)posJoueurX, (float)this.PosY - (float)posJoueurY);
+                Vector2 VecteurDeplace = new Vector2((float)this.PosX - (float)PosJoueurX, (float)this.PosY - (float)PosJoueurY);
                 // Pas besoin de normaliser le vecteur car la classe Balle le fait déjà
-                Balle balle;
+                Balle Balle;
                 if (this.Type == 6)
                 {
-                    balle = new Balle(Constantes.VITESSE_BALLE, 20, 2, this.id.ToString(), 0, PosX + (float)this.Graphique.Width / 2, PosY + (float)this.Graphique.Height / 2, -vecteurDeplace, 1);
+                    Balle = new Balle(Constantes.VITESSE_BALLE, 20, 2, this.Id.ToString(), 0, PosX + (float)this.Graphique.Width / 2, PosY + (float)this.Graphique.Height / 2, -VecteurDeplace, 1);
                 }
                 else if (this.Type == 9) //Boss
                 {
-                    balle = new Balle(12, 45, 3, this.id.ToString(), 0, PosX + (float)this.Graphique.Width / 2, PosY + (float)this.Graphique.Height / 2, -vecteurDeplace, 1);
+                    Balle = new Balle(12, 45, 3, this.Id.ToString(), 0, PosX + (float)this.Graphique.Width / 2, PosY + (float)this.Graphique.Height / 2, -VecteurDeplace, 1);
                 }
                 else
                 {
-                    balle = new Balle(Constantes.VITESSE_BALLE, 20, 1, this.id.ToString(), 0, PosX + (float)this.Graphique.Width / 2, PosY + (float)this.Graphique.Height / 2, -vecteurDeplace, 1);
+                    Balle = new Balle(Constantes.VITESSE_BALLE, 20, 1, this.Id.ToString(), 0, PosX + (float)this.Graphique.Width / 2, PosY + (float)this.Graphique.Height / 2, -VecteurDeplace, 1);
                 }
 
-                mainWindow.monCanvas.Children.Add(balle.Graphique);
-                MainWindow.Balles.Add(balle);
+                MainWindow.monCanvas.Children.Add(Balle.Graphique);
+                MainWindow.Balles.Add(Balle);
 
                 this.CooldownTir = this.CadenceTir;
             }

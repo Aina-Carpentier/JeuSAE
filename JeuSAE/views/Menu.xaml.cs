@@ -12,8 +12,8 @@ namespace JeuSAE;
 /// </summary>
 public partial class Menu : Window
 {
-    public string choix;
-    private readonly DispatcherTimer dispatcherTimer = new();
+    public string Choix;
+    private readonly DispatcherTimer DispatcherTimer = new();
 
     public Menu()
     {
@@ -42,11 +42,11 @@ public partial class Menu : Window
         //background2.Visibility = Visibility.Hidden;
 
 
-        dispatcherTimer.Tick += Defilement;
+        DispatcherTimer.Tick += Defilement;
         // rafraissement toutes les 16 milliseconds
-        dispatcherTimer.Interval = TimeSpan.FromMilliseconds(16);
+        DispatcherTimer.Interval = TimeSpan.FromMilliseconds(16);
         // lancement du timer
-        dispatcherTimer.Start();
+        DispatcherTimer.Start();
     }
 
 
@@ -61,25 +61,25 @@ public partial class Menu : Window
 
     private void labJouer_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
-        choix = "difficulte";
+        Choix = "difficulte";
         Hide();
     }
 
     private void labMagasin_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
-        choix = "magasin";
+        Choix = "magasin";
         Hide();
     }
 
     private void labParametre_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
-        choix = "parametre";
+        Choix = "parametre";
         Hide();
     }
 
     private void labQuitter_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
-        choix = "quitter";
+        Choix = "quitter";
         Hide();
     }
 

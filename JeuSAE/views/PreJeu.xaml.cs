@@ -9,7 +9,7 @@ namespace JeuSAE;
 /// </summary>
 public partial class PreJeu : Window
 {
-    public string choix;
+    public string Choix;
 
     public PreJeu()
     {
@@ -27,7 +27,7 @@ public partial class PreJeu : Window
 
     private void labRetour_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
-        choix = "menu";
+        Choix = "menu";
         Hide();
     }
 
@@ -43,7 +43,7 @@ public partial class PreJeu : Window
 
     private void labFacile_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
-        choix = "jouer";
+        Choix = "jouer";
         Hide();
     }
 
@@ -59,7 +59,7 @@ public partial class PreJeu : Window
 
     private void labMoyen_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
-        choix = "jouer";
+        Choix = "jouer";
         Hide();
     }
 
@@ -75,7 +75,7 @@ public partial class PreJeu : Window
 
     private void labDifficile_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
-        choix = "jouer";
+        Choix = "jouer";
         Hide();
     }
 

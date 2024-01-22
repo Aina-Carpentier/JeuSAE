@@ -4,18 +4,18 @@ using System.Windows.Input;
 
 namespace JeuSAE.classes
 {
-    public class MenuMaxEXP
+    public class MenuMaxExp
     {
-        static MainWindow mainWindow = (MainWindow)App.Current.MainWindow;
-        static Random random = new Random();
-        public static int numAmeliorationBouttonUn = 0, numAmeliorationBouttonDeux = 0, numAmeliorationBouttonTrois = 0;
+        static MainWindow MainWindow = (MainWindow)App.Current.MainWindow;
+        static Random Random = new Random();
+        public static int NumAmeliorationBouttonUn = 0, NumAmeliorationBouttonDeux = 0, NumAmeliorationBouttonTrois = 0;
 
 
         public static void AfficheMenu()
         {
 
-            List<int> listeAmeliorationsAChoisir = new List<int>();
-            List<int> listeAmeliorations = new List<int>();
+            List<int> ListeAmeliorationsAChoisir = new List<int>();
+            List<int> ListeAmeliorations = new List<int>();
 
 
 
@@ -34,74 +34,74 @@ namespace JeuSAE.classes
              */
 
 
-            for (int i = 0; i < Constantes.NOMBRE_AMELIORATIONS; i++)
+            for (int I = 0; I < Constantes.NOMBRE_AMELIORATIONS; I++)
             {
-                listeAmeliorationsAChoisir.Add(i);
+                ListeAmeliorationsAChoisir.Add(I);
             }
 
-            for (int i = 0; i < 3; i++)
+            for (int I = 0; I < 3; I++)
             {
-                int ameliorationIndex = random.Next(0, Constantes.NOMBRE_AMELIORATIONS - i);
-                listeAmeliorations.Add(listeAmeliorationsAChoisir[ameliorationIndex]);
-                listeAmeliorationsAChoisir.RemoveAt(ameliorationIndex);
+                int AmeliorationIndex = Random.Next(0, Constantes.NOMBRE_AMELIORATIONS - I);
+                ListeAmeliorations.Add(ListeAmeliorationsAChoisir[AmeliorationIndex]);
+                ListeAmeliorationsAChoisir.RemoveAt(AmeliorationIndex);
             }
 
 
 #if DEBUG
-            Console.WriteLine(listeAmeliorations);
+            Console.WriteLine(ListeAmeliorations);
 #endif
 
-            String ameliorationString = "";
+            String AmeliorationString = "";
 
-            for (int i = 0; i < listeAmeliorations.Count; i++)
+            for (int I = 0; I < ListeAmeliorations.Count; I++)
             {
-                int numSwitch = 0;
-                double valeurActuelle = 0;
-                switch (listeAmeliorations[i])
+                int NumSwitch = 0;
+                double ValeurActuelle = 0;
+                switch (ListeAmeliorations[I])
                 {
                     case 0:
-                        ameliorationString = "Dégats + 1";
-                        valeurActuelle = Constantes.DEGATS_JOUEUR;
-                        numSwitch = 0;
+                        AmeliorationString = "Dégats + 1";
+                        ValeurActuelle = Constantes.DEGATS_JOUEUR;
+                        NumSwitch = 0;
                         break;
                     case 1:
-                        ameliorationString = "Vitesse Balles + 20 %";
-                        valeurActuelle = Math.Round( Constantes.VITESSE_BALLE_JOUEUR, 1);
-                        numSwitch = 1;
+                        AmeliorationString = "Vitesse Balles + 20 %";
+                        ValeurActuelle = Math.Round( Constantes.VITESSE_BALLE_JOUEUR, 1);
+                        NumSwitch = 1;
                         break;
                     case 2:
-                        ameliorationString = "Vitesse + 20 %";
-                        valeurActuelle = Math.Round( Constantes.VITESSE_JOUEUR, 1);
-                        numSwitch = 2;
+                        AmeliorationString = "Vitesse + 20 %";
+                        ValeurActuelle = Math.Round( Constantes.VITESSE_JOUEUR, 1);
+                        NumSwitch = 2;
                         break;
                     case 3:
-                        ameliorationString = "Taille des Balles + 10";
-                        valeurActuelle = Constantes.TAILLE_BALLE_JOUEUR;
-                        numSwitch = 3;
+                        AmeliorationString = "Taille des Balles + 10";
+                        ValeurActuelle = Constantes.TAILLE_BALLE_JOUEUR;
+                        NumSwitch = 3;
                         break;
                     case 4:
-                        ameliorationString = "Vie + 20";
-                        valeurActuelle = Constantes.VIE_JOUEUR;
-                        numSwitch = 4;
+                        AmeliorationString = "Vie + 20";
+                        ValeurActuelle = Constantes.VIE_JOUEUR;
+                        NumSwitch = 4;
                         break;
                     case 5:
-                        ameliorationString = "Cadence de tir + 20 %";
-                        valeurActuelle = Math.Round( 60 / Constantes.TEMPS_RECHARGE_ARME , 1);
-                        numSwitch = 5;
+                        AmeliorationString = "Cadence de tir + 20 %";
+                        ValeurActuelle = Math.Round( 60 / Constantes.TEMPS_RECHARGE_ARME , 1);
+                        NumSwitch = 5;
                         break;
                     case 6:
-                        ameliorationString = "Perçage + 1";
-                        valeurActuelle = Constantes.BALLE_NOMBRE_PERCE;
-                        numSwitch = 6;
+                        AmeliorationString = "Perçage + 1";
+                        ValeurActuelle = Constantes.BALLE_NOMBRE_PERCE;
+                        NumSwitch = 6;
                         break;
                         case 7:
-                        ameliorationString = "Vol de vie + 1 %";
-                        valeurActuelle = Constantes.POURCENTAGE_NOMBRE_DE_VIE;
-                        numSwitch = 7;
+                        AmeliorationString = "Vol de vie + 1 %";
+                        ValeurActuelle = Constantes.POURCENTAGE_NOMBRE_DE_VIE;
+                        NumSwitch = 7;
                         break;
                 }
 
-                AssigneAmeliorations(ameliorationString, i, valeurActuelle, numSwitch);
+                AssigneAmeliorations(AmeliorationString, I, ValeurActuelle, NumSwitch);
 
 
             }
@@ -112,18 +112,18 @@ namespace JeuSAE.classes
 
 
 
-            mainWindow.tableauMaxEXP.Visibility = System.Windows.Visibility.Visible;
-            mainWindow.bouttonUpgrade1.Visibility = System.Windows.Visibility.Visible;
-            mainWindow.bouttonUpgrade2.Visibility = System.Windows.Visibility.Visible;
-            mainWindow.bouttonUpgrade3.Visibility = System.Windows.Visibility.Visible;
-            mainWindow.labAmelioration1.Visibility = System.Windows.Visibility.Visible;
-            mainWindow.labAmelioration2.Visibility = System.Windows.Visibility.Visible;
-            mainWindow.labAmelioration3.Visibility = System.Windows.Visibility.Visible;
-            mainWindow.labActuelle1.Visibility = System.Windows.Visibility.Visible;
-            mainWindow.labActuelle2.Visibility = System.Windows.Visibility.Visible;
-            mainWindow.labActuelle3.Visibility = System.Windows.Visibility.Visible;
-            mainWindow.labBonus.Visibility = System.Windows.Visibility.Visible;
-            mainWindow.Cursor = Cursors.Arrow;
+            MainWindow.tableauMaxEXP.Visibility = System.Windows.Visibility.Visible;
+            MainWindow.bouttonUpgrade1.Visibility = System.Windows.Visibility.Visible;
+            MainWindow.bouttonUpgrade2.Visibility = System.Windows.Visibility.Visible;
+            MainWindow.bouttonUpgrade3.Visibility = System.Windows.Visibility.Visible;
+            MainWindow.labAmelioration1.Visibility = System.Windows.Visibility.Visible;
+            MainWindow.labAmelioration2.Visibility = System.Windows.Visibility.Visible;
+            MainWindow.labAmelioration3.Visibility = System.Windows.Visibility.Visible;
+            MainWindow.labActuelle1.Visibility = System.Windows.Visibility.Visible;
+            MainWindow.labActuelle2.Visibility = System.Windows.Visibility.Visible;
+            MainWindow.labActuelle3.Visibility = System.Windows.Visibility.Visible;
+            MainWindow.labBonus.Visibility = System.Windows.Visibility.Visible;
+            MainWindow.Cursor = Cursors.Arrow;
 
             MainWindow.OuvreMenuMaxExp = true;
 
@@ -134,18 +134,18 @@ namespace JeuSAE.classes
         public static void CacheMenu()
         {
 
-            mainWindow.tableauMaxEXP.Visibility = System.Windows.Visibility.Hidden;
-            mainWindow.bouttonUpgrade1.Visibility = System.Windows.Visibility.Hidden;
-            mainWindow.bouttonUpgrade2.Visibility = System.Windows.Visibility.Hidden;
-            mainWindow.bouttonUpgrade3.Visibility = System.Windows.Visibility.Hidden;
-            mainWindow.labAmelioration1.Visibility = System.Windows.Visibility.Hidden;
-            mainWindow.labAmelioration2.Visibility = System.Windows.Visibility.Hidden;
-            mainWindow.labAmelioration3.Visibility = System.Windows.Visibility.Hidden;
-            mainWindow.labActuelle1.Visibility = System.Windows.Visibility.Hidden;
-            mainWindow.labActuelle2.Visibility = System.Windows.Visibility.Hidden;
-            mainWindow.labActuelle3.Visibility = System.Windows.Visibility.Hidden;
-            mainWindow.labBonus.Visibility = System.Windows.Visibility.Hidden;
-            mainWindow.Cursor = Cursors.None;
+            MainWindow.tableauMaxEXP.Visibility = System.Windows.Visibility.Hidden;
+            MainWindow.bouttonUpgrade1.Visibility = System.Windows.Visibility.Hidden;
+            MainWindow.bouttonUpgrade2.Visibility = System.Windows.Visibility.Hidden;
+            MainWindow.bouttonUpgrade3.Visibility = System.Windows.Visibility.Hidden;
+            MainWindow.labAmelioration1.Visibility = System.Windows.Visibility.Hidden;
+            MainWindow.labAmelioration2.Visibility = System.Windows.Visibility.Hidden;
+            MainWindow.labAmelioration3.Visibility = System.Windows.Visibility.Hidden;
+            MainWindow.labActuelle1.Visibility = System.Windows.Visibility.Hidden;
+            MainWindow.labActuelle2.Visibility = System.Windows.Visibility.Hidden;
+            MainWindow.labActuelle3.Visibility = System.Windows.Visibility.Hidden;
+            MainWindow.labBonus.Visibility = System.Windows.Visibility.Hidden;
+            MainWindow.Cursor = Cursors.None;
 
             MainWindow.OuvreMenuMaxExp = false;
             Constantes.COEFFICIENT_EXPERIENCE *= 0.9;
@@ -155,32 +155,32 @@ namespace JeuSAE.classes
 
         private static void AssigneAmeliorations(String ameliorationString, int numLabel, double valeur, int numSwitch)
         {
-            String stringActuelle = "Valeur actuelle : " + Environment.NewLine + valeur.ToString();
+            String StringActuelle = "Valeur actuelle : " + Environment.NewLine + valeur.ToString();
 
             if (numSwitch == 5)
             {
-                stringActuelle += " tir/s";
+                StringActuelle += " tir/s";
             }
 
 
 
             if (numLabel == 0)
             {
-                mainWindow.labAmelioration1.Content = ameliorationString;
-                mainWindow.labActuelle1.Content = stringActuelle;
-                numAmeliorationBouttonUn = numSwitch;
+                MainWindow.labAmelioration1.Content = ameliorationString;
+                MainWindow.labActuelle1.Content = StringActuelle;
+                NumAmeliorationBouttonUn = numSwitch;
             }
             else if (numLabel == 1)
             {
-                mainWindow.labAmelioration2.Content = ameliorationString;
-                mainWindow.labActuelle2.Content = stringActuelle;
-                numAmeliorationBouttonDeux = numSwitch;
+                MainWindow.labAmelioration2.Content = ameliorationString;
+                MainWindow.labActuelle2.Content = StringActuelle;
+                NumAmeliorationBouttonDeux = numSwitch;
             }
             else if (numLabel == 2)
             {
-                mainWindow.labAmelioration3.Content = ameliorationString;
-                mainWindow.labActuelle3.Content = stringActuelle;
-                numAmeliorationBouttonTrois = numSwitch;
+                MainWindow.labAmelioration3.Content = ameliorationString;
+                MainWindow.labActuelle3.Content = StringActuelle;
+                NumAmeliorationBouttonTrois = numSwitch;
             }
 
 
@@ -190,22 +190,22 @@ namespace JeuSAE.classes
 
         public static void AppliqueBonusAuJoueur(int numBoutton)
         {
-            int valeurUtilise = 0;
+            int ValeurUtilise = 0;
             switch (numBoutton)
             {
                 case 1:
-                    valeurUtilise = numAmeliorationBouttonUn;
+                    ValeurUtilise = NumAmeliorationBouttonUn;
                     break;
                 case 2:
-                    valeurUtilise = numAmeliorationBouttonDeux;
+                    ValeurUtilise = NumAmeliorationBouttonDeux;
                     break;
                 case 3:
-                    valeurUtilise = numAmeliorationBouttonTrois;
+                    ValeurUtilise = NumAmeliorationBouttonTrois;
                     break;
             }
 
 
-            switch (valeurUtilise)
+            switch (ValeurUtilise)
             {
                 case 0:
                     Constantes.DEGATS_JOUEUR += 1;

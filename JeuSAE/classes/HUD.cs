@@ -14,65 +14,65 @@ using System.Windows.Media.Imaging;
 
 namespace JeuSAE.classes
 {
-    public class HUD
+    public class Hud
     {
-        static MainWindow mainWindow = (MainWindow)App.Current.MainWindow;
-        static double largeurBarVieMax = mainWindow.rectanglePV.Width;
-        static double largeurBarExpMax = mainWindow.rectangleEXP.Width;
-        static double largeurBarEliminationsMax = mainWindow.rectangleElimination.Width;
+        private static readonly MainWindow MainWindow = (MainWindow)App.Current.MainWindow;
+        private static readonly double LargeurBarVieMax = MainWindow.rectanglePV.Width;
+        private static readonly double LargeurBarExpMax = MainWindow.rectangleEXP.Width;
+        private static readonly double LargeurBarEliminationsMax = MainWindow.rectangleElimination.Width;
 
 
         public static void ChangeBarreDeVie(double pourcentage)
         {
-            mainWindow.rectanglePV.Width = largeurBarVieMax * pourcentage;
+            MainWindow.rectanglePV.Width = LargeurBarVieMax * pourcentage;
         }
 
 
-        public static void AjouteVie(double nombrePV)
+        public static void AjouteVie(double nombrePv)
         {
-            double nouvelleLargeur = ((nombrePV) / Constantes.VIE_JOUEUR) * largeurBarVieMax;
+            double NouvelleLargeur = ((nombrePv) / Constantes.VIE_JOUEUR) * LargeurBarVieMax;
 
-            if (nouvelleLargeur + mainWindow.rectanglePV.Width >= largeurBarVieMax)
+            if (NouvelleLargeur + MainWindow.rectanglePV.Width >= LargeurBarVieMax)
             {// Si la vie ajoutée fait dépasser la vie max, on la met juste au max
-                mainWindow.rectanglePV.Width = largeurBarVieMax;
+                MainWindow.rectanglePV.Width = LargeurBarVieMax;
             }
-            else if (nouvelleLargeur + mainWindow.rectanglePV.Width <= 0)
+            else if (NouvelleLargeur + MainWindow.rectanglePV.Width <= 0)
             {// Si la vie ajoutée (enlevée dans ce cas) rends la vie plus petite que 0, on la met à 0
-                mainWindow.rectanglePV.Width = 0; //TODO activer le killscreen ici
-                mainWindow.Mort = true;
+                MainWindow.rectanglePV.Width = 0; //TODO activer le killscreen ici
+                MainWindow.Mort = true;
                 //pour l'animation de mort
-                mainWindow.TickAnimation = 0;
-                mainWindow.curseurPerso.Visibility = Visibility.Hidden;
-                mainWindow.Cursor = Cursors.Arrow;
-                mainWindow.labQuitter.Visibility = Visibility.Visible;
-                mainWindow.labRetour.Visibility = Visibility.Visible;
-                mainWindow.MortDroite = mainWindow.RegardeADroite;
+                MainWindow.TickAnimation = 0;
+                MainWindow.curseurPerso.Visibility = Visibility.Hidden;
+                MainWindow.Cursor = Cursors.Arrow;
+                MainWindow.labQuitter.Visibility = Visibility.Visible;
+                MainWindow.labRetour.Visibility = Visibility.Visible;
+                MainWindow.MortDroite = MainWindow.RegardeADroite;
             } 
             else
             {// Sinon on ajoute la vie
-                mainWindow.rectanglePV.Width += nouvelleLargeur;
+                MainWindow.rectanglePV.Width += NouvelleLargeur;
             }
         }
 
         public static void ChangeBarreExp(double pourcentage)
         {
-            mainWindow.rectangleEXP.Width = largeurBarExpMax * pourcentage;
+            MainWindow.rectangleEXP.Width = LargeurBarExpMax * pourcentage;
         }
 
-        public static void AjouteExp(double nombreEXP)
+        public static void AjouteExp(double nombreExp)
         {
 
-            if (mainWindow.rectangleEXP.Width != largeurBarExpMax)
+            if (MainWindow.rectangleEXP.Width != LargeurBarExpMax)
             {
-                double nouvelleLargeur = ((nombreEXP) / 100d) * largeurBarExpMax;
-                if (nouvelleLargeur + mainWindow.rectangleEXP.Width >= largeurBarExpMax)
+                double NouvelleLargeur = ((nombreExp) / 100d) * LargeurBarExpMax;
+                if (NouvelleLargeur + MainWindow.rectangleEXP.Width >= LargeurBarExpMax)
                 {
-                    mainWindow.rectangleEXP.Width = 0;
-                    MenuMaxEXP.AfficheMenu();
+                    MainWindow.rectangleEXP.Width = 0;
+                    MenuMaxExp.AfficheMenu();
                 }
                 else
                 {
-                    mainWindow.rectangleEXP.Width += nouvelleLargeur;
+                    MainWindow.rectangleEXP.Width += NouvelleLargeur;
                 }
 
             }
@@ -82,29 +82,29 @@ namespace JeuSAE.classes
         public static void ChangeBarreEliminations(double pourcentage)
         {
 
-            mainWindow.rectangleElimination.Width = largeurBarEliminationsMax * pourcentage;
+            MainWindow.rectangleElimination.Width = LargeurBarEliminationsMax * pourcentage;
 
         }
         
         public static bool BossDoitSpawn()
         {
-            return (mainWindow.rectangleElimination.Width / largeurBarEliminationsMax) == 1;
+            return (MainWindow.rectangleElimination.Width / LargeurBarEliminationsMax) == 1;
         }
 
         public static void AjouteElimination(int nombreEliminations)
         {
 
-            if (mainWindow.rectangleElimination.Width != largeurBarEliminationsMax)
+            if (MainWindow.rectangleElimination.Width != LargeurBarEliminationsMax)
             {
-                double nouvelleLargeur = ((nombreEliminations) / 100d) * largeurBarEliminationsMax;
-                if (nouvelleLargeur + mainWindow.rectangleElimination.Width >= largeurBarEliminationsMax)
+                double NouvelleLargeur = ((nombreEliminations) / 100d) * LargeurBarEliminationsMax;
+                if (NouvelleLargeur + MainWindow.rectangleElimination.Width >= LargeurBarEliminationsMax)
                 {
-                    mainWindow.rectangleElimination.Width = 0;
-                    Boss.SpawnUnBoss(mainWindow);
+                    MainWindow.rectangleElimination.Width = 0;
+                    Boss.SpawnUnBoss(MainWindow);
                 }
                 else
                 {
-                    mainWindow.rectangleElimination.Width += nouvelleLargeur;
+                    MainWindow.rectangleElimination.Width += NouvelleLargeur;
                 }
             }
         }
@@ -112,14 +112,14 @@ namespace JeuSAE.classes
         public static void FixeNombreDiamants(int nombreDiamants)
         {
 
-            mainWindow.labDiamant.Content = nombreDiamants.ToString();
+            MainWindow.labDiamant.Content = nombreDiamants.ToString();
 
         }
 
         public static void AjouteNombreDiamants(int nombreDiamants)
         {
-            int nombreDiamantDansLabel = int.Parse(mainWindow.labDiamant.Content.ToString());
-            mainWindow.labDiamant.Content = (nombreDiamants + nombreDiamantDansLabel).ToString();
+            int NombreDiamantDansLabel = int.Parse(MainWindow.labDiamant.Content.ToString());
+            MainWindow.labDiamant.Content = (nombreDiamants + NombreDiamantDansLabel).ToString();
         }
     }
 }

@@ -61,7 +61,7 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         InitialisationMenu();
-        InitialisationHUD();
+        InitialisationHud();
         InitialisationElementsGraphiques();
         
         // Moteur de jeu rafraîchit le jeu toutes les 16ms
@@ -90,11 +90,11 @@ public partial class MainWindow : Window
         MapGenerator.load(this);
     }
 
-    private void InitialisationHUD()
+    private void InitialisationHud()
     {
-        HUDResolution1920x1080();
-        HUD.ChangeBarreEliminations(0);
-        HUD.ChangeBarreExp(0);
+        HudResolution1920X1080();
+        Hud.ChangeBarreEliminations(0);
+        Hud.ChangeBarreExp(0);
     }
 
     private void InitialisationMenu()
@@ -102,51 +102,51 @@ public partial class MainWindow : Window
         Constantes.LECTEUR_MUSIQUE_MENU.Load();
         Constantes.LECTEUR_MUSIQUE_MENU.PlayLooping();
         
-        var menu = new Menu();
-        var parametres = new Parametres();
-        var magasin = new Magasin();
-        var touche = new Touche(Constantes.TOUCHE_HAUT, Constantes.TOUCHE_BAS, Constantes.TOUCHE_DROITE,
+        var Menu = new Menu();
+        var Parametres = new Parametres();
+        var Magasin = new Magasin();
+        var Touche = new Touche(Constantes.TOUCHE_HAUT, Constantes.TOUCHE_BAS, Constantes.TOUCHE_DROITE,
             Constantes.TOUCHE_GAUCHE);
-        var preJeu = new PreJeu();
+        var PreJeu = new PreJeu();
 
-        menu.ShowDialog();
-        string choix = menu.choix;
+        Menu.ShowDialog();
+        string Choix = Menu.Choix;
 
 
-        while (choix != "jouer")
-            switch (choix)
+        while (Choix != "jouer")
+            switch (Choix)
             {
                 case "quitter":
                     Environment.Exit(0);
                     break;
 
                 case "parametre":
-                    parametres.ShowDialog();
-                    choix = parametres.choix;
+                    Parametres.ShowDialog();
+                    Choix = Parametres.Choix;
                     break;
 
                 case "menu":
-                    menu.ShowDialog();
-                    choix = menu.choix;
+                    Menu.ShowDialog();
+                    Choix = Menu.Choix;
                     break;
 
                 case "magasin":
-                    magasin.ShowDialog();
-                    choix = magasin.choix;
+                    Magasin.ShowDialog();
+                    Choix = Magasin.Choix;
                     break;
 
                 case "touche":
-                    touche.ShowDialog();
-                    choix = touche.choix;
-                    Constantes.TOUCHE_HAUT = touche.tHaut;
-                    Constantes.TOUCHE_BAS = touche.tBas;
-                    Constantes.TOUCHE_DROITE = touche.tDroite;
-                    Constantes.TOUCHE_GAUCHE = touche.tGauche;
+                    Touche.ShowDialog();
+                    Choix = Touche.Choix;
+                    Constantes.TOUCHE_HAUT = Touche.Haut;
+                    Constantes.TOUCHE_BAS = Touche.Bas;
+                    Constantes.TOUCHE_DROITE = Touche.Droite;
+                    Constantes.TOUCHE_GAUCHE = Touche.Gauche;
                     break;
 
                 case "difficulte":
-                    preJeu.ShowDialog();
-                    choix = preJeu.choix;
+                    PreJeu.ShowDialog();
+                    Choix = PreJeu.Choix;
                     break;
             }
         Constantes.LECTEUR_MUSIQUE_MENU.Stop();
@@ -182,10 +182,10 @@ public partial class MainWindow : Window
 
     private void monCanvas_MouseMove(object sender, MouseEventArgs e)
     {
-        var curseur = e.GetPosition(monCanvas);
-        Canvas.SetTop(curseurPerso, curseur.Y - curseurPerso.Height / 2);
-        Canvas.SetLeft(curseurPerso, curseur.X - curseurPerso.Width / 2);
-        if (curseur.X > fenetrePrincipale.Width / 2)
+        var Curseur = e.GetPosition(monCanvas);
+        Canvas.SetTop(curseurPerso, Curseur.Y - curseurPerso.Height / 2);
+        Canvas.SetLeft(curseurPerso, Curseur.X - curseurPerso.Width / 2);
+        if (Curseur.X > fenetrePrincipale.Width / 2)
             RegardeADroite = true;
         else
             RegardeADroite = false;
@@ -322,33 +322,33 @@ public partial class MainWindow : Window
                 else Canvas.SetTop(carte, positionLimite);
             }
 
-            foreach (var ennemi in
+            foreach (var Ennemi in
                      Ennemis)
-                ennemi.Tir();
+                Ennemi.Tir();
         }
     }
 
     private void DeplacerObjets(List<Balle> objets, double deplacementX, double deplacementY)
     {
-        foreach (var objet in objets)
+        foreach (var Objet in objets)
         {
-            Canvas.SetLeft(objet.Graphique, Canvas.GetLeft(objet.Graphique) + deplacementX);
-            Canvas.SetTop(objet.Graphique, Canvas.GetTop(objet.Graphique) + deplacementY);
+            Canvas.SetLeft(Objet.Graphique, Canvas.GetLeft(Objet.Graphique) + deplacementX);
+            Canvas.SetTop(Objet.Graphique, Canvas.GetTop(Objet.Graphique) + deplacementY);
 
-            objet.PosX = Canvas.GetLeft(objet.Graphique);
-            objet.PosY = Canvas.GetTop(objet.Graphique);
+            Objet.PosX = Canvas.GetLeft(Objet.Graphique);
+            Objet.PosY = Canvas.GetTop(Objet.Graphique);
         }
     }
 
     private void DeplacerObjets(List<Ennemi> objets, double deplacementX, double deplacementY)
     {
-        foreach (var objet in objets)
+        foreach (var Objet in objets)
         {
-            Canvas.SetLeft(objet.Graphique, Canvas.GetLeft(objet.Graphique) + deplacementX);
-            Canvas.SetTop(objet.Graphique, Canvas.GetTop(objet.Graphique) + deplacementY);
+            Canvas.SetLeft(Objet.Graphique, Canvas.GetLeft(Objet.Graphique) + deplacementX);
+            Canvas.SetTop(Objet.Graphique, Canvas.GetTop(Objet.Graphique) + deplacementY);
 
-            objet.PosX = Canvas.GetLeft(objet.Graphique);
-            objet.PosY = Canvas.GetTop(objet.Graphique);
+            Objet.PosX = Canvas.GetLeft(Objet.Graphique);
+            Objet.PosY = Canvas.GetTop(Objet.Graphique);
         }
     }
 
@@ -385,21 +385,21 @@ public partial class MainWindow : Window
     {
         Constantes.TEMPS_RECHARGE_ACTUEL = (int)Constantes.TEMPS_RECHARGE_ARME;
 
-        var posEcran = Mouse.GetPosition(Application.Current.MainWindow);
-        var posCarte = Mouse.GetPosition(carte);
+        var PosEcran = Mouse.GetPosition(Application.Current.MainWindow);
+        var PosCarte = Mouse.GetPosition(carte);
 
 #if DEBUG
-        Console.WriteLine(posCarte.X + "  " + posCarte.Y);
+        Console.WriteLine(PosCarte.X + "  " + PosCarte.Y);
 #endif
 
-        var vecteurTir = new Vector2((float)posEcran.X - (float)PosJoueurX, (float)posEcran.Y - (float)PosJoueurY);
+        var VecteurTir = new Vector2((float)PosEcran.X - (float)PosJoueurX, (float)PosEcran.Y - (float)PosJoueurY);
 
-        var balleJoueur = new Balle(Constantes.VITESSE_BALLE_JOUEUR, Constantes.TAILLE_BALLE_JOUEUR, 0, "joueur", 0,
-            PosJoueurX, PosJoueurY, vecteurTir, Constantes.DEGATS_JOUEUR);
-        PositionnerBalle(balleJoueur);
+        var BalleJoueur = new Balle(Constantes.VITESSE_BALLE_JOUEUR, Constantes.TAILLE_BALLE_JOUEUR, 0, "joueur", 0,
+            PosJoueurX, PosJoueurY, VecteurTir, Constantes.DEGATS_JOUEUR);
+        PositionnerBalle(BalleJoueur);
 
-        monCanvas.Children.Add(balleJoueur.Graphique);
-        Balles.Add(balleJoueur);
+        monCanvas.Children.Add(BalleJoueur.Graphique);
+        Balles.Add(BalleJoueur);
     }
 
     private void PositionnerBalle(Balle balle)
@@ -412,19 +412,19 @@ public partial class MainWindow : Window
     {
         if (Balles != null)
         {
-            foreach (var balle in Balles)
+            foreach (var Balle in Balles)
             {
-                balle.Deplacement();
+                Balle.Deplacement();
 
-                if (BalleHorsLimite(balle)) BallesMortes.Add(balle);
+                if (BalleHorsLimite(Balle)) BallesMortes.Add(Balle);
 
-                PositionnerBalle(balle);
+                PositionnerBalle(Balle);
             }
 
-            foreach (var balle in BallesMortes)
+            foreach (var Balle in BallesMortes)
             {
-                Balles.Remove(balle);
-                monCanvas.Children.Remove(balle.Graphique);
+                Balles.Remove(Balle);
+                monCanvas.Children.Remove(Balle.Graphique);
             }
 
             BallesMortes.Clear();
@@ -433,35 +433,35 @@ public partial class MainWindow : Window
 
     private void CollisionBalle()
     {
-        foreach (var balle in Balles)
+        foreach (var Balle in Balles)
         {
-            if (balle.Rect.IntersectsWith(HitboxJoueur) && balle.Tireur != "joueur")
+            if (Balle.Rect.IntersectsWith(HitboxJoueur) && Balle.Tireur != "joueur")
             {
                 //Application.Current.Shutdown();
-                BallesMortes.Add(balle);
-                HUD.AjouteVie((int)-balle.Degats);
+                BallesMortes.Add(Balle);
+                Hud.AjouteVie((int)-Balle.Degats);
             }
 
-            var listeEnnemiTemporaire = new List<Ennemi>(Ennemis);
-            foreach (var ennemi in listeEnnemiTemporaire)
-                if (balle.Rect.IntersectsWith(ennemi.Rect) && balle.Tireur == "joueur")
+            var ListeEnnemiTemporaire = new List<Ennemi>(Ennemis);
+            foreach (var Ennemi in ListeEnnemiTemporaire)
+                if (Balle.Rect.IntersectsWith(Ennemi.Rect) && Balle.Tireur == "joueur")
                 {
-                    if (!balle.ListeEnnemisPerces.Contains(ennemi.Id))
+                    if (!Balle.ListeEnnemisPerces.Contains(Ennemi.Id))
                     {
-                        ennemi.Vie -= balle.Degats;
-                        balle.ListeEnnemisPerces.Add(ennemi.Id);
+                        Ennemi.Vie -= Balle.Degats;
+                        Balle.ListeEnnemisPerces.Add(Ennemi.Id);
                     }
 
-                    if (balle.ListeEnnemisPerces.Count >= balle.NombrePerce) BallesMortes.Add(balle);
+                    if (Balle.ListeEnnemisPerces.Count >= Balle.NombrePerce) BallesMortes.Add(Balle);
 
-                    if (ennemi.Vie <= 0)
+                    if (Ennemi.Vie <= 0)
                     {
-                        EnnemisMorts.Add(ennemi);
-                        HUD.AjouteElimination(50);
-                        if (ennemi.Nom == "Boss")
-                            HUD.AjouteExp(Constantes.COEFFICIENT_EXPERIENCE * 200d);
+                        EnnemisMorts.Add(Ennemi);
+                        Hud.AjouteElimination(50);
+                        if (Ennemi.Nom == "Boss")
+                            Hud.AjouteExp(Constantes.COEFFICIENT_EXPERIENCE * 200d);
                         else
-                            HUD.AjouteExp(Constantes.COEFFICIENT_EXPERIENCE);
+                            Hud.AjouteExp(Constantes.COEFFICIENT_EXPERIENCE);
                     }
                 }
         }
@@ -499,24 +499,24 @@ public partial class MainWindow : Window
 
     private void bouttonUpgrade1_MouseDown(object sender, MouseButtonEventArgs e)
     {
-        MenuMaxEXP.AppliqueBonusAuJoueur(1);
+        MenuMaxExp.AppliqueBonusAuJoueur(1);
     }
 
     private void bouttonUpgrade2_MouseDown(object sender, MouseButtonEventArgs e)
     {
-        MenuMaxEXP.AppliqueBonusAuJoueur(2);
+        MenuMaxExp.AppliqueBonusAuJoueur(2);
     }
 
     private void bouttonUpgrade3_MouseDown(object sender, MouseButtonEventArgs e)
     {
-        MenuMaxEXP.AppliqueBonusAuJoueur(3);
+        MenuMaxExp.AppliqueBonusAuJoueur(3);
     }
 
     private void CollisionEnnemi()
     {
-        foreach (var ennemi in Ennemis)
-            if (HitboxJoueur.IntersectsWith(ennemi.Rect))
-                HUD.AjouteVie(-Constantes.DEGATS_COLLISION);
+        foreach (var Ennemi in Ennemis)
+            if (HitboxJoueur.IntersectsWith(Ennemi.Rect))
+                Hud.AjouteVie(-Constantes.DEGATS_COLLISION);
     }
 
     private bool BalleHorsLimite(Balle balle)
@@ -538,14 +538,14 @@ public partial class MainWindow : Window
         Constantes.COMPTEUR_SPAWN++;
 
         // Boss
-        if (HUD.BossDoitSpawn())
+        if (Hud.BossDoitSpawn())
         {
             Ennemi.SpawnUnBoss(this);
-            HUD.ChangeBarreExp(0);
+            Hud.ChangeBarreExp(0);
         }
     }
 
-    private void HUDResolution1920x1080()
+    private void HudResolution1920X1080()
     {
         if (fenetrePrincipale.Width == 1920 && fenetrePrincipale.Height == 1080)
         {
@@ -571,12 +571,12 @@ public partial class MainWindow : Window
 
     private void EnleverTousLesEnnemis()
     {
-        foreach (var ennemi in Ennemis) EnnemisMorts.Add(ennemi);
+        foreach (var Ennemi in Ennemis) EnnemisMorts.Add(Ennemi);
 
-        foreach (var ennemi in EnnemisMorts)
+        foreach (var Ennemi in EnnemisMorts)
         {
-            Ennemis.Remove(ennemi);
-            monCanvas.Children.Remove(ennemi.Graphique);
+            Ennemis.Remove(Ennemi);
+            monCanvas.Children.Remove(Ennemi.Graphique);
         }
 
         EnnemisMorts.Clear();
@@ -584,37 +584,37 @@ public partial class MainWindow : Window
 
         private void LogiqueEnnemis()
         {
-            double posJoueurX = HitboxJoueur.Left + HitboxJoueur.Width /2;
-            double posJoueurY = HitboxJoueur.Top + HitboxJoueur.Height/2;
+            double PosJoueurX = HitboxJoueur.Left + HitboxJoueur.Width /2;
+            double PosJoueurY = HitboxJoueur.Top + HitboxJoueur.Height/2;
 
-        foreach (var ennemi in Ennemis)
+        foreach (var Ennemi in Ennemis)
         {
-            ennemi.PosX = Canvas.GetLeft(ennemi.Graphique);
-            ennemi.PosY = Canvas.GetTop(ennemi.Graphique);
-            var vecteurDeplace = new Vector2((float)ennemi.PosX - (float)posJoueurX,
-                (float)ennemi.PosY - (float)posJoueurY);
-            var vecteurDeplaceNormalise = Vector2.Normalize(vecteurDeplace);
+            Ennemi.PosX = Canvas.GetLeft(Ennemi.Graphique);
+            Ennemi.PosY = Canvas.GetTop(Ennemi.Graphique);
+            var VecteurDeplace = new Vector2((float)Ennemi.PosX - (float)PosJoueurX,
+                (float)Ennemi.PosY - (float)PosJoueurY);
+            var VecteurDeplaceNormalise = Vector2.Normalize(VecteurDeplace);
 
-            var newPosEnnemiX = ennemi.PosX - vecteurDeplaceNormalise.X * ennemi.Vitesse;
-            var newPosEnnemiY = ennemi.PosY - vecteurDeplaceNormalise.Y * ennemi.Vitesse;
+            var NewPosEnnemiX = Ennemi.PosX - VecteurDeplaceNormalise.X * Ennemi.Vitesse;
+            var NewPosEnnemiY = Ennemi.PosY - VecteurDeplaceNormalise.Y * Ennemi.Vitesse;
 
-            ennemi.PosX = newPosEnnemiX;
-            ennemi.PosY = newPosEnnemiY;
+            Ennemi.PosX = NewPosEnnemiX;
+            Ennemi.PosY = NewPosEnnemiY;
 
-            Canvas.SetLeft(ennemi.Graphique, newPosEnnemiX);
-            Canvas.SetTop(ennemi.Graphique, newPosEnnemiY);
-            ennemi.Tir();
+            Canvas.SetLeft(Ennemi.Graphique, NewPosEnnemiX);
+            Canvas.SetTop(Ennemi.Graphique, NewPosEnnemiY);
+            Ennemi.Tir();
         }
     }
 
     private void AnimationJoueur()
     {
-        var posEcran = Mouse.GetPosition(Application.Current.MainWindow);
-        var vecteurTir = new Vector2((float)posEcran.X - (float)PosJoueurX, (float)posEcran.Y - (float)PosJoueurY);
-        float normalVecteurX = Vector2.Normalize(vecteurTir).X, normalVecteurY = Vector2.Normalize(vecteurTir).Y;
+        var PosEcran = Mouse.GetPosition(Application.Current.MainWindow);
+        var VecteurTir = new Vector2((float)PosEcran.X - (float)PosJoueurX, (float)PosEcran.Y - (float)PosJoueurY);
+        float NormalVecteurX = Vector2.Normalize(VecteurTir).X, NormalVecteurY = Vector2.Normalize(VecteurTir).Y;
 #if DEBUG
-        Console.WriteLine("vecteur x " + normalVecteurX);
-        Console.WriteLine("vecteur y " + normalVecteurY);
+        Console.WriteLine("vecteur x " + NormalVecteurX);
+        Console.WriteLine("vecteur y " + NormalVecteurY);
 #endif
 
         CheminSprite = AppDomain.CurrentDomain.BaseDirectory + "images\\sprites\\personnage\\";
@@ -646,13 +646,13 @@ public partial class MainWindow : Window
         }
 
         //faire varier en fonction de la position du curseur
-        if (Math.Abs(normalVecteurX) < 0.2 && normalVecteurY > 0.8)
+        if (Math.Abs(NormalVecteurX) < 0.2 && NormalVecteurY > 0.8)
             ApparenceArme.ImageSource = new BitmapImage(new Uri(CheminSprite + "\\arme\\arme1_5.png"));
-        else if (Math.Abs(normalVecteurX) < 0.2 && normalVecteurY < -0.8)
+        else if (Math.Abs(NormalVecteurX) < 0.2 && NormalVecteurY < -0.8)
             ApparenceArme.ImageSource = new BitmapImage(new Uri(CheminSprite + "\\arme\\arme1_1.png"));
-        else if (Math.Abs(normalVecteurX) < 0.96 && normalVecteurY > 0.25)
+        else if (Math.Abs(NormalVecteurX) < 0.96 && NormalVecteurY > 0.25)
             ApparenceArme.ImageSource = new BitmapImage(new Uri(CheminSprite + "\\arme\\arme1_4.png"));
-        else if (Math.Abs(normalVecteurX) < 0.96 && normalVecteurY < -0.25)
+        else if (Math.Abs(NormalVecteurX) < 0.96 && NormalVecteurY < -0.25)
             ApparenceArme.ImageSource = new BitmapImage(new Uri(CheminSprite + "\\arme\\arme1_2.png"));
         else
             ApparenceArme.ImageSource = new BitmapImage(new Uri(CheminSprite + "\\arme\\arme1_3.png"));
@@ -660,11 +660,11 @@ public partial class MainWindow : Window
 
     private void SupprimerEnnemis()
     {
-        foreach (var ennemi in EnnemisMorts)
+        foreach (var Ennemi in EnnemisMorts)
         {
             NouvelleElimination();
-            Ennemis.Remove(ennemi);
-            monCanvas.Children.Remove(ennemi.Graphique);
+            Ennemis.Remove(Ennemi);
+            monCanvas.Children.Remove(Ennemi.Graphique);
         }
 
         EnnemisMorts.Clear();
@@ -672,22 +672,22 @@ public partial class MainWindow : Window
 
     private void NouvelleElimination()
     {
-        BaseDeDonnee.eliminations += 1;
+        BaseDeDonnee.Eliminations += 1;
         MettreAJourBdd();
     }
 
     private void MettreAJourBdd()
     {
         JsonUtilitaire.Ecriture(BaseDeDonnee, Constantes.CHEMIN_BDD);
-        labDiamant.Content = BaseDeDonnee.argent;
-        labEliminations.Content = BaseDeDonnee.eliminations;
+        labDiamant.Content = BaseDeDonnee.Argent;
+        labEliminations.Content = BaseDeDonnee.Eliminations;
     }
 
     private void AnimationMort()
     {
         EffetFlou.Radius = 10;
 
-        foreach (UIElement children in monCanvas.Children) children.BitmapEffect = EffetFlou;
+        foreach (UIElement Children in monCanvas.Children) Children.BitmapEffect = EffetFlou;
 
         labQuitter.BitmapEffect = NonFloue;
         labRetour.BitmapEffect = NonFloue;

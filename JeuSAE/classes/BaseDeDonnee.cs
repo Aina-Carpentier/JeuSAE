@@ -8,11 +8,11 @@ namespace JeuSAE.classes
 {
     internal class BaseDeDonnee
     {
-        public int argent { get; set; }
-        public int eliminations { get; set;}
-        public int ameliorationPDV {  get; set; }
-        public int ameliorationVitesse {  get; set; }
-        public bool arme2 { get; set;}
-        public bool arme3 { get; set;}
+        public int Argent { get; set; }
+        public int Eliminations { get; set;}
+        public int AmeliorationPdv {  get; set; }
+        public int AmeliorationVitesse {  get; set; }
+        public bool Arme2 { get; set;}
+        public bool Arme3 { get; set;}
     }
 }
