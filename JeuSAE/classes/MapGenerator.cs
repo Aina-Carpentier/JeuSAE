@@ -14,46 +14,49 @@ using System.Windows;
 using System.Windows.Shapes;
 using Rectangle = System.Windows.Shapes.Rectangle;
 using System.Diagnostics;
+using System.Threading.Tasks;
+using System.Windows.Threading;
 using System.Windows.Xps.Packaging;
+using PixelFormat = System.Drawing.Imaging.PixelFormat;
 
 namespace JeuSAE.classes
 {
     public class MapGenerator
     {
 
-        private static readonly Regex SOL_REGEX = new Regex(@"^grass_[0-9]+\.png$");
+        private static readonly Regex Sol_Regex = new Regex(@"^grass_[0-9]+\.png$");
 
-        private static readonly Regex COIN_HAUT_GAUCHE_REGEX = new Regex(@"^grass_top_left_border_[0-9]+\.png$");
-        private static readonly Regex COIN_HAUT_DROIT_REGEX = new Regex(@"^grass_top_right_border_[0-9]+\.png$");
-        private static readonly Regex COIN_BAS_DROIT_REGEX = new Regex(@"^grass_bottom_right_border_[0-9]+\.png$");
-        private static readonly Regex COIN_BAS_GAUCHE_REGEX = new Regex(@"^grass_bottom_left_border_[0-9]+\.png$");
+        private static readonly Regex Coin_Haut_Gauche_Regex = new Regex(@"^grass_top_left_border_[0-9]+\.png$");
+        private static readonly Regex Coin_Haut_Droit_Regex = new Regex(@"^grass_top_right_border_[0-9]+\.png$");
+        private static readonly Regex Coin_Bas_Droit_Regex = new Regex(@"^grass_bottom_right_border_[0-9]+\.png$");
+        private static readonly Regex Coin_Bas_Gauche_Regex = new Regex(@"^grass_bottom_left_border_[0-9]+\.png$");
 
-        private static readonly Regex ARRETE_HAUT_REGEX = new Regex(@"^grass_top_border_[0-9]+\.png$");
-        private static readonly Regex ARRETE_DROIT_REGEX = new Regex(@"^grass_right_border_[0-9]+\.png$");
-        private static readonly Regex ARRETE_BAS_REGEX = new Regex(@"^grass_bottom_border_[0-9]+\.png$");
-        private static readonly Regex ARRETE_GAUCHE_REGEX = new Regex(@"^grass_left_border_[0-9]+\.png$");
+        private static readonly Regex Arrete_Haut_Regex = new Regex(@"^grass_top_border_[0-9]+\.png$");
+        private static readonly Regex Arrete_Droit_Regex = new Regex(@"^grass_right_border_[0-9]+\.png$");
+        private static readonly Regex Arrete_Bas_Regex = new Regex(@"^grass_bottom_border_[0-9]+\.png$");
+        private static readonly Regex Arrete_Gauche_Regex = new Regex(@"^grass_left_border_[0-9]+\.png$");
 
 
-        private static List<string> listeSol = new List<string>();
+        private static readonly List<string> ListeSol = new List<string>();
 
-        private static List<string> listeCoinHautGauche = new List<string>();
-        private static List<string> listeCoinHautDroit = new List<string>();
-        private static List<string> listeCoinBasDroit = new List<string>();
-        private static List<string> listeCoinBasGauche = new List<string>();
+        private static readonly List<string> ListeCoinHautGauche = new List<string>();
+        private static readonly List<string> ListeCoinHautDroit = new List<string>();
+        private static readonly List<string> ListeCoinBasDroit = new List<string>();
+        private static readonly List<string> ListeCoinBasGauche = new List<string>();
 
-        private static List<string> listeArreteHaut = new List<string>();
-        private static List<string> listeArreteDroit = new List<string>();
-        private static List<string> listeArreteBas = new List<string>();
-        private static List<string> listeArreteGauche = new List<string>();
+        private static readonly List<string> ListeArreteHaut = new List<string>();
+        private static readonly List<string> ListeArreteDroit = new List<string>();
+        private static readonly List<string> ListeArreteBas = new List<string>();
+        private static readonly List<string> ListeArreteGauche = new List<string>();
 
-        private static Random rnd = new Random();
+        private static readonly Random Rnd = new Random();
 
-        private static int IMG_WIDTH = 256;
-        private static int IMG_HEIGHT = 256;
-        private static int PROBA_HERBE = 20;
+        private static readonly int Img_Width = 256;
+        private static readonly int Img_Height = 256;
+        private static readonly int Proba_Herbe = 20;
 
-        private static string CHEMIN_DOSSIER_IMAGES = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "images\\");
-        private static string CHEMIN_FICHIERS_IMAGES = System.IO.Path.Combine(CHEMIN_DOSSIER_IMAGES, "environnement_256x256\\");
+        private static readonly string Chemin_Dossier_Images = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "images\\");
+        private static readonly string Chemin_Fichiers_Images = System.IO.Path.Combine(Chemin_Dossier_Images, "environnement_256x256\\");
 
         public static void load(MainWindow mainWindow)
         {
@@ -61,154 +64,157 @@ namespace JeuSAE.classes
             Rectangle carte = mainWindow.carte;
             int largeurCarte = (int)carte.Width;
             int hauteurCarte = (int)carte.Height;
-            string[] images = Directory.GetFiles(CHEMIN_FICHIERS_IMAGES);
-            System.Drawing.Image imageSource = System.Drawing.Image.FromFile(CHEMIN_FICHIERS_IMAGES + "grass_1.png");
-            Bitmap cible = new Bitmap(largeurCarte, hauteurCarte, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+            string[] images = Directory.GetFiles(Chemin_Fichiers_Images);
+            Bitmap cible = new Bitmap(largeurCarte, hauteurCarte, PixelFormat.Format32bppArgb);
             Graphics graphiques = Graphics.FromImage(cible);
 
+            List<Task> tasks = new List<Task>();
 
             foreach (string uri in images)
             {
-                string nomImage = uri.Split("\\")[uri.Split("\\").Length - 1];
-                if (SOL_REGEX.IsMatch(nomImage))
-                {
-                    listeSol.Add(uri);
-                }
-                else if (COIN_HAUT_GAUCHE_REGEX.IsMatch(nomImage))
-                {
-                    listeCoinHautGauche.Add(uri);
-                }
-                else if (COIN_HAUT_DROIT_REGEX.IsMatch(nomImage))
-                {
-                    listeCoinHautDroit.Add(uri);
-                }
-                else if (COIN_BAS_DROIT_REGEX.IsMatch(nomImage))
-                {
-                    listeCoinBasDroit.Add(uri);
-                }
-                else if (COIN_BAS_GAUCHE_REGEX.IsMatch(nomImage))
-                {
-                    listeCoinBasGauche.Add(uri);
-                }
-
-                else if (ARRETE_HAUT_REGEX.IsMatch(nomImage))
-                {
-                    listeArreteHaut.Add(uri);
-                }
-                else if (ARRETE_DROIT_REGEX.IsMatch(nomImage))
-                {
-                    listeArreteDroit.Add(uri);
-                }
-                else if (ARRETE_BAS_REGEX.IsMatch(nomImage))
-                {
-                    listeArreteBas.Add(uri);
-                }
-                else if (ARRETE_GAUCHE_REGEX.IsMatch(nomImage))
-                {
-                    listeArreteGauche.Add(uri);
-                }
-
+                tasks.Add(Task.Run(() => ProcessImageUri(uri)));
             }
 
-#if DEBUG
-            foreach (string uri in listeArreteGauche)
+            Task.WaitAll(tasks.ToArray());
+
+            mainWindow.Dispatcher.Invoke(() =>
             {
-                Console.WriteLine(uri);
-            }
-#endif
-
-            for (int y = 0; y < hauteurCarte; y += IMG_HEIGHT)
-            {
-                for (int x = 0; x < largeurCarte; x += IMG_WIDTH)
+                for (int y = 0; y < hauteurCarte; y += Img_Height)
                 {
-                    List<string> liste = new List<string>();
-                    int xPlusImage = x + IMG_WIDTH;
-                    int yPlusImage = y + IMG_HEIGHT;
+                    for (int x = 0; x < largeurCarte; x += Img_Width)
+                    {
+                        List<string> liste = new List<string>();
+                        int xPlusImage = x + Img_Width;
+                        int yPlusImage = y + Img_Height;
 
-                    if (!PointEstCoin(ref liste, x, y, xPlusImage, yPlusImage, largeurCarte, hauteurCarte)) PointEstArete(ref liste, x, y, xPlusImage, yPlusImage, largeurCarte, hauteurCarte);
+                        if (!PointEstCoin(ref liste, x, y, xPlusImage, yPlusImage, largeurCarte, hauteurCarte))
+                            PointEstArete(ref liste, x, y, xPlusImage, yPlusImage, largeurCarte, hauteurCarte);
 
-                    bool herbeOuFleur = rnd.Next(1, 100) > PROBA_HERBE;
-                    RecupererSourceImage(out imageSource, herbeOuFleur, liste);
-                    graphiques.DrawImage(imageSource, x, y); //TODO multithreading
+                        bool herbeOuFleur = Rnd.Next(1, 100) > Proba_Herbe;
+                        RecupererSourceImage(out System.Drawing.Image ImageSource, herbeOuFleur, liste);
+                        graphiques.DrawImage(ImageSource, x, y);
+                    }
+
+                    Console.WriteLine("Génération de la map : " + Math.Round(y / carte.Height * 100) + " %");
                 }
 
-                Console.WriteLine("Génération de la map : " + Math.Round(y / carte.Height * 100) + " %");
-            }
+                ImageBrush image = new ImageBrush();
+                image.ImageSource = ToBitmapImage(cible);
+                carte.Fill = image;
+            });
+        }
 
-            ImageBrush image = new ImageBrush();
-            image.ImageSource = ToBitmapImage(cible);
-            carte.Fill = image;
+        private static void ProcessImageUri(string uri)
+        {
+            string nomImage = uri.Split("\\")[uri.Split("\\").Length - 1];
+
+            if (Sol_Regex.IsMatch(nomImage))
+            {
+                ListeSol.Add(uri);
+            }
+            else if (Coin_Haut_Gauche_Regex.IsMatch(nomImage))
+            {
+                ListeCoinHautGauche.Add(uri);
+            }
+            else if (Coin_Haut_Droit_Regex.IsMatch(nomImage))
+            {
+                ListeCoinHautDroit.Add(uri);
+            }
+            else if (Coin_Bas_Droit_Regex.IsMatch(nomImage))
+            {
+                ListeCoinBasDroit.Add(uri);
+            }
+            else if (Coin_Bas_Gauche_Regex.IsMatch(nomImage))
+            {
+                ListeCoinBasGauche.Add(uri);
+            }
+            else if (Arrete_Haut_Regex.IsMatch(nomImage))
+            {
+                ListeArreteHaut.Add(uri);
+            }
+            else if (Arrete_Droit_Regex.IsMatch(nomImage))
+            {
+                ListeArreteDroit.Add(uri);
+            }
+            else if (Arrete_Bas_Regex.IsMatch(nomImage))
+            {
+                ListeArreteBas.Add(uri);
+            }
+            else if (Arrete_Gauche_Regex.IsMatch(nomImage))
+            {
+                ListeArreteGauche.Add(uri);
+            }
         }
 
         private static void PointEstArete(ref List<string> liste, int x, int y, int xPlusImage, int yPlusImage, int largeurCarte, int hauteurCarte)
         {
             if (y == 0) //Arête haut
             {
-                liste = listeArreteHaut;
+                liste = ListeArreteHaut;
             }
             else if (xPlusImage >= largeurCarte) //Arête droit
             {
-                liste = listeArreteDroit;
+                liste = ListeArreteDroit;
             }
             else if (yPlusImage >= hauteurCarte) // Arête bas
             {
-                liste = listeArreteBas;
+                liste = ListeArreteBas;
             }
             else if (x == 0) // Arête gauche
             {
-                liste = listeArreteGauche;
+                liste = ListeArreteGauche;
             }
             else // Sol
             {
-                liste = listeSol;
+                liste = ListeSol;
             }
         }
 
         private static bool PointEstCoin(ref List<string> liste, int x, int y, int xPlusImage, int yPlusImage, int largeurCarte, int hauteurCarte)
         {
-            bool res = true;
+            bool Res = true;
             if (y == 0 && xPlusImage >= largeurCarte) //Coin haut droit
             {
-                liste = listeCoinHautDroit;
+                liste = ListeCoinHautDroit;
             }
             else if (yPlusImage >= hauteurCarte && xPlusImage >= largeurCarte) //Coin bas droit
             {
-                liste = listeCoinBasDroit;
+                liste = ListeCoinBasDroit;
             }
             else if (y == 0 && x == 0) // Coin haut gauche
             {
-                liste = listeCoinHautGauche;
+                liste = ListeCoinHautGauche;
             }
             else if (yPlusImage >= hauteurCarte && x == 0) //Coin bas gauche
             {
-                liste = listeCoinBasGauche;
+                liste = ListeCoinBasGauche;
             }
-            else res = false;
-            return res;
+            else Res = false;
+            return Res;
         }
 
         private static void RecupererSourceImage(out System.Drawing.Image image, bool herbeOuFleur, List<string> images)
         {
-            int index = herbeOuFleur ? 0 : rnd.Next(0, images.Count);
-            image = System.Drawing.Image.FromFile(images[index]);
+            int Index = herbeOuFleur ? 0 : Rnd.Next(0, images.Count);
+            image = System.Drawing.Image.FromFile(images[Index]);
         }
 
 
         private static BitmapImage ToBitmapImage(Bitmap bitmap)
         {
-            using (var memory = new MemoryStream())
+            using (var Memory = new MemoryStream())
             {
-                bitmap.Save(memory, ImageFormat.Png);
-                memory.Position = 0;
+                bitmap.Save(Memory, ImageFormat.Png);
+                Memory.Position = 0;
 
-                var bitmapImage = new BitmapImage();
-                bitmapImage.BeginInit();
-                bitmapImage.StreamSource = memory;
-                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                bitmapImage.EndInit();
-                bitmapImage.Freeze();
+                var BitmapImage = new BitmapImage();
+                BitmapImage.BeginInit();
+                BitmapImage.StreamSource = Memory;
+                BitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                BitmapImage.EndInit();
+                BitmapImage.Freeze();
 
-                return bitmapImage;
+                return BitmapImage;
             }
         }
     }

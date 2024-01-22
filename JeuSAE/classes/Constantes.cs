@@ -10,6 +10,7 @@ namespace JeuSAE.classes
 {
     internal class Constantes
     {
+        // Constantes relatives aux balles
         public const int BALLE_WIDHT = 25;
         public const int BALLE_HEIGHT = 10;
         public static double VIE_JOUEUR = 100d;
@@ -17,19 +18,22 @@ namespace JeuSAE.classes
         public const int DEGATS_BALLE_DEUX = 5;
         public const int DEGATS_BALLE_TROIS = 17;
 
-        //public const int DEGAT_BALLE_JOUEUR = 1;
         public const int DEGATS_COLLISION = 10;
         public const int NOMBRE_AMELIORATIONS = 8;
 
+        // Lecteur de musique
         public static readonly SoundPlayer LECTEUR_MUSIQUE_MENU = new SoundPlayer(AppDomain.CurrentDomain.BaseDirectory + "audio\\musiques\\musique_menu.wav");
 
-
+        // Chemins et touches
         public static string CHEMIN_BDD = AppDomain.CurrentDomain.BaseDirectory + "data\\database.json";
         public static double COEFFICIENT_EXPERIENCE = 20;
         public static Key TOUCHE_HAUT = Key.Z, TOUCHE_BAS = Key.S, TOUCHE_DROITE = Key.D, TOUCHE_GAUCHE = Key.Q;
+        
+        // Caractéristiques des balles du joueur
         public static int BALLE_NOMBRE_PERCE = 1;
         public static int POURCENTAGE_NOMBRE_DE_VIE = 0;
 
+        // Caractéristiques du joueur
         public static double VITESSE_JOUEUR = 10;
         public static double TEMPS_RECHARGE_ARME = 15;
         public static int TEMPS_RECHARGE_ACTUEL = 0;
@@ -42,15 +46,14 @@ namespace JeuSAE.classes
         public static int TICK_ANIMATION = 0;
 
         //-------------------------------------------ENNEMI-------------------------------------------
+        // Dimensions des ennemis et boss
         public const int ENNEMI_RECT_LARGEUR = 75;
         public const int ENNEMI_RECT_HAUTEUR = 75;
 
         public const int BOSS_RECT_LARGEUR = 180;
         public const int BOSS_RECT_HAUTEUR = 180;
 
-
-        // VIE
-
+        // VIE des ennemis et boss
         public const double VIE_TRIANGLE_EQ = 3;
         public const double VIE_CARRE = 4;
         public const double VIE_PENTAGONE = 10;
@@ -60,9 +63,7 @@ namespace JeuSAE.classes
         public const double VIE_BOSS = 45;
         public const double VIE_CERCLE = Math.PI;
 
-
-        // VITESSE
-
+        // VITESSE des ennemis et boss
         public const double VITESSE_TRIANGLE_EQ = 3;
         public const double VITESSE_CARRE = 4;
         public const double VITESSE_PENTAGONE = 3;
@@ -72,9 +73,7 @@ namespace JeuSAE.classes
         public const double VITESSE_BOSS = 7;
         public const double VITESSE_CERCLE = Math.PI;
 
-
-        // CADENCE DE TIR
-
+        // CADENCE DE TIR des ennemis et boss
         public const double CADENCE_TRIANGLE_EQ = 3 * 60;
         public const double CADENCE_CARRE = 3 * 60;
         public const double CADENCE_PENTAGONE = 1.5 * 60d;
@@ -84,9 +83,7 @@ namespace JeuSAE.classes
         public const double CADENCE_BOSS = 2.5 * 60d;
         public const double CADENCE_CERCLE = Math.PI * 60d;
 
-
-        // NOM
-
+        // NOM des ennemis et boss
         public const string NOM_TRIANGLE_EQ = "Triangle équilatéral";
         public const string NOM_CARRE = "Carré";
         public const string NOM_PENTAGONE = "Pentagone";
@@ -96,10 +93,8 @@ namespace JeuSAE.classes
         public const string NOM_BOSS = "Boss";
         public const string NOM_CERCLE = "Cercle";
 
-
-
+        // Coûts et prix
         public const int PRIX_ARME = 200;
         public const int PRIX_BASE_AMELIORATION = 10;
-
     }
 }
