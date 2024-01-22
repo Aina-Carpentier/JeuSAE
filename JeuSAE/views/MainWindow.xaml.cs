@@ -73,6 +73,7 @@ public partial class MainWindow : Window
 
     private void InitialisationElementsGraphiques()
     {
+        var Chargement = new Chargement(this);
         NonFloue.Radius = 0;
         
         // Joueur
@@ -87,9 +88,9 @@ public partial class MainWindow : Window
         labRetour.Margin = new Thickness(fenetrePrincipale.Width / 2 - labRetour.Width / 2,
             fenetrePrincipale.Height * 0.2, 0, 0);
         labContinuer.Margin = new Thickness(fenetrePrincipale.Width / 2 - labContinuer.Width /2, fenetrePrincipale.Height * 0.5 , 0, 0);
-        
+
         // Map
-        MapGenerator.load(this);
+        Chargement.ShowDialog();
     }
 
     private void InitialisationHud()
@@ -97,6 +98,7 @@ public partial class MainWindow : Window
         HudResolution1920X1080();
         Hud.ChangeBarreEliminations(0);
         Hud.ChangeBarreExp(0);
+        Cursor = Cursors.None;
     }
 
     private void InitialisationMenu()
@@ -110,6 +112,7 @@ public partial class MainWindow : Window
         var Touche = new Touche(Constantes.TOUCHE_HAUT, Constantes.TOUCHE_BAS, Constantes.TOUCHE_DROITE,
             Constantes.TOUCHE_GAUCHE);
         var PreJeu = new PreJeu();
+        
 
         Menu.ShowDialog();
         string Choix = Menu.Choix;
