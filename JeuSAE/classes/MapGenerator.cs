@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Media;
@@ -38,11 +39,11 @@ public class MapGenerator
     private static readonly List<string> ListeArreteBas = new();
     private static readonly List<string> ListeArreteGauche = new();
 
-    private static readonly Random Rnd = new();
-
     private static readonly int Img_Width = 256;
     private static readonly int Img_Height = 256;
     private static readonly int Proba_Herbe = 20;
+
+    private static readonly Random Rnd = new Random();
 
     private static readonly string Chemin_Dossier_Images =
         Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "images\\");
@@ -56,7 +57,7 @@ public class MapGenerator
         var carte = mainWindow.carte;
         var largeurCarte = (int)carte.Width;
         var hauteurCarte = (int)carte.Height;
-        var images = Directory.GetFiles(Chemin_Fichiers_Images);
+        var images = Directory.GetFiles(Chemin_Fichiers_Images).OrderBy(nom => nom);
         var cible = new Bitmap(largeurCarte, hauteurCarte, PixelFormat.Format32bppArgb);
         var graphiques = Graphics.FromImage(cible);
 
@@ -79,7 +80,8 @@ public class MapGenerator
                     if (!PointEstCoin(ref liste, x, y, xPlusImage, yPlusImage, largeurCarte, hauteurCarte))
                         PointEstArete(ref liste, x, y, xPlusImage, yPlusImage, largeurCarte, hauteurCarte);
 
-                    var herbeOuFleur = Rnd.Next(1, 100) > Proba_Herbe;
+                    int random = Rnd.Next(1, 100);
+                    var herbeOuFleur = random > Proba_Herbe;
                     RecupererSourceImage(out var ImageSource, herbeOuFleur, liste);
                     graphiques.DrawImage(ImageSource, x, y);
                 }
@@ -149,7 +151,7 @@ public class MapGenerator
 
     private static void RecupererSourceImage(out Image image, bool herbeOuFleur, List<string> images)
     {
-        var Index = herbeOuFleur ? 0 : Rnd.Next(0, images.Count);
+        var Index = herbeOuFleur ? 0 : Rnd.Next(1, images.Count);
         image = Image.FromFile(images[Index]);
     }
 
